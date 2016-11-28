@@ -8,12 +8,14 @@
 bsub <<< """
 #BSUB -L /bin/bash
 #BSUB -J $1_rl_map
-#BSUB -q dee-hugemeq
+#BSUB -q dee-hugemem
 #BSUB -o $1_log
 #BSUB -e $1_err
 #BSUB -n 32
 #BSUB -M 53554432
 #BSUB -R \"rusage[tmp=70000] span[ptile=32]\"
+
+module add UHTS/Analysis/samtools/1.3
 
 WORKING_DIR=`pwd`
 
@@ -26,7 +28,7 @@ cp $2 .
 cp $3 .
 
 # run bwa mem
-ngmlr -t 32 -r `basename $2` -q `basename $3` -o $1
+ngmlr -t 31 -r `basename $2` -q `basename $3` | samtools view -bS - | samtools sort - > $1.bam
 
 rm -f `basename $2` `basename $3`
 mv * \$WORKING_DIR
