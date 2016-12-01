@@ -7,7 +7,7 @@
 
 bsub <<< """
 #BSUB -L /bin/bash
-#BSUB -J $1_rl_map
+#BSUB -J $1_lr_map
 #BSUB -q dee-hugemem
 #BSUB -o $1.log
 #BSUB -e $1.err
