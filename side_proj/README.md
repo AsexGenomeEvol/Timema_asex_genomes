@@ -31,3 +31,11 @@ bash ~/timema_assembly/N_variant_calling/2_map_longreads_lsf.sh Tge_GECD_map /sc
 
 Crucial parameters seems to be `-s 3` which says how much coverage we require for accepting a structural variant, since the coverage of both datasets is very small (<5x, I set it so far to 3).
 
+Sniffles takes ages, progrably because I inputed too many scaffolds, I will remap reads to just core scaffolds. I copied the result it computed so far, I will compare it to the fresh one.
+
+```
+bash ~/timema_assembly/N_variant_calling/2_map_longreads_lsf.sh Tge_GECD_map /scratch/beegfs/monthly/kjaron/5_Tge/asm_abyss_besst_gc/Tge_abyss87_besst_GC_core_scaffolds.fa /scratch/beegfs/monthly/kjaron/timema_PacBio_reads/5_Tge/filtered_subreads.GECD.7smrt.fastq.gz
+bash ~/timema_assembly/N_variant_calling/2_map_longreads_lsf.sh Tge_GEEF_map /scratch/beegfs/monthly/kjaron/5_Tge/asm_abyss_besst_gc/Tge_abyss87_besst_GC_core_scaffolds.fa /scratch/beegfs/monthly/kjaron/timema_PacBio_reads/5_Tge/filtered_subreads.GEEF.10smrt.fastq.gz
+```
+
+but it seems that I still have a lot lot scaffolds for Sniffles. I will try to make a subset of really few very long scaffolds
