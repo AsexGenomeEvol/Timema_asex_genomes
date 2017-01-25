@@ -4,9 +4,9 @@ I am interested in SNPs, small structural variants (based on illumina data) and 
 
 #### SNPs & Indels
 
-so far I was thinking of FreeBayes for vartiant calling, but according the latest benchmarking I should probably go for Octopus.
+so far I was thinking of FreeBayes for variant calling, but according the latest benchmarking I should probably go for Octopus.
 
-But quick solution is GATK for now.
+But quick solution is GATK for now. Mapping using `bwa-mem`
 
 ```
 module add UHTS/Aligner/bwa/0.7.13
@@ -19,13 +19,34 @@ python3 $TROOT/scripts/generic_genomics/fasta2fasta_length_filtering.py Tge_abys
 # the total size of this reference is ~600M.
 bwa index Tge_abyss87_besst_GC_core_100k_filtered.fa
 
-
 $TROOT/scripts/map_pair_end_RG_lsf.sh 5_Tge \
   Tge_abyss87_besst_GC_core_100k_filtered.fa \
   Tge_R1t_is_350.fq.gz \
   Tge_R2t_is_350.fq.gz \
-  "@RG\tID:TGE_REFa\tSM:TGE\tPL:ILLUMINA\tPI:350" \
+  "@RG\tID:TGE\tSM:TGE_REF\tPL:illumina\tLB:350\tPU:lane1"
+```
 
+and similar for `1_Tps`:
+
+```
+cd $TROOT/data/1_Tps/raw_assembly
+
+# only scaffolds longer than 100k are kept (to make it computable)
+python3 $TROOT/scripts/generic_genomics/fasta2fasta_length_filtering.py 1_Tps_genome.fa 100000 > 1_Tps_genome_100k_filtered.fa
+
+# the total size of this reference is ~200M, 1326 scaffolds.
+bwa index 1_Tps_genome_100k_filtered.fa
+
+$TROOT/scripts/map_pair_end_RG_lsf.sh 1_Tps \
+  Tge_abyss87_besst_GC_core_100k_filtered.fa \
+  Tps_R1t_is_350.fq.gz \
+  Tps_R2t_is_350.fq.gz \
+  "@RG\tID:TPS\tSM:TPS_REF\tPL:illumina\tLB:350\tPU:lane2"
+```
+
+template for GATK
+
+```
 module add UHTS/Analysis/GenomeAnalysisTK/3.7
 module add UHTS/Analysis/samtools/latest
 
@@ -36,7 +57,8 @@ java -jar GenomeAnalysisTK.jar \
   --genotyping_mode DISCOVERY \
   -stand_emit_conf 10 \
   -stand_call_conf 30 \
-  -o raw_variants.vcf
+  -o raw_variants.vcf \
+  -nt 16   ## -V ?
 ```
 
 #### Structural variations
