@@ -2,14 +2,44 @@
 
 I am interested in SNPs, small structural variants (based on illumina data) and greater structural variants (based on PacBio data).
 
-## small
+#### SNPs & Indels
 
-## Variant calling
+so far I was thinking of FreeBayes for vartiant calling, but according the latest benchmarking I should probably go for Octopus.
 
-so far I was thinking of FreeBayes for vartiant calling, but according the latest benchmarking I should probably go for Octopus (which is not available now).
+But quick solution is GATK for now.
+
+```
+module add UHTS/Aligner/bwa/0.7.13
+
+cd $TROOT/data/5_Tge/reference
+
+# only scaffolds longer than 100k are kept (to make it computable)
+python3 $TROOT/scripts/generic_genomics/fasta2fasta_length_filtering.py Tge_abyss87_besst_GC_core_scaffolds.fa 100000 > Tge_abyss87_besst_GC_core_100k_filtered.fa
+
+# the total size of this reference is ~600M.
+bwa index Tge_abyss87_besst_GC_core_100k_filtered.fa
 
 
-## big
+$TROOT/scripts/map_pair_end_RG_lsf.sh 5_Tge \
+  Tge_abyss87_besst_GC_core_100k_filtered.fa \
+  Tge_R1t_is_350.fq.gz \
+  Tge_R2t_is_350.fq.gz \
+  "@RG\tID:TGE_REFa\tSM:TGE\tPL:ILLUMINA\tPI:350" \
+
+module add UHTS/Analysis/GenomeAnalysisTK/3.7
+module add UHTS/Analysis/samtools/latest
+
+java -jar GenomeAnalysisTK.jar \
+  -T HaplotypeCaller \
+  -R reference.fa \
+  -I preprocessed_reads.bam \  
+  --genotyping_mode DISCOVERY \
+  -stand_emit_conf 10 \
+  -stand_call_conf 30 \
+  -o raw_variants.vcf
+```
+
+#### Structural variations
 
 I am testing NGM-LR -> Sniffles pipeline; installation of both those tools was trivial! They both have man pages and Fritz was friendly, when he gave a talk about it, therefore I guess I can consult it with him after several trials.
 
@@ -58,5 +88,5 @@ bash ~/timema_assembly/N_variant_calling/2_map_longreads_lsf.sh Tge_GECD_remap $
 and I started sniffles for GEEF
 
 ```
-bash ~/timema_assembly/N_variant_calling/3_sniffles_lsf.sh Tge_GEEF_sv /scratch/beegfs/monthly/kjaron/5_Tge/variant_calling/GEEF/Tge_GEEF_map.bam 
+bash ~/timema_assembly/N_variant_calling/3_sniffles_lsf.sh Tge_GEEF_sv /scratch/beegfs/monthly/kjaron/5_Tge/variant_calling/GEEF/Tge_GEEF_map.bam
 ```
