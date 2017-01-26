@@ -110,3 +110,9 @@ and I started sniffles for GEEF
 ```
 bash ~/timema_assembly/N_variant_calling/3_sniffles_lsf.sh Tge_GEEF_sv /scratch/beegfs/monthly/kjaron/5_Tge/variant_calling/GEEF/Tge_GEEF_map.bam
 ```
+
+and GECD as well:
+
+```
+bash $TROOT/N_variant_calling/3_sniffles_lsf.sh Tge_GECD_sv $TROOT/data/5_Tge/variant_calling/remap_GECD/Tge_GECD_remap.bam
+```

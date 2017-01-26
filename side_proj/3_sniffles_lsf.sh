@@ -6,11 +6,11 @@
 bsub <<< """
 #BSUB -L /bin/bash
 #BSUB -J $1_snif
-#BSUB -q dee-hugemem
+#BSUB -q dee
 #BSUB -o $1.out
 #BSUB -e $1.err
 #BSUB -n 16
-#BSUB -M 20000000
+#BSUB -M 4000000
 #BSUB -R \"rusage[tmp=30000] span[ptile=16]\"
 
 WORKING_DIR=`pwd`
@@ -23,9 +23,9 @@ cd /scratch/local/monthly/kjaron/$1
 cp $2 .
 
 # run sniffles
-/usr/bin/time -f '%M %E %P' sniffles -m `basename $2` -s 3 -t 16 -v $1.vcf
+sniffles -m `basename $2` -s 3 -t 16 -v $1.vcf
 
-rm -f `basename $2` 
+rm -f `basename $2`
 mv * \$WORKING_DIR
 rmdir /scratch/local/monthly/kjaron/$1
 """
