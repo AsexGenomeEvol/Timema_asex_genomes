@@ -44,22 +44,20 @@ $TROOT/scripts/map_pair_end_RG_lsf.sh 1_Tps \
   "@RG\tID:TPS\tSM:TPS_REF\tPL:illumina\tLB:350\tPU:lane2"
 ```
 
-template for GATK
+I am supposed to mark duplicates, but I wont, seems like a pint I do not have time for it now. However, script `1_deduplicate_lsf.sh` should do it (not tested).
 
+Now we have to index fasta
 ```
-module add UHTS/Analysis/GenomeAnalysisTK/3.7
-module add UHTS/Analysis/samtools/latest
+cd $TROOT/data/1_Tps/reference
+$TROOT/scripts/index_fa.sh 1_Tps_genome_100k_filtered.fa
+$TROOT/scripts/make_dict_fasta.sh 1_Tps_genome_100k_filtered.fa
+cd ../variant_calling/GATK/350/
+$TROOT/scripts/index_bam.sh map_pe_to_1_Tps.bam
+# once those jobs are done
+$TROOT/N_variant_calling/2_run_GATK_lsf.sh 1_Tps 350 1_Tps_genome_100k_filtered.fa
+```
+analogically I run the analysis on Tge, both 350 and 550 libs.
 
-java -jar GenomeAnalysisTK.jar \
-  -T HaplotypeCaller \
-  -R reference.fa \
-  -I preprocessed_reads.bam \  
-  --genotyping_mode DISCOVERY \
-  -stand_emit_conf 10 \
-  -stand_call_conf 30 \
-  -o raw_variants.vcf \
-  -nt 16   ## -V ?
-```
 
 #### Structural variations
 
