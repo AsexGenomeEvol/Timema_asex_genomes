@@ -16,8 +16,8 @@ call.all : $(VARCALLS)
 
 data/$(SP)/variant_calls/$(IND)/atlas/$(IND)_to_$(REF)_MLEGenotypes.vcf.gz :
 	cd data/$(SP)/variant_calls/logs && \
-		N_variant_calling/atlas_callMLE.sh $(SP) $(REF) $(IND)
+		$$TROOT/N_variant_calling/atlas_callMLE.sh $(SP) $(REF) $(IND)
 
 data/$(SP)/variant_calls/$(IND)/atlas/$(IND)_to_$(REF)_theta_estimates.txt :
 	cd data/$(SP)/variant_calls/logs && \
-		N_variant_calling/atlas_estTheta.sh $(SP) $(REF) $(IND)
+		$$TROOT/N_variant_calling/atlas_estTheta.sh $(SP) $(REF) $(IND)
