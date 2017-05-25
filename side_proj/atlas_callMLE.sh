@@ -27,14 +27,13 @@ bsub <<< """
 #BSUB -o "$3"_to_"$2"_callMLE.out
 #BSUB -e "$3"_to_"$2"_callMLE.err
 #BSUB -n 1
-#BSUB -M 10000000
+#BSUB -M 20000000
 
 module add UHTS/Analysis/samtools/1.3
 
 # make local directory for computations
 LOCAL_DIR=/scratch/local/monthly/kjaron/"$SP"_"$BAM"_atlas_variants
-export TMPDIR=\$LOCAL_DIR/temp
-mkdir -p \$LOCAL_DIR/temp
+mkdir -p \$LOCAL_DIR
 
 # copy genome and mapped long insert size lib
 cd \$LOCAL_DIR
@@ -46,7 +45,6 @@ atlas task=callMLE bam=$BAM fasta=$GENOME vcf verbose
 mkdir -p $TROOT/data/$SP/variant_calls/$3/atlas
 mv $(basename $BAM .bam)_MLEGenotypes.vcf.gz $TROOT/data/$SP/variant_calls/$3/atlas/
 
-rm -r temp
 rm $BAM*
 rm $GENOME*
 
