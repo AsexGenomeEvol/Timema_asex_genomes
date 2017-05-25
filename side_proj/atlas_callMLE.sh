@@ -40,7 +40,7 @@ cd \$LOCAL_DIR
 ln -s $TROOT/data/$SP/mapping/$BAM* .
 ln -s $TROOT/data/$SP/reference/$GENOME* .
 
-atlas task=callMLE bam=$BAM fasta=$GENOME vcf verbose
+atlas task=callMLE bam=$BAM fasta=$GENOME vcf suppressWarnings
 
 mkdir -p $TROOT/data/$SP/variant_calls/$3/atlas
 mv $(basename $BAM .bam)_MLEGenotypes.vcf.gz $TROOT/data/$SP/variant_calls/$3/atlas/
