@@ -3,9 +3,11 @@
 # is SP
 # is a reference genome (VERSION)
 # individual
+# window_size
 
 SP=$1
 BAM="$3"_to_"$2".bam
+WINDOW=$4
 
 if [[ ! -s $TROOT/data/$SP/mapping/$BAM ]]
 then
@@ -17,8 +19,8 @@ bsub <<< """
 #BSUB -L /bin/bash
 #BSUB -J theta_$1
 #BSUB -q bgee
-#BSUB -o "$3"_to_"$2"_theta.out
-#BSUB -e "$3"_to_"$2"_theta.err
+#BSUB -o job_"$3"_to_"$2"_w"$WINDOW"_theta.log
+#BSUB -e job_"$3"_to_"$2"_w"$WINDOW"_theta.err
 #BSUB -n 1
 #BSUB -M 20000000
 
@@ -30,10 +32,15 @@ mkdir -p \$LOCAL_DIR
 cd \$LOCAL_DIR
 ln -s $TROOT/data/$SP/mapping/$BAM* .
 
-atlas task=estimateTheta bam=$BAM suppressWarnings window=1000
+python3 $TROOT/N_variant_calling/create_BED_withmin_window_size.py \
+	$SP $3 $WINDOW > relevant_windows.bed
+atlas task=estimateTheta bam=$BAM suppressWarnings window=relevant_windows.bed \
+	1> "$3"_to_"$2"_w"$WINDOW"_theta.log 2> "$3"_to_"$2"_w"$WINDOW"_theta.err
 
 mkdir -p $TROOT/data/$SP/variant_calls/$3/atlas
-mv $(basename $BAM .bam)_theta_estimates.txt $TROOT/data/$SP/variant_calls/$3/atlas/
+mv $(basename $BAM .bam)_theta_estimates.txt \
+	$TROOT/data/$SP/variant_calls/$3/atlas/$(basename $BAM .bam)_w"$WINDOW"_theta_estimates.txt
+mv "$3"_to_"$2"_w"$WINDOW"_theta.* $TROOT/data/$SP/variant_calls/$3/atlas/
 
 rm $BAM*
 rmdir \$LOCAL_DIR
