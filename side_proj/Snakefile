@@ -1,0 +1,7 @@
+rule readme_base:
+    input:
+        "data/README.md",
+    output:
+        "readme_base"
+    shell:
+        "wc {input} > {output}"
