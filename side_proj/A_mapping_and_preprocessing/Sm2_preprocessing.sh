@@ -26,14 +26,14 @@ sort_and_assign_RG Sm2 550 r3 &
 wait
 
 rm Sm2.trim.{180,350,550}.pair12.sam
-samtools merge ref_to_2_As_b1v01.bam Sm2.trim.{180,350,550}.pair12.sort.RG.sam
-samtools index ref_to_2_As_b1v01.bam
+samtools merge ref_to_2_Sm_b1v01.bam Sm2.trim.{180,350,550}.pair12.sort.RG.sam
+samtools index ref_to_2_Sm_b1v01.bam
 
-rm As6.trim.{180,350,550}.pair12.sort.RG.sam
+rm Sm6.trim.{180,350,550}.pair12.sort.RG.sam
 
 atlas task=estimateTheta \
-	bam=ref_to_2_As_b1v01.bam \
+	bam=ref_to_2_Sm_b1v01.bam \
 	window=10000 \
 	suppressWarnings verbose \
-	1> ref_to_2_As_b1v01_theta.log
+	1> ref_to_2_Sm_b1v01_theta.log
     Sm2.trim.{180,350,550}.pair12.sam
