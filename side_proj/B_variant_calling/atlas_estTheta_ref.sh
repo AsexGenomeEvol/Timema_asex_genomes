@@ -52,7 +52,7 @@ atlas task=estimateTheta \
 	suppressWarnings verbose \
 	1> "$BASENAME"_theta.log
 
-mkdir -p $VROOT/data/$SP/variant_calls/$3/atlas
+mkdir -p $VROOT/data/$SP/variant_calls/ref/atlas
 mv "$BAMBASE"_theta_estimates.txt \
 	$VROOT/data/$SP/variant_calls/ref/atlas/"$BASENAME"_theta_estimates.txt
 mv "$BASENAME"_theta.log $VROOT/data/$SP/variant_calls/ref/atlas/

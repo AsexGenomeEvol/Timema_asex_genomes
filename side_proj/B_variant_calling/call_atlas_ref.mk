@@ -1,8 +1,10 @@
+include scripts/make/template.mk
+
 ifndef WINDOW_SIZE
 WINDOW_SIZE := 100000
 endif
 
-THETACALLS := $(patsubst %, data/%/variant_calls/ref/atlas/ref_to_b3v05_w$(WINDOW_SIZE)_theta_estimates.txt, $(SPECIES))
+THETACALLS := $(patsubst %, data/%/variant_calls/ref/atlas/ref_to_b3v05_w$(WINDOW_SIZE)_theta_estimates.txt, $(TIMEMAS))
 
 .PHONY : call.all
 call.all : $(THETACALLS)
