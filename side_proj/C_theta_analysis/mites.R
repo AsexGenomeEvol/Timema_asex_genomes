@@ -88,3 +88,63 @@ light_sex = "#E9A070B5"
 plot_log_hist(sex_data = Sm_thetas$theta_MLE, asex_data = On_thetas$theta_MLE,
               breaks = 160, barwidth = 4, col = c(dark_sex, light_sex),
               xlab = expression(paste("Heterozygosity of 10kbp windows [", theta, ']')))
+
+# Polite mites
+
+##### READ_DATA
+args <- commandArgs(trailingOnly=TRUE)
+
+library(AsexStats)
+
+ind <- args[1]
+ref <- args[2]
+window <- args[3]
+ind <- 'ref'
+ref <- 'b1v01'
+window <- '10000'
+
+logThetas <- list()
+atlasData <- list()
+
+mites <- list()
+              #   ASEX    SEX
+mites$codes <- c("1_On","1_Os",
+                 "2_As","2_Sm")
+
+files <- c(
+    'data/1_On/variant_calls/ref/atlas/ref_to_1_On_b1v01_w10000_theta_estimates.txt',
+    'data/1_Os/variant_calls/ref/atlas/ref_to_1_Os_b1v01_w10000_theta_estimates.txt',
+    'data/2_As/variant_calls/ref/atlas/ref_to_2_As_b1v01_w10000_theta_estimates.txt',
+    'data/2_Sm/variant_calls/ref/atlas/ref_to_2_Sm_b1v01_w10000_theta_estimates_killed.txt')
+
+for(i in 1:4){
+    # non-filtered all data
+    atlasData[[i]] <- read.table(files[i], header = T)
+    # filtered theta estimates
+    logThetas[[i]] <- log10(filter_theta(atlasData[[i]], filt_cov = F, window_size = 9999)[,'theta_MLE'])
+}
+
+library(sm)
+source('/Volumes/dump/projects/timema/AsexStats/almost_working/vioplot2.R')
+
+theta_label <- expression(paste("Heterozygosity of 10kbp windows [" , log[10], " " , theta, ']'))
+
+quartz(type = 'pdf', file = 'figures/mites_w10000_theta_violin.pdf')
+plot(x=NULL, y=NULL,
+     xlim = c(0.5, 2.5), ylim=c(min(unlist(logThetas)), max(unlist(logThetas))),
+     type="n", ann=FALSE, axes=F, bty="n")
+axis(1, at=c(1:5), labels = F)
+text(c(1:5), par("usr")[3] - 0.2, srt = 10, pos = 1, xpd = TRUE,
+     labels = c('On / Os', 'As / Sm'))
+axis(2)
+mtext(theta_label, side = 2, line = +2, cex = 1.3)
+
+for(i in 1:4){
+    vioplot2(logThetas[[i]],
+             at = ifelse(i %% 2 == 1, (i + 1) / 2, i / 2),
+             side = ifelse(i %% 2 == 1, "left", "right"),
+             col = ifelse(i %% 2 == 1, asex_blue, sex_red),
+             add = T, h = 0.2)
+}
+# sex_legend(cex = 1.3)
+dev.off()
