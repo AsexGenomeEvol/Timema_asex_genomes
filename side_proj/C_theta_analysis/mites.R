@@ -103,6 +103,7 @@ ind <- 'ref'
 ref <- 'b1v01'
 window <- '10000'
 
+thetas <- list()
 logThetas <- list()
 atlasData <- list()
 
@@ -121,11 +122,12 @@ for(i in 1:4){
     # non-filtered all data
     atlasData[[i]] <- read.table(files[i], header = T)
     # filtered theta estimates
-    logThetas[[i]] <- log10(filter_theta(atlasData[[i]], filt_cov = F, window_size = 9999)[,'theta_MLE'])
+    thetas[[i]] <- filter_thetas(atlasData[[i]], filt_cov = F, window_size = 9999)[,'theta_MLE']
+    logThetas[[i]] <- log10(thetas[[i]])
 }
 
 library(sm)
-source('/Volumes/dump/projects/timema/AsexStats/almost_working/vioplot2.R')
+source('/Volumes/dump/projects/timema/AsexStats/R/vioplot2.R')
 
 theta_label <- expression(paste("Heterozygosity of 10kbp windows [" , log[10], " " , theta, ']'))
 
