@@ -16,7 +16,7 @@ for(i in 1:4){
     atlas_data[[i]] <- read.table(files[i], header = T)
 }
 
-thetas <- lapply(atlas_data, function(x){filter_thetas(x, filt_cov = T, window_size = 9999)[,'theta_MLE']} )
+thetas <- lapply(atlas_data, function(x){filter_thetas(x, filt_cov = F, window_size = 9999)[,'theta_MLE']} )
 log_thetas <- lapply(thetas, log10)
 
 theta_log_label <- expression(paste("Heterozygosity of 10kbp windows [" , log[10], " " , theta, ']'))
@@ -64,10 +64,17 @@ sex_legend()
 dev.off()
 
 ## summary table
+theta_summaries <- lapply(thetas, summary)
+get_stat <- function(input_list, stat_name, round_to = 4){
+    round(unlist(lapply(input_list, function(x){ x[stat_name] })), round_to)
+}
+
 mite_summary <- data.frame(sp = mites$labels,
-                           mean_theta_10k = unlist(lapply(thetas, mean)),
-                           median_theta_10k <- unlist(lapply(thetas, median)))
-write.table(mite_summary, 'stats/heterozygosity_summary_reference.tsv',
+                           mean = get_stat(theta_summaries, 'Mean'),
+                           st_quantile = get_stat(theta_summaries, '1st Qu.'),
+                           median = get_stat(theta_summaries, 'Median'),
+                           rd_quantile = get_stat(theta_summaries, '3rd Qu.'))
+write.table(mite_summary, 'stats/ref_theta_10k_summary.tsv',
             quote = F, sep = '\t', row.names = F)
 
 #### SEX SEX figures
