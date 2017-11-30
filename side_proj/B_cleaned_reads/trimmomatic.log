@@ -1,0 +1,1049 @@
+Tbi_01_L2_OBIWAN_314:
+Input Read Pairs: 43146329
+Both Surviving: 34324618 (79,55%)
+Forward Only Surviving: 3474757 (8,05%)
+Reverse Only Surviving: 1746516 (4,05%)
+Dropped: 3600438 (8,34%)
+
+Tbi_01_L4_OBIWAN_309:
+Input Read Pairs: 43318927
+Both Surviving: 34114052 (78,75%)
+Forward Only Surviving: 3470110 (8,01%)
+Reverse Only Surviving: 1975050 (4,56%)
+Dropped: 3759715 (8,68%)
+
+Tbi_01_L4_OBIWAN_312:
+Input Read Pairs: 45156928
+Both Surviving: 34366835 (76,11%)
+Forward Only Surviving: 4442913 (9,84%)
+Reverse Only Surviving: 1999270 (4,43%)
+Dropped: 4347910 (9,63%)
+
+Tbi_02_L2_OBIWAN_314:
+Input Read Pairs: 47878111
+Both Surviving: 38379440 (80,16%)
+Forward Only Surviving: 3683676 (7,69%)
+Reverse Only Surviving: 2120314 (4,43%)
+Dropped: 3694681 (7,72%)
+
+Tbi_02_L4_OBIWAN_309:
+Input Read Pairs: 48407895
+Both Surviving: 38311768 (79,14%)
+Forward Only Surviving: 3783473 (7,82%)
+Reverse Only Surviving: 2331593 (4,82%)
+Dropped: 3981061 (8,22%)
+
+Tbi_02_L4_OBIWAN_312:
+Input Read Pairs: 49812969
+Both Surviving: 38307761 (76,90%)
+Forward Only Surviving: 4654688 (9,34%)
+Reverse Only Surviving: 2396637 (4,81%)
+Dropped: 4453883 (8,94%)
+
+Tbi_03_L2_OBIWAN_314:
+Input Read Pairs: 81884718
+Both Surviving: 65087996 (79,49%)
+Forward Only Surviving: 6379789 (7,79%)
+Reverse Only Surviving: 3791086 (4,63%)
+Dropped: 6625847 (8,09%)
+
+Tbi_03_L4_OBIWAN_309:
+Input Read Pairs: 83050543
+Both Surviving: 65163955 (78,46%)
+Forward Only Surviving: 6856741 (8,26%)
+Reverse Only Surviving: 3972375 (4,78%)
+Dropped: 7057472 (8,50%)
+
+Tbi_03_L4_OBIWAN_312:
+Input Read Pairs: 85094547
+Both Surviving: 64728132 (76,07%)
+Forward Only Surviving: 8133835 (9,56%)
+Reverse Only Surviving: 4210273 (4,95%)
+Dropped: 8022307 (9,43%)
+
+Tbi_04_L2_OBIWAN_314:
+Input Read Pairs: 49986316
+Both Surviving: 39575294 (79,17%)
+Forward Only Surviving: 4203877 (8,41%)
+Reverse Only Surviving: 2102675 (4,21%)
+Dropped: 4104470 (8,21%)
+
+Tbi_04_L4_OBIWAN_309:
+Input Read Pairs: 50216283
+Both Surviving: 39317790 (78,30%)
+Forward Only Surviving: 4180195 (8,32%)
+Reverse Only Surviving: 2382654 (4,74%)
+Dropped: 4335644 (8,63%)
+
+Tbi_04_L4_OBIWAN_312:
+Input Read Pairs: 52058459
+Both Surviving: 39415985 (75,71%)
+Forward Only Surviving: 5265948 (10,12%)
+Reverse Only Surviving: 2403751 (4,62%)
+Dropped: 4972775 (9,55%)
+
+Tbi_05_L2_OBIWAN_314:
+Input Read Pairs: 42941271
+Both Surviving: 33299948 (77,55%)
+Forward Only Surviving: 3923564 (9,14%)
+Reverse Only Surviving: 1862286 (4,34%)
+Dropped: 3855473 (8,98%)
+
+Tbi_05_L4_OBIWAN_309:
+Input Read Pairs: 43540620
+Both Surviving: 33434319 (76,79%)
+Forward Only Surviving: 4048718 (9,30%)
+Reverse Only Surviving: 1996718 (4,59%)
+Dropped: 4060865 (9,33%)
+
+Tbi_05_L4_OBIWAN_312:
+Input Read Pairs: 44513102
+Both Surviving: 32840722 (73,78%)
+Forward Only Surviving: 4952704 (11,13%)
+Reverse Only Surviving: 2063786 (4,64%)
+Dropped: 4655890 (10,46%)
+
+Tce_01_L1_OBIWAN_309:
+Input Read Pairs: 62966503
+Both Surviving: 50020016 (79,44%)
+Forward Only Surviving: 4650193 (7,39%)
+Reverse Only Surviving: 2698640 (4,29%)
+Dropped: 5597654 (8,89%)
+
+Tce_01_L3_OBIWAN_314:
+Input Read Pairs: 63766806
+Both Surviving: 49980955 (78,38%)
+Forward Only Surviving: 5141184 (8,06%)
+Reverse Only Surviving: 2730593 (4,28%)
+Dropped: 5914074 (9,27%)
+
+Tce_01_L5_OBIWAN_312:
+Input Read Pairs: 66284645
+Both Surviving: 51167771 (77,19%)
+Forward Only Surviving: 5674203 (8,56%)
+Reverse Only Surviving: 3176303 (4,79%)
+Dropped: 6266368 (9,45%)
+
+Tce_02_L1_OBIWAN_309:
+Input Read Pairs: 48558658
+Both Surviving: 37013270 (76,22%)
+Forward Only Surviving: 4540209 (9,35%)
+Reverse Only Surviving: 1996218 (4,11%)
+Dropped: 5008961 (10,32%)
+
+Tce_02_L3_OBIWAN_314:
+Input Read Pairs: 49216032
+Both Surviving: 36748445 (74,67%)
+Forward Only Surviving: 5111546 (10,39%)
+Reverse Only Surviving: 1999191 (4,06%)
+Dropped: 5356850 (10,88%)
+
+Tce_02_L5_OBIWAN_312:
+Input Read Pairs: 50961529
+Both Surviving: 37467359 (73,52%)
+Forward Only Surviving: 5511150 (10,81%)
+Reverse Only Surviving: 2326903 (4,57%)
+Dropped: 5656117 (11,10%)
+
+Tce_03_L1_OBIWAN_309:
+Input Read Pairs: 50367248
+Both Surviving: 39692584 (78,81%)
+Forward Only Surviving: 4444497 (8,82%)
+Reverse Only Surviving: 2121740 (4,21%)
+Dropped: 4108427 (8,16%)
+
+Tce_03_L3_OBIWAN_314:
+Input Read Pairs: 50731017
+Both Surviving: 39441446 (77,75%)
+Forward Only Surviving: 4816268 (9,49%)
+Reverse Only Surviving: 2205118 (4,35%)
+Dropped: 4268185 (8,41%)
+
+Tce_03_L5_OBIWAN_312:
+Input Read Pairs: 52650444
+Both Surviving: 40181732 (76,32%)
+Forward Only Surviving: 5298882 (10,06%)
+Reverse Only Surviving: 2532865 (4,81%)
+Dropped: 4636965 (8,81%)
+
+Tce_04_L1_OBIWAN_309:
+Input Read Pairs: 43881455
+Both Surviving: 34052380 (77,60%)
+Forward Only Surviving: 3985075 (9,08%)
+Reverse Only Surviving: 1873047 (4,27%)
+Dropped: 3970953 (9,05%)
+
+Tce_04_L3_OBIWAN_314:
+Input Read Pairs: 44343018
+Both Surviving: 33868324 (76,38%)
+Forward Only Surviving: 4276711 (9,64%)
+Reverse Only Surviving: 1978747 (4,46%)
+Dropped: 4219236 (9,51%)
+
+Tce_04_L5_OBIWAN_312:
+Input Read Pairs: 45703665
+Both Surviving: 34349023 (75,16%)
+Forward Only Surviving: 4653778 (10,18%)
+Reverse Only Surviving: 2258239 (4,94%)
+Dropped: 4442625 (9,72%)
+
+Tce_05_L1_OBIWAN_309:
+Input Read Pairs: 45526053
+Both Surviving: 37009952 (81,29%)
+Forward Only Surviving: 3168715 (6,96%)
+Reverse Only Surviving: 2085196 (4,58%)
+Dropped: 3262190 (7,17%)
+
+Tce_05_L3_OBIWAN_314:
+Input Read Pairs: 46355345
+Both Surviving: 37219619 (80,29%)
+Forward Only Surviving: 3517737 (7,59%)
+Reverse Only Surviving: 2111732 (4,56%)
+Dropped: 3506257 (7,56%)
+
+Tce_05_L5_OBIWAN_312:
+Input Read Pairs: 48198849
+Both Surviving: 38055484 (78,96%)
+Forward Only Surviving: 3934378 (8,16%)
+Reverse Only Surviving: 2443968 (5,07%)
+Dropped: 3765019 (7,81%)
+
+Tcm_01_L2_OBIWAN_309:
+Input Read Pairs: 49321386
+Both Surviving: 38115950 (77,28%)
+Forward Only Surviving: 4503848 (9,13%)
+Reverse Only Surviving: 2071331 (4,20%)
+Dropped: 4630257 (9,39%)
+
+Tcm_01_L4_OBIWAN_314:
+Input Read Pairs: 50104258
+Both Surviving: 38252409 (76,35%)
+Forward Only Surviving: 4995070 (9,97%)
+Reverse Only Surviving: 2007512 (4,01%)
+Dropped: 4849267 (9,68%)
+
+Tcm_01_L6_OBIWAN_312:
+Input Read Pairs: 49433423
+Both Surviving: 38153177 (77,18%)
+Forward Only Surviving: 4680357 (9,47%)
+Reverse Only Surviving: 2226110 (4,50%)
+Dropped: 4373779 (8,85%)
+
+Tcm_02_L2_OBIWAN_309:
+Input Read Pairs: 49709527
+Both Surviving: 39191329 (78,84%)
+Forward Only Surviving: 4165046 (8,38%)
+Reverse Only Surviving: 2118440 (4,26%)
+Dropped: 4234712 (8,52%)
+
+Tcm_02_L4_OBIWAN_314:
+Input Read Pairs: 50231627
+Both Surviving: 39293677 (78,22%)
+Forward Only Surviving: 4420267 (8,80%)
+Reverse Only Surviving: 2130979 (4,24%)
+Dropped: 4386704 (8,73%)
+
+Tcm_02_L6_OBIWAN_312:
+Input Read Pairs: 49591790
+Both Surviving: 39060415 (78,76%)
+Forward Only Surviving: 4221827 (8,51%)
+Reverse Only Surviving: 2332637 (4,70%)
+Dropped: 3976911 (8,02%)
+
+Tcm_03_L2_OBIWAN_309:
+Input Read Pairs: 53698877
+Both Surviving: 42328751 (78,83%)
+Forward Only Surviving: 4321369 (8,05%)
+Reverse Only Surviving: 2353011 (4,38%)
+Dropped: 4695746 (8,74%)
+
+Tcm_03_L4_OBIWAN_314:
+Input Read Pairs: 54437677
+Both Surviving: 42541433 (78,15%)
+Forward Only Surviving: 4690425 (8,62%)
+Reverse Only Surviving: 2314161 (4,25%)
+Dropped: 4891658 (8,99%)
+
+Tcm_03_L6_OBIWAN_312:
+Input Read Pairs: 53849375
+Both Surviving: 42387227 (78,71%)
+Forward Only Surviving: 4451188 (8,27%)
+Reverse Only Surviving: 2542750 (4,72%)
+Dropped: 4468210 (8,30%)
+
+Tcm_04_L2_OBIWAN_309:
+Input Read Pairs: 43908478
+Both Surviving: 33788315 (76,95%)
+Forward Only Surviving: 3872654 (8,82%)
+Reverse Only Surviving: 1845142 (4,20%)
+Dropped: 4402367 (10,03%)
+
+Tcm_04_L4_OBIWAN_314:
+Input Read Pairs: 44703892
+Both Surviving: 33978856 (76,01%)
+Forward Only Surviving: 4352229 (9,74%)
+Reverse Only Surviving: 1747438 (3,91%)
+Dropped: 4625369 (10,35%)
+
+Tcm_04_L6_OBIWAN_312:
+Input Read Pairs: 44120779
+Both Surviving: 33830217 (76,68%)
+Forward Only Surviving: 4105517 (9,31%)
+Reverse Only Surviving: 1937717 (4,39%)
+Dropped: 4247328 (9,63%)
+
+Tcm_05_L2_OBIWAN_309:
+Input Read Pairs: 45138590
+Both Surviving: 35293536 (78,19%)
+Forward Only Surviving: 3886620 (8,61%)
+Reverse Only Surviving: 1963541 (4,35%)
+Dropped: 3994893 (8,85%)
+
+Tcm_05_L4_OBIWAN_314:
+Input Read Pairs: 45746906
+Both Surviving: 35425787 (77,44%)
+Forward Only Surviving: 4245415 (9,28%)
+Reverse Only Surviving: 1923074 (4,20%)
+Dropped: 4152630 (9,08%)
+
+Tcm_05_L6_OBIWAN_312:
+Input Read Pairs: 45151372
+Both Surviving: 35277461 (78,13%)
+Forward Only Surviving: 4019920 (8,90%)
+Reverse Only Surviving: 2120345 (4,70%)
+Dropped: 3733646 (8,27%)
+
+Tdi_01_L2_OBIWAN_312:
+Input Read Pairs: 41706845
+Both Surviving: 34423645 (82,54%)
+Forward Only Surviving: 2956855 (7,09%)
+Reverse Only Surviving: 1725752 (4,14%)
+Dropped: 2600593 (6,24%)
+
+Tdi_01_L4_OBIWAN_307:
+Input Read Pairs: 44959644
+Both Surviving: 33906011 (75,41%)
+Forward Only Surviving: 4604310 (10,24%)
+Reverse Only Surviving: 2313702 (5,15%)
+Dropped: 4135621 (9,20%)
+
+Tdi_01_L7_OBIWAN_310:
+Input Read Pairs: 48031828
+Both Surviving: 39411900 (82,05%)
+Forward Only Surviving: 3443114 (7,17%)
+Reverse Only Surviving: 1996846 (4,16%)
+Dropped: 3179968 (6,62%)
+
+Tdi_02_L2_OBIWAN_312:
+Input Read Pairs: 40991002
+Both Surviving: 34718185 (84,70%)
+Forward Only Surviving: 2554262 (6,23%)
+Reverse Only Surviving: 1630899 (3,98%)
+Dropped: 2087656 (5,09%)
+
+Tdi_02_L4_OBIWAN_307:
+Input Read Pairs: 44471398
+Both Surviving: 35090934 (78,91%)
+Forward Only Surviving: 3848116 (8,65%)
+Reverse Only Surviving: 2288495 (5,15%)
+Dropped: 3243853 (7,29%)
+
+Tdi_02_L7_OBIWAN_310:
+Input Read Pairs: 47703699
+Both Surviving: 40213276 (84,30%)
+Forward Only Surviving: 2958543 (6,20%)
+Reverse Only Surviving: 1946776 (4,08%)
+Dropped: 2585104 (5,42%)
+
+Tdi_03_L2_OBIWAN_312:
+Input Read Pairs: 41962399
+Both Surviving: 36055899 (85,92%)
+Forward Only Surviving: 2510472 (5,98%)
+Reverse Only Surviving: 1615942 (3,85%)
+Dropped: 1780086 (4,24%)
+
+Tdi_03_L4_OBIWAN_307:
+Input Read Pairs: 45458388
+Both Surviving: 36220146 (79,68%)
+Forward Only Surviving: 3731558 (8,21%)
+Reverse Only Surviving: 2372043 (5,22%)
+Dropped: 3134641 (6,90%)
+
+Tdi_03_L7_OBIWAN_310:
+Input Read Pairs: 48609611
+Both Surviving: 41511364 (85,40%)
+Forward Only Surviving: 2848551 (5,86%)
+Reverse Only Surviving: 1957672 (4,03%)
+Dropped: 2292024 (4,72%)
+
+Tdi_04_L2_OBIWAN_312:
+Input Read Pairs: 38777471
+Both Surviving: 32785229 (84,55%)
+Forward Only Surviving: 2538033 (6,55%)
+Reverse Only Surviving: 1433268 (3,70%)
+Dropped: 2020941 (5,21%)
+
+Tdi_04_L4_OBIWAN_307:
+Input Read Pairs: 41835149
+Both Surviving: 32830098 (78,47%)
+Forward Only Surviving: 3721254 (8,90%)
+Reverse Only Surviving: 2086398 (4,99%)
+Dropped: 3197399 (7,64%)
+
+Tdi_04_L7_OBIWAN_310:
+Input Read Pairs: 44780373
+Both Surviving: 37725378 (84,25%)
+Forward Only Surviving: 2830583 (6,32%)
+Reverse Only Surviving: 1751211 (3,91%)
+Dropped: 2473201 (5,52%)
+
+Tdi_05_L2_OBIWAN_312:
+Input Read Pairs: 41369275
+Both Surviving: 34895000 (84,35%)
+Forward Only Surviving: 2876781 (6,95%)
+Reverse Only Surviving: 1529455 (3,70%)
+Dropped: 2068039 (5,00%)
+
+Tdi_05_L4_OBIWAN_307:
+Input Read Pairs: 44814915
+Both Surviving: 34620003 (77,25%)
+Forward Only Surviving: 4392292 (9,80%)
+Reverse Only Surviving: 2221890 (4,96%)
+Dropped: 3580730 (7,99%)
+
+Tdi_05_L7_OBIWAN_310:
+Input Read Pairs: 47857011
+Both Surviving: 40086386 (83,76%)
+Forward Only Surviving: 3262902 (6,82%)
+Reverse Only Surviving: 1855536 (3,88%)
+Dropped: 2652187 (5,54%)
+
+Tge_01_L3_OBIWAN_310:
+Input Read Pairs: 39662172
+Both Surviving: 33454656 (84,35%)
+Forward Only Surviving: 2364126 (5,96%)
+Reverse Only Surviving: 1735935 (4,38%)
+Dropped: 2107455 (5,31%)
+
+Tge_01_L7_OBIWAN_314:
+Input Read Pairs: 41429350
+Both Surviving: 34114268 (82,34%)
+Forward Only Surviving: 2893853 (6,99%)
+Reverse Only Surviving: 1710722 (4,13%)
+Dropped: 2710507 (6,54%)
+
+Tge_01_L8_OBIWAN_307:
+Input Read Pairs: 37289490
+Both Surviving: 30171955 (80,91%)
+Forward Only Surviving: 2697634 (7,23%)
+Reverse Only Surviving: 1956125 (5,25%)
+Dropped: 2463776 (6,61%)
+
+Tge_02_L3_OBIWAN_310:
+Input Read Pairs: 52771389
+Both Surviving: 44570172 (84,46%)
+Forward Only Surviving: 3476406 (6,59%)
+Reverse Only Surviving: 2053301 (3,89%)
+Dropped: 2671510 (5,06%)
+
+Tge_02_L7_OBIWAN_314:
+Input Read Pairs: 55229518
+Both Surviving: 45453197 (82,30%)
+Forward Only Surviving: 4458637 (8,07%)
+Reverse Only Surviving: 1904765 (3,45%)
+Dropped: 3412919 (6,18%)
+
+Tge_02_L8_OBIWAN_307:
+Input Read Pairs: 49737413
+Both Surviving: 40076412 (80,58%)
+Forward Only Surviving: 4127658 (8,30%)
+Reverse Only Surviving: 2352202 (4,73%)
+Dropped: 3181141 (6,40%)
+
+Tge_03_L3_OBIWAN_310:
+Input Read Pairs: 49210106
+Both Surviving: 42209546 (85,77%)
+Forward Only Surviving: 2655250 (5,40%)
+Reverse Only Surviving: 2126249 (4,32%)
+Dropped: 2219061 (4,51%)
+
+Tge_03_L7_OBIWAN_314:
+Input Read Pairs: 51233245
+Both Surviving: 43055093 (84,04%)
+Forward Only Surviving: 3270514 (6,38%)
+Reverse Only Surviving: 2059126 (4,02%)
+Dropped: 2848512 (5,56%)
+
+Tge_03_L8_OBIWAN_307:
+Input Read Pairs: 46289786
+Both Surviving: 38251141 (82,63%)
+Forward Only Surviving: 3016815 (6,52%)
+Reverse Only Surviving: 2404302 (5,19%)
+Dropped: 2617528 (5,65%)
+
+Tge_04_L3_OBIWAN_310:
+Input Read Pairs: 38516193
+Both Surviving: 32712578 (84,93%)
+Forward Only Surviving: 2271675 (5,90%)
+Reverse Only Surviving: 1599430 (4,15%)
+Dropped: 1932510 (5,02%)
+
+Tge_04_L7_OBIWAN_314:
+Input Read Pairs: 40062025
+Both Surviving: 33312700 (83,15%)
+Forward Only Surviving: 2682036 (6,69%)
+Reverse Only Surviving: 1604892 (4,01%)
+Dropped: 2462397 (6,15%)
+
+Tge_04_L8_OBIWAN_307:
+Input Read Pairs: 36379736
+Both Surviving: 29704561 (81,65%)
+Forward Only Surviving: 2592877 (7,13%)
+Reverse Only Surviving: 1804285 (4,96%)
+Dropped: 2278013 (6,26%)
+
+Tge_05_L3_OBIWAN_310:
+Input Read Pairs: 46877957
+Both Surviving: 39732148 (84,76%)
+Forward Only Surviving: 2948251 (6,29%)
+Reverse Only Surviving: 1895596 (4,04%)
+Dropped: 2301962 (4,91%)
+
+Tge_05_L7_OBIWAN_314:
+Input Read Pairs: 49063613
+Both Surviving: 40624169 (82,80%)
+Forward Only Surviving: 3675570 (7,49%)
+Reverse Only Surviving: 1806489 (3,68%)
+Dropped: 2957385 (6,03%)
+
+Tge_05_L8_OBIWAN_307:
+Input Read Pairs: 44216302
+Both Surviving: 35950424 (81,31%)
+Forward Only Surviving: 3453353 (7,81%)
+Reverse Only Surviving: 2119919 (4,79%)
+Dropped: 2692606 (6,09%)
+
+Tms_01_L5_OBIWAN_310:
+Input Read Pairs: 43999428
+Both Surviving: 36288274 (82,47%)
+Forward Only Surviving: 3175318 (7,22%)
+Reverse Only Surviving: 1953688 (4,44%)
+Dropped: 2582148 (5,87%)
+
+Tms_01_L6_OBIWAN_314:
+Input Read Pairs: 45284359
+Both Surviving: 36184976 (79,91%)
+Forward Only Surviving: 3820084 (8,44%)
+Reverse Only Surviving: 1931425 (4,27%)
+Dropped: 3347874 (7,39%)
+
+Tms_01_L7_OBIWAN_307:
+Input Read Pairs: 41996173
+Both Surviving: 32353606 (77,04%)
+Forward Only Surviving: 3764153 (8,96%)
+Reverse Only Surviving: 2484329 (5,92%)
+Dropped: 3394085 (8,08%)
+
+Tms_02_L5_OBIWAN_310:
+Input Read Pairs: 46259976
+Both Surviving: 38487909 (83,20%)
+Forward Only Surviving: 3016028 (6,52%)
+Reverse Only Surviving: 2172965 (4,70%)
+Dropped: 2583074 (5,58%)
+
+Tms_02_L6_OBIWAN_314:
+Input Read Pairs: 47112269
+Both Surviving: 38099679 (80,87%)
+Forward Only Surviving: 3531847 (7,50%)
+Reverse Only Surviving: 2169470 (4,60%)
+Dropped: 3311273 (7,03%)
+
+Tms_02_L7_OBIWAN_307:
+Input Read Pairs: 44020216
+Both Surviving: 34345030 (78,02%)
+Forward Only Surviving: 3488002 (7,92%)
+Reverse Only Surviving: 2793674 (6,35%)
+Dropped: 3393510 (7,71%)
+
+Tms_03_L5_OBIWAN_310:
+Input Read Pairs: 46433398
+Both Surviving: 38639426 (83,21%)
+Forward Only Surviving: 3076042 (6,62%)
+Reverse Only Surviving: 2129625 (4,59%)
+Dropped: 2588305 (5,57%)
+
+Tms_03_L6_OBIWAN_314:
+Input Read Pairs: 53229599
+Both Surviving: 42989114 (80,76%)
+Forward Only Surviving: 4234215 (7,95%)
+Reverse Only Surviving: 2280501 (4,28%)
+Dropped: 3725769 (7,00%)
+
+Tms_03_L7_OBIWAN_307:
+Input Read Pairs: 44288915
+Both Surviving: 34629589 (78,19%)
+Forward Only Surviving: 3513031 (7,93%)
+Reverse Only Surviving: 2772091 (6,26%)
+Dropped: 3374204 (7,62%)
+
+Tms_04_L5_OBIWAN_310:
+Input Read Pairs: 62216825
+Both Surviving: 50911530 (81,83%)
+Forward Only Surviving: 4675159 (7,51%)
+Reverse Only Surviving: 2779313 (4,47%)
+Dropped: 3850823 (6,19%)
+
+Tms_04_L6_OBIWAN_314:
+Input Read Pairs: 59293055
+Both Surviving: 46999347 (79,27%)
+Forward Only Surviving: 5008530 (8,45%)
+Reverse Only Surviving: 2667178 (4,50%)
+Dropped: 4618000 (7,79%)
+
+Tms_04_L7_OBIWAN_307:
+Input Read Pairs: 59201124
+Both Surviving: 45070628 (76,13%)
+Forward Only Surviving: 5602166 (9,46%)
+Reverse Only Surviving: 3515013 (5,94%)
+Dropped: 5013317 (8,47%)
+
+Tms_05_L5_OBIWAN_310:
+Input Read Pairs: 53593741
+Both Surviving: 44212324 (82,50%)
+Forward Only Surviving: 3839631 (7,16%)
+Reverse Only Surviving: 2373893 (4,43%)
+Dropped: 3167893 (5,91%)
+
+Tms_05_L6_OBIWAN_314:
+Input Read Pairs: 55403216
+Both Surviving: 44288461 (79,94%)
+Forward Only Surviving: 4698171 (8,48%)
+Reverse Only Surviving: 2317574 (4,18%)
+Dropped: 4099010 (7,40%)
+
+Tms_05_L7_OBIWAN_307:
+Input Read Pairs: 51072137
+Both Surviving: 39299573 (76,95%)
+Forward Only Surviving: 4573839 (8,96%)
+Reverse Only Surviving: 3018810 (5,91%)
+Dropped: 4179915 (8,18%)
+
+Tpa_01_L4_OBIWAN_310:
+Input Read Pairs: 43441290
+Both Surviving: 35794529 (82,40%)
+Forward Only Surviving: 2988756 (6,88%)
+Reverse Only Surviving: 1995744 (4,59%)
+Dropped: 2662261 (6,13%)
+
+Tpa_01_L5_OBIWAN_307:
+Input Read Pairs: 41083486
+Both Surviving: 31793522 (77,39%)
+Forward Only Surviving: 3642063 (8,87%)
+Reverse Only Surviving: 2340903 (5,70%)
+Dropped: 3306998 (8,05%)
+
+Tpa_01_L8_OBIWAN_314:
+Input Read Pairs: 46048386
+Both Surviving: 36888808 (80,11%)
+Forward Only Surviving: 3580463 (7,78%)
+Reverse Only Surviving: 1999073 (4,34%)
+Dropped: 3580042 (7,77%)
+
+Tpa_02_L4_OBIWAN_310:
+Input Read Pairs: 45957388
+Both Surviving: 37271973 (81,10%)
+Forward Only Surviving: 3510985 (7,64%)
+Reverse Only Surviving: 2127862 (4,63%)
+Dropped: 3046568 (6,63%)
+
+Tpa_02_L5_OBIWAN_307:
+Input Read Pairs: 43452335
+Both Surviving: 32983809 (75,91%)
+Forward Only Surviving: 4269329 (9,83%)
+Reverse Only Surviving: 2489895 (5,73%)
+Dropped: 3709302 (8,54%)
+
+Tpa_02_L8_OBIWAN_314:
+Input Read Pairs: 48372516
+Both Surviving: 38022237 (78,60%)
+Forward Only Surviving: 4191259 (8,66%)
+Reverse Only Surviving: 2084261 (4,31%)
+Dropped: 4074759 (8,42%)
+
+Tpa_03_L4_OBIWAN_310:
+Input Read Pairs: 43004929
+Both Surviving: 35729946 (83,08%)
+Forward Only Surviving: 2861115 (6,65%)
+Reverse Only Surviving: 1888728 (4,39%)
+Dropped: 2525140 (5,87%)
+
+Tpa_03_L5_OBIWAN_307:
+Input Read Pairs: 40673635
+Both Surviving: 31947668 (78,55%)
+Forward Only Surviving: 3406042 (8,37%)
+Reverse Only Surviving: 2251603 (5,54%)
+Dropped: 3068322 (7,54%)
+
+Tpa_03_L8_OBIWAN_314:
+Input Read Pairs: 45533448
+Both Surviving: 36772130 (80,76%)
+Forward Only Surviving: 3566936 (7,83%)
+Reverse Only Surviving: 1803794 (3,96%)
+Dropped: 3390588 (7,45%)
+
+Tpa_04_L4_OBIWAN_310:
+Input Read Pairs: 42280139
+Both Surviving: 35310160 (83,51%)
+Forward Only Surviving: 2569898 (6,08%)
+Reverse Only Surviving: 1986589 (4,70%)
+Dropped: 2413492 (5,71%)
+
+Tpa_04_L5_OBIWAN_307:
+Input Read Pairs: 39893941
+Both Surviving: 31644451 (79,32%)
+Forward Only Surviving: 3037078 (7,61%)
+Reverse Only Surviving: 2356457 (5,91%)
+Dropped: 2855955 (7,16%)
+
+Tpa_04_L8_OBIWAN_314:
+Input Read Pairs: 45495709
+Both Surviving: 37021900 (81,37%)
+Forward Only Surviving: 3188808 (7,01%)
+Reverse Only Surviving: 1999432 (4,39%)
+Dropped: 3285569 (7,22%)
+
+Tpa_05_L4_OBIWAN_310:
+Input Read Pairs: 72214155
+Both Surviving: 58365533 (80,82%)
+Forward Only Surviving: 5355316 (7,42%)
+Reverse Only Surviving: 3366998 (4,66%)
+Dropped: 5126308 (7,10%)
+
+Tpa_05_L5_OBIWAN_307:
+Input Read Pairs: 67842610
+Both Surviving: 50772438 (74,84%)
+Forward Only Surviving: 7068894 (10,42%)
+Reverse Only Surviving: 3792618 (5,59%)
+Dropped: 6208660 (9,15%)
+
+Tpa_05_L8_OBIWAN_314:
+Input Read Pairs: 77034392
+Both Surviving: 60129696 (78,06%)
+Forward Only Surviving: 6721166 (8,72%)
+Reverse Only Surviving: 3260534 (4,23%)
+Dropped: 6922996 (8,99%)
+
+Tps_01_L3_OBIWAN_307:
+Input Read Pairs: 54017613
+Both Surviving: 40575049 (75,11%)
+Forward Only Surviving: 4994210 (9,25%)
+Reverse Only Surviving: 3252668 (6,02%)
+Dropped: 5195686 (9,62%)
+
+Tps_01_L3_OBIWAN_312:
+Input Read Pairs: 51504638
+Both Surviving: 42378186 (82,28%)
+Forward Only Surviving: 3543395 (6,88%)
+Reverse Only Surviving: 2152765 (4,18%)
+Dropped: 3430292 (6,66%)
+
+Tps_01_L8_OBIWAN_310:
+Input Read Pairs: 57787013
+Both Surviving: 47228235 (81,73%)
+Forward Only Surviving: 3896035 (6,74%)
+Reverse Only Surviving: 2467804 (4,27%)
+Dropped: 4194939 (7,26%)
+
+Tps_02_L3_OBIWAN_307:
+Input Read Pairs: 43497019
+Both Surviving: 32797961 (75,40%)
+Forward Only Surviving: 4019470 (9,24%)
+Reverse Only Surviving: 2524376 (5,80%)
+Dropped: 4155212 (9,55%)
+
+Tps_02_L3_OBIWAN_312:
+Input Read Pairs: 40059719
+Both Surviving: 32812781 (81,91%)
+Forward Only Surviving: 3039917 (7,59%)
+Reverse Only Surviving: 1577961 (3,94%)
+Dropped: 2629060 (6,56%)
+
+Tps_02_L8_OBIWAN_310:
+Input Read Pairs: 46109180
+Both Surviving: 37544866 (81,43%)
+Forward Only Surviving: 3319900 (7,20%)
+Reverse Only Surviving: 1927520 (4,18%)
+Dropped: 3316894 (7,19%)
+
+Tps_03_L3_OBIWAN_307:
+Input Read Pairs: 55258054
+Both Surviving: 41342300 (74,82%)
+Forward Only Surviving: 5140185 (9,30%)
+Reverse Only Surviving: 3404361 (6,16%)
+Dropped: 5371208 (9,72%)
+
+Tps_03_L3_OBIWAN_312:
+Input Read Pairs: 50510739
+Both Surviving: 41377298 (81,92%)
+Forward Only Surviving: 3769649 (7,46%)
+Reverse Only Surviving: 2225746 (4,41%)
+Dropped: 3138046 (6,21%)
+
+Tps_03_L8_OBIWAN_310:
+Input Read Pairs: 58528970
+Both Surviving: 47519194 (81,19%)
+Forward Only Surviving: 4269211 (7,29%)
+Reverse Only Surviving: 2579479 (4,41%)
+Dropped: 4161086 (7,11%)
+
+Tps_04_L3_OBIWAN_307:
+Input Read Pairs: 48400531
+Both Surviving: 34804685 (71,91%)
+Forward Only Surviving: 5350591 (11,05%)
+Reverse Only Surviving: 2841841 (5,87%)
+Dropped: 5403414 (11,16%)
+
+Tps_04_L3_OBIWAN_312:
+Input Read Pairs: 45236640
+Both Surviving: 35919284 (79,40%)
+Forward Only Surviving: 3968728 (8,77%)
+Reverse Only Surviving: 1879782 (4,16%)
+Dropped: 3468846 (7,67%)
+
+Tps_04_L8_OBIWAN_310:
+Input Read Pairs: 51638176
+Both Surviving: 40580337 (78,59%)
+Forward Only Surviving: 4449173 (8,62%)
+Reverse Only Surviving: 2181347 (4,22%)
+Dropped: 4427319 (8,57%)
+
+Tps_05_L3_OBIWAN_307:
+Input Read Pairs: 52031374
+Both Surviving: 37884165 (72,81%)
+Forward Only Surviving: 5262842 (10,11%)
+Reverse Only Surviving: 3214759 (6,18%)
+Dropped: 5669608 (10,90%)
+
+Tps_05_L3_OBIWAN_312:
+Input Read Pairs: 48691587
+Both Surviving: 39020431 (80,14%)
+Forward Only Surviving: 3882050 (7,97%)
+Reverse Only Surviving: 2147385 (4,41%)
+Dropped: 3641721 (7,48%)
+
+Tps_05_L8_OBIWAN_310:
+Input Read Pairs: 55477536
+Both Surviving: 44005926 (79,32%)
+Forward Only Surviving: 4428159 (7,98%)
+Reverse Only Surviving: 2429400 (4,38%)
+Dropped: 4614051 (8,32%)
+
+Tsi_01_L1_OBIWAN_312:
+Input Read Pairs: 38149501
+Both Surviving: 30306826 (79,44%)
+Forward Only Surviving: 2816283 (7,38%)
+Reverse Only Surviving: 1432242 (3,75%)
+Dropped: 3594150 (9,42%)
+
+Tsi_01_L6_OBIWAN_307:
+Input Read Pairs: 40807562
+Both Surviving: 30146751 (73,88%)
+Forward Only Surviving: 3827176 (9,38%)
+Reverse Only Surviving: 2195106 (5,38%)
+Dropped: 4638529 (11,37%)
+
+Tsi_01_L6_OBIWAN_310:
+Input Read Pairs: 45499880
+Both Surviving: 35417623 (77,84%)
+Forward Only Surviving: 3501014 (7,69%)
+Reverse Only Surviving: 1963130 (4,31%)
+Dropped: 4618113 (10,15%)
+
+Tsi_02_L1_OBIWAN_312:
+Input Read Pairs: 38316861
+Both Surviving: 30186278 (78,78%)
+Forward Only Surviving: 3078888 (8,04%)
+Reverse Only Surviving: 1689559 (4,41%)
+Dropped: 3362136 (8,77%)
+
+Tsi_02_L6_OBIWAN_307:
+Input Read Pairs: 40710729
+Both Surviving: 29248124 (71,84%)
+Forward Only Surviving: 4670944 (11,47%)
+Reverse Only Surviving: 2229950 (5,48%)
+Dropped: 4561711 (11,21%)
+
+Tsi_02_L6_OBIWAN_310:
+Input Read Pairs: 45371589
+Both Surviving: 34698308 (76,48%)
+Forward Only Surviving: 4074120 (8,98%)
+Reverse Only Surviving: 2076925 (4,58%)
+Dropped: 4522236 (9,97%)
+
+Tsi_03_L1_OBIWAN_312:
+Input Read Pairs: 45221989
+Both Surviving: 37895021 (83,80%)
+Forward Only Surviving: 3221048 (7,12%)
+Reverse Only Surviving: 1679757 (3,71%)
+Dropped: 2426163 (5,37%)
+
+Tsi_03_L6_OBIWAN_307:
+Input Read Pairs: 49329223
+Both Surviving: 38205982 (77,45%)
+Forward Only Surviving: 4555215 (9,23%)
+Reverse Only Surviving: 2600024 (5,27%)
+Dropped: 3968002 (8,04%)
+
+Tsi_03_L6_OBIWAN_310:
+Input Read Pairs: 54852058
+Both Surviving: 44793309 (81,66%)
+Forward Only Surviving: 4105559 (7,48%)
+Reverse Only Surviving: 2297316 (4,19%)
+Dropped: 3655874 (6,66%)
+
+Tsi_04_L1_OBIWAN_312:
+Input Read Pairs: 41071173
+Both Surviving: 35103895 (85,47%)
+Forward Only Surviving: 2549194 (6,21%)
+Reverse Only Surviving: 1396614 (3,40%)
+Dropped: 2021470 (4,92%)
+
+Tsi_04_L6_OBIWAN_307:
+Input Read Pairs: 44476866
+Both Surviving: 35714903 (80,30%)
+Forward Only Surviving: 3382729 (7,61%)
+Reverse Only Surviving: 2245713 (5,05%)
+Dropped: 3133521 (7,05%)
+
+Tsi_04_L6_OBIWAN_310:
+Input Read Pairs: 49632273
+Both Surviving: 41602452 (83,82%)
+Forward Only Surviving: 3099012 (6,24%)
+Reverse Only Surviving: 1984636 (4,00%)
+Dropped: 2946173 (5,94%)
+
+Tsi_05_L1_OBIWAN_312:
+Input Read Pairs: 48699978
+Both Surviving: 41434223 (85,08%)
+Forward Only Surviving: 2991565 (6,14%)
+Reverse Only Surviving: 1866398 (3,83%)
+Dropped: 2407792 (4,94%)
+
+Tsi_05_L6_OBIWAN_307:
+Input Read Pairs: 53673695
+Both Surviving: 42460945 (79,11%)
+Forward Only Surviving: 4122256 (7,68%)
+Reverse Only Surviving: 2944980 (5,49%)
+Dropped: 4145514 (7,72%)
+
+Tsi_05_L6_OBIWAN_310:
+Input Read Pairs: 59334650
+Both Surviving: 49344986 (83,16%)
+Forward Only Surviving: 3830583 (6,46%)
+Reverse Only Surviving: 2569240 (4,33%)
+Dropped: 3589841 (6,05%)
+
+Tte_01_L1_OBIWAN_314:
+Input Read Pairs: 49839380
+Both Surviving: 37155988 (74,55%)
+Forward Only Surviving: 4974848 (9,98%)
+Reverse Only Surviving: 1972882 (3,96%)
+Dropped: 5735662 (11,51%)
+
+Tte_01_L3_OBIWAN_309:
+Input Read Pairs: 43580624
+Both Surviving: 34613286 (79,42%)
+Forward Only Surviving: 3605452 (8,27%)
+Reverse Only Surviving: 1697703 (3,90%)
+Dropped: 3664183 (8,41%)
+
+Tte_01_L5_OBIWAN_314:
+Input Read Pairs: 49853150
+Both Surviving: 36952337 (74,12%)
+Forward Only Surviving: 5240895 (10,51%)
+Reverse Only Surviving: 1969159 (3,95%)
+Dropped: 5690759 (11,42%)
+
+Tte_02_L1_OBIWAN_314:
+Input Read Pairs: 53182987
+Both Surviving: 39575003 (74,41%)
+Forward Only Surviving: 5061971 (9,52%)
+Reverse Only Surviving: 2424183 (4,56%)
+Dropped: 6121830 (11,51%)
+
+Tte_02_L3_OBIWAN_309:
+Input Read Pairs: 46599744
+Both Surviving: 36937769 (79,27%)
+Forward Only Surviving: 3839082 (8,24%)
+Reverse Only Surviving: 2044922 (4,39%)
+Dropped: 3777971 (8,11%)
+
+Tte_02_L5_OBIWAN_314:
+Input Read Pairs: 53368315
+Both Surviving: 39632494 (74,26%)
+Forward Only Surviving: 5261111 (9,86%)
+Reverse Only Surviving: 2446678 (4,58%)
+Dropped: 6028032 (11,30%)
+
+Tte_03_L1_OBIWAN_314:
+Input Read Pairs: 66555992
+Both Surviving: 49963705 (75,07%)
+Forward Only Surviving: 6198554 (9,31%)
+Reverse Only Surviving: 2915123 (4,38%)
+Dropped: 7478610 (11,24%)
+
+Tte_03_L3_OBIWAN_309:
+Input Read Pairs: 57667779
+Both Surviving: 46121363 (79,98%)
+Forward Only Surviving: 4461185 (7,74%)
+Reverse Only Surviving: 2541614 (4,41%)
+Dropped: 4543617 (7,88%)
+
+Tte_03_L5_OBIWAN_314:
+Input Read Pairs: 66885575
+Both Surviving: 50218145 (75,08%)
+Forward Only Surviving: 6351306 (9,50%)
+Reverse Only Surviving: 2956369 (4,42%)
+Dropped: 7359755 (11,00%)
+
+Tte_04_L1_OBIWAN_314:
+Input Read Pairs: 57607898
+Both Surviving: 42052438 (73,00%)
+Forward Only Surviving: 6385019 (11,08%)
+Reverse Only Surviving: 2316592 (4,02%)
+Dropped: 6853849 (11,90%)
+
+Tte_04_L3_OBIWAN_309:
+Input Read Pairs: 50785890
+Both Surviving: 39717882 (78,21%)
+Forward Only Surviving: 4709230 (9,27%)
+Reverse Only Surviving: 2042197 (4,02%)
+Dropped: 4316581 (8,50%)
+
+Tte_04_L5_OBIWAN_314:
+Input Read Pairs: 57731028
+Both Surviving: 41932963 (72,64%)
+Forward Only Surviving: 6696313 (11,60%)
+Reverse Only Surviving: 2326794 (4,03%)
+Dropped: 6774958 (11,74%)
+
+Tte_05_L1_OBIWAN_314:
+Input Read Pairs: 58397699
+Both Surviving: 44656319 (76,47%)
+Forward Only Surviving: 4802616 (8,22%)
+Reverse Only Surviving: 2928874 (5,02%)
+Dropped: 6009890 (10,29%)
+
+Tte_05_L3_OBIWAN_309:
+Input Read Pairs: 51249188
+Both Surviving: 41531397 (81,04%)
+Forward Only Surviving: 3714498 (7,25%)
+Reverse Only Surviving: 2396264 (4,68%)
+Dropped: 3607029 (7,04%)
+
+Tte_05_L5_OBIWAN_314:
+Input Read Pairs: 58916630
+Both Surviving: 45028559 (76,43%)
+Forward Only Surviving: 5011265 (8,51%)
+Reverse Only Surviving: 2946124 (5,00%)
+Dropped: 5930682 (10,07%)
