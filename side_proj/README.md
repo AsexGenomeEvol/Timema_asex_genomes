@@ -3,7 +3,7 @@ Pipeline steps for calling SNPs (and indels) in stick insects are described in :
 
 * [A - raw data formatting](./A_raw_reads)
 
-xxx
+ Organising/merging/renaming the fastq files for the five individuals of each of the ten species.
 
 * [B - read_trimming](./B_cleaned_reads)
 
