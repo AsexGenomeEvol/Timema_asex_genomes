@@ -1,20 +1,20 @@
 
-10 species x 5 individuals x 3 runs (x multiple fastq files)
+10 species x 5 individuals x multiple runs (x multiple fastq files)
 
-Only the 3 **OBIWAN** runs were used, as **WINDU** runs had troubles during the sequencing. 
+Only the **OBIWAN** runs were used, as **WINDU** runs had troubles during the sequencing. 
 
 Each run has **R1**/**R2**/**R3** files (that can be split in multiple fastq files), where **R1** & **R2** contain paired-end reads and **R3** is identical to **R2** and was therefore not used in the analysis.
 
 All paired-end run use the same insert size : **550 bp**.
 
 Split fastq files corresponding to the same run in an individual were merged together (R1 & R2 being kept apart), leading to a total of :
-10 species x 5 individuals x 3 runs x R1/R2 =  150 fastq files
+10 species x 5 individuals x 3 (OBIWAN) runs x R1/R2 =  150 fastq files
 
 For the correspondance table between original file names from the sequencing facility and standardized file names used in the next steps, see :
 [correspondance table (table for download)](./resequencing_samples)
 
 
-## Species alias :
+### Species and individual aliases :
 
 * **1_Tdi**   (samples: Tdi_01 / Tdi_02 / Tdi_03 / Tdi_04 / Tdi_05)
 * **1_Tps**   (samples: Tps_01 / Tps_02 / Tps_03 / Tps_04 / Tps_05)
