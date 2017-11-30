@@ -1,17 +1,19 @@
 
-Pipeline steps for calling SNPs (and indels) in stick insects are described in :
+#### Pipeline steps for calling SNPs (and indels) in stick insects are described in :
 
-* [A - raw data formatting](./A_raw_reads)
+* [**A - raw data formatting**](./A_raw_reads)
 
   Organising / merging / renaming fastq files of the five resequenced individuals of the ten species.
 
-* [B - read_trimming](./B_cleaned_reads)
+* [**B - read_trimming**](./B_cleaned_reads)
 
-* [C - mapping](./C_mapping)
+  Trimming of the reads for quality and presence of adapters.
 
-* [D - snp calling (preliminary round)](./D_snp_calling_round0)
+* [**C - mapping**](./C_mapping)
 
-* [E - base quality recalibration](./E_recalibration)
+* [**D - snp calling (preliminary round)**](./D_snp_calling_round0)
 
-* [F - snp calling (final round)](./F_snp_calling_round1)
+* [**E - base quality recalibration**](./E_recalibration)
+
+* [**F - snp calling (final round)**](./F_snp_calling_round1)
 
