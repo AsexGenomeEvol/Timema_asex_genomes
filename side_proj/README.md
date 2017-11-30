@@ -1,7 +1,7 @@
 
 Pipeline steps for calling SNPs (and indels) in stick insects are described in :
 
-* [A - raw data formatting](./raw_reads)
+* [A - raw data formatting](./A_raw_reads)
 
 * [B - read_trimming](./B_read_trimming)
 
