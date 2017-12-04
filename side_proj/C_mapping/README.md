@@ -140,9 +140,9 @@ samtools index $bwa.bam
 
 '**Tdi_01.run_list**' content :
 ````
-Tdi_01_L2_OBIWAN_312.raw.bam 
-Tdi_01_L4_OBIWAN_307.raw.bam 
-Tdi_01_L7_OBIWAN_310.raw.bam
+Tdi_01_L2_OBIWAN_312.bam 
+Tdi_01_L4_OBIWAN_307.bam 
+Tdi_01_L7_OBIWAN_310.bam
 ````
 
 ````
