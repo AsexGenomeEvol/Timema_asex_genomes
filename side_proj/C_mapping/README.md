@@ -132,6 +132,7 @@ samtools index $bwa.bam
 samtools merge -@ 10 -b $sample.run_list $sample.bam        # merge bam files (list in $sample.run_list, output: $sample.bam)
 samtools index $sample.bam                                  # reindex
 ````
+Duplicates always represent less than 10% of the reads are often found at level of 1 or 2%.
 
 -------
 -------
