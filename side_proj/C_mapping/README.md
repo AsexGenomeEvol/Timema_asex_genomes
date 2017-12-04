@@ -126,11 +126,14 @@ samtools index $bwa.bam
 
 ### 7) merge all (three) bam files from a single sample :
 
-(after previous steps are done for each of the three runs of a sample)
+(after the previous steps are finished for each of the three runs of a sample)
 
 ````
 samtools merge -@ 10 -b $sample.run_list $sample.bam        # merge bam files (list in $sample.run_list, output: $sample.bam)
 samtools index $sample.bam                                  # reindex
 ````
 
+-------
+-------
+-------
 **BILAN:** We get a single bam file per sample (5 individuals *x* 10 species = 50 bam files).
