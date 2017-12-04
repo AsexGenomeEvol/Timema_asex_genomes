@@ -4,7 +4,7 @@
 
 Mapping was performed independently for each run (three runs per individual).
 
-Following commands are given for sample **Tdi_01** (run **L2_OBIWAN_314**).
+Following commands are given for sample **Tdi_01** (run: **L2_OBIWAN_314**).
 
 
 ### 0) preliminary step :
@@ -26,7 +26,7 @@ Assign a read group (**RG**) to the run (it will be added in the bam file header
 bwa mem -R $readGroup   \
     -M                  \
     -t 40               \
-    $referenceGenome    \
+    $referenceGenome_b3v04 \
     $fastqR1 $fastqR2   >  $bwaPE.sam
 ````
 
@@ -34,10 +34,10 @@ bwa mem -R $readGroup   \
 #### Command for single-end fastq file :
 
 ````
-"bwa mem -R $readGroup   \
+bwa mem -R $readGroup   \
     -M                   \
     -t 40                \
-    $referenceGenome     \
+    $referenceGenome_b3v04  \
     $fastqUnpaired       >  $bwaSE.sam
 ````
 
@@ -65,9 +65,60 @@ bwa mem -R $readGroup   \
                        One may consider to use option -M to flag shorter split hits as secondary.'
 ````
 
-**NOTE:** mapping was not performed on 'final' assemblies (version: **b3v06**), but on a previous version (**b3v04**) containing **all** scaffolds (even those of size <1kb that were then removed in last version). This is to avoid that resequenced reads map on an incorrect scaffold because of the absence of their true target. A quick comparison between mappings of the same run on both assemblies shows that this amount of concerned reads can be large (up to 20% of the total pool of reads can map incorrectly to an other scaffold when then they in fact belong elsewhere). Note however that such hits are likely to receive a poor **mapping quality score** that will later reduce their influence in the discrimination between true and false SNPs.
+**NOTE:** mapping was not performed on 'final' assemblies (version: **b3v06**), but on a previous version (**b3v04**) containing **all** scaffolds (even those of size <1kb that were then removed in last version). This is to avoid that resequenced reads map on an incorrect scaffold because of the absence of their true target. A quick comparison between mapping results of the same run on both assemblies shows that the amount of concerned reads can be large (up to 20% of the total pool of reads can map incorrectly to the wrong scaffold when then they in fact belong elsewhere). Keep in mind however that such hits are likely to receive a poor **mapping quality score** that will later reduce their influence in the discrimination between true and false SNPs.
 
 
+### 2) filter sam files on regions and quality :
+
+Only reads mapped to scaffolds present in the final assembly (version: **b3v06**) and above a certain mapping quality threshold (phred-score: **20**) were kept (this also removes unmapped reads) :
+````
+samtools view -h -q 20 -L $bed -@ 10 $bwaPE.sam > $bwaPE.filtered.sam
+samtools view -h -q 20 -L $bed -@ 10 $bwaSE.sam > $bwaSE.filtered.sam
+````
+`$bed`: bed file containing list of coordinates of final scaffolds.
+
+
+### 3) convert sam to sorted bam :
+
+````
+samtools sort -@ 10 -O bam -l 9 -T $bwaPE.temp.bam -o $bwaPE.bam $bwaPE.filtered.sam
+samtools sort -@ 10 -O bam -l 9 -T $bwaSE.temp.bam -o $bwaSE.bam $bwaSE.filtered.sam
+````
+
+### 4) merging paired-end and single-end bam files :
+
+````
+samtools merge -f -@ 10 -c $bwa.bam $bwaPE.bam $bwaSE.bam      
+````
+**note:** '-c' tag is use to keep the same '**@RG:ID**' when it is the same in the different input files (by default, the program adds a suffix to one of the read group!).
+
+
+### 5) rewrite header section by keeping only scaffolds from final assembly (and indexing) :
+
+Later programs will check the correspondence between the list of scaffolds in the assembly (fasta) and the headers of the bam file (where all scaffolds of **b3v04** assembly are currently present).
+````
+java -jar picard.jar ReorderSam \
+    I=$bwa.bam                  \
+    O=$bwa.reordered.bam        \
+    R=$referenceGenome_b3v06    \
+    S=true                      \
+    CREATE_INDEX=TRUE
+# replace old bam by new :
+mv $bwa.reordered.bam $bwa.bam
+````
+
+### 6) mark duplicates with Picard tools (and reindex) :
+
+````
+java -Xmx25g -jar picard.jar MarkDuplicates \
+   INPUT=$bwa.bam \
+   OUTPUT=${ind}_mdup.bam \
+   METRICS_FILE=log/${ind}_duplicate_metrics.txt \
+   MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
+   REMOVE_DUPLICATES=true               
+mv ${ind}_mdup.bam $ind.bam
+samtools index $ind.bam
+````
 
 
 
