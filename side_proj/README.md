@@ -24,4 +24,4 @@
 
 * [**F - snp calling (final round)**](./F_snp_calling_round1)
 
-  Second round of SNP (and indels) calling using updated bam files (with corrected base quality score).
+  Second and final round of SNP (and indels) calling using updated bam files (with corrected base quality scores).
