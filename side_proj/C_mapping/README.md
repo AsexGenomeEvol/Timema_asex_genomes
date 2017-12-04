@@ -136,4 +136,6 @@ samtools index $sample.bam                                  # reindex
 -------
 -------
 -------
-**BILAN:** We get a single bam file per sample (5 individuals *x* 10 species = 50 bam files).
+**BILAN:** A single bam file per sample (5 individuals *x* 10 species = 50 bam files).
+
+
