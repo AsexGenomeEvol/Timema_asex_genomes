@@ -7,7 +7,7 @@ Mapping was performed independently for each run (three runs per individual).
 Following commands are given for sample **Tdi_01** (run **L2_OBIWAN_314**).
 
 
-### Pre-mapping :
+### 0) preliminary step :
 
 Assign a read group (**RG**) to the run (it will be added in the bam file headers) :
 ````
@@ -18,7 +18,7 @@ Assign a read group (**RG**) to the run (it will be added in the bam file header
 * **PL**: platform/technology used to produce the reads.
 * **SM**: **sample** (several read groups can correspond to the same sample).
 
-### Mapping :
+### 1) mapping :
 
 #### Command for paired-end fastq files :
 
@@ -64,6 +64,11 @@ bwa mem -R $readGroup   \
                        However, some tools such as Picard markDuplicates does not work with split alignments. 
                        One may consider to use option -M to flag shorter split hits as secondary.'
 ````
+
+**NOTE:** mapping was not performed on 'final' assemblies (version: **b3v06**), but on a previous version (**b3v04**) containing **all** scaffolds (even those of size <1kb that were then removed in last version). This is to avoid that resequenced reads map on an incorrect scaffold because of the absence of their true target. A quick comparison between mappings of the same run on both assemblies shows that this amount of concerned reads can be large (up to 20% of the total pool of reads can map incorrectly to an other scaffold when then they in fact belong elsewhere). Note however that such hits are likely to receive a poor **mapping quality score** that will later reduce their influence in the discrimination between true and false SNPs.
+
+
+
 
 
 
