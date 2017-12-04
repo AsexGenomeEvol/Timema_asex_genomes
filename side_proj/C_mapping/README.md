@@ -109,18 +109,28 @@ mv $bwa.reordered.bam $bwa.bam
 
 ### 6) mark duplicates with Picard tools (and reindex) :
 
+Duplicates (ie, reads having exactly the same sequence and therefore mapping to the same location), mostly arising from PCR amplification bias introduced during library construction (or corresponding to optical duplicates), are removed from the bam file, as they inflate the coverage of a position and can lead for instance to errors looking like true snps; but more generally, they will lead to a breakdown of the statistical models for variant calling that assume some sort of independence between measurements.
+
 ````
 java -Xmx25g -jar picard.jar MarkDuplicates \
    INPUT=$bwa.bam \
-   OUTPUT=${ind}_mdup.bam \
-   METRICS_FILE=log/${ind}_duplicate_metrics.txt \
+   OUTPUT=${bwa}_md.bam \
+   METRICS_FILE=log/${bwa}_duplicate_metrics.txt \
    MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
    REMOVE_DUPLICATES=true               
-mv ${ind}_mdup.bam $ind.bam
-samtools index $ind.bam
+mv ${bwa}_md.bam $bwa.bam
+# reindexing :
+samtools index $bwa.bam
 ````
 
 
+### 7) merge all (three) bam files from a single sample :
 
+(after previous steps are done for each of the three runs of a sample)
 
+````
+samtools merge -@ 10 -b $sample.run_list $sample.bam        # merge bam files (list in $sample.run_list, output: $sample.bam)
+samtools index $sample.bam                                  # reindex
+````
 
+**BILAN:** We get a single bam file per sample (5 individuals *x* 10 species = 50 bam files).
