@@ -1,4 +1,7 @@
 
+# A - raw data formatting :
+
+
 *10 species* x *5 individuals* x *multiple runs* (x *multiple fastq files*)
 
 Only the **OBIWAN** runs were used, as **WINDU** runs had troubles during the sequencing. 
