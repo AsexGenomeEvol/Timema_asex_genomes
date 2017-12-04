@@ -105,7 +105,7 @@ vcftools \
 ````
 1_Tdi.SNP_raw.vcf
 1_Tdi.indel_raw.vcf
-`````
+````
 
 **note:** these two sets of variants are not definitive 
 (although some tests were applied by *GATK* to remove the most dubious ones).
@@ -154,12 +154,11 @@ QD < 5.0
 FS > 25.0
 SOR > 3.5
 ReadPosRankSum < -2.5
-
 ````
 
 #### parameter distributions (and thresholds) for SNPs :
 
-![DP](./plots/DP_snp.pdf)
+![DP](./plots/DP_snp.png)
 
 
 
