@@ -158,11 +158,12 @@ ReadPosRankSum < -2.5
 
 #### parameter distributions (and thresholds) for SNPs :
 
-![QD](./plots/QD_snp.png)
-
-
-
-
+![QD](plots/QD_snp.png)
+![FS](plots/FS_snp.png)
+![SOR](plots/SOR_snp.png)
+![MQ](plots/MQ_snp.png)
+![MQRankSum](plots/MQRankSum_snp.png)
+![ReadPosRankSum](plots/ReadPosRankSum_snp.png)
 
 
 ### 5) merging paired-end and single-end bam files :
