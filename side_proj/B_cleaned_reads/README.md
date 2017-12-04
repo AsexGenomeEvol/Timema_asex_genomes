@@ -1,4 +1,7 @@
 
+# B - read trimming :
+
+
 Paired-end reads were trimmed for presence of adapters and quality using **Trimmomatic**.
 Similar parameters to the individual used for genome assembly were employed ([Illumina adapters](./Illumina-PE_adapters.fa) used).
 
