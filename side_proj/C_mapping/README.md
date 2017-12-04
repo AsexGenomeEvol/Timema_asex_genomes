@@ -68,7 +68,7 @@ bwa mem -R $readGroup   \
 **NOTE:** mapping was not performed on 'final' assemblies (version: **b3v06**), but on a previous version (**b3v04**) containing **all** scaffolds (even those of size <1kb that were then removed in last version). This is to avoid that resequenced reads map on an incorrect scaffold because of the absence of their true target. A quick comparison between mapping results of the same run on both assemblies shows that the amount of concerned reads can be large (up to 20% of the total pool of reads can map incorrectly to the wrong scaffold when then they in fact belong elsewhere). Keep in mind however that such hits are likely to receive a poor **mapping quality score** that will later reduce their influence in the discrimination between true and false SNPs.
 
 
-### 2) filter sam files on regions and quality :
+### 2) filter sam files on regions and mapping quality :
 
 Only reads mapped to scaffolds present in the final assembly (version: **b3v06**) and above a certain mapping quality threshold (phred-score: **20**) were kept (this also removes unmapped reads) :
 ````
@@ -78,7 +78,7 @@ samtools view -h -q 20 -L $bed -@ 10 $bwaSE.sam > $bwaSE.filtered.sam
 `$bed`: bed file containing list of coordinates of final scaffolds.
 
 
-### 3) convert sam to sorted bam :
+### 3) convert sam file to sorted bam :
 
 ````
 samtools sort -@ 10 -O bam -l 9 -T $bwaPE.temp.bam -o $bwaPE.bam $bwaPE.filtered.sam
@@ -90,7 +90,7 @@ samtools sort -@ 10 -O bam -l 9 -T $bwaSE.temp.bam -o $bwaSE.bam $bwaSE.filtered
 ````
 samtools merge -f -@ 10 -c $bwa.bam $bwaPE.bam $bwaSE.bam      
 ````
-**note:** '-c' tag is use to keep the same '**@RG:ID**' when it is the same in the different input files (by default, the program adds a suffix to one of the read group!).
+**note:** `-c` tag is use to keep the same '**@RG:ID**' when it is the same in the different input files (by default, the program adds a suffix to one of the read group!).
 
 
 ### 5) rewrite header section by keeping only scaffolds from final assembly (and indexing) :
