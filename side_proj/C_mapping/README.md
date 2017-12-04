@@ -4,7 +4,7 @@
 
 Mapping was performed independently for each run (three runs per individual).
 
-Following commands are given for sample **Tdi_01** (run: **L2_OBIWAN_314**).
+Following commands are given for sample **Tdi_01** (run: **L2_OBIWAN_312**).
 
 
 ### 0) preliminary step :
@@ -20,10 +20,20 @@ Assign a read group (**RG**) to the run (it will be added in the bam file header
 
 ### 1) mapping :
 
+
+#### Input variables :
+````
+readGroup='@RG\tID:L2_OBIWAN_312\tDT:2017-09-20\tLB:lib-L2_OBIWAN_314\tPL:ILLUMINA\tSM:Tdi_01'
+referenceGenome_b3v04=1_Tdi_b3v04.fa
+fastqR1=Tdi_01_L2_OBIWAN_312_R1.cleaned.fastq.gz
+fastqR2=Tdi_01_L2_OBIWAN_312_R2.cleaned.fastq.gz
+fastqUnpaired=Tdi_01_L2_OBIWAN_312_se.cleaned.fastq.gz
+````
+
 #### Command for paired-end fastq files :
 
 ````
-bwa mem -R $readGroup   \
+bwa mem -R \"$readGroup\"   \
     -M                  \
     -t 40               \
     $referenceGenome_b3v04 \
@@ -128,9 +138,16 @@ samtools index $bwa.bam
 
 (after the previous steps are finished for each of the three runs of a sample)
 
+'**Tdi_01.run_list**' content :
 ````
-samtools merge -@ 10 -b $sample.run_list $sample.bam        # merge bam files (list in $sample.run_list, output: $sample.bam)
-samtools index $sample.bam                                  # reindex
+Tdi_01_L2_OBIWAN_312.raw.bam 
+Tdi_01_L4_OBIWAN_307.raw.bam 
+Tdi_01_L7_OBIWAN_310.raw.bam
+````
+
+````
+samtools merge -@ 10 -b Tdi_01.run_list Tdi_01.bam          # merge bam files (list in 1_Tdi.run_list, output: Tdi_01.bam)
+samtools index Tdi_01.bam                                   # reindex
 ````
 Duplicates always represent less than 10% of the reads are often found at level of 1 or 2%.
 
