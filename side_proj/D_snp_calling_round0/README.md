@@ -158,7 +158,7 @@ ReadPosRankSum < -2.5
 
 #### parameter distributions (and thresholds) for SNPs :
 
-![DP](./plots/DP_snp.png)
+![QD](./plots/QD_snp.png)
 
 
 
