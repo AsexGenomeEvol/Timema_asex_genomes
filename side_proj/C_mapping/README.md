@@ -137,6 +137,7 @@ Duplicates always represent less than 10% of the reads are often found at level 
 -------
 -------
 -------
-**BILAN:** A single bam file per sample (5 individuals *x* 10 species = 50 bam files).
+**BILAN:** A single bam file per sample (*5* individuals *x* *10* species = *50* bam files).
 
+Statistic files, produced by `samtools flagstat` after **step 1** (suffix: `.out`) and **step 6** (suffix: `.out2`), can be found in [this archive](./mapping_stats.tar.gz).
 
