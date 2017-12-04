@@ -151,8 +151,7 @@ samtools index Tdi_01.bam                                   # reindex
 ````
 Duplicates always represent less than 10% of the reads are often found at level of 1 or 2%.
 
--------
--------
+<br><br>
 -------
 **BILAN:** A single bam file per sample (*5* individuals *x* *10* species = *50* files).
 
