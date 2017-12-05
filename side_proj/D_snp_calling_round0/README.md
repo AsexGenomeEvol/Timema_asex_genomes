@@ -48,10 +48,10 @@ do
 java -Xmx20g -jarGenomeAnalysisTK.jar \
    -T HaplotypeCaller \
    -R 1_Tdi_b3v06.fa  \
-   -I $sample.bam   \
+   -I $sample.bam   \                 # input file 
    --genotyping_mode DISCOVERY  \
    --emitRefConfidence GVCF    \
-   -o $sample.g.vcf \
+   -o $sample.g.vcf \                 # output file
    -hets 0.001   \
    -nct  1
  done
@@ -77,9 +77,9 @@ Tdi_05.g.vcf
 java -Xmx20g -jar GenomeAnalysisTK.jar \
    -T  GenotypeGVCFs \
    -R  1_Tdi_b3v06.fa \
-   -V  1_Tdi.gvcf.list  \
+   -V  1_Tdi.gvcf.list  \          # input file
    -nt 10   \        
-   -o  1_Tdi.allVariant_raw.vcf
+   -o  1_Tdi.allVariant_raw.vcf    # output file
 ````
 
 
@@ -182,8 +182,8 @@ ReadPosRankSum < -2.5
 java -jar GenomeAnalysisTK.jar \
     -T VariantFiltration    \
     -R 1_Tdi_b3v06.fa       \
-    -V 1_Tdi.SNP_raw.vcf    \
-    -o 1_Tdi.SNP_filter.vcf \
+    -V 1_Tdi.SNP_raw.vcf    \                                   # input file
+    -o 1_Tdi.SNP_filter.vcf \                                   # output file
     --filterExpression  "QD < 5.0"    --filterName "badQD"  \
     --filterExpression  "FS > 50.0"   --filterName "badFS"  \
     --filterExpression  "SOR > 3.0"   --filterName "badSOR" \
