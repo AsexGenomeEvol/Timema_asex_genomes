@@ -1,6 +1,8 @@
 
 # A - raw data formatting :
 
+(go to next step : [read trimming](../B_cleaned_reads))
+
 
 *10 species* x *5 individuals* x *multiple runs* (x *multiple fastq files*)
 
