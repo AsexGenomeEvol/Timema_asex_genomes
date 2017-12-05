@@ -140,7 +140,7 @@ DP < 10                        # min sample coverage
 * **minimum DP:** variants with low coverage (typically below *10x*) also tend to have low (calling/genotyping) qualities so they have great chances to be filtered out anyway, but to keep things comparable, we also want to filter monomorphic positions that do not have sufficient coverage (as no filter is applied on their quality), hence the use of a minimum coverage filter.
 * **maximum DP:** we also added a maximum coverage threshold which is mainly designed to remove positions that could correspond to repeated regions/elements (again, this criterion is also applied to monomorphic sites). The maximum coverage threshold is **species-specific** but always corresponds to : *1.8 x mean(coverage)*, (the mean coverage being calculated on the first 50Mb of the assembly); see below for the coverage distribution in *1_Tdi*. 
 
-
+![DP](DP_Tdi.png)
 
 
 
