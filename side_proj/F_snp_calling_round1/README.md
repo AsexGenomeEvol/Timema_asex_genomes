@@ -1,20 +1,14 @@
 
 
-# D - snp calling (preliminary round) :
+# F - snp calling (final round) :
 
 (go to previous step : [base recalibration](../E_recalibration))
 
 ---------
 
-In theory, the base quality score recalibration step (**BQSR**), necessary to correctly ascertain the confidence we can put in each base, should be done **before** the variant (ie, SNP/indel) calling step.
-Unfortunately, the **BQSR** step requires an already available set of trustable variant positions, which we don't have when working on non-model organisms such as stick insects.
-The work-around is to do a first, preliminary round of variant calling with original base quality scores in order to get a raw set of variants that will be use to mask these positions during the **BQSR** step (so that they are not mistaken for sequencing errors).
-Once the bam files have been recalibrated, a new round of variant calling can be performed to obtain a trustable set of variant positions.
-Note that this cycle (BQSR/variant calling) can be repeated several times until convergence.
-For computational reasons however, we only did a single BQSR step. 
+Now that base quality scores were recalibrated in *bam* files, we can perform a definitive round of variant (SNP/indel) calling. Explanations about the pipeline are mainly given here : [snp calling (first round)](../D_snp_calling_round0), in this section, we only empathise on the differences between the tow runs.
 
-
-Following commands are given for species '**1_Tdi**' (all runs of each sample have been merged into a single bam file).
+Following commands are given for species '**1_Tdi**'.
 
 
 ### 0) preliminary step :
