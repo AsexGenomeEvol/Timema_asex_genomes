@@ -161,13 +161,7 @@ ReadPosRankSum < -2.5
 
 ![QD](plots/QD_snp.png)
 
-**note:** it is interesting to remark that while sexual species exhibit the expected distribution pattern, asexual species (in 
-# IMPORTANT REMARKS :
-#    -> [QD] : SEX & ASEX display two types of distributions for 'QD' parameter ! 
-#              Sexuals have the expected 'QD pattern', while asexuals mostly lack the first pic of true SNPs (most SNPs being in the second pic) !
-#    -> [FS] : SEX & ASEX display the expected distribution pattern but there is a shift between both, because we want to set a unique filter value,
-#              we had to be very conservative in sexuals (where nearly no SNPs will be filtered out by the filter).
-
+**note:** it is interesting to remark that while sexual species exhibit the expected distribution pattern for the **QD** parameter, asexual species (in *grey*, *black*, *blue*, *green* and *violet*) seem to have a different shape, mostly lacking the central pic (the pic on the left corresponding to errors).
 
 ![FS](plots/FS_snp.png)
 ![SOR](plots/SOR_snp.png)
@@ -177,66 +171,27 @@ ReadPosRankSum < -2.5
 
 
 
+### 5) apply hard filters to variants :
 
-
-
-
-
-
-
-
-### 5) merging paired-end and single-end bam files :
-
+#### command for SNP vcf :
 ````
-samtools merge -f -@ 10 -c $bwa.bam $bwaPE.bam $bwaSE.bam      
-````
-**note:** `-c` tag is use to keep the same '**@RG:ID**' when it is the same in the different input files (by default, the program adds a suffix to one of the read group!).
-
-
-### 5) rewrite header section by keeping only scaffolds from final assembly (and indexing) :
-
-Later programs will check the correspondence between the list of scaffolds in the assembly (fasta) and the headers of the bam file (where all scaffolds of **b3v04** assembly are currently present).
-````
-java -jar picard.jar ReorderSam \
-    I=$bwa.bam                  \
-    O=$bwa.reordered.bam        \
-    R=$referenceGenome_b3v06    \
-    S=true                      \
-    CREATE_INDEX=TRUE
-# replace old bam by new :
-mv $bwa.reordered.bam $bwa.bam
+java -jar GenomeAnalysisTK.jar \
+    -T VariantFiltration    \
+    -R 1_Tdi_b3v06.fa       \
+    -V 1_Tdi.SNP_raw.vcf    \
+    -o 1_Tdi.SNP_filter.vcf \
+    --filterExpression  "QD < 5.0"    --filterName "badQD"  \
+    --filterExpression  "FS > 50.0"   --filterName "badFS"  \
+    --filterExpression  "SOR > 3.0"   --filterName "badSOR" \
+    --filterExpression  "MQ < 55.0"   --filterName "badMQ"  \
+    --filterExpression  "MQRankSum < -1.0"          --filterName "badMQRankSum"    \
+    --filterExpression  "ReadPosRankSum < -2.5"     --filterName "badReadPosRankSum"  
 ````
 
-### 6) mark duplicates with Picard tools (and reindex) :
-
-Duplicates (ie, reads having exactly the same sequence and therefore mapping to the same location), mostly arising from PCR amplification bias introduced during library construction (or corresponding to optical duplicates), are removed from the bam file, as they inflate the coverage of a position and can lead for instance to errors looking like true snps; but more generally, they will lead to a breakdown of the statistical models for variant calling that assume some sort of independence between measurements.
-
+#### output :
 ````
-java -Xmx25g -jar picard.jar MarkDuplicates \
-   INPUT=$bwa.bam \
-   OUTPUT=${bwa}_md.bam \
-   METRICS_FILE=log/${bwa}_duplicate_metrics.txt \
-   MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
-   REMOVE_DUPLICATES=true               
-mv ${bwa}_md.bam $bwa.bam
-# reindexing :
-samtools index $bwa.bam
+1_Tdi.SNP_filter.vcf
+1_Tdi.indel_filter.vcf
 ````
 
 
-### 7) merge all (three) bam files from a single sample :
-
-(after the previous steps are finished for each of the three runs of a sample)
-
-````
-samtools merge -@ 10 -b $sample.run_list $sample.bam        # merge bam files (list in $sample.run_list, output: $sample.bam)
-samtools index $sample.bam                                  # reindex
-````
-Duplicates always represent less than 10% of the reads are often found at level of 1 or 2%.
-
--------
--------
--------
-**BILAN:** A single bam file per sample (*5* individuals *x* *10* species = *50* files).
-
-Statistic files, produced by `samtools flagstat` after **step 1** (suffix: `.out`) and **step 6** (suffix: `.out2`), can be found in this [archive](./mapping_stats.tar.gz).
