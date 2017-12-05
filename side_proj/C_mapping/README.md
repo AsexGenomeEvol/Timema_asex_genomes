@@ -1,6 +1,8 @@
 
 # C - mapping :
 
+(go to next step : [snp calling (first round)](../D_snp_calling_round0), previous step : [read trimming](../B_cleaned_reads))
+
 
 Mapping was performed independently for each run (three runs per individual).
 
