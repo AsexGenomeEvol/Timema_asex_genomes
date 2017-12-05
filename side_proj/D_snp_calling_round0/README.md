@@ -158,19 +158,17 @@ ReadPosRankSum < -2.5
 
 #### parameter distributions for SNPs :
 
-##### Color scheme :
-* *1_Tdi* : blue
-* *1_Tps* : red
-* *2_Tcm* : cyan
-* *2_Tce* : orange
-* *3_Tsi* : black
-* *3_Tms* : grey
-* *4_Tbi* : pink
-* *4_Tte* : violet
-* *5_Tge* : green
-* *5_Tpa* : yellow
 
 ![QD](plots/QD_snp.png)
+
+**note:** it is interesting to remark that while sexual species exhibit the expected distribution pattern, asexual species (in 
+# IMPORTANT REMARKS :
+#    -> [QD] : SEX & ASEX display two types of distributions for 'QD' parameter ! 
+#              Sexuals have the expected 'QD pattern', while asexuals mostly lack the first pic of true SNPs (most SNPs being in the second pic) !
+#    -> [FS] : SEX & ASEX display the expected distribution pattern but there is a shift between both, because we want to set a unique filter value,
+#              we had to be very conservative in sexuals (where nearly no SNPs will be filtered out by the filter).
+
+
 ![FS](plots/FS_snp.png)
 ![SOR](plots/SOR_snp.png)
 ![MQ](plots/MQ_snp.png)
