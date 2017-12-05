@@ -173,19 +173,19 @@ each line of the filtering file gives :
 
 #### Behavior of the script :
 
-* if at least one test fails at the population level : 
+* **if at least one test fails at the population level :**
      * **FILTER** field (pop-level) gets list of failed tags (ex: `lowDP`, `lowQD;highSOR`).
      *  **FT** fields (sample-level) all gets `x` failed tag (without being tested further).
      
      **note:** this implies that for failed variant positions, there could be some valid homozygous genotypes at the sample-level that were rejected anyway. However, as the number of failed variants is negligible in front of the total number of monomorphic positions, we did not try to rescue them.
 
-* if the position could not be tested for any parameter at the pop-level : 
+* **if the position could not be tested for any parameter at the population level :**
 
   (either because they are missing from the annotations or have the null value `.`. This is **never** expected in our case as we test a lot of parameters, but this could happen if we decided to only look at a single parameter)
      * **FILTER** field (pop-level) gets `x` failed tag.
      *  **FT** fields (sample-level) all gets `x` failed tag (without being tested further).
 
-* if the position pass all tests at the population level :
+* **if the position pass all tests at the population level :**
 
      **note:** we only look at the parameters that can be tested (ie, their annotation is not missing and has a non-null value). Therefore, if only one parameter among the list is present and the position pass the associaqted test, it will be enough to get the `PASS` tag).
      
