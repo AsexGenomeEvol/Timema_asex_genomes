@@ -78,7 +78,7 @@ java -jar GenomeAnalysisTK.jar \
     -o Tdi_01.recal.bam
 ````
 #### output :
-`Tdi_01.recal.bam` : recalibrated *bam* file which will be used to do the final round of variant calling ([there](F_snp_calling_round1)).
+`Tdi_01.recal.bam` : recalibrated *bam* file which will be used to do the final round of variant calling ([there](../F_snp_calling_round1)).
 
 
 
