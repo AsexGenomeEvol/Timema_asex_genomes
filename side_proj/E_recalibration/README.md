@@ -45,7 +45,7 @@ java -Xmx20g -jar GenomeAnalysisTK.jar \
     -o Tdi_01.post_recal.table
 ````
 #### output :
-`Tdi_01.post_recal.table` : second report which will be used in next step to evaluate the effect of base quality recalibration (see next step).
+`Tdi_01.post_recal.table` : second report which will be used in next step to evaluate the effect of base quality recalibration.
 
 
 
