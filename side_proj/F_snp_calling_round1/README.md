@@ -146,31 +146,20 @@ DP < 10                        # min sample coverage
 
 
 
-
-
 ### 5) apply hard filters to variants :
+
+This time, we did not use *VariantFiltration* from GATK as it takes an insane amount of time to run on a vcf containing all positions (around one week), can not be easily parallelised and also exhibits some strange behavior at the genotype level (a lot of samples will get the `PASS` tag with no coverage for example...).
+Therefore, we wrote a custom [script](3_variant_filtration_r1.py) that also gives us more freedom to filter positions as we intended.
 
 A position satisfying any of these criteria will be filtered out.
 
-#### command for SNP vcf :
-````
-java -jar GenomeAnalysisTK.jar \
-    -T VariantFiltration    \
-    -R 1_Tdi_b3v06.fa       \
-    -V 1_Tdi.SNP_raw.vcf    \
-    -o 1_Tdi.SNP_filter.vcf \
-    --filterExpression  "QD < 5.0"    --filterName "badQD"  \
-    --filterExpression  "FS > 50.0"   --filterName "badFS"  \
-    --filterExpression  "SOR > 3.0"   --filterName "badSOR" \
-    --filterExpression  "MQ < 55.0"   --filterName "badMQ"  \
-    --filterExpression  "MQRankSum < -1.0"          --filterName "badMQRankSum"    \
-    --filterExpression  "ReadPosRankSum < -2.5"     --filterName "badReadPosRankSum"  
-````
 
-#### output :
+
+#### output files :
 ````
 1_Tdi.SNP_filter.vcf
 1_Tdi.indel_filter.vcf
+1_Tdi.allSite_filter.vcf
 ````
-These first sets of variants will be used in the following **BQSR** step to mask their position (so they are not mistaken for sequencing errors).
+
 
