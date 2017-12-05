@@ -1,7 +1,7 @@
 
 # D - snp calling (preliminary round) :
 
-In theory, the base quality score recalibration step (**BQSR**), necessary to correctly ascertain the confidence we can put in each base, should be done **before** the variant (ie, SNPs/indels) calling step.
+In theory, the base quality score recalibration step (**BQSR**, see [E - BQSR](../E_recalibration)), necessary to correctly ascertain the confidence we can put in each base, should be done **before** the variant (ie, SNP/indel) calling step.
 Unfortunately, the **BQSR** step requires an already available set of trustable variant positions, which we don't have when working on non-model organisms such as stick insects.
 The work-around is to do a first, preliminary round of variant calling with original base quality scores in order to get a raw set of variants that will be use to mask these positions during the **BQSR** step (so that they are not mistaken for sequencing errors).
 Once the bam files have been recalibrated, a new round of variant calling can be performed to obtain a trustable set of variant positions.
