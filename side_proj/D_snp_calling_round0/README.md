@@ -138,7 +138,7 @@ followed by plots of their distributions (for SNPs) to justify our choices
 we made use of their graphical recommendations:
 https://software.broadinstitute.org/gatk/documentation/article.php?id=6925).
 
-#### for SNPs :
+#### thresholds for SNPs :
 ````
 QD < 5.0                       # Quality by Depth (weight call score by the coverage)
 FS > 50.0                      # Fisher Strand (probability of strand bias at the site)
@@ -148,7 +148,7 @@ MQRankSum < -1.0               # do read with ALT allele have a different mappin
 ReadPosRankSum < -2.5          # are read positions for REF allele different than ALT allele
 ````
 
-#### for indels :
+#### thresholds for indels :
 ````
 QD < 5.0
 FS > 25.0
@@ -156,7 +156,19 @@ SOR > 3.5
 ReadPosRankSum < -2.5
 ````
 
-#### parameter distributions (and thresholds) for SNPs :
+#### parameter distributions for SNPs :
+
+##### Color scheme :
+* *1_Tdi* : blue
+* *1_Tps* : red
+* *2_Tcm* : cyan
+* *2_Tce* : orange
+* *3_Tsi* : black
+* *3_Tms* : grey
+* *4_Tbi* : pink
+* *4_Tte* : violet
+* *5_Tge* : green
+* *5_Tpa* : yellow
 
 ![QD](plots/QD_snp.png)
 ![FS](plots/FS_snp.png)
@@ -164,6 +176,15 @@ ReadPosRankSum < -2.5
 ![MQ](plots/MQ_snp.png)
 ![MQRankSum](plots/MQRankSum_snp.png)
 ![ReadPosRankSum](plots/ReadPosRankSum_snp.png)
+
+
+
+
+
+
+
+
+
 
 
 ### 5) merging paired-end and single-end bam files :
