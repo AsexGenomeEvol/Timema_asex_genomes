@@ -1,6 +1,9 @@
 
 # D - base quality score recalibration (BQSR) :
 
+(go to next step : [snp calling (last round)](../D_snp_calling_round0), previous step : [snp calling (first round)](../F_snp_calling_round1))
+
+---------
 
 This step aims to detect systematic errors made by the sequencer when it estimates the quality score of each base call,
 and then readjust their values in the **bam** files.
@@ -78,7 +81,7 @@ java -jar GenomeAnalysisTK.jar \
     -o Tdi_01.recal.bam
 ````
 #### output :
-`Tdi_01.recal.bam` : recalibrated *bam* file which will be used to perform the final round of variant calling ([here](../F_snp_calling_round1)).
+`Tdi_01.recal.bam` : recalibrated *bam* file which will be used to perform the final round of variant calling.
 
 
 
