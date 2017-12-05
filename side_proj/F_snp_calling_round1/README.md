@@ -192,7 +192,7 @@ each line of the filtering file gives :
      * **FILTER** field (pop-level) gets `PASS` tag.
      
        Each sample is then tested independently for the sample-level parameters :
-         * if sample cannot be tested (ie, all annotations are missing or have a null value (`.`)) : 
+         * if sample cannot be tested (ie, all annotations missing with null value (`.`)) : 
            **FT** field gets the `x` failed tag.
          * if sample fails at least one test : **FT** field gets the `f` failed tag.
          * if sample pass all tests (that can be done) : **FT** field gets the `PASS` tag.
