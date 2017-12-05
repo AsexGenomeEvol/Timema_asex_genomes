@@ -16,7 +16,7 @@
 
 * [**D - snp calling (preliminary round)**](./D_snp_calling_round0)
 
-  First round of SNP (and indels) calling, this preliminary set of snps will only be used to mask positions during the following "base quality score recalibration" step. 
+  First round of SNP (and indel) calling, this preliminary set of snps will only be used to mask positions during the following "base quality score recalibration" step. 
 
 * [**E - base quality score recalibration (BQSR)**](./E_recalibration)
 
@@ -24,4 +24,4 @@
 
 * [**F - snp calling (final round)**](./F_snp_calling_round1)
 
-  Second and final round of SNP (and indels) calling using updated bam files (with corrected base quality scores).
+  Second and final round of SNP (and indel) calling using updated bam files (with corrected base quality scores).
