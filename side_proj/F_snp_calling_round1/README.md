@@ -142,17 +142,7 @@ DP < 10                        # min sample coverage
 
 ![DP](DP_Tdi.png)
 
-
-
-
-
-
-
-
-
-#### parameter distributions for SNPs :
-
-
+(mean coverage in thick red line, maximum coverage threshold in thin red line)
 
 
 
