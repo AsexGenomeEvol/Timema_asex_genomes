@@ -193,5 +193,5 @@ java -jar GenomeAnalysisTK.jar \
 1_Tdi.SNP_filter.vcf
 1_Tdi.indel_filter.vcf
 ````
-
+These first sets of variants will be used in the following **BQSR** step to mask their position (so they are not mistaken for sequencing errors).
 
