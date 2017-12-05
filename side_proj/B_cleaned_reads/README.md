@@ -1,7 +1,7 @@
 
 # B - read trimming :
 
-(go to next step : [mapping](../C_mapping))
+(go to next step : [mapping](../C_mapping), previous step : [data formatting](../A_raw_reads))
 
 
 Paired-end reads were trimmed for presence of adapters and quality using **Trimmomatic**.
