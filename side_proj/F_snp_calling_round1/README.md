@@ -102,46 +102,63 @@ java -jar GenomeAnalysisTK.jar \
 
 ### 4) (visually) determine thresholds for hard filtering :
 
-Here are the parameter threshold values that were chosen for **filtering out** SNPs and indels, 
-followed by plots of their distributions (for SNPs) to justify our choices
-(although our values differ a bit from those recommended by *GATK* on their own human dataset,
-we made use of their graphical recommendations:
-https://software.broadinstitute.org/gatk/documentation/article.php?id=6925).
+Distributions were very similar between the two rounds, therefore we did not change any threshold value for SNPs or indels, but we added new ones, see below :
 
 #### thresholds for SNPs :
 ````
+# previous thresholds (population level) :
 QD < 5.0                       # Quality by Depth (weight call score by the coverage)
 FS > 50.0                      # Fisher Strand (probability of strand bias at the site)
 SOR > 3.0                      # Strand Odds Ration (another way to estimate strand bias)
 MQ < 55.0                      # Mapping Quality 
 MQRankSum < -1.0               # do read with ALT allele have a different mapping quality 
 ReadPosRankSum < -2.5          # are read positions for REF allele different than ALT allele
+# new thresholds (population level) :
+DP > 141                       # max total coverage (value differs among species!)
+DP < 10                        # min total coverage
+# new thresholds (sample level) : 
+DP < 10                        # min sample coverage
+GQ < 30                        # Genotype Quality (confidence in the sample genotype)
 ````
 
 #### thresholds for indels :
 ````
+
+# previous thresholds (population level) :
 QD < 5.0
 FS > 25.0
 SOR > 3.5
 ReadPosRankSum < -2.5
+# new thresholds (population level) : 
+DP < 10                        # min total coverage
+# new thresholds (sample level) : 
+DP < 10                        # min sample coverage
 ````
+
+**remarks :**
+* **population vs. sample level filters:** in a vcf file, each position has two **FILTER** fields, the first one (which has the `.` value before filtration) concerns the position as a whole, it indicates if the position is variable at the population  scale (its value becomes `PASS` after filtering if it does not fail any test, otherwise it will have a (list of) tag(s) corresponding to failed tests (ex: `lowQD;highFS`)). The second filter field (**FT**) is a per-sample value that indicates if we can trust the genotype of a particular sample (which can be either homozygous or heterozygous) at this position. Therefore, a position can have `PASS` in the **FILTER** field (meaning we are confident there is a SNP at this position), but some specific sample genotypes can still appear dubious (and not getting the `PASS` tag).
+* **minimum DP:** variants with low coverage (typically below *10x*) also tend to have low (calling/genotyping) qualities so they have great chances to be filtered out anyway, but to keep things comparable, we also want to filter monomorphic positions that do not have sufficient coverage (as no filter is applied on their quality), hence the use of a minimum coverage filter.
+* **maximum DP:** we also added a maximum coverage threshold which is mainly designed to remove positions that could correspond to repeated regions/elements (again, this criterion is also applied to monomorphic sites). The maximum coverage threshold is **species-specific** but always corresponds to : *1.8 x mean(coverage)*, (the mean coverage being calculated on the first 50Mb of the assembly); see below for the coverage distribution in *1_Tdi*. 
+
+
+
+
+
+
+
+
+
+
 
 #### parameter distributions for SNPs :
 
 
-![QD](plots/QD_snp.png)
-
-**note:** it is interesting to remark that while sexual species exhibit the expected distribution pattern for the **QD** parameter, asexual species (in *grey*, *black*, *blue*, *green* and *violet*) seem to have a different shape, mostly lacking the central pic (the pic on the left corresponding to errors).
-
-![FS](plots/FS_snp.png)
-![SOR](plots/SOR_snp.png)
-![MQ](plots/MQ_snp.png)
-![MQRankSum](plots/MQRankSum_snp.png)
-![ReadPosRankSum](plots/ReadPosRankSum_snp.png)
 
 
 
 ### 5) apply hard filters to variants :
+
+A position satisfying any of these criteria will be filtered out.
 
 #### command for SNP vcf :
 ````
