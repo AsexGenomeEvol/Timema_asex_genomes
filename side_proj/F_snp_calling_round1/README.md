@@ -6,36 +6,16 @@
 
 ---------
 
-Now that base quality scores were recalibrated in *bam* files, we can perform a definitive round of variant (SNP/indel) calling. Explanations about the pipeline are mainly given here : [snp calling (first round)](../D_snp_calling_round0), in this section, we only empathise on the differences between the tow runs.
+Base quality scores now being recalibrated, we can perform a definitive round of variant (SNP/indel) calling. Explanations about the pipeline are mainly given here : [snp calling (first round)](../D_snp_calling_round0). In this section, we only mostly on the differences between the two runs.
 
-Following commands are given for species '**1_Tdi**'.
+Following commands are given for species '**1_Tdi**' (samples : *Tdi_01*, *Tdi_02*, *Tdi_03*, *Tdi_04*, *Tdi_05*).
 
-
-### 0) preliminary step :
-
-Split the genome assemblies in (40) intervals of similar size, this allows some parallelisation :
-````
-java -jar -Xmx50g Queue.jar -S GenotypeGVCFs.scala -R 1_Tdi_b3v06.fa -o trash -V 1_Tdi.empty.list -run
-````
-* `GenotypeGVCFs.scala`: [script](./GenotypeGVCFs.scala) for creating intervals.
-* `1_Tdi.empty.list`: empty file, we just want the program to create intervals and then stops.
-
-
--------------
-In the latest version of the *GATK* pipeline, the *variant calling* is performed in two distinct steps (previously grouped into a single analysis).
-This new procedure allows to add samples along the way without redoing the whole calculation.
-
-First step is *per-sample calling* followed by *joint genotyping* across all (five) samples. 
-This workflow involves running **HaplotypeCaller** on each sample separately in *GVCF mode*, to produce an intermediate file format called **GVCF** (for Genomic VCF, `.g.vcf` extension). 
-The GVCFs of multiple samples are then run through a *joint genotyping* step (using **GenotypeGVCFs**) to produce a multi-sample **VCF** callset (which will later be processed to distinguish between true and false (aka errors) variants). 
 
 
 ### 1) per-sample calling with 'HaplotypeCaller' :
 
 
-**HaplotypeCaller** is able to call SNPs and indels simultaneously via local de-novo assembly of haplotypes in an active region. 
-In other words, whenever the program encounters a region showing signs of variation, it discards the existing mapping information and completely reassembles the reads in that region. 
-This allows the program to be more accurate when calling regions that are traditionally difficult to call, for example when they contain different types of variants (indels/SNPs) close to each other. 
+**HaplotypeCaller** calls SNPs and indels simultaneously via local de-novo assembly of haplotypes in an active region. 
 
 ````
 for sample in Tdi_{01,02,03,04,05}
@@ -51,7 +31,7 @@ java -Xmx20g -jarGenomeAnalysisTK.jar \
    -nct  1
  done
 ````
-* `-hets`: prior on heterozygosity level. We set its value at `0.01` for sexual species and `0.001` for asexuals.
+* `-hets`: prior on heterozygosity level. Its value was set at `0.01` for sexual species and `0.001` for asexuals.
 
 
 ### 2) joint genotyping with 'GenotypeGVCFs' :
