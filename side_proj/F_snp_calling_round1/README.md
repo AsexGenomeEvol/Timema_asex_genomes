@@ -6,7 +6,7 @@
 
 ---------
 
-Base quality scores now being recalibrated, we can perform a definitive round of variant (SNP/indel) calling. Explanations about the pipeline are mainly given here : [snp calling (first round)](../D_snp_calling_round0). In this section, we only mostly on the differences between the two runs.
+Base quality scores now being recalibrated, we can perform a definitive round of variant (SNP/indel) calling. Explanations about the pipeline are mainly given here : [snp calling (first round)](../D_snp_calling_round0). In this section, we mostly emphasise on the differences between the two runs.
 
 Following commands are given for species '**1_Tdi**' (samples : *Tdi_01*, *Tdi_02*, *Tdi_03*, *Tdi_04*, *Tdi_05*).
 
@@ -18,20 +18,22 @@ Following commands are given for species '**1_Tdi**' (samples : *Tdi_01*, *Tdi_0
 **HaplotypeCaller** calls SNPs and indels simultaneously via local de-novo assembly of haplotypes in an active region. 
 
 ````
+# SAME COMMAND THAN AT FIRST ROUND :
 for sample in Tdi_{01,02,03,04,05}
 do
 java -Xmx20g -jarGenomeAnalysisTK.jar \
    -T HaplotypeCaller \
    -R 1_Tdi_b3v06.fa  \
-   -I $sample.bam   \
+   -I $sample.bam   \                  # input file
    --genotyping_mode DISCOVERY  \
    --emitRefConfidence GVCF    \
-   -o $sample.g.vcf \
+   -o $sample.g.vcf \                  # output file
    -hets 0.001   \
    -nct  1
  done
 ````
 * `-hets`: prior on heterozygosity level. Its value was set at `0.01` for sexual species and `0.001` for asexuals.
+
 
 
 ### 2) joint genotyping with 'GenotypeGVCFs' :
@@ -52,32 +54,43 @@ Tdi_05.g.vcf
 java -Xmx20g -jar GenomeAnalysisTK.jar \
    -T  GenotypeGVCFs \
    -R  1_Tdi_b3v06.fa \
-   -V  1_Tdi.gvcf.list  \
-   -nt 10   \        
-   -o  1_Tdi.allVariant_raw.vcf
+   -V  1_Tdi.gvcf.list  \          # input file
+   -allSites \                     # additional option
+   -nt 10    \        
+   -o  1_Tdi.allVariant_raw.vcf    # output file
 ````
+#### output file :
+`1_Tdi.allVariant_raw.vcf`
+
+**note:** we add the `-allSites` tag in order to print **all** positions in the output vcf (including **monomorphic** positions which represent the majority of the positions).
+Despite the large file size produced (~25 Go), this is necessary to later calculate some statistics such as heterozygosity (for which we need to apply equivalent criteria to monomorphic sites in order to correctly evaluate the polymorphism); or to convert the vcf files into fasta files (which are then used in some of our pipelines).
 
 
 ### 3) extract SNPs and indels :
 
-
+Still, we create two additional vcf by extracting only SNP or indel positions (similarly to first round).
 ````
+# this time, we use 'GATK SelectVariants' instead of 'vcftools' for better running time.
+
 # Get SNPs only :
-vcftools \
-    --vcf 1_Tdi.allVariant_raw.vcf \
-    --remove-indels      \
-    --out 1_Tdi.SNP_raw  \
-    --recode             \
-    --keep-INFO-all
+java -jar GenomeAnalysisTK.jar \
+    -T SelectVariants          \
+    -R 1_Tdi_b3v06.fa          \
+    -V 1_Tdi.allSite_raw.vcf   \    # input
+    -selectType SNP            \
+    -o 1_Tdi.SNP_raw.vcf            # output
+# remove deleted positions (that are still written) :
+grep -vP "\t\*\t" 1_Tdi.SNP_raw.vcf > 1_Tdi.SNP_raw.vcf.noDel
+mv 1_Tdi.SNP_raw.vcf.noDel 1_Tdi.SNP_raw.vcf
 
 
 # Get indels only :
-vcftools \
-    --vcf 1_Tdi.allVariant_raw.vcf \
-    --keep-only-indels     \
-    --out 1_Tdi.indel_raw  \
-    --recode               \
-    --keep-INFO-all
+java -jar GenomeAnalysisTK.jar \
+    -T SelectVariants          \
+    -R 1_Tdi_b3v06.fa          \
+    -V 1_Tdi.allSite_raw.vcf   \    # input
+    -selectType INDEL          \
+    -o 1_Tdi.indel_raw.vcf          # output
 ````
 
 #### output files :
@@ -85,28 +98,6 @@ vcftools \
 1_Tdi.SNP_raw.vcf
 1_Tdi.indel_raw.vcf
 ````
-
-**note:** these two sets of variants are not definitive 
-(although some tests were applied by *GATK* to remove the most dubious ones).
-The **vcf** files contain the list of possible variant positions (one per line), 
-each reported position being associated with a lot of extra-information (such as its global and per-sample coverages, 
-and different statistics like the score of the call, mapping quality,...).
-It is therefore necessary to set criteria to distinguish between real and false variant (see below).
-
---------------
-
-The best way to filter the resulting variant callset according to *GATK* recommandations 
-is to use *variant quality score recalibration* (**VQSR**),
-which uses machine learning to identify annotation profiles of variants that are likely to be real. 
-The drawback of this sophisticated method is that it requires a highly curated sets of known variants; 
-this makes it impossible to apply it to non-model organisms.
-Therefore, in our case, the alternative is to use a quite brutal approach where we will use hard thresholds 
-on chosen parameters to manually filter the variants...
-
-#### Some links:
-https://gatkforums.broadinstitute.org/gatk/discussion/3225/how-can-i-filter-my-callset-if-i-cannot-use-vqsr-recalibrate-variants
-https://software.broadinstitute.org/gatk/documentation/article.php?id=2806
-
 
 
 ### 4) (visually) determine thresholds for hard filtering :
