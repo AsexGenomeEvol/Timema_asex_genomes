@@ -25,6 +25,8 @@ java -Xmx20g -jar GenomeAnalysisTK.jar \
     -nct 20             \
     -o Tdi_01.recal.table
 ````
+#### output :
+`Tdi_01.recal.table` : it contains the covariation data that will be used in the step to recalibrate base qualities.
 
 
 
@@ -42,6 +44,8 @@ java -Xmx20g -jar GenomeAnalysisTK.jar \
     -nct 20             \
     -o Tdi_01.post_recal.table
 ````
+#### output :
+`Tdi_01.post_recal.table` : second report which will be used in next step to evaluate the effect of base quality recalibration (see next step).
 
 
 
@@ -56,6 +60,10 @@ java -Xmx10g -jar GenomeAnalysisTK.jar \
     -after  Tdi_01.post_recal.table    \
     -plots  Tdi_01.recal_plots.pdf
 ````
+#### output :
+`Tdi_01.recal_plots.pdf` : plots that show how the reported base qualities match up to the empirical qualities 
+calculated by **BaseRecalibrator** (download [pdf file for Tdi_01 sample](Tbi_01.recal_plots.pdf)). Comparing the before and after plots allows to check the effect of the base recalibration process before applying it to the sequence data (*bam* file).
+
 
 
 ### 4) apply the recalibration to your sequence data :
@@ -69,6 +77,8 @@ java -jar GenomeAnalysisTK.jar \
     -nct 20                    \
     -o Tdi_01.recal.bam
 ````
+#### output :
+`Tdi_01.recal.bam` : recalibrated *bam* file which will be used to do the final round of variant calling.
 
 
 
