@@ -151,8 +151,6 @@ DP < 10                        # min sample coverage
 This time, we did not use *VariantFiltration* from GATK as it takes an insane amount of time to run on a vcf containing all positions (around one week), can not be easily parallelised and also exhibits some strange behavior at the genotype level (a lot of samples will get the `PASS` tag with no coverage for example...).
 Therefore, we wrote a custom [script](3_variant_filtration_r1.py) that also gives us more freedom to filter positions as we intended.
 
-#### Behavior of the script :
-
 It takes as inputs a *vcf* file and a filtering file (content below) :
 ````
 INFO:DP>141:highDP
@@ -167,33 +165,36 @@ FORMAT:DP<10:f
 FORMAT:GQ<30:f
 ````
 each line of the filtering file gives :
-      * the field in which the parameter should be tested 
-        (**INFO** if it's at the population-level, **FORMAT** if it's at the sample level).
-      * the parameter (ex: **DP**) and the condition to fail the test.
-      * the tag to write in the output vcf if the test fails (note that tags at the sample-level (with **FORMAT**) can now only consist in `x` or `f`, irrespective of what is written in the above file; this allows to save disk space as these tags will appear at each line for each sample).
+   * the field in which the parameter should be tested 
+     (**INFO** if it's at the pop-level, **FORMAT** at the sample level).
+   * the parameter (ex: **DP**) and the condition to fail the test.
+   * the tag to write in the output *vcf* if the test fails (note that tags at the sample-level can now only consist in `x` or `f`, irrespective of what is written in the above file; this allows to save disk space as these tags will appear at each line for each sample).
 
-* if at least one test is failed at the population level : 
+
+#### Behavior of the script :
+
+* if at least one test fails at the population level : 
      * **FILTER** field (pop-level) gets list of failed tags (ex: `lowDP`, `lowQD;highSOR`).
      *  **FT** fields (sample-level) all gets `x` failed tag (without being tested further).
      
      **note:** this implies that for failed variant positions, there could be some valid homozygous genotypes at the sample-level that were rejected anyway. However, as the number of failed variants is negligible in front of the total number of monomorphic positions, we did not try to rescue them.
 
-* if the position could not be tested for any of pop-level parameters : 
+* if the position could not be tested for any parameter at the pop-level : 
 
-  (because they are missing from the annotations or they have the null value `.`. This is **never** expected in our case as we test a lot of parameters for each position, but this could happen if we only look at a single parameter (for example, coverage: **DP**))
+  (either because they are missing from the annotations or have the null value `.`. This is **never** expected in our case as we test a lot of parameters, but this could happen if we decided to only look at a single parameter)
      * **FILTER** field (pop-level) gets `x` failed tag.
      *  **FT** fields (sample-level) all gets `x` failed tag (without being tested further).
 
 * if the position pass all tests at the population level :
-     **note:** we only look at the parameters that can be tested (ie, their annotation is not missing and has a non-null value). Therefore, if only one parameter among the list is present and the position pass its test, it will get the `PASS` tag).
+     **note:** we only look at the parameters that can be tested (ie, their annotation is not missing and has a non-null value). Therefore, if only one parameter among the list is present and the position pass the associaqted test, it will be enough to get the `PASS` tag).
      * **FILTER** field (pop-level) gets `PASS` tag.
      
-     Each sample is then test independently for the parameters at the sample-level :
-        * if sample cannot be tested (all annotations are missing or have a null value (`.`)) : **FT** field gets the `x` failed tag.
+     Each sample is then tested independently for the sample-level parameters :
+        * if sample cannot be tested (ie, all annotations are missing or have a null value (`.`)) : **FT** field gets the `x` failed tag.
         * if sample fails at least one test : **FT** field gets the `f` failed tag.
-        * if sample pass all tests (that could be performed) : **FT** field gets the `PASS` failed tag.
+        * if sample pass all tests (that can be done) : **FT** field gets the `PASS` tag.
        
-        **note:** because some parameters are applied only at the sample-level (ex: minimum coverage), it might happen that a position that get the `PASS` tag at the pop-level, will not have any sample that was individually validated. However, we expect this case to be very rare as a validated variants at the pop-level should in theory have at least one robust sample to back them up.
+        **note:** because some parameters are applied only at the sample-level (ex: minimum coverage), it might happen that a position that get the `PASS` tag at the pop-level, will then have no sample that are individually validated. However, we expect this case to be very rare as a validated variant at the pop-level should in theory benefit from at least one robust sample to back it up.
      
 
 
