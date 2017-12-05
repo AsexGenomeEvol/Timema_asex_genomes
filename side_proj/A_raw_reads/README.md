@@ -16,6 +16,8 @@ Split fastq files corresponding to the same run in an individual were merged tog
 For the correspondance table between original file names from the sequencing facility and standardized file names used in the next steps, see :
 [correspondance table (table for download)](./resequencing_samples)
 
+The paired-end fastq files have then be trimmed for presence of Illumina adapters and quality [here](../B_cleaned_reads).
+
 
 ### Species and individual aliases :
 
@@ -30,6 +32,4 @@ For the correspondance table between original file names from the sequencing fac
 * **5_Tge**   (samples: Tge_01 / Tge_02 / Tge_03 / Tge_04 / Tge_05)
 * **5_Tpa**   (samples: Tpa_01 / Tpa_02 / Tpa_03 / Tpa_04 / Tpa_05)
 
-
-The fastq files have then be trimmed for presence of Illumina adapters and quality [here](../B_cleaned_reads).
 
