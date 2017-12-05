@@ -151,15 +151,19 @@ DP < 10                        # min sample coverage
 This time, we did not use *VariantFiltration* from GATK as it takes an insane amount of time to run on a vcf containing all positions (around one week), can not be easily parallelised and also exhibits some strange behavior at the genotype level (a lot of samples will get the `PASS` tag with no coverage for example...).
 Therefore, we wrote a custom [script](3_variant_filtration_r1.py) that also gives us more freedom to filter positions as we intended.
 
+#### Behavior of the script :
+
+* if at least one test is failed at the population level : 
+
 A position satisfying any of these criteria will be filtered out.
 
 
 
-#### output files :
+## OUTPUT FINAL FILES :
 ````
-1_Tdi.SNP_filter.vcf
-1_Tdi.indel_filter.vcf
-1_Tdi.allSite_filter.vcf
+<sp>.SNP_filter.vcf        (ex: 1_Tdi.SNP_filter.vcf)
+<sp>.indel_filter.vcf      (ex: 1_Tdi.indel_filter.vcf)
+<sp>.allSite_filter.vcf    (ex: 1_Tdi.allSite_filter.vcf)
 ````
 
 
