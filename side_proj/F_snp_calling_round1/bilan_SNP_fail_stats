@@ -1,0 +1,160 @@
+---------------
+Species : 1_Tdi :
+2209794 SNPs have been validated out of 3451377 in total (64%) !
+1241583 we filtered out, among which :
+      -> 15841 because they were ambiguous sites (ie indel or multiallelic)
+      -> 20379 only because of snp quality ('QD'), out of 307758 in total
+      -> 1471 only because of low coverage  ('DP'), out of 18012 in total
+      -> 28872 only because of high coverage ('DP'), out of 195437 in total
+      -> 43 only because of strand biais ('FS'), out of 32331 in total
+      -> 80729 only because of strand biais ('SOR'), out of 282946 in total
+      -> 479562 only because of mapping quality ('MQ'), out of 1079768 in total
+      -> 34697 only because of ref/alt mapping quality ('MQRankSum'), out of 406273 in total
+      -> 497 only because of site position in read ('ReadPosRankSum'), out of 17438 in total
+      -> 579492 failed multiple tests
+
+
+---------------
+Species : 1_Tps :
+4602733 SNPs have been validated out of 6760177 in total (68%) !
+2157444 we filtered out, among which :
+      -> 46201 because they were ambiguous sites (ie indel or multiallelic)
+      -> 153751 only because of snp quality ('QD'), out of 583096 in total
+      -> 3097 only because of low coverage  ('DP'), out of 25526 in total
+      -> 39307 only because of high coverage ('DP'), out of 281427 in total
+      -> 378 only because of strand biais ('FS'), out of 33663 in total
+      -> 112574 only because of strand biais ('SOR'), out of 337134 in total
+      -> 384826 only because of mapping quality ('MQ'), out of 1758142 in total
+      -> 391173 only because of ref/alt mapping quality ('MQRankSum'), out of 1166870 in total
+      -> 12912 only because of site position in read ('ReadPosRankSum'), out of 40815 in total
+      -> 1013225 failed multiple tests
+
+
+---------------
+Species : 2_Tcm :
+8860305 SNPs have been validated out of 13011164 in total (68%) !
+4150859 we filtered out, among which :
+      -> 151725 because they were ambiguous sites (ie indel or multiallelic)
+      -> 216498 only because of snp quality ('QD'), out of 843801 in total
+      -> 4836 only because of low coverage  ('DP'), out of 50925 in total
+      -> 41645 only because of high coverage ('DP'), out of 345122 in total
+      -> 384 only because of strand biais ('FS'), out of 43488 in total
+      -> 167135 only because of strand biais ('SOR'), out of 544571 in total
+      -> 1017238 only because of mapping quality ('MQ'), out of 3503840 in total
+      -> 720258 only because of ref/alt mapping quality ('MQRankSum'), out of 2120410 in total
+      -> 18470 only because of site position in read ('ReadPosRankSum'), out of 48206 in total
+      -> 1812670 failed multiple tests
+
+
+---------------
+Species : 2_Tsi :
+554787 SNPs have been validated out of 1560082 in total (35%) !
+1005295 we filtered out, among which :
+      -> 7774 because they were ambiguous sites (ie indel or multiallelic)
+      -> 98003 only because of snp quality ('QD'), out of 397077 in total
+      -> 1799 only because of low coverage  ('DP'), out of 20145 in total
+      -> 63481 only because of high coverage ('DP'), out of 283056 in total
+      -> 9 only because of strand biais ('FS'), out of 29270 in total
+      -> 26199 only because of strand biais ('SOR'), out of 175259 in total
+      -> 204873 only because of mapping quality ('MQ'), out of 789186 in total
+      -> 29999 only because of ref/alt mapping quality ('MQRankSum'), out of 406495 in total
+      -> 945 only because of site position in read ('ReadPosRankSum'), out of 23362 in total
+      -> 572213 failed multiple tests
+
+
+---------------
+Species : 3_Tce :
+12568258 SNPs have been validated out of 17387172 in total (72%) !
+4818914 we filtered out, among which :
+      -> 331493 because they were ambiguous sites (ie indel or multiallelic)
+      -> 248630 only because of snp quality ('QD'), out of 817382 in total
+      -> 8889 only because of low coverage  ('DP'), out of 63672 in total
+      -> 33439 only because of high coverage ('DP'), out of 283707 in total
+      -> 635 only because of strand biais ('FS'), out of 45124 in total
+      -> 182573 only because of strand biais ('SOR'), out of 584134 in total
+      -> 1578792 only because of mapping quality ('MQ'), out of 3933687 in total
+      -> 597926 only because of ref/alt mapping quality ('MQRankSum'), out of 1922104 in total
+      -> 29464 only because of site position in read ('ReadPosRankSum'), out of 65090 in total
+      -> 1807073 failed multiple tests
+
+
+---------------
+Species : 3_Tms :
+1298783 SNPs have been validated out of 2187168 in total (59%) !
+888385 we filtered out, among which :
+      -> 11372 because they were ambiguous sites (ie indel or multiallelic)
+      -> 7005 only because of snp quality ('QD'), out of 249154 in total
+      -> 1721 only because of low coverage  ('DP'), out of 16852 in total
+      -> 18206 only because of high coverage ('DP'), out of 144383 in total
+      -> 69 only because of strand biais ('FS'), out of 38487 in total
+      -> 41704 only because of strand biais ('SOR'), out of 221854 in total
+      -> 316853 only because of mapping quality ('MQ'), out of 798184 in total
+      -> 22403 only because of ref/alt mapping quality ('MQRankSum'), out of 326897 in total
+      -> 476 only because of site position in read ('ReadPosRankSum'), out of 18337 in total
+      -> 468576 failed multiple tests
+
+
+---------------
+Species : 4_Tbi :
+5368521 SNPs have been validated out of 7641794 in total (70%) !
+2273273 we filtered out, among which :
+      -> 92093 because they were ambiguous sites (ie indel or multiallelic)
+      -> 108194 only because of snp quality ('QD'), out of 602316 in total
+      -> 3879 only because of low coverage  ('DP'), out of 38070 in total
+      -> 42009 only because of high coverage ('DP'), out of 291541 in total
+      -> 532 only because of strand biais ('FS'), out of 49580 in total
+      -> 91116 only because of strand biais ('SOR'), out of 371345 in total
+      -> 522911 only because of mapping quality ('MQ'), out of 1883341 in total
+      -> 305386 only because of ref/alt mapping quality ('MQRankSum'), out of 1084506 in total
+      -> 12136 only because of site position in read ('ReadPosRankSum'), out of 41592 in total
+      -> 1095017 failed multiple tests
+
+
+---------------
+Species : 4_Tte :
+252421 SNPs have been validated out of 913790 in total (27%) !
+661369 we filtered out, among which :
+      -> 8459 because they were ambiguous sites (ie indel or multiallelic)
+      -> 15336 only because of snp quality ('QD'), out of 248828 in total
+      -> 1464 only because of low coverage  ('DP'), out of 22650 in total
+      -> 26056 only because of high coverage ('DP'), out of 184786 in total
+      -> 42 only because of strand biais ('FS'), out of 37072 in total
+      -> 11826 only because of strand biais ('SOR'), out of 176084 in total
+      -> 109135 only because of mapping quality ('MQ'), out of 584228 in total
+      -> 19952 only because of ref/alt mapping quality ('MQRankSum'), out of 316255 in total
+      -> 596 only because of site position in read ('ReadPosRankSum'), out of 17661 in total
+      -> 468503 failed multiple tests
+
+
+---------------
+Species : 5_Tge :
+22389 SNPs have been validated out of 450967 in total (04%) !
+428578 we filtered out, among which :
+      -> 5047 because they were ambiguous sites (ie indel or multiallelic)
+      -> 8088 only because of snp quality ('QD'), out of 175490 in total
+      -> 745 only because of low coverage  ('DP'), out of 14576 in total
+      -> 19776 only because of high coverage ('DP'), out of 128181 in total
+      -> 25 only because of strand biais ('FS'), out of 26271 in total
+      -> 5140 only because of strand biais ('SOR'), out of 116654 in total
+      -> 53803 only because of mapping quality ('MQ'), out of 380866 in total
+      -> 12886 only because of ref/alt mapping quality ('MQRankSum'), out of 223248 in total
+      -> 348 only because of site position in read ('ReadPosRankSum'), out of 12764 in total
+      -> 322720 failed multiple tests
+
+
+---------------
+Species : 5_Tpa :
+8343424 SNPs have been validated out of 11745943 in total (71%) !
+3402519 we filtered out, among which :
+      -> 405227 because they were ambiguous sites (ie indel or multiallelic)
+      -> 202072 only because of snp quality ('QD'), out of 497377 in total
+      -> 3829 only because of low coverage  ('DP'), out of 29898 in total
+      -> 17528 only because of high coverage ('DP'), out of 147428 in total
+      -> 420 only because of strand biais ('FS'), out of 12818 in total
+      -> 118485 only because of strand biais ('SOR'), out of 315127 in total
+      -> 952853 only because of mapping quality ('MQ'), out of 2606451 in total
+      -> 671316 only because of ref/alt mapping quality ('MQRankSum'), out of 1445362 in total
+      -> 21558 only because of site position in read ('ReadPosRankSum'), out of 42945 in total
+      -> 1009231 failed multiple tests
+
+

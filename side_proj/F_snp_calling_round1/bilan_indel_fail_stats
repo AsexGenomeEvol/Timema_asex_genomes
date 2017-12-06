@@ -1,0 +1,120 @@
+---------------
+Species : 1_Tdi :
+644327 indels have been validated out of 770219 in total (83%) !
+125892 we filtered out, among which :
+      -> 51479 only because of snp quality ('QD'), out of 57576 in total
+      -> 5587 only because of low coverage  ('DP'), out of 5992 in total
+      -> 2235 only because of strand biais ('FS'), out of 8819 in total
+      -> 51646 only because of strand biais ('SOR'), out of 60495 in total
+      -> 3698 only because of site position in read ('ReadPosRankSum'), out of 6374 in total
+      -> 11247 failed multiple tests
+
+
+---------------
+Species : 1_Tps :
+1123991 indels have been validated out of 1315799 in total (85%) !
+191808 we filtered out, among which :
+      -> 92852 only because of snp quality ('QD'), out of 102858 in total
+      -> 7132 only because of low coverage  ('DP'), out of 7762 in total
+      -> 8307 only because of strand biais ('FS'), out of 21431 in total
+      -> 44836 only because of strand biais ('SOR'), out of 62345 in total
+      -> 16623 only because of site position in read ('ReadPosRankSum'), out of 22238 in total
+      -> 22058 failed multiple tests
+
+
+---------------
+Species : 2_Tcm :
+2057810 indels have been validated out of 2330085 in total (88%) !
+272275 we filtered out, among which :
+      -> 131723 only because of snp quality ('QD'), out of 143262 in total
+      -> 13692 only because of low coverage  ('DP'), out of 14546 in total
+      -> 12604 only because of strand biais ('FS'), out of 34467 in total
+      -> 60533 only because of strand biais ('SOR'), out of 88292 in total
+      -> 22133 only because of site position in read ('ReadPosRankSum'), out of 26360 in total
+      -> 31590 failed multiple tests
+
+
+---------------
+Species : 2_Tsi :
+370864 indels have been validated out of 494334 in total (75%) !
+123470 we filtered out, among which :
+      -> 68709 only because of snp quality ('QD'), out of 75511 in total
+      -> 7174 only because of low coverage  ('DP'), out of 7841 in total
+      -> 2018 only because of strand biais ('FS'), out of 8066 in total
+      -> 30312 only because of strand biais ('SOR'), out of 38353 in total
+      -> 3716 only because of site position in read ('ReadPosRankSum'), out of 7544 in total
+      -> 11541 failed multiple tests
+
+
+---------------
+Species : 3_Tce :
+2873718 indels have been validated out of 3226744 in total (89%) !
+353026 we filtered out, among which :
+      -> 158561 only because of snp quality ('QD'), out of 176775 in total
+      -> 16961 only because of low coverage  ('DP'), out of 18217 in total
+      -> 18429 only because of strand biais ('FS'), out of 50158 in total
+      -> 77774 only because of strand biais ('SOR'), out of 118808 in total
+      -> 33884 only because of site position in read ('ReadPosRankSum'), out of 41201 in total
+      -> 47417 failed multiple tests
+
+
+---------------
+Species : 3_Tms :
+475155 indels have been validated out of 599416 in total (79%) !
+124261 we filtered out, among which :
+      -> 50035 only because of snp quality ('QD'), out of 57371 in total
+      -> 4598 only because of low coverage  ('DP'), out of 5073 in total
+      -> 2400 only because of strand biais ('FS'), out of 9858 in total
+      -> 51510 only because of strand biais ('SOR'), out of 61311 in total
+      -> 3072 only because of site position in read ('ReadPosRankSum'), out of 6079 in total
+      -> 12646 failed multiple tests
+
+
+---------------
+Species : 4_Tbi :
+1361530 indels have been validated out of 1587582 in total (85%) !
+226052 we filtered out, among which :
+      -> 96795 only because of snp quality ('QD'), out of 112264 in total
+      -> 9449 only because of low coverage  ('DP'), out of 10309 in total
+      -> 11200 only because of strand biais ('FS'), out of 33452 in total
+      -> 53927 only because of strand biais ('SOR'), out of 82730 in total
+      -> 20119 only because of site position in read ('ReadPosRankSum'), out of 26817 in total
+      -> 34562 failed multiple tests
+
+
+---------------
+Species : 4_Tte :
+243824 indels have been validated out of 350410 in total (69%) !
+106586 we filtered out, among which :
+      -> 49112 only because of snp quality ('QD'), out of 55942 in total
+      -> 5937 only because of low coverage  ('DP'), out of 6573 in total
+      -> 2238 only because of strand biais ('FS'), out of 10466 in total
+      -> 31117 only because of strand biais ('SOR'), out of 42700 in total
+      -> 3780 only because of site position in read ('ReadPosRankSum'), out of 8514 in total
+      -> 14402 failed multiple tests
+
+
+---------------
+Species : 5_Tge :
+141597 indels have been validated out of 232277 in total (60%) !
+90680 we filtered out, among which :
+      -> 49540 only because of snp quality ('QD'), out of 54556 in total
+      -> 3709 only because of low coverage  ('DP'), out of 4067 in total
+      -> 1534 only because of strand biais ('FS'), out of 6580 in total
+      -> 25095 only because of strand biais ('SOR'), out of 31641 in total
+      -> 2202 only because of site position in read ('ReadPosRankSum'), out of 4254 in total
+      -> 8600 failed multiple tests
+
+
+---------------
+Species : 5_Tpa :
+5113767 indels have been validated out of 5674597 in total (90%) !
+560830 we filtered out, among which :
+      -> 249560 only because of snp quality ('QD'), out of 271553 in total
+      -> 26880 only because of low coverage  ('DP'), out of 29239 in total
+      -> 32637 only because of strand biais ('FS'), out of 72555 in total
+      -> 122068 only because of strand biais ('SOR'), out of 175044 in total
+      -> 67329 only because of site position in read ('ReadPosRankSum'), out of 79669 in total
+      -> 62356 failed multiple tests
+
+
