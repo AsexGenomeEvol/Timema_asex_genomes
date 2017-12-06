@@ -224,7 +224,7 @@ each line of the filtering file gives :
 |    5_Tge    |    450967   |     22389    |    04%    |   997707597  |   960991903   |    96%    |      2.e-05      |
 |    5_Tpa    |   11745943  |    8343424   |    71%    |   732732943  |   705548015   |    96%    |      0.0118      |
 
-**rem:** monomorphic sites were filtered using the same set of filters as SNPs in the *vcf* containing all positions, in which indels and multiallelic positions were tagged **ambiguous** in the **FILTER** field (indel filters were only used for the **indel** *vcf*).
+**rem:** monomorphic sites were filtered using the same set of filters as SNPs in the *vcf* containing all positions (in which indels and multiallelic positions were tagged **ambiguous** in the **FILTER** field; indel filters were only used for the **indel** *vcf*).
 
 More details about the effects on the filtering of the different parameters for SNP positions [here](bilan_SNP_fail_stats) and for indels [here](bilan_indel_fail_stats).
 
