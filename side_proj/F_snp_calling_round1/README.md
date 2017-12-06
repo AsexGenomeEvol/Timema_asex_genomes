@@ -209,7 +209,7 @@ each line of the filtering file gives :
 
 ### Some statistics :
 
-Number of SNP and monomorphic positions :
+#### Number of SNP and monomorphic positions :
 
 | **species** | **SNP_raw** | **SNP_PASS** | **PASS%** | **mono_raw** | **mono_PASS** | **PASS%** | **polymorphism** |
 |:-----------:|:-----------:|:------------:|:---------:|:------------:|:-------------:|:---------:|:----------------:|
@@ -224,7 +224,9 @@ Number of SNP and monomorphic positions :
 |    5_Tge    |    450967   |     22389    |    04%    |   997707597  |   960991903   |    96%    |      2.e-05      |
 |    5_Tpa    |   11745943  |    8343424   |    71%    |   732732943  |   705548015   |    96%    |      0.0118      |
 
-**rem:** monomorphic sites were filtered with the same filters as SNPs (indel filters were only used on the **indel** *vcf*, indels and multiallelic were tagged **ambiguous** in the *vcf* containing all positions).
+**rem:** monomorphic sites were filtered using the same set of filters as SNPs in the *vcf* containing all positions, where indels and multiallelic positions were tagged **ambiguous** in the **FILTER** field (indel filters were only used on the **indel** *vcf*).
+
+#### Number of indels :
 
 | **species** | **indel raw** | **indel PASS** | **PASS%** |
 |:-----------:|:-------------:|:--------------:|:---------:|
@@ -240,7 +242,20 @@ Number of SNP and monomorphic positions :
 |    5_Tpa    |    5674597    |     5113767    |    90%    |
 
 
+#### Comparison of the number of SNPs between the two rounds (r0&r1) of variant calling :
 
+| **species** | **raw SNP round0** | **raw SNP round1** | **ratio r1/r0** | **filter SNP r0** | **filter SNP r1** | **ratio r1/r0** |
+|:-----------:|:------------------:|:------------------:|:---------------:|:-----------------:|:-----------------:|:---------------:|
+|    1_Tdi    |       3558621      |       3451377      |       0.97      |      2245121      |      2209794      |       0.98      |
+|    1_Tps    |       6915111      |       6760177      |       0.98      |      4718582      |      4602733      |       0.98      |
+|    2_Tcm    |      13164241      |      13011164      |       0.99      |      9053143      |      8860305      |       0.98      |
+|    2_Tsi    |       1753180      |       1560082      |       0.89      |       662105      |       554787      |       0.84      |
+|    3_Tce    |      17477810      |      17387172      |       0.99      |      12829186     |      12568258     |       0.98      |
+|    3_Tms    |       2204745      |       2187168      |       0.99      |      1319986      |      1298783      |       0.98      |
+|    4_Tbi    |       7691562      |       7641794      |       0.99      |      5477286      |      5368521      |       0.98      |
+|    4_Tte    |       940203       |       913790       |       0.97      |       281203      |       252421      |       0.9       |
+|    5_Tge    |       465826       |       450967       |       0.97      |       43357       |       22389       |       0.52      |
+|    5_Tpa    |      34320839      |      11745943      |       0.34      |      23895710     |      8343424      |       0.35      |
 
 
 
