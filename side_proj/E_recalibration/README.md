@@ -1,7 +1,7 @@
 
 # E - base quality score recalibration (BQSR) :
 
-(go to next step : [snp calling (last round)](../D_snp_calling_round1), previous step : [snp calling (first round)](../F_snp_calling_round0))
+(go to next step : [snp calling (last round)](../F_snp_calling_round1), previous step : [snp calling (first round)](../D_snp_calling_round0))
 
 ---------
 
