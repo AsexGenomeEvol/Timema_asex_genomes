@@ -24,7 +24,7 @@ do
 java -Xmx20g -jarGenomeAnalysisTK.jar \
    -T HaplotypeCaller \
    -R 1_Tdi_b3v06.fa  \
-   -I $sample.recal.bam   \         =  # input file
+   -I $sample.recal.bam   \            # input file
    --genotyping_mode DISCOVERY  \
    --emitRefConfidence GVCF    \
    -o $sample.g.vcf \                  # output file
