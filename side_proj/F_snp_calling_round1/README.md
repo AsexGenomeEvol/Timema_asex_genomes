@@ -226,6 +226,8 @@ each line of the filtering file gives :
 
 **rem:** monomorphic sites were filtered using the same set of filters as SNPs in the *vcf* containing all positions, where indels and multiallelic positions were tagged **ambiguous** in the **FILTER** field (indel filters were only used on the **indel** *vcf*).
 
+More details about the effects on the filtering of the different parameters for SNP positions [here](bilan_SNP_fail_stats) and for indels [here](bilan_indel_fail_stats).
+
 #### Number of indels :
 
 | **species** | **indel raw** | **indel PASS** | **PASS%** |
@@ -242,7 +244,7 @@ each line of the filtering file gives :
 |    5_Tpa    |    5674597    |     5113767    |    90%    |
 
 
-#### Comparison of the number of SNPs between the two rounds (r0&r1) of variant calling :
+#### Comparison of the number of SNPs between the two rounds (r0 & r1) of variant calling :
 
 | **species** | **raw SNP round0** | **raw SNP round1** | **ratio r1/r0** | **filter SNP r0** | **filter SNP r1** | **ratio r1/r0** |
 |:-----------:|:------------------:|:------------------:|:---------------:|:-----------------:|:-----------------:|:---------------:|
@@ -253,7 +255,7 @@ each line of the filtering file gives :
 |    3_Tce    |      17477810      |      17387172      |       0.99      |      12829186     |      12568258     |       0.98      |
 |    3_Tms    |       2204745      |       2187168      |       0.99      |      1319986      |      1298783      |       0.98      |
 |    4_Tbi    |       7691562      |       7641794      |       0.99      |      5477286      |      5368521      |       0.98      |
-|    4_Tte    |       940203       |       913790       |       0.97      |       281203      |       252421      |       0.9       |
+|    4_Tte    |       940203       |       913790       |       0.97      |       281203      |       252421      |       0.90      |
 |    5_Tge    |       465826       |       450967       |       0.97      |       43357       |       22389       |       0.52      |
 |    5_Tpa    |      34320839      |      11745943      |       0.34      |      23895710     |      8343424      |       0.35      |
 
