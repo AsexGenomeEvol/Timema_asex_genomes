@@ -25,3 +25,11 @@
 * [**F - snp calling (final round)**](./F_snp_calling_round1)
 
   Second and final round of SNP (and indel) calling using updated bam files (with corrected base quality scores).
+  
+  
+  
+#### Some links about the general pipeline :
+
+https://software.broadinstitute.org/gatk/best-practices/bp_3step.php?case=GermShortWGS&p=1
+https://www.broadinstitute.org/partnerships/education/broade/best-practices-variant-calling-gatk-1
+https://www.france-bioinformatique.fr/sites/default/files/V04_FiltrageVariantNLapaluRoscoff2016_0.pdf
