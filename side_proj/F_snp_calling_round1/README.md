@@ -211,7 +211,7 @@ each line of the filtering file gives :
 
 #### Number of SNP and monomorphic positions :
 
-| **species** | **SNP_raw** | **SNP_PASS** | **PASS%** | **mono_raw** | **mono_PASS** | **PASS%** | **SNP density**  |
+| **species** | **SNP raw** | **SNP PASS** | **PASS%** | **mono raw** | **mono PASS** | **PASS%** | **SNP density**  |
 |:-----------:|:-----------:|:------------:|:---------:|:------------:|:-------------:|:---------:|:----------------:|
 |    1_Tdi    |   3451377   |    2209794   |    64%    |  1007079155  |   966024897   |    96%    |      0.0023      |
 |    1_Tps    |   6760177   |    4602733   |    68%    |   919096516  |   874807942   |    95%    |      0.0053      |
@@ -223,6 +223,8 @@ each line of the filtering file gives :
 |    4_Tte    |    913790   |    252421    |    27%    |  1032816312  |   980178552   |    95%    |      0.0003      |
 |    5_Tge    |    450967   |     22389    |    04%    |   997707597  |   960991903   |    96%    |      2.e-05      |
 |    5_Tpa    |   11745943  |    8343424   |    71%    |   732732943  |   705548015   |    96%    |      0.0118      |
+
+***SNP density*** = *SNP PASS* (*number of validated SNPs*)  */*  *mono PASS* (*number of validated monomorphic sites*)
 
 **rem:** monomorphic sites were filtered using the same set of filters as SNPs in the *vcf* containing all positions (in which indels and multiallelic positions were tagged **ambiguous** in the **FILTER** field). Indel filters were only used for the **indel** *vcf*.
 
