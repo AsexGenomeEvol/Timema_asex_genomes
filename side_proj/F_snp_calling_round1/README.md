@@ -211,7 +211,7 @@ each line of the filtering file gives :
 
 #### Number of SNP and monomorphic positions :
 
-| **species** | **SNP_raw** | **SNP_PASS** | **PASS%** | **mono_raw** | **mono_PASS** | **PASS%** | **polymorphism** |
+| **species** | **SNP_raw** | **SNP_PASS** | **PASS%** | **mono_raw** | **mono_PASS** | **PASS%** | **SNP density**  |
 |:-----------:|:-----------:|:------------:|:---------:|:------------:|:-------------:|:---------:|:----------------:|
 |    1_Tdi    |   3451377   |    2209794   |    64%    |  1007079155  |   966024897   |    96%    |      0.0023      |
 |    1_Tps    |   6760177   |    4602733   |    68%    |   919096516  |   874807942   |    95%    |      0.0053      |
