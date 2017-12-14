@@ -146,7 +146,7 @@ DP < 10                        # min sample coverage
 
 **maximum DP values:**
 
-*1_Tdi*: 141 */* *1_Tps*: 137 */* **2_Tcm**: 135 */* **2_Tsi**: 116 */* **3_Tce**: 162 */* **3_Tms**: 173 */* **4_Tbi**: 168 */* **4_Tte**: 143 */* **5_Tge**: 146 */* **5_Tpa**: 162
+*1_Tdi*:141|*1_Tps*:137|*2_Tcm*:135|*2_Tsi*:116|*3_Tce*:162|*3_Tms*:173|*4_Tbi*:168|*4_Tte*:143|*5_Tge*:146|*5_Tpa*:162
 
 
 ### 5) apply hard filters to variants :
