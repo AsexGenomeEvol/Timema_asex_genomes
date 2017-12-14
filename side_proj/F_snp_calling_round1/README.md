@@ -138,12 +138,15 @@ DP < 10                        # min sample coverage
 **remarks :**
 * **population vs. sample level filters:** in a vcf file, each position has two **FILTER** fields, the first one (which has the `.` value before filtration) concerns the position as a whole, it indicates if the position is variable at the population  scale (its value becomes `PASS` after filtering if it does not fail any test, otherwise it will have a (list of) tag(s) corresponding to failed tests (ex: `lowQD;highFS`)). The second filter field (**FT**) is a per-sample value that indicates if we can trust the genotype of a particular sample (which can be either homozygous or heterozygous) at this position. Therefore, a position can have `PASS` in the **FILTER** field (meaning we are confident there is a SNP at this position), but some specific sample genotypes can still appear dubious (and not getting the `PASS` tag).
 * **minimum DP:** variants with low coverage (typically below *10x*) also tend to have low (calling/genotyping) qualities so they have great chances to be filtered out anyway, but to keep things comparable, we also want to filter monomorphic positions that do not have sufficient coverage (as no filter is applied on their quality), hence the use of a minimum coverage filter.
-* **maximum DP:** we also added a maximum coverage threshold which is mainly designed to remove positions that could correspond to repeated regions/elements (again, this criterion is also applied to monomorphic sites). The maximum coverage threshold is **species-specific** but always corresponds to : *1.8 x mean(coverage)*, (the mean coverage being calculated on the first 50Mb of the assembly); see below for the coverage distribution in *1_Tdi*. 
-
-(mean coverage in thick red line, maximum coverage threshold in thin red line)
+* **maximum DP:** we also added a maximum coverage threshold which is mainly designed to remove positions that could correspond to repeated regions/elements (again, this criterion is also applied to monomorphic sites). The maximum coverage threshold is **species-specific** but always corresponds to : *1.8 x mean(coverage)*, (the mean coverage being calculated on the first 50Mb of the assembly); see below for the coverage distribution in *1_Tdi*.
 
 ![DP](DP_Tdi.png)
 
+(mean coverage in thick red line, maximum coverage threshold in thin red line)
+
+**maximum DP values:**
+
+*1_Tdi*: 141 */* *1_Tps*: 137 */* **2_Tcm**: 135 */* **2_Tsi**: 116 */* **3_Tce**: 162 */* **3_Tms**: 173 */* **4_Tbi**: 168 */* **4_Tte**: 143 */* **5_Tge**: 146 */* **5_Tpa**: 162
 
 
 ### 5) apply hard filters to variants :
