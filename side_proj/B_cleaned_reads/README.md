@@ -21,17 +21,17 @@ ILLUMINACLIP:Illumina-PE_adapters.fa:3:25:6 LEADING:9 TRAILING:9 SLIDINGWINDOW:4
 
 Surviving pairs of reads :
 ````
-Tdi_01_L2_OBIWAN_312_R1.cleaned.fastq.gz`
+Tdi_01_L2_OBIWAN_312_R1.cleaned.fastq.gz
 Tdi_01_L2_OBIWAN_312_R2.cleaned.fastq.gz
 ````
 The two output fastq files containing unpaired reads :
 ````
-Tdi_01_L2_OBIWAN_312_R1.se.cleaned.fastq.gz`
+Tdi_01_L2_OBIWAN_312_R1.se.cleaned.fastq.gz
 Tdi_01_L2_OBIWAN_312_R2.se.cleaned.fastq.gz
 ````
 were merged together into :
 ````
-Tdi_01_L2_OBIWAN_312.se.cleaned.fastq.gz`
+Tdi_01_L2_OBIWAN_312.se.cleaned.fastq.gz
 ````
 
 
