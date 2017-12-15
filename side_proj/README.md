@@ -31,5 +31,7 @@
 #### Some general links about the pipeline :
 
 https://software.broadinstitute.org/gatk/best-practices/bp_3step.php?case=GermShortWGS&p=1
+
 https://www.broadinstitute.org/partnerships/education/broade/best-practices-variant-calling-gatk-1
+
 https://www.france-bioinformatique.fr/sites/default/files/V04_FiltrageVariantNLapaluRoscoff2016_0.pdf
