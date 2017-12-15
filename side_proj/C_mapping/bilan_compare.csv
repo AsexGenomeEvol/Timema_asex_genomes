@@ -1,0 +1,61 @@
+MAPPING-b3_v04  MAPPING-b3_v06
+
+1_Tdi.compare:
+68847290        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L2_OBIWAN_312')
+68600917 (99%)  66949208 (97%)  -> number of mapped reads (ie primary hits)
+57500819 (83%)  66949208 (97%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+51079916 (74%)  57998941 (84%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+1_Tps.compare:
+81150098        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L3_OBIWAN_307')
+77236177 (95%)  72790220 (89%)  -> number of mapped reads (ie primary hits)
+57198762 (70%)  72790220 (89%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+50547550 (62%)  60868351 (75%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+2_Tcm.compare:
+76231900        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L2_OBIWAN_309')
+75109426 (98%)  71076574 (93%)  -> number of mapped reads (ie primary hits)
+54712760 (71%)  71076574 (93%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+47785307 (62%)  57475022 (75%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+2_Tsi.compare:
+60613652        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L1_OBIWAN_312')
+58510399 (96%)  56721179 (93%)  -> number of mapped reads (ie primary hits)
+42524572 (70%)  56721179 (93%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+32847112 (54%)  44388680 (73%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+3_Tce.compare:
+100040032       -               -> total number of reads in paired fastq files (R1+R2) (read group:'L1_OBIWAN_309')
+99480107 (99%)  95943688 (95%)  -> number of mapped reads (ie primary hits)
+80356701 (80%)  95943688 (95%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+71430910 (71%)  81978671 (81%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+3_Tms.compare:
+72576548        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L5_OBIWAN_310')
+70161422 (96%)  69217768 (95%)  -> number of mapped reads (ie primary hits)
+61529771 (84%)  69217768 (95%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+56776359 (78%)  61913533 (85%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+4_Tbi.compare:
+68649236        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L2_OBIWAN_314')
+58636904 (85%)  57186799 (83%)  -> number of mapped reads (ie primary hits)
+49839935 (72%)  57186799 (83%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+43824150 (63%)  48279539 (70%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+4_Tte.compare:
+74311976        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L1_OBIWAN_314')
+40405744 (54%)  39988131 (53%)  -> number of mapped reads (ie primary hits)
+35754930 (48%)  39988131 (53%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+31834920 (42%)  34829331 (46%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+5_Tge.compare:
+66909312        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L3_OBIWAN_310')
+65629366 (98%)  64948548 (97%)  -> number of mapped reads (ie primary hits)
+52610659 (78%)  64948548 (97%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+47685128 (71%)  54230891 (81%)  -> number of remaining reads after filtering for mapping quality (Q20)
+-------------
+5_Tpa.compare:
+71589058        -               -> total number of reads in paired fastq files (R1+R2) (read group:'L4_OBIWAN_310')
+69463057 (97%)  63097561 (88%)  -> number of mapped reads (ie primary hits)
+50240398 (70%)  63097561 (88%)  -> number of reads mapped to final scaffolds (ie, from final assembly: b3_v06)
+43853810 (61%)  51327412 (71%)  -> number of remaining reads after filtering for mapping quality (Q20)
