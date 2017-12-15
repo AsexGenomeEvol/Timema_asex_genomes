@@ -78,6 +78,7 @@ bwa mem -R $readGroup   \
 ````
 
 **NOTE:** mapping was not performed on 'final' assemblies (version: **b3v06**), but on a previous version (**b3v04**) containing **all** scaffolds (even those of size <1kb that were then removed in last version, as well as contaminants). This is to avoid that resequenced reads map on an incorrect scaffold because of the absence of their true target. A quick comparison between mapping results of the same run on both assemblies shows that the amount of reads affected by this can be large (up to 20% of the total pool of reads can map to a wrong scaffold when the chromosome they belong to is missing). Keep in mind however that such hits are likely to receive a poor **mapping quality score** that will later reduce their influence in discriminating between true and false SNPs.
+Details [here](bilan_compare.csv).
 
 
 ### 2) filter sam files on regions and mapping quality :
