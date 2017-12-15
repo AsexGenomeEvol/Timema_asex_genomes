@@ -28,7 +28,7 @@
   
   
   
-#### Some links about the general pipeline :
+#### Some general links about the pipeline :
 
 https://software.broadinstitute.org/gatk/best-practices/bp_3step.php?case=GermShortWGS&p=1
 https://www.broadinstitute.org/partnerships/education/broade/best-practices-variant-calling-gatk-1
