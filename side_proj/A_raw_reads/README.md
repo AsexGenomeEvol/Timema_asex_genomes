@@ -13,7 +13,7 @@ Each run has **R1**/**R2**/**R3** files (that can be split in multiple fastq fil
 
 All paired-end runs use the same insert size : **550 bp** with reads of length : **100 bp**.
 
-Split fastq files corresponding to the same run in an individual were merged together (R1 & R2 being kept apart), leading to a total of :
+Split fastq files corresponding to the same run of an individual were merged together (R1 & R2 being kept apart), leading to a total of :
 *10 species* x *5 individuals* x *3 (OBIWAN) runs* x *R1/R2* =  *150 fastq files*
 
 For the correspondance table between original file names from the sequencing facility and standardized file names used in the next steps, see :
