@@ -24,16 +24,16 @@ The paired-end fastq files have then be trimmed for presence of Illumina adapter
 
 ### Species and individual aliases :
 
-* **1_Tdi**   (samples: Tdi_01 / Tdi_02 / Tdi_03 / Tdi_04 / Tdi_05)
-* **1_Tps**   (samples: Tps_01 / Tps_02 / Tps_03 / Tps_04 / Tps_05)
-* **2_Tcm**   (samples: Tcm_01 / Tcm_02 / Tcm_03 / Tdi_04 / Tcm_05)
-* **2_Tsi**   (samples: Tsi_01 / Tce_02 / Tce_03 / Tce_04 / Tce_05)
-* **3_Tce**   (samples: Tce_01 / Tdi_02 / Tdi_03 / Tdi_04 / Tdi_05)
-* **3_Tms**   (samples: Tms_01 / Tms_02 / Tms_03 / Tms_04 / Tms_05)
-* **4_Tbi**   (samples: Tbi_01 / Tbi_02 / Tbi_03 / Tbi_04 / Tbi_05)
-* **4_Tte**   (samples: Tte_01 / Tte_02 / Tte_03 / Tte_04 / Tte_05)
-* **5_Tge**   (samples: Tge_01 / Tge_02 / Tge_03 / Tge_04 / Tge_05)
-* **5_Tpa**   (samples: Tpa_01 / Tpa_02 / Tpa_03 / Tpa_04 / Tpa_05)
+* **1_Tdi**   (samples: Tdi_01 to Tdi_05)
+* **1_Tps**   (samples: Tps_01 to Tps_05)
+* **2_Tcm**   (samples: Tcm_01 to Tcm_05)
+* **2_Tsi**   (samples: Tsi_01 to Tce_05)
+* **3_Tce**   (samples: Tce_01 to Tdi_05)
+* **3_Tms**   (samples: Tms_01 to Tms_05)
+* **4_Tbi**   (samples: Tbi_01 to Tbi_05)
+* **4_Tte**   (samples: Tte_01 to Tte_05)
+* **5_Tge**   (samples: Tge_01 to Tge_05)
+* **5_Tpa**   (samples: Tpa_01 to Tpa_05)
 
 
 ```
@@ -57,4 +57,4 @@ The paired-end fastq files have then be trimmed for presence of Illumina adapter
              \/  
               \___ T. genevieve      5_Tge ♀
 ```
-(from https://github.com/AsexGenomeEvol/timema_assembly)
+(from Kamil page: https://github.com/AsexGenomeEvol/timema_assembly)
