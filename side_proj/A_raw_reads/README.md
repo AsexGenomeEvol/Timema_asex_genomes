@@ -36,3 +36,25 @@ The paired-end fastq files have then be trimmed for presence of Illumina adapter
 * **5_Tpa**   (samples: Tpa_01 / Tpa_02 / Tpa_03 / Tpa_04 / Tpa_05)
 
 
+```
+               ___ T. poppensis      1_Tps ♀♂  = sexual
+              /  
+             /\___ T. douglasi       1_Tdi ♀   = asexual
+            /
+           /\  ___ T. californicum   2_Tcm ♀♂
+          /  \/
+         /    \___ T. shepardi       2_Tsi ♀
+        /\
+       /  \   ____ T. cristinae      3_Tce ♀♂
+      /    \ /
+      \     \_____ T. monikensis     3_Tms ♀
+       \
+        \      ___ T. bartmani       4_Tbi ♀♂
+         \    /
+          \  /\___ T. tahoe          4_Tte ♀
+           \/
+            \  ___ T. podura         5_Tpa ♀♂
+             \/  
+              \___ T. genevieve      5_Tge ♀
+```
+(from https://github.com/AsexGenomeEvol/timema_assembly)
