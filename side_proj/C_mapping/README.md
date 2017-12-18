@@ -13,7 +13,7 @@ Following commands are given for sample **Tdi_01** (run: **L2_OBIWAN_312**).
 
 Assign a read group (**RG**) to the run (it will be added in the bam file headers) :
 ````
-@RG   ID:L2_OBIWAN_312   DT:2017-09-20   LB:lib-L2_OBIWAN_314   PL:ILLUMINA   SM:Tdi_01
+@RG   ID:L2_OBIWAN_312   DT:2017-09-20   LB:lib-L2_OBIWAN_312   PL:ILLUMINA   SM:Tdi_01
 ````
 * **ID**: **read group unique identifier for the run**.
 * **LB**: DNA preparation library identifier (used by MarkDuplicates to remove molecular duplicates).
