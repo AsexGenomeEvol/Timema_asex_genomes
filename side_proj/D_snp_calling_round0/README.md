@@ -22,7 +22,7 @@ Split the genome assemblies in (40) intervals of similar size, this allows some 
 ````
 java -jar -Xmx50g Queue.jar -S GenotypeGVCFs.scala -R 1_Tdi_b3v06.fa -o trash -V 1_Tdi.empty.list -run
 ````
-* `GenotypeGVCFs.scala`: [script](./GenotypeGVCFs.scala) for creating intervals.
+* `GenotypeGVCFs.scala`: [script](./GenotypeGVCFs.scala) for creating intervals (ie, `1_Tdi.{01,02,..}_40.intervals`).
 * `1_Tdi.empty.list`: empty file, we just want the program to create intervals and then stops.
 
 
@@ -81,6 +81,7 @@ java -Xmx20g -jar GenomeAnalysisTK.jar \
    -nt 10   \        
    -o  1_Tdi.allVariant_raw.vcf   
 ````
+**note:** command shown without any parallelisation (to do so, we did a loop on genomic intervals: `*intervals`, by giving them to `-R` option instead of the complete assembly).
 
 
 ### 3) extract SNPs and indels :
