@@ -79,9 +79,9 @@ java -Xmx20g -jar GenomeAnalysisTK.jar \
    -R  1_Tdi_b3v06.fa \
    -V  1_Tdi.gvcf.list  \          
    -nt 10   \        
-   -o  1_Tdi.allVariant_raw.vcf   
+   -o  1_Tdi.allVariant_raw.vcf
 ````
-**note:** command shown without any parallelisation (to do so, we did a loop on genomic intervals: `*intervals`, by giving them to `-R` option instead of the complete assembly).
+**note:** command shown without any parallelisation (to do so, use a loop on genomic intervals: `*intervals`, which should be given to the `-R` option in place of the complete assembly).
 
 
 ### 3) extract SNPs and indels :
