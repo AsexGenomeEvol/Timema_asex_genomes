@@ -32,7 +32,7 @@ java -Xmx20g -jarGenomeAnalysisTK.jar \
    -nct  1
  done
 ````
-* `-hets`: prior on heterozygosity level. Its value was set at `0.01` for sexual species and `0.001` for asexuals (this is the only moment in the pipeline where sexual and asexual species are treated differently). As a quick control, we redid the snp calling for **1_Tdi** (which is asexual) by giving it the heterozygosity value of sexual species (ie, `0.01`). We found a very similar number of validated snps (ie *2,211,875* instead of *2,209,794*, which is *2081* additional snps, see also [summary tables](### Some statistics :)). This suggests a limited influence of this prior on the results.
+* `-hets`: prior on heterozygosity level. Its value was set at `0.01` for sexual species and `0.001` for asexuals (this is the only moment in the pipeline where sexual and asexual species are treated differently). As a quick control, we redid the snp calling for **1_Tdi** (which is asexual) by giving it the heterozygosity value of sexual species (ie, `0.01`). We found a very similar number of validated snps (ie *2,211,875* instead of *2,209,794*, which is *2081* additional snps, see also [summary tables](#stat)). This suggests a limited influence of this prior on the results.
 
 
 
@@ -210,7 +210,7 @@ each line of the filtering file gives :
 <sp>.allSite_filter.vcf  #ex: 1_Tdi.allSite_filter.vcf -> vcf containing all positions of the assembly
 ````
 
-### Some statistics :
+### <a name="stat"></a> Some statistics :
 
 #### Number of SNP and monomorphic positions :
 
