@@ -154,7 +154,7 @@ DP < 10                        # min sample coverage
 
 ### 5) apply hard filters to variants :
 
-This time, we did not use *VariantFiltration* from GATK as it takes an insane amount of time to run on a vcf containing all positions (around one week), can not be easily parallelised and also exhibits some strange behavior at the genotype level (a lot of samples will get the `PASS` tag with no coverage for example...).
+This time, we did not use *VariantFiltration* from GATK as it takes an insane amount of time to run on a vcf containing all positions (around a week), can not be easily parallelised and also exhibits some strange behavior at the genotype level (a lot of samples for example will get the `PASS` tag even with zero coverage...).
 Therefore, we wrote a custom [script](3_variant_filtration_r1.py) that also gives us more freedom to filter positions as we intended.
 
 It takes as inputs a *vcf* file and a filtering file (content below) :
