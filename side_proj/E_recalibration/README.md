@@ -6,7 +6,7 @@
 ---------
 
 This step aims to detect systematic errors made by the sequencer when it estimates the quality score of each base call,
-and then readjust their values in the **bam** files.
+and then readjust their values in the **bam** files. This process is accomplished by analyzing the covariation among several features of a base such as its **reported quality score**,**position within the read** and the effect of preceding and current nucleotide (**sequencing chemistry effect**)/
 
 #### Some links :
 https://software.broadinstitute.org/gatk/documentation/article.php?id=44
@@ -81,7 +81,7 @@ java -jar GenomeAnalysisTK.jar \
     -o Tdi_01.recal.bam
 ````
 #### output :
-`Tdi_01.recal.bam` : recalibrated *bam* file which will be used to perform the final round of variant calling.
+`Tdi_01.recal.bam` : recalibrated *bam* file which will be used to perform the [final round of variant calling](../F_snp_calling_round1).
 
 
 
