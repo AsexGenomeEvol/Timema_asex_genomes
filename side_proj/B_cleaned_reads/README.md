@@ -6,7 +6,7 @@
 -------------------
 
 Paired-end reads were trimmed for presence of adapters and quality using **Trimmomatic**.
-Similar parameters to the individual used for genome assembly were employed ([Illumina adapter](./Illumina-PE_adapters.fa) sequences used).
+Similar parameters to the individual used for genome assembly were employed ([Illumina adapter sequences](./Illumina-PE_adapters.fa) used).
 
 Command example (for a single run of a single sample, R1&R2 files processed together) :
 
