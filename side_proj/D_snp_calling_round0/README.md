@@ -114,7 +114,7 @@ vcftools \
 (although some tests were applied by *GATK* to remove the most dubious ones).
 The **vcf** files contain the list of possible variant positions (one per line), 
 each reported position being associated with a lot of extra-information (such as its global and per-sample coverages, 
-and different statistics like the score of the call, mapping quality,...).
+and different statistics like the score of the variant, its mapping quality, etc...).
 It is therefore necessary to set criteria to distinguish between real and false variant (see below).
 
 --------------
