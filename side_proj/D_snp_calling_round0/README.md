@@ -28,7 +28,7 @@ java -jar -Xmx50g Queue.jar -S GenotypeGVCFs.scala -R 1_Tdi_b3v06.fa -o trash -V
 
 -------------
 In the latest version of the *GATK* pipeline, the *variant calling* is performed in two distinct steps (previously grouped into a single analysis).
-This new procedure allows to add samples along the way without redoing the whole calculation.
+This new procedure allows to add samples along the way without redoing the whole calculation (which now scales linearly with the number of samples).
 
 First step is *per-sample calling* followed by *joint genotyping* across all (five) samples. 
 This workflow involves running **HaplotypeCaller** on each sample separately in *GVCF mode*, to produce an intermediate file format called **GVCF** (for Genomic VCF, `.g.vcf` extension). 
