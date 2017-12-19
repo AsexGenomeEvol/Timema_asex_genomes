@@ -193,15 +193,15 @@ each line of the *filtering file* gives :
 
 * **if the position pass all tests at the population level :**
 
-     **note:** we only look at the parameters that can be tested (ie, their annotation is not missing and has a non-null value). Therefore, if only one parameter among the list is present and the position pass the associaqted test, it will be enough to get the `PASS` tag).
+     **note:** we only look at the parameters that can be tested (ie, their annotation is not missing and has a non-null value). Therefore, if only one parameter among the list is present and the position pass the associated test, it will be enough to get the `PASS` tag).
      
      * **FILTER** field (pop-level) gets `PASS` tag.
      
        Each sample is then tested independently for the sample-level parameters :
-         * if sample cannot be tested (ie, all annotations missing with null value) : 
+         * if sample cannot be tested (ie, all annotations missing or with null value) : 
            **FT** field gets the `x` failed tag.
          * if sample fails at least one test : **FT** field gets the `f` failed tag.
-         * if sample pass all tests (that can be done) : **FT** field gets the `PASS` tag.
+         * if sample pass all tests (that can be tested) : **FT** field gets the `PASS` tag.
        
          **note:** because some parameters are applied only at the sample-level (ex: minimum coverage), it might happen that a position that get the `PASS` tag at the pop-level, will then have no sample that are individually validated. However, we expect this case to be very rare as a validated variant at the pop-level should in theory benefit from at least one robust sample to back it up.
      
