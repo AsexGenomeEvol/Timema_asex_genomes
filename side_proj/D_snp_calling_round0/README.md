@@ -10,7 +10,7 @@ Unfortunately, the **BQSR** step requires an already available set of trustable 
 The work-around is to do a first, preliminary round of variant calling with original base quality scores in order to get a raw set of variants that will be use to mask these positions during the **BQSR** step (so that they are not mistaken for sequencing errors).
 Once the bam files have been recalibrated, a new round of variant calling can be performed to obtain a trustable set of variant positions.
 Note that this cycle (BQSR/variant calling) can be repeated several times until convergence.
-For computational reasons however, we only did a single BQSR step. 
+For computational reasons however, we only did the BQSR step once. 
 
 
 Following commands are given for species '**1_Tdi**' (all runs of each five samples have been merged into a single bam file).
