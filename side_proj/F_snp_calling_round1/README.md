@@ -157,7 +157,7 @@ DP < 10                        # min sample coverage
 This time, we did not use *VariantFiltration* from GATK as it takes an insane amount of time to run on a vcf containing all positions (around a week), can not be easily parallelised and also exhibits some strange behavior at the genotype level (a lot of samples for example will get the `PASS` tag even with zero coverage...).
 Therefore, we wrote a custom [script](3_variant_filtration_r1.py) that also gives us more freedom to filter positions as we intended.
 
-It takes as inputs a *vcf* file and a filtering file (content below) :
+It takes as inputs a *vcf file* and a *filtering file* (content below) :
 ````
 INFO:DP>141:highDP
 INFO:DP<10:lowDP
@@ -170,11 +170,11 @@ INFO:ReadPosRankSum<-2.5:lowReadPosRankSum
 FORMAT:DP<10:f
 FORMAT:GQ<30:f
 ````
-each line of the filtering file gives :
+each line of the *filtering file* gives :
    * the field in which the parameter should be tested 
      (**INFO** if it's at the pop-level, **FORMAT** at the sample level).
    * the parameter (ex: **DP**) and the condition to fail the test.
-   * the tag to write in the output *vcf* if the test fails (note that tags at the sample-level can now only consist in `x` or `f`, irrespective of what is written in the above file; this allows to save disk space as these tags will appear at each line for each sample).
+   * the **tag** to write in the output *vcf* if the test fails (note that tags at the sample-level can now only consist in `x` or `f`, irrespective of what is written in the above file; this allows to save disk space as these tags will appear at each line for each sample).
 
 
 #### Behavior of the script :
