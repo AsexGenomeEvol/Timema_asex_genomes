@@ -174,7 +174,7 @@ each line of the *filtering file* gives :
    * the field in which the parameter should be tested 
      (**INFO** if it's at the pop-level, **FORMAT** at the sample level).
    * the parameter (ex: **DP**) and the condition to fail the test.
-   * the **tag** to write in the output *vcf* if the test fails (note that tags at the sample-level can now only consist in `x` or `f`, irrespective of what is written in the above file; this allows to save disk space as these tags will appear at each line for each sample).
+   * the tag to write in the output *vcf* if the test fails (note that tags at the sample-level can now only consist in `x` or `f`, irrespective of what is written in the above file; this allows to save disk space as these tags will appear at each line for each sample).
 
 
 #### Behavior of the script :
