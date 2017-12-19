@@ -133,9 +133,9 @@ https://software.broadinstitute.org/gatk/documentation/article.php?id=2806
 
 
 
-### 4) (visually) determine thresholds for hard filtering :
+### 4) determine (visually) thresholds for hard filtering :
 
-Here are the parameter threshold values that were chosen for **filtering out** SNPs and indels, 
+Below are the parameter threshold values that were chosen for **filtering out** SNPs and indels, 
 followed by plots of their distributions (for SNPs) to justify our choices
 (although our values differ a bit from those recommended by *GATK* on their own human dataset,
 we made use of their graphical recommendations:
