@@ -153,7 +153,7 @@ Tdi_01_L7_OBIWAN_310.bam
 samtools merge -@ 10 -b Tdi_01.run_list Tdi_01.bam          # merge bam files (list in 1_Tdi.run_list, output: Tdi_01.bam)
 samtools index Tdi_01.bam                                   # reindex
 ````
-Duplicates always represent less than 10% of the reads are often found at level of 1 or 2%.
+Duplicates always represent less than 10% of the reads and are often found at levels of 1 or 2%.
 
 
 -------
