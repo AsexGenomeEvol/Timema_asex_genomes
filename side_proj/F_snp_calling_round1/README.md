@@ -63,7 +63,7 @@ java -Xmx20g -jar GenomeAnalysisTK.jar \
 `1_Tdi.allVariant_raw.vcf`
 
 **note:** we add the `-allSites` tag in order to print **all** positions in the output vcf (including **monomorphic** positions which represent the majority of them).
-Despite the large file size produced (~25 Go), this is necessary to later calculate some statistics such as heterozygosity (for which we need to apply equivalent criteria to monomorphic sites); or to convert the vcf files into fasta files (not done here, but typical expected format for some of our pipelines).
+Despite the large file size produced (~25 Go), this is necessary to later calculate some statistics such as heterozygosity or snp density (for which we need to apply equivalent criteria to monomorphic sites); or to convert the vcf files into fasta files (not done here, but format typically expected in some of our pipelines).
 
 
 ### 3) extract SNPs and indels :
