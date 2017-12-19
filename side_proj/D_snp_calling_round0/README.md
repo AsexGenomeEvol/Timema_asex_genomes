@@ -13,7 +13,7 @@ Note that this cycle (BQSR/variant calling) can be repeated several times until 
 For computational reasons however, we only did the BQSR step once. 
 
 
-Following commands are given for species '**1_Tdi**' (all runs of each five samples have been merged into a single bam file).
+Following commands are given for species '**1_Tdi**' (for each of the five samples, all runs were merged into a single bam file).
 
 
 ### 0) preliminary step :
