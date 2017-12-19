@@ -124,8 +124,8 @@ is to use *variant quality score recalibration* (**VQSR**),
 which uses machine learning to identify annotation profiles of variants that are likely to be real. 
 The drawback of this sophisticated method is that it requires a highly curated sets of known variants; 
 this makes it impossible to apply it to non-model organisms.
-Therefore, in our case, the alternative is to use a quite brutal approach where we will use hard thresholds 
-on chosen parameters to manually filter the variants...
+Therefore, in our case, the alternative is to use a brutal approach where we will set hard thresholds 
+on selected parameters to bluntly filter the variants...
 
 #### Some links:
 https://gatkforums.broadinstitute.org/gatk/discussion/3225/how-can-i-filter-my-callset-if-i-cannot-use-vqsr-recalibrate-variants
