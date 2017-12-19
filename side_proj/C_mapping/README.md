@@ -161,5 +161,5 @@ Duplicates always represent less than 10% of the reads are often found at level 
 
 Statistic files, produced by `samtools flagstat` after **step 1** (suffix: `.out`) and **step 6** (suffix: `.out2`), can be found in this [archive](./mapping_stats.tar.gz). Number of mapped reads per fastq file is also shown [here](basic_stats).
 
-**note:** for almost all samples, we found more than *95%* of reads mapped to the corresponding genome assembly. For a few of them however, a lower percentage of reads have mapped (potentially due to the presence of contamination, as sometimes already presumed from **fastQC** reports). The most extreme being *Tte_01* and *Tte_04* with *53-55%* and *66-68%* of reads mapped respectively.
+**note:** for almost all samples, we found more than *95%* of reads mapped to the corresponding genome assembly (version b3v04). For a few of them however, a lower percentage of reads have mapped (potentially due to the presence of contaminants, as sometimes already presumed from **fastQC** reports). The most extreme cases being *Tte_01* and *Tte_04* with *53-55%* and *66-68%* of reads mapped respectively.
 
