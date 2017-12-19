@@ -39,7 +39,7 @@ java -Xmx20g -jarGenomeAnalysisTK.jar \
 ### 2) joint genotyping with 'GenotypeGVCFs' :
 
 
-'**1_Tdi.gvcf.list' content :**
+##### '**1_Tdi.gvcf.list' content :**
 ````
 Tdi_01.g.vcf
 Tdi_02.g.vcf
