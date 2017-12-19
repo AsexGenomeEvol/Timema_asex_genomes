@@ -62,7 +62,7 @@ java -Xmx20g -jarGenomeAnalysisTK.jar \
 ### 2) joint genotyping with 'GenotypeGVCFs' :
 
 
-'**1_Tdi.gvcf.list' content :**
+##### '**1_Tdi.gvcf.list' content :**
 ````
 Tdi_01.g.vcf
 Tdi_02.g.vcf
@@ -72,8 +72,6 @@ Tdi_05.g.vcf
 ````
 
 ````
-# this step can be parallelised by giving regions to the program
-# instead of the complete assembly (as shown below).
 java -Xmx20g -jar GenomeAnalysisTK.jar \
    -T  GenotypeGVCFs \
    -R  1_Tdi_b3v06.fa \
