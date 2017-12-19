@@ -187,7 +187,7 @@ each line of the *filtering file* gives :
 
 * **if the position could not be tested for any parameter at the population level :**
 
-  (either because they are missing from the annotations or have the null value (`.`). This is **never** expected in our case as we test a lot of parameters, but this could happen if we decided to only look at a single parameter)
+  (either because parameters are missing from the annotations or have the null value (`.`). This is **never** expected in our case as we test a lot of parameters, but this could happen if we decided to only look at a single parameter)
      * **FILTER** field (pop-level) gets `x` failed tag.
      *  **FT** fields (sample-level) all gets `x` failed tag (without being tested further).
 
