@@ -17,7 +17,7 @@ Split fastq files corresponding to the same run of an individual were merged tog
 *10 species* x *5 individuals* x *3 (OBIWAN) runs* x *R1/R2* =  *150 fastq files*
 
 For the correspondance table between original file names from the sequencing facility and standardized file names used in the next steps, see :
-[correspondance table (table for download)](./resequencing_samples)
+[correspondance table](./resequencing_samples)
 
 The paired-end fastq files were then trimmed for presence of Illumina adapters and quality [here](../B_cleaned_reads).
 
