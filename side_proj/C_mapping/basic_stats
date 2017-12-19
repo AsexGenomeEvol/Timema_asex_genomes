@@ -1,0 +1,1649 @@
+=> Tbi_01_L2_OBIWAN_314 <==
+59121444 reads out of 69133776 have mapped for Tbi_01_L2_OBIWAN_314_pe (85%)
+ 4584211 reads out of  5265902 have mapped for Tbi_01_L2_OBIWAN_314_se (87%)
+
+44350342 filtered reads (regions and quality) out of 69133776 have mapped for Tbi_01_L2_OBIWAN_314_pe (64%)
+ 3152002 filtered reads (regions and quality) out of  5265902 have mapped for Tbi_01_L2_OBIWAN_314_se (59%)
+
+46878371 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_01_L4_OBIWAN_309 <==
+58780650 reads out of 68711312 have mapped for Tbi_01_L4_OBIWAN_309_pe (85%)
+ 4783316 reads out of  5491716 have mapped for Tbi_01_L4_OBIWAN_309_se (87%)
+
+44106332 filtered reads (regions and quality) out of 68711312 have mapped for Tbi_01_L4_OBIWAN_309_pe (64%)
+ 3286747 filtered reads (regions and quality) out of  5491716 have mapped for Tbi_01_L4_OBIWAN_309_se (59%)
+
+46856956 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_01_L4_OBIWAN_312 <==
+59164132 reads out of 69214961 have mapped for Tbi_01_L4_OBIWAN_312_pe (85%)
+ 5633846 reads out of  6493772 have mapped for Tbi_01_L4_OBIWAN_312_se (86%)
+
+44480611 filtered reads (regions and quality) out of 69214961 have mapped for Tbi_01_L4_OBIWAN_312_pe (64%)
+ 3916478 filtered reads (regions and quality) out of  6493772 have mapped for Tbi_01_L4_OBIWAN_312_se (60%)
+
+47836318 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_02_L2_OBIWAN_314 <==
+75448610 reads out of 77377775 have mapped for Tbi_02_L2_OBIWAN_314_pe (97%)
+ 5690705 reads out of  5856365 have mapped for Tbi_02_L2_OBIWAN_314_se (97%)
+
+57061095 filtered reads (regions and quality) out of 77377775 have mapped for Tbi_02_L2_OBIWAN_314_pe (73%)
+ 3976069 filtered reads (regions and quality) out of  5856365 have mapped for Tbi_02_L2_OBIWAN_314_se (67%)
+
+60283167 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_02_L4_OBIWAN_309 <==
+75322832 reads out of 77240582 have mapped for Tbi_02_L4_OBIWAN_309_pe (97%)
+ 5997552 reads out of  6170052 have mapped for Tbi_02_L4_OBIWAN_309_se (97%)
+
+56968110 filtered reads (regions and quality) out of 77240582 have mapped for Tbi_02_L4_OBIWAN_309_pe (73%)
+ 4190675 filtered reads (regions and quality) out of  6170052 have mapped for Tbi_02_L4_OBIWAN_309_se (67%)
+
+60509028 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_02_L4_OBIWAN_312 <==
+75311496 reads out of 77228002 have mapped for Tbi_02_L4_OBIWAN_312_pe (97%)
+ 6911445 reads out of  7111770 have mapped for Tbi_02_L4_OBIWAN_312_se (97%)
+
+57090796 filtered reads (regions and quality) out of 77228002 have mapped for Tbi_02_L4_OBIWAN_312_pe (73%)
+ 4870591 filtered reads (regions and quality) out of  7111770 have mapped for Tbi_02_L4_OBIWAN_312_se (68%)
+
+61291333 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_03_L2_OBIWAN_314 <==
+127924986 reads out of 131257756 have mapped for Tbi_03_L2_OBIWAN_314_pe (97%)
+9976845 reads out of 10265593 have mapped for Tbi_03_L2_OBIWAN_314_se (97%)
+
+95949003 filtered reads (regions and quality) out of 131257756 have mapped for Tbi_03_L2_OBIWAN_314_pe (73%)
+6898833 filtered reads (regions and quality) out of 10265593 have mapped for Tbi_03_L2_OBIWAN_314_se (67%)
+
+101050104 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_03_L4_OBIWAN_309 <==
+128093362 reads out of 131415008 have mapped for Tbi_03_L4_OBIWAN_309_pe (97%)
+ 10625515 reads out of  10928720 have mapped for Tbi_03_L4_OBIWAN_309_se (97%)
+
+96021929 filtered reads (regions and quality) out of 131415008 have mapped for Tbi_03_L4_OBIWAN_309_pe (73%)
+ 7354444 filtered reads (regions and quality) out of  10928720 have mapped for Tbi_03_L4_OBIWAN_309_se (67%)
+
+101725908 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_03_L4_OBIWAN_312 <==
+127208933 reads out of 130520422 have mapped for Tbi_03_L4_OBIWAN_312_pe (97%)
+ 12105493 reads out of  12452155 have mapped for Tbi_03_L4_OBIWAN_312_se (97%)
+
+95652422 filtered reads (regions and quality) out of 130520422 have mapped for Tbi_03_L4_OBIWAN_312_pe (73%)
+ 8453929 filtered reads (regions and quality) out of  12452155 have mapped for Tbi_03_L4_OBIWAN_312_se (67%)
+
+102401126 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_04_L2_OBIWAN_314 <==
+79131968 reads out of 79818029 have mapped for Tbi_04_L2_OBIWAN_314_pe (99%)
+ 6277546 reads out of  6372133 have mapped for Tbi_04_L2_OBIWAN_314_se (98%)
+
+59314384 filtered reads (regions and quality) out of 79818029 have mapped for Tbi_04_L2_OBIWAN_314_pe (74%)
+ 4299878 filtered reads (regions and quality) out of  6372133 have mapped for Tbi_04_L2_OBIWAN_314_se (67%)
+
+62747034 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_04_L4_OBIWAN_309 <==
+78615272 reads out of 79298818 have mapped for Tbi_04_L4_OBIWAN_309_pe (99%)
+ 6535899 reads out of  6630260 have mapped for Tbi_04_L4_OBIWAN_309_se (98%)
+
+58943001 filtered reads (regions and quality) out of 79298818 have mapped for Tbi_04_L4_OBIWAN_309_pe (74%)
+ 4474471 filtered reads (regions and quality) out of  6630260 have mapped for Tbi_04_L4_OBIWAN_309_se (67%)
+
+62666068 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_04_L4_OBIWAN_312 <==
+78804179 reads out of 79488350 have mapped for Tbi_04_L4_OBIWAN_312_pe (99%)
+ 7635852 reads out of  7743227 have mapped for Tbi_04_L4_OBIWAN_312_se (98%)
+
+59221119 filtered reads (regions and quality) out of 79488350 have mapped for Tbi_04_L4_OBIWAN_312_pe (74%)
+ 5292335 filtered reads (regions and quality) out of  7743227 have mapped for Tbi_04_L4_OBIWAN_312_se (68%)
+
+63729047 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_05_L2_OBIWAN_314 <==
+64589193 reads out of 67141084 have mapped for Tbi_05_L2_OBIWAN_314_pe (96%)
+ 5604254 reads out of  5837422 have mapped for Tbi_05_L2_OBIWAN_314_se (96%)
+
+48169381 filtered reads (regions and quality) out of 67141084 have mapped for Tbi_05_L2_OBIWAN_314_pe (71%)
+ 3847353 filtered reads (regions and quality) out of  5837422 have mapped for Tbi_05_L2_OBIWAN_314_se (65%)
+
+51339267 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_05_L4_OBIWAN_309 <==
+64859751 reads out of 67414424 have mapped for Tbi_05_L4_OBIWAN_309_pe (96%)
+ 5859024 reads out of  6099931 have mapped for Tbi_05_L4_OBIWAN_309_se (96%)
+
+48359558 filtered reads (regions and quality) out of 67414424 have mapped for Tbi_05_L4_OBIWAN_309_pe (71%)
+ 4019709 filtered reads (regions and quality) out of  6099931 have mapped for Tbi_05_L4_OBIWAN_309_se (65%)
+
+51785898 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tbi_05_L4_OBIWAN_312 <==
+63701122 reads out of 66209535 have mapped for Tbi_05_L4_OBIWAN_312_pe (96%)
+ 6793810 reads out of  7076022 have mapped for Tbi_05_L4_OBIWAN_312_se (96%)
+
+47619234 filtered reads (regions and quality) out of 66209535 have mapped for Tbi_05_L4_OBIWAN_312_pe (71%)
+ 4712178 filtered reads (regions and quality) out of  7076022 have mapped for Tbi_05_L4_OBIWAN_312_se (66%)
+
+51733076 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_01_L1_OBIWAN_309 <==
+100344771 reads out of 100904696 have mapped for Tce_01_L1_OBIWAN_309_pe (99%)
+  7344913 reads out of   7422688 have mapped for Tce_01_L1_OBIWAN_309_se (98%)
+
+72186156 filtered reads (regions and quality) out of 100904696 have mapped for Tce_01_L1_OBIWAN_309_pe (71%)
+ 4779423 filtered reads (regions and quality) out of   7422688 have mapped for Tce_01_L1_OBIWAN_309_se (64%)
+
+76044763 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_01_L3_OBIWAN_314 <==
+100263557 reads out of 100823259 have mapped for Tce_01_L3_OBIWAN_314_pe (99%)
+  7865985 reads out of   7951657 have mapped for Tce_01_L3_OBIWAN_314_se (98%)
+
+72230637 filtered reads (regions and quality) out of 100823259 have mapped for Tce_01_L3_OBIWAN_314_pe (71%)
+ 5104572 filtered reads (regions and quality) out of   7951657 have mapped for Tce_01_L3_OBIWAN_314_se (64%)
+
+76247377 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_01_L5_OBIWAN_312 <==
+102644883 reads out of 103217840 have mapped for Tce_01_L5_OBIWAN_312_pe (99%)
+  8846625 reads out of   8936115 have mapped for Tce_01_L5_OBIWAN_312_se (98%)
+
+73881536 filtered reads (regions and quality) out of 103217840 have mapped for Tce_01_L5_OBIWAN_312_pe (71%)
+ 5803285 filtered reads (regions and quality) out of   8936115 have mapped for Tce_01_L5_OBIWAN_312_se (64%)
+
+78686400 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_02_L1_OBIWAN_309 <==
+74227417 reads out of 74680170 have mapped for Tce_02_L1_OBIWAN_309_pe (99%)
+ 6529687 reads out of  6604428 have mapped for Tce_02_L1_OBIWAN_309_se (98%)
+
+52988831 filtered reads (regions and quality) out of 74680170 have mapped for Tce_02_L1_OBIWAN_309_pe (70%)
+ 4220435 filtered reads (regions and quality) out of  6604428 have mapped for Tce_02_L1_OBIWAN_309_se (63%)
+
+56509065 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_02_L3_OBIWAN_314 <==
+73691447 reads out of 74142305 have mapped for Tce_02_L3_OBIWAN_314_pe (99%)
+ 7099951 reads out of  7185183 have mapped for Tce_02_L3_OBIWAN_314_se (98%)
+
+52664784 filtered reads (regions and quality) out of 74142305 have mapped for Tce_02_L3_OBIWAN_314_pe (71%)
+ 4585513 filtered reads (regions and quality) out of  7185183 have mapped for Tce_02_L3_OBIWAN_314_se (63%)
+
+56424241 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_02_L5_OBIWAN_312 <==
+75135642 reads out of 75595371 have mapped for Tce_02_L5_OBIWAN_312_pe (99%)
+ 7831100 reads out of  7916588 have mapped for Tce_02_L5_OBIWAN_312_se (98%)
+
+53636994 filtered reads (regions and quality) out of 75595371 have mapped for Tce_02_L5_OBIWAN_312_pe (70%)
+ 5110942 filtered reads (regions and quality) out of  7916588 have mapped for Tce_02_L5_OBIWAN_312_se (64%)
+
+57994204 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_03_L1_OBIWAN_309 <==
+79614275 reads out of 80054226 have mapped for Tce_03_L1_OBIWAN_309_pe (99%)
+6561104 reads out of 6626560 have mapped for Tce_03_L1_OBIWAN_309_se (99%)
+
+57182966 filtered reads (regions and quality) out of 80054226 have mapped for Tce_03_L1_OBIWAN_309_pe (71%)
+4330161 filtered reads (regions and quality) out of 6626560 have mapped for Tce_03_L1_OBIWAN_309_se (65%)
+
+60886382 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_03_L3_OBIWAN_314 <==
+79104105 reads out of 79543284 have mapped for Tce_03_L3_OBIWAN_314_pe (99%)
+ 7014715 reads out of  7086163 have mapped for Tce_03_L3_OBIWAN_314_se (98%)
+
+56909942 filtered reads (regions and quality) out of 79543284 have mapped for Tce_03_L3_OBIWAN_314_pe (71%)
+ 4618430 filtered reads (regions and quality) out of  7086163 have mapped for Tce_03_L3_OBIWAN_314_se (65%)
+
+60789137 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_03_L5_OBIWAN_312 <==
+80591717 reads out of 81037529 have mapped for Tce_03_L5_OBIWAN_312_pe (99%)
+ 7827903 reads out of  7902241 have mapped for Tce_03_L5_OBIWAN_312_se (99%)
+
+57919190 filtered reads (regions and quality) out of 81037529 have mapped for Tce_03_L5_OBIWAN_312_pe (71%)
+ 5202330 filtered reads (regions and quality) out of  7902241 have mapped for Tce_03_L5_OBIWAN_312_se (65%)
+
+62453340 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_04_L1_OBIWAN_309 <==
+66483673 reads out of 68689009 have mapped for Tce_04_L1_OBIWAN_309_pe (96%)
+ 5745553 reads out of  5913268 have mapped for Tce_04_L1_OBIWAN_309_se (97%)
+
+47774802 filtered reads (regions and quality) out of 68689009 have mapped for Tce_04_L1_OBIWAN_309_pe (69%)
+ 3788068 filtered reads (regions and quality) out of  5913268 have mapped for Tce_04_L1_OBIWAN_309_se (64%)
+
+50955783 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_04_L3_OBIWAN_314 <==
+66119558 reads out of 68312311 have mapped for Tce_04_L3_OBIWAN_314_pe (96%)
+ 6136651 reads out of  6315129 have mapped for Tce_04_L3_OBIWAN_314_se (97%)
+
+47614010 filtered reads (regions and quality) out of 68312311 have mapped for Tce_04_L3_OBIWAN_314_pe (69%)
+ 4034267 filtered reads (regions and quality) out of  6315129 have mapped for Tce_04_L3_OBIWAN_314_se (63%)
+
+50935445 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_04_L5_OBIWAN_312 <==
+67058442 reads out of 69283249 have mapped for Tce_04_L5_OBIWAN_312_pe (96%)
+ 6775246 reads out of  6975157 have mapped for Tce_04_L5_OBIWAN_312_se (97%)
+
+48253014 filtered reads (regions and quality) out of 69283249 have mapped for Tce_04_L5_OBIWAN_312_pe (69%)
+ 4497579 filtered reads (regions and quality) out of  6975157 have mapped for Tce_04_L5_OBIWAN_312_se (64%)
+
+52108364 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_05_L1_OBIWAN_309 <==
+74232183 reads out of 74669709 have mapped for Tce_05_L1_OBIWAN_309_pe (99%)
+ 5244185 reads out of  5303846 have mapped for Tce_05_L1_OBIWAN_309_se (98%)
+
+53291858 filtered reads (regions and quality) out of 74669709 have mapped for Tce_05_L1_OBIWAN_309_pe (71%)
+ 3426167 filtered reads (regions and quality) out of  5303846 have mapped for Tce_05_L1_OBIWAN_309_se (64%)
+
+55942230 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_05_L3_OBIWAN_314 <==
+74646070 reads out of 75088619 have mapped for Tce_05_L3_OBIWAN_314_pe (99%)
+ 5617685 reads out of  5683635 have mapped for Tce_05_L3_OBIWAN_314_se (98%)
+
+53675672 filtered reads (regions and quality) out of 75088619 have mapped for Tce_05_L3_OBIWAN_314_pe (71%)
+ 3656186 filtered reads (regions and quality) out of  5683635 have mapped for Tce_05_L3_OBIWAN_314_se (64%)
+
+56413083 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tce_05_L5_OBIWAN_312 <==
+76324146 reads out of 76774043 have mapped for Tce_05_L5_OBIWAN_312_pe (99%)
+ 6367679 reads out of  6437724 have mapped for Tce_05_L5_OBIWAN_312_se (98%)
+
+54846118 filtered reads (regions and quality) out of 76774043 have mapped for Tce_05_L5_OBIWAN_312_pe (71%)
+ 4181741 filtered reads (regions and quality) out of  6437724 have mapped for Tce_05_L5_OBIWAN_312_se (64%)
+
+58185557 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_01_L2_OBIWAN_309 <==
+75782180 reads out of 76904654 have mapped for Tcm_01_L2_OBIWAN_309_pe (98%)
+ 6519000 reads out of  6647358 have mapped for Tcm_01_L2_OBIWAN_309_se (98%)
+
+48457078 filtered reads (regions and quality) out of 76904654 have mapped for Tcm_01_L2_OBIWAN_309_pe (63%)
+ 3691861 filtered reads (regions and quality) out of  6647358 have mapped for Tcm_01_L2_OBIWAN_309_se (55%)
+
+51348610 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_01_L4_OBIWAN_314 <==
+76045428 reads out of 77173318 have mapped for Tcm_01_L4_OBIWAN_314_pe (98%)
+ 6939359 reads out of  7079603 have mapped for Tcm_01_L4_OBIWAN_314_se (98%)
+
+48744609 filtered reads (regions and quality) out of 77173318 have mapped for Tcm_01_L4_OBIWAN_314_pe (63%)
+ 3925003 filtered reads (regions and quality) out of  7079603 have mapped for Tcm_01_L4_OBIWAN_314_se (55%)
+
+51749272 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_01_L6_OBIWAN_312 <==
+75847982 reads out of 76978639 have mapped for Tcm_01_L6_OBIWAN_312_pe (98%)
+ 6847513 reads out of  6980471 have mapped for Tcm_01_L6_OBIWAN_312_se (98%)
+
+48561340 filtered reads (regions and quality) out of 76978639 have mapped for Tcm_01_L6_OBIWAN_312_pe (63%)
+ 3920794 filtered reads (regions and quality) out of  6980471 have mapped for Tcm_01_L6_OBIWAN_312_se (56%)
+
+51682883 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_02_L2_OBIWAN_309 <==
+76295674 reads out of 79035241 have mapped for Tcm_02_L2_OBIWAN_309_pe (96%)
+ 6113734 reads out of  6347167 have mapped for Tcm_02_L2_OBIWAN_309_se (96%)
+
+48775621 filtered reads (regions and quality) out of 79035241 have mapped for Tcm_02_L2_OBIWAN_309_pe (61%)
+ 3509188 filtered reads (regions and quality) out of  6347167 have mapped for Tcm_02_L2_OBIWAN_309_se (55%)
+
+51540205 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_02_L4_OBIWAN_314 <==
+76489230 reads out of 79233820 have mapped for Tcm_02_L4_OBIWAN_314_pe (96%)
+ 6374855 reads out of  6617170 have mapped for Tcm_02_L4_OBIWAN_314_se (96%)
+
+49055386 filtered reads (regions and quality) out of 79233820 have mapped for Tcm_02_L4_OBIWAN_314_pe (61%)
+ 3646018 filtered reads (regions and quality) out of  6617170 have mapped for Tcm_02_L4_OBIWAN_314_se (55%)
+
+51842405 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_02_L6_OBIWAN_312 <==
+76038965 reads out of 78766463 have mapped for Tcm_02_L6_OBIWAN_312_pe (96%)
+ 6378499 reads out of  6619754 have mapped for Tcm_02_L6_OBIWAN_312_se (96%)
+
+48710136 filtered reads (regions and quality) out of 78766463 have mapped for Tcm_02_L6_OBIWAN_312_pe (61%)
+ 3688641 filtered reads (regions and quality) out of  6619754 have mapped for Tcm_02_L6_OBIWAN_312_se (55%)
+
+51660567 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_03_L2_OBIWAN_309 <==
+84493467 reads out of 85396720 have mapped for Tcm_03_L2_OBIWAN_309_pe (98%)
+ 6633328 reads out of  6744054 have mapped for Tcm_03_L2_OBIWAN_309_se (98%)
+
+54307351 filtered reads (regions and quality) out of 85396720 have mapped for Tcm_03_L2_OBIWAN_309_pe (63%)
+ 3803959 filtered reads (regions and quality) out of  6744054 have mapped for Tcm_03_L2_OBIWAN_309_se (56%)
+
+57136306 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_03_L4_OBIWAN_314 <==
+84910491 reads out of 85818979 have mapped for Tcm_03_L4_OBIWAN_314_pe (98%)
+ 6959535 reads out of  7078091 have mapped for Tcm_03_L4_OBIWAN_314_se (98%)
+
+54707064 filtered reads (regions and quality) out of 85818979 have mapped for Tcm_03_L4_OBIWAN_314_pe (63%)
+ 3979999 filtered reads (regions and quality) out of  7078091 have mapped for Tcm_03_L4_OBIWAN_314_se (56%)
+
+57574009 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_03_L6_OBIWAN_312 <==
+84605635 reads out of 85513365 have mapped for Tcm_03_L6_OBIWAN_312_pe (98%)
+ 6950263 reads out of  7064988 have mapped for Tcm_03_L6_OBIWAN_312_se (98%)
+
+54452185 filtered reads (regions and quality) out of 85513365 have mapped for Tcm_03_L6_OBIWAN_312_pe (63%)
+ 4020927 filtered reads (regions and quality) out of  7064988 have mapped for Tcm_03_L6_OBIWAN_312_se (56%)
+
+57496043 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_04_L2_OBIWAN_309 <==
+66143935 reads out of 68141008 have mapped for Tcm_04_L2_OBIWAN_309_pe (97%)
+ 5602005 reads out of  5776083 have mapped for Tcm_04_L2_OBIWAN_309_se (96%)
+
+42800653 filtered reads (regions and quality) out of 68141008 have mapped for Tcm_04_L2_OBIWAN_309_pe (62%)
+ 3237307 filtered reads (regions and quality) out of  5776083 have mapped for Tcm_04_L2_OBIWAN_309_se (56%)
+
+45381897 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_04_L4_OBIWAN_314 <==
+66516917 reads out of 68520075 have mapped for Tcm_04_L4_OBIWAN_314_pe (97%)
+ 5974810 reads out of  6161938 have mapped for Tcm_04_L4_OBIWAN_314_se (96%)
+
+43133094 filtered reads (regions and quality) out of 68520075 have mapped for Tcm_04_L4_OBIWAN_314_pe (62%)
+ 3450767 filtered reads (regions and quality) out of  6161938 have mapped for Tcm_04_L4_OBIWAN_314_se (56%)
+
+45819331 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_04_L6_OBIWAN_312 <==
+66229914 reads out of 68223101 have mapped for Tcm_04_L6_OBIWAN_312_pe (97%)
+ 5919478 reads out of  6102886 have mapped for Tcm_04_L6_OBIWAN_312_se (96%)
+
+42904482 filtered reads (regions and quality) out of 68223101 have mapped for Tcm_04_L6_OBIWAN_312_pe (62%)
+ 3455125 filtered reads (regions and quality) out of  6102886 have mapped for Tcm_04_L6_OBIWAN_312_se (56%)
+
+45703641 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_05_L2_OBIWAN_309 <==
+69255849 reads out of 71160820 have mapped for Tcm_05_L2_OBIWAN_309_pe (97%)
+ 5736875 reads out of  5905731 have mapped for Tcm_05_L2_OBIWAN_309_se (97%)
+
+44260272 filtered reads (regions and quality) out of 71160820 have mapped for Tcm_05_L2_OBIWAN_309_pe (62%)
+ 3312544 filtered reads (regions and quality) out of  5905731 have mapped for Tcm_05_L2_OBIWAN_309_se (56%)
+
+46907559 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_05_L4_OBIWAN_314 <==
+69514274 reads out of 71422777 have mapped for Tcm_05_L4_OBIWAN_314_pe (97%)
+ 6048868 reads out of  6227085 have mapped for Tcm_05_L4_OBIWAN_314_se (97%)
+
+44543853 filtered reads (regions and quality) out of 71422777 have mapped for Tcm_05_L4_OBIWAN_314_pe (62%)
+ 3486277 filtered reads (regions and quality) out of  6227085 have mapped for Tcm_05_L4_OBIWAN_314_se (55%)
+
+47254955 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tcm_05_L6_OBIWAN_312 <==
+69224022 reads out of 71127927 have mapped for Tcm_05_L6_OBIWAN_312_pe (97%)
+ 6021955 reads out of  6197799 have mapped for Tcm_05_L6_OBIWAN_312_se (97%)
+
+44326274 filtered reads (regions and quality) out of 71127927 have mapped for Tcm_05_L6_OBIWAN_312_pe (62%)
+ 3502570 filtered reads (regions and quality) out of  6197799 have mapped for Tcm_05_L6_OBIWAN_312_se (56%)
+
+47165441 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_01_L2_OBIWAN_312 <==
+68933616 reads out of 69179989 have mapped for Tdi_01_L2_OBIWAN_312_pe (99%)
+ 4673809 reads out of  4713560 have mapped for Tdi_01_L2_OBIWAN_312_se (99%)
+
+52418004 filtered reads (regions and quality) out of 69179989 have mapped for Tdi_01_L2_OBIWAN_312_pe (75%)
+ 3158056 filtered reads (regions and quality) out of  4713560 have mapped for Tdi_01_L2_OBIWAN_312_se (66%)
+
+54059103 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_01_L4_OBIWAN_307 <==
+67899149 reads out of 68127370 have mapped for Tdi_01_L4_OBIWAN_307_pe (99%)
+ 6906320 reads out of  6961481 have mapped for Tdi_01_L4_OBIWAN_307_se (99%)
+
+51909694 filtered reads (regions and quality) out of 68127370 have mapped for Tdi_01_L4_OBIWAN_307_pe (76%)
+ 4648343 filtered reads (regions and quality) out of  6961481 have mapped for Tdi_01_L4_OBIWAN_307_se (66%)
+
+54904708 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_01_L7_OBIWAN_310 <==
+78931266 reads out of 79205044 have mapped for Tdi_01_L7_OBIWAN_310_pe (99%)
+ 5431547 reads out of  5476482 have mapped for Tdi_01_L7_OBIWAN_310_se (99%)
+
+60018777 filtered reads (regions and quality) out of 79205044 have mapped for Tdi_01_L7_OBIWAN_310_pe (75%)
+ 3662885 filtered reads (regions and quality) out of  5476482 have mapped for Tdi_01_L7_OBIWAN_310_se (66%)
+
+61693300 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_02_L2_OBIWAN_312 <==
+69463128 reads out of 69704297 have mapped for Tdi_02_L2_OBIWAN_312_pe (99%)
+ 4171827 reads out of  4209163 have mapped for Tdi_02_L2_OBIWAN_312_se (99%)
+
+52975641 filtered reads (regions and quality) out of 69704297 have mapped for Tdi_02_L2_OBIWAN_312_pe (76%)
+ 2868645 filtered reads (regions and quality) out of  4209163 have mapped for Tdi_02_L2_OBIWAN_312_se (68%)
+
+54873425 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_02_L4_OBIWAN_307 <==
+70242046 reads out of 70440101 have mapped for Tdi_02_L4_OBIWAN_307_pe (99%)
+ 6111333 reads out of  6172791 have mapped for Tdi_02_L4_OBIWAN_307_se (99%)
+
+53811305 filtered reads (regions and quality) out of 70440101 have mapped for Tdi_02_L4_OBIWAN_307_pe (76%)
+ 4161740 filtered reads (regions and quality) out of  6172791 have mapped for Tdi_02_L4_OBIWAN_307_se (67%)
+
+56869043 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_02_L7_OBIWAN_310 <==
+80469425 reads out of 80736432 have mapped for Tdi_02_L7_OBIWAN_310_pe (99%)
+ 4890934 reads out of  4934083 have mapped for Tdi_02_L7_OBIWAN_310_se (99%)
+
+61359296 filtered reads (regions and quality) out of 80736432 have mapped for Tdi_02_L7_OBIWAN_310_pe (75%)
+ 3349269 filtered reads (regions and quality) out of  4934083 have mapped for Tdi_02_L7_OBIWAN_310_se (67%)
+
+63415389 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_03_L2_OBIWAN_312 <==
+70549057 reads out of 72486384 have mapped for Tdi_03_L2_OBIWAN_312_pe (97%)
+ 4041815 reads out of  4157329 have mapped for Tdi_03_L2_OBIWAN_312_se (97%)
+
+49077629 filtered reads (regions and quality) out of 72486384 have mapped for Tdi_03_L2_OBIWAN_312_pe (67%)
+ 2521988 filtered reads (regions and quality) out of  4157329 have mapped for Tdi_03_L2_OBIWAN_312_se (60%)
+
+50882604 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_03_L4_OBIWAN_307 <==
+70878181 reads out of 72799774 have mapped for Tdi_03_L4_OBIWAN_307_pe (97%)
+ 5972971 reads out of  6150682 have mapped for Tdi_03_L4_OBIWAN_307_se (97%)
+
+49893129 filtered reads (regions and quality) out of 72799774 have mapped for Tdi_03_L4_OBIWAN_307_pe (68%)
+ 3620780 filtered reads (regions and quality) out of  6150682 have mapped for Tdi_03_L4_OBIWAN_307_se (58%)
+
+52701166 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_03_L7_OBIWAN_310 <==
+81230404 reads out of 83452787 have mapped for Tdi_03_L7_OBIWAN_310_pe (97%)
+ 4710500 reads out of  4843628 have mapped for Tdi_03_L7_OBIWAN_310_se (97%)
+
+56625248 filtered reads (regions and quality) out of 83452787 have mapped for Tdi_03_L7_OBIWAN_310_pe (67%)
+ 2929750 filtered reads (regions and quality) out of  4843628 have mapped for Tdi_03_L7_OBIWAN_310_se (60%)
+
+58620199 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_04_L2_OBIWAN_312 <==
+63377836 reads out of 65936362 have mapped for Tdi_04_L2_OBIWAN_312_pe (96%)
+ 3863136 reads out of  4000971 have mapped for Tdi_04_L2_OBIWAN_312_se (96%)
+
+46085452 filtered reads (regions and quality) out of 65936362 have mapped for Tdi_04_L2_OBIWAN_312_pe (69%)
+ 2526535 filtered reads (regions and quality) out of  4000971 have mapped for Tdi_04_L2_OBIWAN_312_se (63%)
+
+47951915 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_04_L4_OBIWAN_307 <==
+63430328 reads out of 66009651 have mapped for Tdi_04_L4_OBIWAN_307_pe (96%)
+ 5633432 reads out of  5851821 have mapped for Tdi_04_L4_OBIWAN_307_se (96%)
+
+46394203 filtered reads (regions and quality) out of 66009651 have mapped for Tdi_04_L4_OBIWAN_307_pe (70%)
+ 3622262 filtered reads (regions and quality) out of  5851821 have mapped for Tdi_04_L4_OBIWAN_307_se (61%)
+
+49290738 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_04_L7_OBIWAN_310 <==
+72914251 reads out of 75869486 have mapped for Tdi_04_L7_OBIWAN_310_pe (96%)
+ 4458685 reads out of  4617448 have mapped for Tdi_04_L7_OBIWAN_310_se (96%)
+
+53039656 filtered reads (regions and quality) out of 75869486 have mapped for Tdi_04_L7_OBIWAN_310_pe (69%)
+ 2891888 filtered reads (regions and quality) out of  4617448 have mapped for Tdi_04_L7_OBIWAN_310_se (62%)
+
+55091398 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_05_L2_OBIWAN_312 <==
+63458144 reads out of 70184099 have mapped for Tdi_05_L2_OBIWAN_312_pe (90%)
+ 4081360 reads out of  4436558 have mapped for Tdi_05_L2_OBIWAN_312_se (91%)
+
+44046128 filtered reads (regions and quality) out of 70184099 have mapped for Tdi_05_L2_OBIWAN_312_pe (62%)
+ 2541029 filtered reads (regions and quality) out of  4436558 have mapped for Tdi_05_L2_OBIWAN_312_se (57%)
+
+45997094 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_05_L4_OBIWAN_307 <==
+62883494 reads out of 69618294 have mapped for Tdi_05_L4_OBIWAN_307_pe (90%)
+ 6105316 reads out of  6657941 have mapped for Tdi_05_L4_OBIWAN_307_se (91%)
+
+44179679 filtered reads (regions and quality) out of 69618294 have mapped for Tdi_05_L4_OBIWAN_307_pe (63%)
+ 3700619 filtered reads (regions and quality) out of  6657941 have mapped for Tdi_05_L4_OBIWAN_307_se (55%)
+
+47241027 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tdi_05_L7_OBIWAN_310 <==
+72888444 reads out of 80625036 have mapped for Tdi_05_L7_OBIWAN_310_pe (90%)
+ 4743926 reads out of  5154713 have mapped for Tdi_05_L7_OBIWAN_310_se (92%)
+
+50697035 filtered reads (regions and quality) out of 80625036 have mapped for Tdi_05_L7_OBIWAN_310_pe (62%)
+ 2937622 filtered reads (regions and quality) out of  5154713 have mapped for Tdi_05_L7_OBIWAN_310_se (56%)
+
+52889116 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_01_L3_OBIWAN_310 <==
+65970426 reads out of 67250372 have mapped for Tge_01_L3_OBIWAN_310_pe (98%)
+ 4010702 reads out of  4132796 have mapped for Tge_01_L3_OBIWAN_310_se (97%)
+
+48460910 filtered reads (regions and quality) out of 67250372 have mapped for Tge_01_L3_OBIWAN_310_pe (72%)
+ 2732448 filtered reads (regions and quality) out of  4132796 have mapped for Tge_01_L3_OBIWAN_310_se (66%)
+
+50264080 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_01_L7_OBIWAN_314 <==
+67308307 reads out of 68571043 have mapped for Tge_01_L7_OBIWAN_314_pe (98%)
+ 4489796 reads out of  4640429 have mapped for Tge_01_L7_OBIWAN_314_se (96%)
+
+49517993 filtered reads (regions and quality) out of 68571043 have mapped for Tge_01_L7_OBIWAN_314_pe (72%)
+ 3055830 filtered reads (regions and quality) out of  4640429 have mapped for Tge_01_L7_OBIWAN_314_se (65%)
+
+51516097 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_01_L8_OBIWAN_307 <==
+59577302 reads out of 60642665 have mapped for Tge_01_L8_OBIWAN_307_pe (98%)
+ 4532798 reads out of  4692351 have mapped for Tge_01_L8_OBIWAN_307_se (96%)
+
+43817277 filtered reads (regions and quality) out of 60642665 have mapped for Tge_01_L8_OBIWAN_307_pe (72%)
+ 3084897 filtered reads (regions and quality) out of  4692351 have mapped for Tge_01_L8_OBIWAN_307_se (65%)
+
+46064673 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_02_L3_OBIWAN_310 <==
+82914568 reads out of 89560616 have mapped for Tge_02_L3_OBIWAN_310_pe (92%)
+ 5003004 reads out of  5570113 have mapped for Tge_02_L3_OBIWAN_310_se (89%)
+
+62227629 filtered reads (regions and quality) out of 89560616 have mapped for Tge_02_L3_OBIWAN_310_pe (69%)
+ 3458627 filtered reads (regions and quality) out of  5570113 have mapped for Tge_02_L3_OBIWAN_310_se (62%)
+
+64564066 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_02_L7_OBIWAN_314 <==
+84799497 reads out of 91328529 have mapped for Tge_02_L7_OBIWAN_314_pe (92%)
+ 5674893 reads out of  6408937 have mapped for Tge_02_L7_OBIWAN_314_se (88%)
+
+63728225 filtered reads (regions and quality) out of 91328529 have mapped for Tge_02_L7_OBIWAN_314_pe (69%)
+ 3910887 filtered reads (regions and quality) out of  6408937 have mapped for Tge_02_L7_OBIWAN_314_se (61%)
+
+66339229 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_02_L8_OBIWAN_307 <==
+75056451 reads out of 80516489 have mapped for Tge_02_L8_OBIWAN_307_pe (93%)
+ 5733009 reads out of  6528955 have mapped for Tge_02_L8_OBIWAN_307_se (87%)
+
+56464810 filtered reads (regions and quality) out of 80516489 have mapped for Tge_02_L8_OBIWAN_307_pe (70%)
+ 3933603 filtered reads (regions and quality) out of  6528955 have mapped for Tge_02_L8_OBIWAN_307_se (60%)
+
+59383927 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_03_L3_OBIWAN_310 <==
+79386800 reads out of 84696527 have mapped for Tge_03_L3_OBIWAN_310_pe (93%)
+ 4400213 reads out of  4802615 have mapped for Tge_03_L3_OBIWAN_310_se (91%)
+
+62546088 filtered reads (regions and quality) out of 84696527 have mapped for Tge_03_L3_OBIWAN_310_pe (73%)
+ 3282480 filtered reads (regions and quality) out of  4802615 have mapped for Tge_03_L3_OBIWAN_310_se (68%)
+
+65003287 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_03_L7_OBIWAN_314 <==
+81138047 reads out of 86390928 have mapped for Tge_03_L7_OBIWAN_314_pe (93%)
+ 4859516 reads out of  5352753 have mapped for Tge_03_L7_OBIWAN_314_se (90%)
+
+63988241 filtered reads (regions and quality) out of 86390928 have mapped for Tge_03_L7_OBIWAN_314_pe (74%)
+ 3619281 filtered reads (regions and quality) out of  5352753 have mapped for Tge_03_L7_OBIWAN_314_se (67%)
+
+66581741 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_03_L8_OBIWAN_307 <==
+72301095 reads out of 76750691 have mapped for Tge_03_L8_OBIWAN_307_pe (94%)
+ 4906018 reads out of  5444843 have mapped for Tge_03_L8_OBIWAN_307_se (90%)
+
+56973385 filtered reads (regions and quality) out of 76750691 have mapped for Tge_03_L8_OBIWAN_307_pe (74%)
+ 3663205 filtered reads (regions and quality) out of  5444843 have mapped for Tge_03_L8_OBIWAN_307_se (67%)
+
+59891535 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_04_L3_OBIWAN_310 <==
+64125694 reads out of 65678827 have mapped for Tge_04_L3_OBIWAN_310_pe (97%)
+ 3761294 reads out of  3892188 have mapped for Tge_04_L3_OBIWAN_310_se (96%)
+
+49858385 filtered reads (regions and quality) out of 65678827 have mapped for Tge_04_L3_OBIWAN_310_pe (75%)
+ 2762882 filtered reads (regions and quality) out of  3892188 have mapped for Tge_04_L3_OBIWAN_310_se (70%)
+
+51961609 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_04_L7_OBIWAN_314 <==
+65336903 reads out of 66878944 have mapped for Tge_04_L7_OBIWAN_314_pe (97%)
+ 4154664 reads out of  4309951 have mapped for Tge_04_L7_OBIWAN_314_se (96%)
+
+50865857 filtered reads (regions and quality) out of 66878944 have mapped for Tge_04_L7_OBIWAN_314_pe (76%)
+ 3043117 filtered reads (regions and quality) out of  4309951 have mapped for Tge_04_L7_OBIWAN_314_se (70%)
+
+53097173 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_04_L8_OBIWAN_307 <==
+58306448 reads out of 59634339 have mapped for Tge_04_L8_OBIWAN_307_pe (97%)
+ 4253089 reads out of  4421442 have mapped for Tge_04_L8_OBIWAN_307_se (96%)
+
+45360906 filtered reads (regions and quality) out of 59634339 have mapped for Tge_04_L8_OBIWAN_307_pe (76%)
+ 3118084 filtered reads (regions and quality) out of  4421442 have mapped for Tge_04_L8_OBIWAN_307_se (70%)
+
+47884832 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_05_L3_OBIWAN_310 <==
+77577320 reads out of 79857446 have mapped for Tge_05_L3_OBIWAN_310_pe (97%)
+ 4667898 reads out of  4881366 have mapped for Tge_05_L3_OBIWAN_310_se (95%)
+
+57086759 filtered reads (regions and quality) out of 79857446 have mapped for Tge_05_L3_OBIWAN_310_pe (71%)
+ 3176971 filtered reads (regions and quality) out of  4881366 have mapped for Tge_05_L3_OBIWAN_310_se (65%)
+
+59240105 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_05_L7_OBIWAN_314 <==
+79407718 reads out of 81643340 have mapped for Tge_05_L7_OBIWAN_314_pe (97%)
+ 5252483 reads out of  5523851 have mapped for Tge_05_L7_OBIWAN_314_se (95%)
+
+58513600 filtered reads (regions and quality) out of 81643340 have mapped for Tge_05_L7_OBIWAN_314_pe (71%)
+ 3565483 filtered reads (regions and quality) out of  5523851 have mapped for Tge_05_L7_OBIWAN_314_se (64%)
+
+60872807 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tge_05_L8_OBIWAN_307 <==
+70383946 reads out of 72244454 have mapped for Tge_05_L8_OBIWAN_307_pe (97%)
+ 5321315 reads out of  5617966 have mapped for Tge_05_L8_OBIWAN_307_se (94%)
+
+51885311 filtered reads (regions and quality) out of 72244454 have mapped for Tge_05_L8_OBIWAN_307_pe (71%)
+ 3596947 filtered reads (regions and quality) out of  5617966 have mapped for Tge_05_L8_OBIWAN_307_se (64%)
+
+54559402 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_01_L5_OBIWAN_310 <==
+70405128 reads out of 72820254 have mapped for Tms_01_L5_OBIWAN_310_pe (96%)
+ 4838351 reads out of  5150969 have mapped for Tms_01_L5_OBIWAN_310_se (93%)
+
+57459674 filtered reads (regions and quality) out of 72820254 have mapped for Tms_01_L5_OBIWAN_310_pe (78%)
+ 3688349 filtered reads (regions and quality) out of  5150969 have mapped for Tms_01_L5_OBIWAN_310_se (71%)
+
+60325131 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_01_L6_OBIWAN_314 <==
+70227051 reads out of 72608398 have mapped for Tms_01_L6_OBIWAN_314_pe (96%)
+ 5437181 reads out of  5775546 have mapped for Tms_01_L6_OBIWAN_314_se (94%)
+
+57384263 filtered reads (regions and quality) out of 72608398 have mapped for Tms_01_L6_OBIWAN_314_pe (79%)
+ 4136578 filtered reads (regions and quality) out of  5775546 have mapped for Tms_01_L6_OBIWAN_314_se (71%)
+
+60555123 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_01_L7_OBIWAN_307 <==
+62820769 reads out of 64917339 have mapped for Tms_01_L7_OBIWAN_307_pe (96%)
+ 5913325 reads out of  6275707 have mapped for Tms_01_L7_OBIWAN_307_se (94%)
+
+51314820 filtered reads (regions and quality) out of 64917339 have mapped for Tms_01_L7_OBIWAN_307_pe (79%)
+ 4499509 filtered reads (regions and quality) out of  6275707 have mapped for Tms_01_L7_OBIWAN_307_se (71%)
+
+55059937 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_02_L5_OBIWAN_310 <==
+76242731 reads out of 77269354 have mapped for Tms_02_L5_OBIWAN_310_pe (98%)
+ 5027130 reads out of  5214177 have mapped for Tms_02_L5_OBIWAN_310_se (96%)
+
+62055193 filtered reads (regions and quality) out of 77269354 have mapped for Tms_02_L5_OBIWAN_310_pe (80%)
+ 3822935 filtered reads (regions and quality) out of  5214177 have mapped for Tms_02_L5_OBIWAN_310_se (73%)
+
+64968435 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_02_L6_OBIWAN_314 <==
+75492954 reads out of 76485513 have mapped for Tms_02_L6_OBIWAN_314_pe (98%)
+ 5526590 reads out of  5728779 have mapped for Tms_02_L6_OBIWAN_314_se (96%)
+
+61533642 filtered reads (regions and quality) out of 76485513 have mapped for Tms_02_L6_OBIWAN_314_pe (80%)
+ 4191376 filtered reads (regions and quality) out of  5728779 have mapped for Tms_02_L6_OBIWAN_314_se (73%)
+
+64681345 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_02_L7_OBIWAN_307 <==
+68082648 reads out of 68944135 have mapped for Tms_02_L7_OBIWAN_307_pe (98%)
+ 6093055 reads out of  6312955 have mapped for Tms_02_L7_OBIWAN_307_se (96%)
+
+55475328 filtered reads (regions and quality) out of 68944135 have mapped for Tms_02_L7_OBIWAN_307_pe (80%)
+ 4624459 filtered reads (regions and quality) out of  6312955 have mapped for Tms_02_L7_OBIWAN_307_se (73%)
+
+59267280 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_03_L5_OBIWAN_310 <==
+76611477 reads out of 77549074 have mapped for Tms_03_L5_OBIWAN_310_pe (98%)
+ 5022440 reads out of  5230344 have mapped for Tms_03_L5_OBIWAN_310_se (96%)
+
+62532220 filtered reads (regions and quality) out of 77549074 have mapped for Tms_03_L5_OBIWAN_310_pe (80%)
+ 3829688 filtered reads (regions and quality) out of  5230344 have mapped for Tms_03_L5_OBIWAN_310_se (73%)
+
+65421032 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_03_L6_OBIWAN_314 <==
+85267874 reads out of 86273002 have mapped for Tms_03_L6_OBIWAN_314_pe (98%)
+ 6288548 reads out of  6545418 have mapped for Tms_03_L6_OBIWAN_314_se (96%)
+
+69679687 filtered reads (regions and quality) out of 86273002 have mapped for Tms_03_L6_OBIWAN_314_pe (80%)
+ 4783447 filtered reads (regions and quality) out of  6545418 have mapped for Tms_03_L6_OBIWAN_314_se (73%)
+
+73196621 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_03_L7_OBIWAN_307 <==
+68719139 reads out of 69491621 have mapped for Tms_03_L7_OBIWAN_307_pe (98%)
+ 6073005 reads out of  6316117 have mapped for Tms_03_L7_OBIWAN_307_se (96%)
+
+56154996 filtered reads (regions and quality) out of 69491621 have mapped for Tms_03_L7_OBIWAN_307_pe (80%)
+ 4621017 filtered reads (regions and quality) out of  6316117 have mapped for Tms_03_L7_OBIWAN_307_se (73%)
+
+59911890 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_04_L5_OBIWAN_310 <==
+99596505 reads out of 102105046 have mapped for Tms_04_L5_OBIWAN_310_pe (97%)
+ 7161731 reads out of   7480549 have mapped for Tms_04_L5_OBIWAN_310_se (95%)
+
+81343264 filtered reads (regions and quality) out of 102105046 have mapped for Tms_04_L5_OBIWAN_310_pe (79%)
+ 5502629 filtered reads (regions and quality) out of   7480549 have mapped for Tms_04_L5_OBIWAN_310_se (73%)
+
+85650198 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_04_L6_OBIWAN_314 <==
+92029735 reads out of 94255283 have mapped for Tms_04_L6_OBIWAN_314_pe (97%)
+ 7358838 reads out of  7701977 have mapped for Tms_04_L6_OBIWAN_314_se (95%)
+
+75263178 filtered reads (regions and quality) out of 94255283 have mapped for Tms_04_L6_OBIWAN_314_pe (79%)
+ 5637332 filtered reads (regions and quality) out of  7701977 have mapped for Tms_04_L6_OBIWAN_314_se (73%)
+
+79670305 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_04_L7_OBIWAN_307 <==
+88421569 reads out of 90383167 have mapped for Tms_04_L7_OBIWAN_307_pe (97%)
+ 8716774 reads out of  9148887 have mapped for Tms_04_L7_OBIWAN_307_se (95%)
+
+72232858 filtered reads (regions and quality) out of 90383167 have mapped for Tms_04_L7_OBIWAN_307_pe (79%)
+ 6688900 filtered reads (regions and quality) out of  9148887 have mapped for Tms_04_L7_OBIWAN_307_se (73%)
+
+77802978 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_05_L5_OBIWAN_310 <==
+88036802 reads out of 88725298 have mapped for Tms_05_L5_OBIWAN_310_pe (99%)
+ 5929382 reads out of  6240021 have mapped for Tms_05_L5_OBIWAN_310_se (95%)
+
+71310990 filtered reads (regions and quality) out of 88725298 have mapped for Tms_05_L5_OBIWAN_310_pe (80%)
+ 4514340 filtered reads (regions and quality) out of  6240021 have mapped for Tms_05_L5_OBIWAN_310_se (72%)
+
+74665730 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_05_L6_OBIWAN_314 <==
+88222511 reads out of 88872026 have mapped for Tms_05_L6_OBIWAN_314_pe (99%)
+ 6716200 reads out of  7046277 have mapped for Tms_05_L6_OBIWAN_314_se (95%)
+
+71518339 filtered reads (regions and quality) out of 88872026 have mapped for Tms_05_L6_OBIWAN_314_pe (80%)
+ 5096455 filtered reads (regions and quality) out of  7046277 have mapped for Tms_05_L6_OBIWAN_314_se (72%)
+
+75294554 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tms_05_L7_OBIWAN_307 <==
+78330376 reads out of 78854814 have mapped for Tms_05_L7_OBIWAN_307_pe (99%)
+ 7280661 reads out of  7626341 have mapped for Tms_05_L7_OBIWAN_307_se (95%)
+
+63483351 filtered reads (regions and quality) out of 78854814 have mapped for Tms_05_L7_OBIWAN_307_pe (80%)
+ 5525680 filtered reads (regions and quality) out of  7626341 have mapped for Tms_05_L7_OBIWAN_307_se (72%)
+
+67940119 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_01_L4_OBIWAN_310 <==
+70860534 reads out of 72986535 have mapped for Tpa_01_L4_OBIWAN_310_pe (97%)
+ 4875672 reads out of  5098934 have mapped for Tpa_01_L4_OBIWAN_310_se (95%)
+
+44615725 filtered reads (regions and quality) out of 72986535 have mapped for Tpa_01_L4_OBIWAN_310_pe (61%)
+ 2726254 filtered reads (regions and quality) out of  5098934 have mapped for Tpa_01_L4_OBIWAN_310_se (53%)
+
+46585039 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_01_L5_OBIWAN_307 <==
+62937570 reads out of 64804822 have mapped for Tpa_01_L5_OBIWAN_307_pe (97%)
+ 5851504 reads out of  6119061 have mapped for Tpa_01_L5_OBIWAN_307_se (95%)
+
+39859021 filtered reads (regions and quality) out of 64804822 have mapped for Tpa_01_L5_OBIWAN_307_pe (61%)
+ 3256130 filtered reads (regions and quality) out of  6119061 have mapped for Tpa_01_L5_OBIWAN_307_se (53%)
+
+42448386 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_01_L8_OBIWAN_314 <==
+73028206 reads out of 75204143 have mapped for Tpa_01_L8_OBIWAN_314_pe (97%)
+ 5450809 reads out of  5705260 have mapped for Tpa_01_L8_OBIWAN_314_se (95%)
+
+46112337 filtered reads (regions and quality) out of 75204143 have mapped for Tpa_01_L8_OBIWAN_314_pe (61%)
+ 3044713 filtered reads (regions and quality) out of  5705260 have mapped for Tpa_01_L8_OBIWAN_314_se (53%)
+
+48248934 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_02_L4_OBIWAN_310 <==
+74320182 reads out of 76338529 have mapped for Tpa_02_L4_OBIWAN_310_pe (97%)
+ 5556146 reads out of  5798524 have mapped for Tpa_02_L4_OBIWAN_310_se (95%)
+
+44360162 filtered reads (regions and quality) out of 76338529 have mapped for Tpa_02_L4_OBIWAN_310_pe (58%)
+ 2891749 filtered reads (regions and quality) out of  5798524 have mapped for Tpa_02_L4_OBIWAN_310_se (49%)
+
+46438113 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_02_L5_OBIWAN_307 <==
+65777777 reads out of 67524059 have mapped for Tpa_02_L5_OBIWAN_307_pe (97%)
+ 6654314 reads out of  6948523 have mapped for Tpa_02_L5_OBIWAN_307_se (95%)
+
+39581360 filtered reads (regions and quality) out of 67524059 have mapped for Tpa_02_L5_OBIWAN_307_pe (58%)
+ 3447099 filtered reads (regions and quality) out of  6948523 have mapped for Tpa_02_L5_OBIWAN_307_se (49%)
+
+42311028 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_02_L8_OBIWAN_314 <==
+75823197 reads out of 77862113 have mapped for Tpa_02_L8_OBIWAN_314_pe (97%)
+ 6174924 reads out of  6448463 have mapped for Tpa_02_L8_OBIWAN_314_se (95%)
+
+45430698 filtered reads (regions and quality) out of 77862113 have mapped for Tpa_02_L8_OBIWAN_314_pe (58%)
+ 3216098 filtered reads (regions and quality) out of  6448463 have mapped for Tpa_02_L8_OBIWAN_314_se (49%)
+
+47696180 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_03_L4_OBIWAN_310 <==
+71075619 reads out of 72813664 have mapped for Tpa_03_L4_OBIWAN_310_pe (97%)
+ 4668020 reads out of  4847219 have mapped for Tpa_03_L4_OBIWAN_310_se (96%)
+
+45334021 filtered reads (regions and quality) out of 72813664 have mapped for Tpa_03_L4_OBIWAN_310_pe (62%)
+ 2671563 filtered reads (regions and quality) out of  4847219 have mapped for Tpa_03_L4_OBIWAN_310_se (55%)
+
+47327279 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_03_L5_OBIWAN_307 <==
+63552084 reads out of 65090787 have mapped for Tpa_03_L5_OBIWAN_307_pe (97%)
+ 5561730 reads out of  5773424 have mapped for Tpa_03_L5_OBIWAN_307_se (96%)
+
+40717514 filtered reads (regions and quality) out of 65090787 have mapped for Tpa_03_L5_OBIWAN_307_pe (62%)
+ 3178594 filtered reads (regions and quality) out of  5773424 have mapped for Tpa_03_L5_OBIWAN_307_se (55%)
+
+43285995 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_03_L8_OBIWAN_314 <==
+73144400 reads out of 74925207 have mapped for Tpa_03_L8_OBIWAN_314_pe (97%)
+ 5276538 reads out of  5480497 have mapped for Tpa_03_L8_OBIWAN_314_se (96%)
+
+46747714 filtered reads (regions and quality) out of 74925207 have mapped for Tpa_03_L8_OBIWAN_314_pe (62%)
+ 3019265 filtered reads (regions and quality) out of  5480497 have mapped for Tpa_03_L8_OBIWAN_314_se (55%)
+
+48937811 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_04_L4_OBIWAN_310 <==
+69010385 reads out of 72100760 have mapped for Tpa_04_L4_OBIWAN_310_pe (95%)
+ 4380857 reads out of  4695284 have mapped for Tpa_04_L4_OBIWAN_310_se (93%)
+
+41326677 filtered reads (regions and quality) out of 72100760 have mapped for Tpa_04_L4_OBIWAN_310_pe (57%)
+ 2241544 filtered reads (regions and quality) out of  4695284 have mapped for Tpa_04_L4_OBIWAN_310_se (47%)
+
+42723258 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_04_L5_OBIWAN_307 <==
+61882030 reads out of 64586982 have mapped for Tpa_04_L5_OBIWAN_307_pe (95%)
+ 5170045 reads out of  5549109 have mapped for Tpa_04_L5_OBIWAN_307_se (93%)
+
+37331914 filtered reads (regions and quality) out of 64586982 have mapped for Tpa_04_L5_OBIWAN_307_pe (57%)
+ 2632884 filtered reads (regions and quality) out of  5549109 have mapped for Tpa_04_L5_OBIWAN_307_se (47%)
+
+39221754 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_04_L8_OBIWAN_314 <==
+72369963 reads out of 75577119 have mapped for Tpa_04_L8_OBIWAN_314_pe (95%)
+ 4976250 reads out of  5340228 have mapped for Tpa_04_L8_OBIWAN_314_se (93%)
+
+43532662 filtered reads (regions and quality) out of 75577119 have mapped for Tpa_04_L8_OBIWAN_314_pe (57%)
+ 2554027 filtered reads (regions and quality) out of  5340228 have mapped for Tpa_04_L8_OBIWAN_314_se (47%)
+
+45064295 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_05_L4_OBIWAN_310 <==
+115694844 reads out of 119495909 have mapped for Tpa_05_L4_OBIWAN_310_pe (96%)
+  8520003 reads out of   8983827 have mapped for Tpa_05_L4_OBIWAN_310_se (94%)
+
+66027122 filtered reads (regions and quality) out of 119495909 have mapped for Tpa_05_L4_OBIWAN_310_pe (55%)
+ 4152291 filtered reads (regions and quality) out of   8983827 have mapped for Tpa_05_L4_OBIWAN_310_se (46%)
+
+67782655 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_05_L5_OBIWAN_307 <==
+100738602 reads out of 103877832 have mapped for Tpa_05_L5_OBIWAN_307_pe (96%)
+ 10566713 reads out of  11182048 have mapped for Tpa_05_L5_OBIWAN_307_se (94%)
+
+58145069 filtered reads (regions and quality) out of 103877832 have mapped for Tpa_05_L5_OBIWAN_307_pe (55%)
+ 5088265 filtered reads (regions and quality) out of  11182048 have mapped for Tpa_05_L5_OBIWAN_307_se (45%)
+
+61170013 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tpa_05_L8_OBIWAN_314 <==
+119223564 reads out of 123073551 have mapped for Tpa_05_L8_OBIWAN_314_pe (96%)
+  9724043 reads out of  10272243 have mapped for Tpa_05_L8_OBIWAN_314_se (94%)
+
+68363131 filtered reads (regions and quality) out of 123073551 have mapped for Tpa_05_L8_OBIWAN_314_pe (55%)
+ 4744083 filtered reads (regions and quality) out of  10272243 have mapped for Tpa_05_L8_OBIWAN_314_se (46%)
+
+70376413 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_01_L3_OBIWAN_307 <==
+77941024 reads out of 81854945 have mapped for Tps_01_L3_OBIWAN_307_pe (95%)
+ 7298723 reads out of  8323157 have mapped for Tps_01_L3_OBIWAN_307_se (87%)
+
+51644261 filtered reads (regions and quality) out of 81854945 have mapped for Tps_01_L3_OBIWAN_307_pe (63%)
+ 4286741 filtered reads (regions and quality) out of  8323157 have mapped for Tps_01_L3_OBIWAN_307_se (51%)
+
+54625528 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_01_L3_OBIWAN_312 <==
+80125258 reads out of 85490620 have mapped for Tps_01_L3_OBIWAN_312_pe (93%)
+ 5230145 reads out of  5750671 have mapped for Tps_01_L3_OBIWAN_312_se (90%)
+
+52812116 filtered reads (regions and quality) out of 85490620 have mapped for Tps_01_L3_OBIWAN_312_pe (61%)
+ 3079207 filtered reads (regions and quality) out of  5750671 have mapped for Tps_01_L3_OBIWAN_312_se (53%)
+
+54657479 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_01_L8_OBIWAN_310 <==
+89765355 reads out of 95279529 have mapped for Tps_01_L8_OBIWAN_310_pe (94%)
+ 5850075 reads out of  6426298 have mapped for Tps_01_L8_OBIWAN_310_se (91%)
+
+59178153 filtered reads (regions and quality) out of 95279529 have mapped for Tps_01_L8_OBIWAN_310_pe (62%)
+ 3426001 filtered reads (regions and quality) out of  6426298 have mapped for Tps_01_L8_OBIWAN_310_se (53%)
+
+61073596 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_02_L3_OBIWAN_307 <==
+65849485 reads out of 66184894 have mapped for Tps_02_L3_OBIWAN_307_pe (99%)
+ 6531469 reads out of  6613858 have mapped for Tps_02_L3_OBIWAN_307_se (98%)
+
+43635281 filtered reads (regions and quality) out of 66184894 have mapped for Tps_02_L3_OBIWAN_307_pe (65%)
+ 3812329 filtered reads (regions and quality) out of  6613858 have mapped for Tps_02_L3_OBIWAN_307_se (57%)
+
+46656557 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_02_L3_OBIWAN_312 <==
+65864280 reads out of 66228014 have mapped for Tps_02_L3_OBIWAN_312_pe (99%)
+ 4604108 reads out of  4666520 have mapped for Tps_02_L3_OBIWAN_312_se (98%)
+
+43431540 filtered reads (regions and quality) out of 66228014 have mapped for Tps_02_L3_OBIWAN_312_pe (65%)
+ 2696087 filtered reads (regions and quality) out of  4666520 have mapped for Tps_02_L3_OBIWAN_312_se (57%)
+
+45416306 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_02_L8_OBIWAN_310 <==
+75378352 reads out of 75778098 have mapped for Tps_02_L8_OBIWAN_310_pe (99%)
+ 5236071 reads out of  5304747 have mapped for Tps_02_L8_OBIWAN_310_se (98%)
+
+49733822 filtered reads (regions and quality) out of 75778098 have mapped for Tps_02_L8_OBIWAN_310_pe (65%)
+ 3038681 filtered reads (regions and quality) out of  5304747 have mapped for Tps_02_L8_OBIWAN_310_se (57%)
+
+51867292 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_03_L3_OBIWAN_307 <==
+82941895 reads out of 83392607 have mapped for Tps_03_L3_OBIWAN_307_pe (99%)
+ 8519262 reads out of  8630955 have mapped for Tps_03_L3_OBIWAN_307_se (98%)
+
+55336788 filtered reads (regions and quality) out of 83392607 have mapped for Tps_03_L3_OBIWAN_307_pe (66%)
+ 5006523 filtered reads (regions and quality) out of  8630955 have mapped for Tps_03_L3_OBIWAN_307_se (58%)
+
+59549518 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_03_L3_OBIWAN_312 <==
+82988068 reads out of 83476727 have mapped for Tps_03_L3_OBIWAN_312_pe (99%)
+ 5972583 reads out of  6055539 have mapped for Tps_03_L3_OBIWAN_312_se (98%)
+
+55150345 filtered reads (regions and quality) out of 83476727 have mapped for Tps_03_L3_OBIWAN_312_pe (66%)
+ 3495563 filtered reads (regions and quality) out of  6055539 have mapped for Tps_03_L3_OBIWAN_312_se (57%)
+
+57935323 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_03_L8_OBIWAN_310 <==
+95329348 reads out of 95869175 have mapped for Tps_03_L8_OBIWAN_310_pe (99%)
+ 6828632 reads out of  6919508 have mapped for Tps_03_L8_OBIWAN_310_se (98%)
+
+63357154 filtered reads (regions and quality) out of 95869175 have mapped for Tps_03_L8_OBIWAN_310_pe (66%)
+ 3973712 filtered reads (regions and quality) out of  6919508 have mapped for Tps_03_L8_OBIWAN_310_se (57%)
+
+66449608 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_04_L3_OBIWAN_307 <==
+64602994 reads out of 70415045 have mapped for Tps_04_L3_OBIWAN_307_pe (91%)
+ 7632437 reads out of  8297361 have mapped for Tps_04_L3_OBIWAN_307_se (91%)
+
+39280487 filtered reads (regions and quality) out of 70415045 have mapped for Tps_04_L3_OBIWAN_307_pe (55%)
+ 3920769 filtered reads (regions and quality) out of  8297361 have mapped for Tps_04_L3_OBIWAN_307_se (47%)
+
+41663099 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_04_L3_OBIWAN_312 <==
+66598030 reads out of 72677640 have mapped for Tps_04_L3_OBIWAN_312_pe (91%)
+ 5466320 reads out of  5924435 have mapped for Tps_04_L3_OBIWAN_312_se (92%)
+
+40289908 filtered reads (regions and quality) out of 72677640 have mapped for Tps_04_L3_OBIWAN_312_pe (55%)
+ 2813371 filtered reads (regions and quality) out of  5924435 have mapped for Tps_04_L3_OBIWAN_312_se (47%)
+
+41633045 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_04_L8_OBIWAN_310 <==
+75291786 reads out of 82110304 have mapped for Tps_04_L8_OBIWAN_310_pe (91%)
+ 6207360 reads out of  6718812 have mapped for Tps_04_L8_OBIWAN_310_se (92%)
+
+45547410 filtered reads (regions and quality) out of 82110304 have mapped for Tps_04_L8_OBIWAN_310_pe (55%)
+ 3146561 filtered reads (regions and quality) out of  6718812 have mapped for Tps_04_L8_OBIWAN_310_se (46%)
+
+46857375 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_05_L3_OBIWAN_307 <==
+74344546 reads out of 76829032 have mapped for Tps_05_L3_OBIWAN_307_pe (96%)
+ 8231999 reads out of  8596717 have mapped for Tps_05_L3_OBIWAN_307_se (95%)
+
+43170056 filtered reads (regions and quality) out of 76829032 have mapped for Tps_05_L3_OBIWAN_307_pe (56%)
+ 4102925 filtered reads (regions and quality) out of  8596717 have mapped for Tps_05_L3_OBIWAN_307_se (47%)
+
+45090140 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_05_L3_OBIWAN_312 <==
+76432651 reads out of 79126751 have mapped for Tps_05_L3_OBIWAN_312_pe (96%)
+ 5868468 reads out of  6115939 have mapped for Tps_05_L3_OBIWAN_312_se (95%)
+
+44196437 filtered reads (regions and quality) out of 79126751 have mapped for Tps_05_L3_OBIWAN_312_pe (55%)
+ 2928053 filtered reads (regions and quality) out of  6115939 have mapped for Tps_05_L3_OBIWAN_312_se (47%)
+
+45044317 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tps_05_L8_OBIWAN_310 <==
+86270672 reads out of 89247899 have mapped for Tps_05_L8_OBIWAN_310_pe (96%)
+ 6680338 reads out of  6957179 have mapped for Tps_05_L8_OBIWAN_310_se (96%)
+
+49823345 filtered reads (regions and quality) out of 89247899 have mapped for Tps_05_L8_OBIWAN_310_pe (55%)
+ 3303491 filtered reads (regions and quality) out of  6957179 have mapped for Tps_05_L8_OBIWAN_310_se (47%)
+
+50530970 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_01_L1_OBIWAN_312 <==
+59318858 reads out of 61422111 have mapped for Tsi_01_L1_OBIWAN_312_pe (96%)
+ 4126534 reads out of  4317885 have mapped for Tsi_01_L1_OBIWAN_312_se (95%)
+
+35981439 filtered reads (regions and quality) out of 61422111 have mapped for Tsi_01_L1_OBIWAN_312_pe (58%)
+ 2231392 filtered reads (regions and quality) out of  4317885 have mapped for Tsi_01_L1_OBIWAN_312_se (51%)
+
+34824819 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_01_L6_OBIWAN_307 <==
+59095098 reads out of 61083745 have mapped for Tsi_01_L6_OBIWAN_307_pe (96%)
+ 5843777 reads out of  6120403 have mapped for Tsi_01_L6_OBIWAN_307_se (95%)
+
+35834906 filtered reads (regions and quality) out of 61083745 have mapped for Tsi_01_L6_OBIWAN_307_pe (58%)
+ 3137655 filtered reads (regions and quality) out of  6120403 have mapped for Tsi_01_L6_OBIWAN_307_se (51%)
+
+35274032 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_01_L6_OBIWAN_310 <==
+69380457 reads out of 71771838 have mapped for Tsi_01_L6_OBIWAN_310_pe (96%)
+ 5315567 reads out of  5555074 have mapped for Tsi_01_L6_OBIWAN_310_se (95%)
+
+42037896 filtered reads (regions and quality) out of 71771838 have mapped for Tsi_01_L6_OBIWAN_310_pe (58%)
+ 2852304 filtered reads (regions and quality) out of  5555074 have mapped for Tsi_01_L6_OBIWAN_310_se (51%)
+
+40246956 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_02_L1_OBIWAN_312 <==
+60928413 reads out of 61381477 have mapped for Tsi_02_L1_OBIWAN_312_pe (99%)
+ 4772044 reads out of  4866334 have mapped for Tsi_02_L1_OBIWAN_312_se (98%)
+
+38673036 filtered reads (regions and quality) out of 61381477 have mapped for Tsi_02_L1_OBIWAN_312_pe (63%)
+ 2563069 filtered reads (regions and quality) out of  4866334 have mapped for Tsi_02_L1_OBIWAN_312_se (52%)
+
+37843026 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_02_L6_OBIWAN_307 <==
+59078786 reads out of 59462177 have mapped for Tsi_02_L6_OBIWAN_307_pe (99%)
+ 6913831 reads out of  7046851 have mapped for Tsi_02_L6_OBIWAN_307_se (98%)
+
+37587111 filtered reads (regions and quality) out of 59462177 have mapped for Tsi_02_L6_OBIWAN_307_pe (63%)
+ 3714982 filtered reads (regions and quality) out of  7046851 have mapped for Tsi_02_L6_OBIWAN_307_se (52%)
+
+37712454 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_02_L6_OBIWAN_310 <==
+70074638 reads out of 70559784 have mapped for Tsi_02_L6_OBIWAN_310_pe (99%)
+ 6163877 reads out of  6279210 have mapped for Tsi_02_L6_OBIWAN_310_se (98%)
+
+44460444 filtered reads (regions and quality) out of 70559784 have mapped for Tsi_02_L6_OBIWAN_310_pe (63%)
+ 3299571 filtered reads (regions and quality) out of  6279210 have mapped for Tsi_02_L6_OBIWAN_310_se (52%)
+
+43289097 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_03_L1_OBIWAN_312 <==
+71679952 reads out of 76261391 have mapped for Tsi_03_L1_OBIWAN_312_pe (93%)
+ 4623254 reads out of  4940161 have mapped for Tsi_03_L1_OBIWAN_312_se (93%)
+
+51241129 filtered reads (regions and quality) out of 76261391 have mapped for Tsi_03_L1_OBIWAN_312_pe (67%)
+ 2909291 filtered reads (regions and quality) out of  4940161 have mapped for Tsi_03_L1_OBIWAN_312_se (58%)
+
+52472474 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_03_L6_OBIWAN_307 <==
+72577762 reads out of 76877716 have mapped for Tsi_03_L6_OBIWAN_307_pe (94%)
+ 6688112 reads out of  7212657 have mapped for Tsi_03_L6_OBIWAN_307_se (92%)
+
+52075752 filtered reads (regions and quality) out of 76877716 have mapped for Tsi_03_L6_OBIWAN_307_pe (67%)
+ 4204320 filtered reads (regions and quality) out of  7212657 have mapped for Tsi_03_L6_OBIWAN_307_se (58%)
+
+54379584 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_03_L6_OBIWAN_310 <==
+84916788 reads out of 90139255 have mapped for Tsi_03_L6_OBIWAN_310_pe (94%)
+ 6038493 reads out of  6455087 have mapped for Tsi_03_L6_OBIWAN_310_se (93%)
+
+60794662 filtered reads (regions and quality) out of 90139255 have mapped for Tsi_03_L6_OBIWAN_310_pe (67%)
+ 3790405 filtered reads (regions and quality) out of  6455087 have mapped for Tsi_03_L6_OBIWAN_310_se (58%)
+
+62220656 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_04_L1_OBIWAN_312 <==
+68332954 reads out of 70497358 have mapped for Tsi_04_L1_OBIWAN_312_pe (96%)
+ 3868078 reads out of  3968532 have mapped for Tsi_04_L1_OBIWAN_312_se (97%)
+
+51516986 filtered reads (regions and quality) out of 70497358 have mapped for Tsi_04_L1_OBIWAN_312_pe (73%)
+ 2691506 filtered reads (regions and quality) out of  3968532 have mapped for Tsi_04_L1_OBIWAN_312_se (67%)
+
+53326808 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_04_L6_OBIWAN_307 <==
+69500674 reads out of 71713091 have mapped for Tsi_04_L6_OBIWAN_307_pe (96%)
+ 5511796 reads out of  5661273 have mapped for Tsi_04_L6_OBIWAN_307_se (97%)
+
+52518237 filtered reads (regions and quality) out of 71713091 have mapped for Tsi_04_L6_OBIWAN_307_pe (73%)
+ 3824370 filtered reads (regions and quality) out of  5661273 have mapped for Tsi_04_L6_OBIWAN_307_se (67%)
+
+55340098 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_04_L6_OBIWAN_310 <==
+80967599 reads out of 83541205 have mapped for Tsi_04_L6_OBIWAN_310_pe (96%)
+ 4983868 reads out of  5113099 have mapped for Tsi_04_L6_OBIWAN_310_se (97%)
+
+61112066 filtered reads (regions and quality) out of 83541205 have mapped for Tsi_04_L6_OBIWAN_310_pe (73%)
+ 3465131 filtered reads (regions and quality) out of  5113099 have mapped for Tsi_04_L6_OBIWAN_310_se (67%)
+
+63348454 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_05_L1_OBIWAN_312 <==
+83031422 reads out of 83259022 have mapped for Tsi_05_L1_OBIWAN_312_pe (99%)
+ 4852472 reads out of  4890575 have mapped for Tsi_05_L1_OBIWAN_312_se (99%)
+
+61958698 filtered reads (regions and quality) out of 83259022 have mapped for Tsi_05_L1_OBIWAN_312_pe (74%)
+ 3323991 filtered reads (regions and quality) out of  4890575 have mapped for Tsi_05_L1_OBIWAN_312_se (67%)
+
+64254218 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_05_L6_OBIWAN_307 <==
+85091188 reads out of 85304970 have mapped for Tsi_05_L6_OBIWAN_307_pe (99%)
+ 7062092 reads out of  7117031 have mapped for Tsi_05_L6_OBIWAN_307_se (99%)
+
+63592117 filtered reads (regions and quality) out of 85304970 have mapped for Tsi_05_L6_OBIWAN_307_pe (74%)
+ 4833046 filtered reads (regions and quality) out of  7117031 have mapped for Tsi_05_L6_OBIWAN_307_se (67%)
+
+67236349 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tsi_05_L6_OBIWAN_310 <==
+98891539 reads out of 99145284 have mapped for Tsi_05_L6_OBIWAN_310_pe (99%)
+ 6396116 reads out of  6442753 have mapped for Tsi_05_L6_OBIWAN_310_se (99%)
+
+73809184 filtered reads (regions and quality) out of 99145284 have mapped for Tsi_05_L6_OBIWAN_310_pe (74%)
+ 4388305 filtered reads (regions and quality) out of  6442753 have mapped for Tsi_05_L6_OBIWAN_310_se (68%)
+
+76769363 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_01_L1_OBIWAN_314 <==
+40614226 reads out of 74520458 have mapped for Tte_01_L1_OBIWAN_314_pe (54%)
+ 3200477 reads out of  6969247 have mapped for Tte_01_L1_OBIWAN_314_se (45%)
+
+32324667 filtered reads (regions and quality) out of 74520458 have mapped for Tte_01_L1_OBIWAN_314_pe (43%)
+ 2341761 filtered reads (regions and quality) out of  6969247 have mapped for Tte_01_L1_OBIWAN_314_se (33%)
+
+34111547 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_01_L3_OBIWAN_309 <==
+36800533 reads out of 69418747 have mapped for Tte_01_L3_OBIWAN_309_pe (53%)
+ 2486143 reads out of  5320707 have mapped for Tte_01_L3_OBIWAN_309_se (46%)
+
+29214104 filtered reads (regions and quality) out of 69418747 have mapped for Tte_01_L3_OBIWAN_309_pe (42%)
+ 1808768 filtered reads (regions and quality) out of  5320707 have mapped for Tte_01_L3_OBIWAN_309_se (33%)
+
+30618448 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_01_L5_OBIWAN_314 <==
+40828358 reads out of 74114792 have mapped for Tte_01_L5_OBIWAN_314_pe (55%)
+ 3265194 reads out of  7231944 have mapped for Tte_01_L5_OBIWAN_314_se (45%)
+
+32487580 filtered reads (regions and quality) out of 74114792 have mapped for Tte_01_L5_OBIWAN_314_pe (43%)
+ 2392272 filtered reads (regions and quality) out of  7231944 have mapped for Tte_01_L5_OBIWAN_314_se (33%)
+
+34320175 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_02_L1_OBIWAN_314 <==
+66649993 reads out of 79452358 have mapped for Tte_02_L1_OBIWAN_314_pe (83%)
+ 6077619 reads out of  7538461 have mapped for Tte_02_L1_OBIWAN_314_se (80%)
+
+52891887 filtered reads (regions and quality) out of 79452358 have mapped for Tte_02_L1_OBIWAN_314_pe (66%)
+ 4331559 filtered reads (regions and quality) out of  7538461 have mapped for Tte_02_L1_OBIWAN_314_se (57%)
+
+56305997 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_02_L3_OBIWAN_309 <==
+61792916 reads out of 74166193 have mapped for Tte_02_L3_OBIWAN_309_pe (83%)
+ 4813261 reads out of  5929335 have mapped for Tte_02_L3_OBIWAN_309_se (81%)
+
+48881038 filtered reads (regions and quality) out of 74166193 have mapped for Tte_02_L3_OBIWAN_309_pe (65%)
+ 3401046 filtered reads (regions and quality) out of  5929335 have mapped for Tte_02_L3_OBIWAN_309_se (57%)
+
+51576637 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_02_L5_OBIWAN_314 <==
+66938447 reads out of 79566722 have mapped for Tte_02_L5_OBIWAN_314_pe (84%)
+ 6226624 reads out of  7761066 have mapped for Tte_02_L5_OBIWAN_314_se (80%)
+
+53111369 filtered reads (regions and quality) out of 79566722 have mapped for Tte_02_L5_OBIWAN_314_pe (66%)
+ 4441252 filtered reads (regions and quality) out of  7761066 have mapped for Tte_02_L5_OBIWAN_314_se (57%)
+
+56628173 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_03_L1_OBIWAN_314 <==
+98624194 reads out of 100353841 have mapped for Tte_03_L1_OBIWAN_314_pe (98%)
+ 8943703 reads out of   9176431 have mapped for Tte_03_L1_OBIWAN_314_se (97%)
+
+78855594 filtered reads (regions and quality) out of 100353841 have mapped for Tte_03_L1_OBIWAN_314_pe (78%)
+ 6529718 filtered reads (regions and quality) out of   9176431 have mapped for Tte_03_L1_OBIWAN_314_se (71%)
+
+83899850 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_03_L3_OBIWAN_309 <==
+90965997 reads out of 92645118 have mapped for Tte_03_L3_OBIWAN_309_pe (98%)
+ 6878199 reads out of  7056183 have mapped for Tte_03_L3_OBIWAN_309_se (97%)
+
+72594891 filtered reads (regions and quality) out of 92645118 have mapped for Tte_03_L3_OBIWAN_309_pe (78%)
+ 4981062 filtered reads (regions and quality) out of  7056183 have mapped for Tte_03_L3_OBIWAN_309_se (70%)
+
+76453397 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_03_L5_OBIWAN_314 <==
+99154840 reads out of 100864151 have mapped for Tte_03_L5_OBIWAN_314_pe (98%)
+ 9127039 reads out of   9371622 have mapped for Tte_03_L5_OBIWAN_314_se (97%)
+
+79265083 filtered reads (regions and quality) out of 100864151 have mapped for Tte_03_L5_OBIWAN_314_pe (78%)
+ 6671359 filtered reads (regions and quality) out of   9371622 have mapped for Tte_03_L5_OBIWAN_314_se (71%)
+
+84437208 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_04_L1_OBIWAN_314 <==
+57447619 reads out of 84374501 have mapped for Tte_04_L1_OBIWAN_314_pe (68%)
+ 5154921 reads out of  8744266 have mapped for Tte_04_L1_OBIWAN_314_se (58%)
+
+45625847 filtered reads (regions and quality) out of 84374501 have mapped for Tte_04_L1_OBIWAN_314_pe (54%)
+ 3691236 filtered reads (regions and quality) out of  8744266 have mapped for Tte_04_L1_OBIWAN_314_se (42%)
+
+48534497 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_04_L3_OBIWAN_309 <==
+53006427 reads out of 79691784 have mapped for Tte_04_L3_OBIWAN_309_pe (66%)
+ 4041359 reads out of  6787432 have mapped for Tte_04_L3_OBIWAN_309_se (59%)
+
+41974582 filtered reads (regions and quality) out of 79691784 have mapped for Tte_04_L3_OBIWAN_309_pe (52%)
+ 2870533 filtered reads (regions and quality) out of  6787432 have mapped for Tte_04_L3_OBIWAN_309_se (42%)
+
+44247179 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_04_L5_OBIWAN_314 <==
+57744051 reads out of 84135324 have mapped for Tte_04_L5_OBIWAN_314_pe (68%)
+ 5278587 reads out of  9066148 have mapped for Tte_04_L5_OBIWAN_314_se (58%)
+
+45848584 filtered reads (regions and quality) out of 84135324 have mapped for Tte_04_L5_OBIWAN_314_pe (54%)
+ 3782657 filtered reads (regions and quality) out of  9066148 have mapped for Tte_04_L5_OBIWAN_314_se (41%)
+
+48844082 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_05_L1_OBIWAN_314 <==
+87172972 reads out of 89670484 have mapped for Tte_05_L1_OBIWAN_314_pe (97%)
+ 7620836 reads out of  7777645 have mapped for Tte_05_L1_OBIWAN_314_se (97%)
+
+69796097 filtered reads (regions and quality) out of 89670484 have mapped for Tte_05_L1_OBIWAN_314_pe (77%)
+ 5590012 filtered reads (regions and quality) out of  7777645 have mapped for Tte_05_L1_OBIWAN_314_se (71%)
+
+74131509 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_05_L3_OBIWAN_309 <==
+81166079 reads out of 83403291 have mapped for Tte_05_L3_OBIWAN_309_pe (97%)
+ 6033067 reads out of  6150475 have mapped for Tte_05_L3_OBIWAN_309_se (98%)
+
+64853032 filtered reads (regions and quality) out of 83403291 have mapped for Tte_05_L3_OBIWAN_309_pe (77%)
+ 4387839 filtered reads (regions and quality) out of  6150475 have mapped for Tte_05_L3_OBIWAN_309_se (71%)
+
+68278047 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
+
+==> Tte_05_L5_OBIWAN_314 <==
+87910399 reads out of 90419139 have mapped for Tte_05_L5_OBIWAN_314_pe (97%)
+ 7842501 reads out of  8004653 have mapped for Tte_05_L5_OBIWAN_314_se (97%)
+
+70355301 filtered reads (regions and quality) out of 90419139 have mapped for Tte_05_L5_OBIWAN_314_pe (77%)
+ 5758535 filtered reads (regions and quality) out of  8004653 have mapped for Tte_05_L5_OBIWAN_314_se (71%)
+
+74836918 reads have mapped after all filters (p-e + s-e) !
+****************************************************************************
+
