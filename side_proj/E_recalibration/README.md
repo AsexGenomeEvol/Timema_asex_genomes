@@ -6,7 +6,7 @@
 ---------
 
 This step aims to detect systematic errors made by the sequencer when it estimates the quality score of each base call,
-and then readjust their values in the **bam** files. This process is accomplished by analyzing the covariation among several features of a base such as its **reported quality score**,**position within the read** and the effect of preceding and current nucleotide (**sequencing chemistry effect**)/
+and then readjust their values in the **bam** files. This process is accomplished by analyzing the covariation among several features of a base, mainly its *reported quality score*, its *position within the read* and the effect of preceding and current nucleotide (*sequencing chemistry effect*).
 
 #### Some links :
 https://software.broadinstitute.org/gatk/documentation/article.php?id=44
