@@ -7,7 +7,7 @@
 
 *10 species* x *5 individuals* x *multiple runs* (x *multiple fastq files*)
 
-Only the **OBIWAN** runs were used, as **WINDU** runs had troubles during the sequencing (apparently, only **R1** reads can be trusted). 
+Only the **OBIWAN** runs were used, as **WINDU** runs had troubles during the sequencing (apparently, only **R1** reads are reliable). 
 
 Each run has **R1**/**R2**/**R3** files (that can be split in multiple fastq files), where **R1** & **R2** contain paired-end reads and **R3** is identical to **R2** and was therefore not used in the analysis.
 
