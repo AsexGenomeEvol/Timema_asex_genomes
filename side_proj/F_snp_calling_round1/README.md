@@ -201,9 +201,9 @@ each line of the *filtering file* gives :
          * if sample cannot be tested (ie, all annotations missing or with null value) : 
            **FT** field gets the `x` failed tag.
          * if sample fails at least one test : **FT** field gets the `f` failed tag.
-         * if sample pass all tests (that can be tested) : **FT** field gets the `PASS` tag.
+         * if sample pass all tests (that can be performed) : **FT** field gets the `PASS` tag.
        
-         **note:** because some parameters are applied only at the sample-level (ex: minimum coverage), it might happen that a position that get the `PASS` tag at the pop-level, will then have no sample that are individually validated. However, we expect this case to be very rare as a validated variant at the pop-level should in theory benefit from at least one robust sample to back it up.
+         **note:** because some parameters are applied only at the sample-level (ex: genotype quality), it might happen that a position that get the `PASS` tag at the pop-level, will then have no sample that are individually validated. However, we expect this case to be very rare as a validated variant at the pop-level should in theory benefit from at least one robust sample to back it up.
      
 
 ## OUTPUT FINAL FILES :
