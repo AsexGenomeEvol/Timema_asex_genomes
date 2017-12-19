@@ -113,9 +113,11 @@ SOR > 3.0                      # Strand Odds Ration (another way to estimate str
 MQ < 55.0                      # Mapping Quality 
 MQRankSum < -1.0               # do read with ALT allele have a different mapping quality 
 ReadPosRankSum < -2.5          # are read positions for REF allele different than ALT allele
+
 # new thresholds (population level) :
 DP > 141                       # max total coverage (value differs among species!)
 DP < 10                        # min total coverage
+
 # new thresholds (sample level) : 
 DP < 10                        # min sample coverage
 GQ < 30                        # Genotype Quality (confidence in the sample genotype)
@@ -123,14 +125,15 @@ GQ < 30                        # Genotype Quality (confidence in the sample geno
 
 #### thresholds for indels :
 ````
-
 # previous thresholds (population level) :
 QD < 5.0
 FS > 25.0
 SOR > 3.5
 ReadPosRankSum < -2.5
+
 # new thresholds (population level) : 
 DP < 10                        # min total coverage
+
 # new thresholds (sample level) : 
 DP < 10                        # min sample coverage
 ````
