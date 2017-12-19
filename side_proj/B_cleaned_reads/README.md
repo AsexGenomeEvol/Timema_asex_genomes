@@ -37,5 +37,7 @@ Tdi_01_L2_OBIWAN_312.se.cleaned.fastq.gz
 
 #### Results:
 
-Around 10% of the reads are trimmed for each run, see detailed results [here](./trimmomatic.log) and final number of reads 
-per file [here](./number_reads.csv).
+* Around 10% of the reads are trimmed for each run, see detailed results [here](./trimmomatic.log) and final number of reads 
+per file [here](number_reads.csv).
+
+* **FastQC** reports (archive [here](timema_fastQC.html.tar.gz)) indicate very good quality of cleaned reads in general, but abnormal *GC*-content distributions, possibly due to contamination, were found in the runs of a few samples (aka: *Tsi_{01,02,03}* and *Tte_{01,04}*).
