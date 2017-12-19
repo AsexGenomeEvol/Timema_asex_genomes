@@ -232,7 +232,7 @@ each line of the *filtering file* gives :
 
 ***SNP density*** = *SNP PASS* (*number of validated SNPs*)  */*  *mono PASS* (*number of validated monomorphic sites*)
 
-**rem:** monomorphic sites were filtered using the same set of filters as SNPs in the **all positions** vcf* (in which indels and multiallelic positions were tagged `ambiguous` in the **FILTER** field), even if only min and max coverage thresholds are actually applied on these monomorphic positions. Indel filters were only used for the **indel** *vcf*.
+**rem:** monomorphic sites were filtered using the same set of filters as SNPs in the **all positions** *vcf* (in which indels and multiallelic positions were tagged `ambiguous` in the **FILTER** field), even if only minimum and maximum coverage thresholds are actually applied on these monomorphic positions. Indel filters were only used for the **indel** *vcf*.
 
 More details about the effects on the filtering of the different parameters for SNP positions [here](bilan_SNP_fail_stats) and for indels [here](bilan_indel_fail_stats).
 
