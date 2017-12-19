@@ -68,7 +68,7 @@ Despite the large file size produced (~25 Go), this is necessary to later calcul
 
 ### 3) extract SNPs and indels :
 
-Still, we create two additional vcf by extracting only SNP or indel positions (similarly to first round).
+Still, we create two additional **vcf** by extracting only SNP or indel positions (similarly to first round).
 ````
 # this time, we use 'GATK SelectVariants' instead of 'vcftools' for better running time.
 
@@ -100,7 +100,7 @@ java -jar GenomeAnalysisTK.jar \
 ````
 
 
-### 4) (visually) determine thresholds for hard filtering :
+### 4) determine (visually) thresholds for hard filtering :
 
 Distributions were very similar between the two rounds, therefore we did not change any threshold value for SNPs or indels, but we added new ones, see below :
 
