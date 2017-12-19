@@ -164,7 +164,7 @@ ReadPosRankSum < -2.5
 
 ![QD](plots/QD_snp.png)
 
-**note:** it is interesting to remark that while sexual species exhibit the expected distribution pattern for the **QD** parameter, asexual species (in *grey*, *black*, *blue*, *green* and *violet*) seem to have a different shape, mostly lacking the central pic (the pic on the left corresponding to errors).
+**note:** it is interesting to remark that while sexual species exhibit the expected distribution pattern for the **QD** parameter, asexual species (in *grey*, *black*, *blue*, *green* and *violet*) seem to have a different shape, mostly lacking the central pic (the pic on the very left corresponding to errors).
 
 ![FS](plots/FS_snp.png)
 ![SOR](plots/SOR_snp.png)
@@ -196,5 +196,5 @@ java -jar GenomeAnalysisTK.jar \
 1_Tdi.SNP_filter.vcf
 1_Tdi.indel_filter.vcf
 ````
-These first sets of variants will be used in the following **BQSR** step to mask their position (so that they are not mistaken for sequencing errors).
+These first sets of variants will be used in the following **BQSR** step (page [here](../E_recalibration)) to mask their position (so that they are not mistaken for sequencing errors).
 
