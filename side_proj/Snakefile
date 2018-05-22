@@ -1,7 +1,29 @@
-rule readme_base:
-    input:
-        "data/README.md",
-    output:
-        "readme_base"
-    shell:
-        "wc {input} > {output}"
+import re
+
+trimmed_reads = []
+
+with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
+	tab.readline()
+	for textline in tab :
+		line = textline.split()
+		#  following line just takes the first sample, because I am renalysing only this one
+		if line[2][-2:] == "01" :
+			trimmed_reads.append("data/" + line[1] + "/trimmed_reads/" + line[2])
+
+### if environmental variable USE_LOCAL contains anything, it will compute on /scratch/local
+cluster_script = os.environ.get("USE_LOCAL")
+if cluster_script == None :
+	cluster_script = ""
+else :
+	cluster_script = "scripts/use_local.sh "
+
+rule trim_all :
+	input :
+		expand(trimmed_reads)
+
+rule trim_reads :
+	threads : 16
+	resources : mem=80000000, tmp=150000
+	input : "A_mapping_and_preprocessing/Illumina-PE_adapters.fa", "data/{sp}/raw_reads/{sample}"
+	output : "data/{sp}/trimmed_reads/{sample}"
+	shell : cluster_script + "A_mapping_and_preprocessing/trim_reads.sh {wildcards.sp} {wildcards.sample} {input} {output}"
