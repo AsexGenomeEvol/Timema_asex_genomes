@@ -3,3 +3,4 @@ logs
 stats
 lists
 *.pdf
+.snakemake
