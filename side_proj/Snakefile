@@ -1,6 +1,7 @@
 import re
 
 trimmed_reads = []
+genomescope_outputs = []
 
 with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 	tab.readline()
@@ -9,6 +10,7 @@ with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 		#  following line just takes the first sample, because I am renalysing only this one
 		if line[2][-2:] == "01" :
 			trimmed_reads.append("data/" + line[1] + "/trimmed_reads/" + line[2])
+			genomescope_files.append("data/" + line[1] + "/genomescope/" + line[2])
 
 ### if environmental variable USE_LOCAL contains anything, it will compute on /scratch/local
 cluster_script = os.environ.get("USE_LOCAL")
@@ -21,9 +23,20 @@ rule trim_all :
 	input :
 		expand(trimmed_reads)
 
+rule genomescope_all :
+	input :
+		expand(genomescope_outputs)
+
 rule trim_reads :
 	threads : 16
 	resources : mem=80000000, tmp=150000
 	input : "A_mapping_and_preprocessing/Illumina-PE_adapters.fa", "data/{sp}/raw_reads/{sample}"
 	output : "data/{sp}/trimmed_reads/{sample}"
 	shell : cluster_script + "A_mapping_and_preprocessing/trim_reads.sh {wildcards.sp} {wildcards.sample} {input} {output}"
+
+rule genomescope :
+	threads : 16
+	resources : mem=64000000, tmp=100000
+	input : "data/{sp}/trimmed_reads/{sample}"
+	output : "data/{sp}/genomescope/{sample}"
+	shell : cluster_script + "B_variant_calling/genomescope.sh {input} {output}"
