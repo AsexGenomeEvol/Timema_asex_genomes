@@ -3,19 +3,16 @@ library(AsexStats)
 mites <- list()
               #   ASEX    SEX
 mites$labels <- c("1_On","1_Os",
-                 "2_As","2_Sm")
+                  "2_As","2_Sm")
 
-files <- c(
+ref_files <- c(
     'data/1_On/variant_calls/ref/atlas/ref_to_1_On_b1v01_w10000_theta_estimates.txt',
     'data/1_Os/variant_calls/ref/atlas/ref_to_1_Os_b1v01_w10000_theta_estimates.txt',
     'data/2_As/variant_calls/ref/atlas/ref_to_2_As_b1v01_w10000_theta_estimates.txt',
     'data/2_Sm/variant_calls/ref/atlas/ref_to_2_Sm_b1v01_w10000_theta_estimates_killed.txt')
-
-atlas_data <- list()
-for(i in 1:4){
-    atlas_data[[i]] <- read.table(files[i], header = T)
-}
-
+reseq_files <- sapply(mites$labels, function(x) { dir(paste0("data/", x), pattern = "theta_estimates.txt", full.names = T) })
+files <- as.vector(rbind(ref_files, reseq_files))
+atlas_data <- lapply(files, read.table, header = T)
 thetas <- lapply(atlas_data, function(x){filter_thetas(x, filt_cov = F, window_size = 9999)[,'theta_MLE']} )
 log_thetas <- lapply(thetas, log10)
 
@@ -69,13 +66,25 @@ get_stat <- function(input_list, stat_name, round_to = 4){
     round(unlist(lapply(input_list, function(x){ x[stat_name] })), round_to)
 }
 
-mite_summary <- data.frame(sp = mites$labels,
+mite_summary <- data.frame(mite = substr(files, 11, 13),
                            mean = get_stat(theta_summaries, 'Mean'),
                            st_quantile = get_stat(theta_summaries, '1st Qu.'),
                            median = get_stat(theta_summaries, 'Median'),
                            rd_quantile = get_stat(theta_summaries, '3rd Qu.'))
 write.table(mite_summary, 'stats/ref_theta_10k_summary.tsv',
             quote = F, sep = '\t', row.names = F)
+
+quartz(type = 'pdf', file = 'figures/mites_heterozygosity_mediabs.pdf')
+    bp_data <- matrix(mite_summary$median, ncol = 4)
+    bp_lq <- matrix(mite_summary$st_quantile, ncol = 4)
+    bp_uq <- matrix(mite_summary$rd_quantile, ncol = 4)
+    bp <- barplot(bp_data, names = mites$labels, ylab = 'median Heterozygosity',
+                  col = rep(c(asex_blue, sex_red), each = 6), beside = TRUE, ylim = c(0,1))
+
+    segments(bp, bp_data - bp_lq, bp, bp_data + bp_uq, lwd = 1.5)
+    arrows(bp, bp_data - bp_lq, bp, bp_data + bp_uq, lwd = 1.5, angle = 90,
+           code = 3, length = 0.05)
+dev.off()
 
 #### SEX SEX figures
 # dark_sex = "#C95048ED"
@@ -86,9 +95,12 @@ write.table(mite_summary, 'stats/ref_theta_10k_summary.tsv',
 
 ## Violiolin plots
 
-quartz(type = 'pdf', file = 'figures/mites_w10000_theta_violin.pdf')
+log_thetas <- lapply(log_thetas, function(x) x[!is.infinite(x)])
+log_thetas <- lapply(log_thetas, function(x) x[!is.na(x)])
+
+quartz(type = 'pdf', file = 'figures/all_mites_w10000_theta_violin.pdf')
 plot(x=NULL, y=NULL,
-     xlim = c(0.5, 2.5), ylim=c(min(unlist(log_thetas)), max(unlist(log_thetas))),
+     xlim = c(0.5, 2.5), ylim = range(log_thetas, na.rm = T, finite = T),
      type="n", ann=FALSE, axes=F, bty="n")
 axis(1, at=c(1:5), labels = F)
 text(c(1:5), par("usr")[3] - 0.2, srt = 0, pos = 1, xpd = TRUE,
@@ -96,11 +108,11 @@ text(c(1:5), par("usr")[3] - 0.2, srt = 0, pos = 1, xpd = TRUE,
 axis(2)
 mtext(theta_log_label, side = 2, line = +2, cex = 1.3)
 
-for(i in 1:4){
+for(i in 1:24){
     vioplot2(log_thetas[[i]],
-             at = ifelse(i %% 2 == 1, (i + 1) / 2, i / 2),
-             side = ifelse(i %% 2 == 1, "left", "right"),
-             col = ifelse(i %% 2 == 1, asex_blue, sex_red),
+             at = ceiling(1:24 / 12)[i],
+             side = ifelse(ceiling(1:24 / 6)[i] %% 2 == 1, "left", "right"),
+             col = ifelse(ceiling(1:24 / 6)[i] %% 2 == 1, asex_blue, sex_red),
              add = T, h = 0.2)
 }
 # sex_legend(cex = 1.3)
