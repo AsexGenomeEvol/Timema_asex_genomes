@@ -3,7 +3,7 @@
 # 1 a directory with input reads
 # 2 output dir data/{sp}/genomescope/{sample}
 
-FASTQS=$(ls $1)
+FASTQS=$(ls $1/*)
 OUTDIR=$2
 mkdir -p $OUTDIR
 
