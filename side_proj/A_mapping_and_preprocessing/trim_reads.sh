@@ -19,16 +19,18 @@ OUTPUT_DIR=$5
 
 R1_READS=$(ls $INPUT_DIR | grep "_R1_")
 
+mkdir $OUTPUT_DIR
+
 for r1 in $R1_READS; do
     r2=${r1/R1/R2} # get R2 reads by substituting R1 in the r1 name
     NAMEBASE=$(basename $r1 .fastq.gz | awk -F "_R1" '{print $1 $2}') # delete suffix and _R? from the read names
-    t_r1="$OUTPUT_DIR"/"$NAMEBASE"_R1.cleaned.fastq.gz # specify output name based on the input
-    t_r2="$OUTPUT_DIR"/"$NAMEBASE"_R2.cleaned.fastq.gz # naminch scheme taken from Emeric
-    np_r1="$OUTPUT_DIR"/"$NAMEBASE"_R1.se.cleaned.fastq.gz
-    np_r2="$OUTPUT_DIR"/"$NAMEBASE"_R2.se.cleaned.fastq.gz
+    t_r1="$NAMEBASE"_R1.cleaned.fastq.gz # specify output name based on the input
+    t_r2="$NAMEBASE"_R2.cleaned.fastq.gz # naminch scheme taken from Emeric
+    np_r1="$NAMEBASE"_R1.se.cleaned.fastq.gz
+    np_r2="$NAMEBASE"_R2.se.cleaned.fastq.gz
 
-    trimmomatic PE -threads 16 $r1 $r2 \
-        $t_r1 $np_r1 \
-        $t_r2 $np_r1 \
+    trimmomatic PE -threads 16 "$INPUT_DIR"/"$r1" "$INPUT_DIR"/"$r2" \
+        "$OUTPUT_DIR"/$t_r1 "$OUTPUT_DIR"/$np_r1 \
+        "$OUTPUT_DIR"/$t_r2 "$OUTPUT_DIR"/$np_r1 \
         ILLUMINACLIP:"$ADAPTERS":3:25:6 LEADING:9 TRAILING:9 SLIDINGWINDOW:4:15 MINLEN:96
 done
