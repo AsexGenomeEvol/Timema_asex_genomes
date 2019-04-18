@@ -4,9 +4,9 @@ A code that would download raw reds of one resequencing ind from our ftp server.
 
 ```{bash}
 for sp in $TIMEMAS; do
-    SAMPLES=$(grep $sp data/resequencing_samples | cut -f 1 -d " ")
+    SAMPLES=$(grep $sp A_mapping_and_preprocessing/resequencing_samples | cut -f 1 -d " ")
     smpl=$(echo $SAMPLES | cut -f 1 -d ' ')
-    ODIR=data/"$sp"/raw_reads/$(grep "$smpl" data/resequencing_samples | cut -f 3)
+    ODIR=data/"$sp"/raw_reads/$(grep "$smpl" A_mapping_and_preprocessing/resequencing_samples | cut -f 3)
     mkdir -p $ODIR
     wget ftp://ftpmrr.unil.ch/AsexGenomeEvol/timema/data/"$sp"/raw_reads/"$smpl"/* -P $ODIR
 done
