@@ -12,5 +12,17 @@ for sp in $TIMEMAS; do
 done
 ```
 
-Trimming should have an extra level of complexity, something that takes species and sample name and trim all the reads.
+Trimming was done in Montpellier, to sort out trimmed reads
 
+```{bash}
+for sp in $TIMEMAS; do
+    sp_name=$(echo $sp | cut -f 2 -d "_");
+    for order in 0{1,2,3,4,5}; do
+        sample="$sp_name"_"$order";
+        read_dir=data/"$sp"/trimmed_reads/"$sample";
+        mkdir -p "$read_dir";
+        mv data/reads_reseq_trimmed/"$sp"_"$order"_* $read_dir;
+    done;
+done
+
+```

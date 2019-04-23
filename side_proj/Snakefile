@@ -1,16 +1,24 @@
 import re
 
+timema = ['1_Tdi', '1_Tps',
+          '2_Tcm', '2_Tsi',
+          '3_Tce', '3_Tms',
+          '4_Tbi', '4_Tte',
+          '5_Tge', '5_Tpa']
+
 trimmed_reads = []
-genomescope_outputs = []
+# genomescope_files = []
+mapping_indices = []
 
 with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 	tab.readline()
 	for textline in tab :
 		line = textline.split()
 		#  following line just takes the first sample, because I am renalysing only this one
-		if line[2][-2:] == "01" :
-			trimmed_reads.append("data/" + line[1] + "/trimmed_reads/" + line[2])
-			genomescope_files.append("data/" + line[1] + "/genomescope/" + line[2])
+		# if line[2][-2:] == "01" :
+		# 	genomescope_files.append("data/" + line[1] + "/genomescope/" + line[2])
+		trimmed_reads.append("data/" + line[1] + "/trimmed_reads/" + line[2])
+		mapping_files.append("data/" + line[1] + "/mapping/" + line[2] + "_to_b3v08.bam.bai")
 
 ### if environmental variable USE_LOCAL contains anything, it will compute on /scratch/local
 cluster_script = os.environ.get("USE_LOCAL")
@@ -23,9 +31,13 @@ rule trim_all :
 	input :
 		expand(trimmed_reads)
 
-rule genomescope_all :
+# rule genomescope_all :
+# 	input :
+# 		expand(genomescope_outputs)
+
+rule map_all :
 	input :
-		expand(genomescope_outputs)
+		expand(mapping_indices)
 
 rule trim_reads :
 	threads : 16
@@ -34,9 +46,32 @@ rule trim_reads :
 	output : "data/{sp}/trimmed_reads/{sample}"
 	shell : cluster_script + "A_mapping_and_preprocessing/trim_reads.sh {wildcards.sp} {wildcards.sample} {input} {output}"
 
-rule genomescope :
+# genome profiling is done on the refence genomes
+# rule genomescope :
+# 	threads : 16
+# 	resources : mem=64000000, tmp=100000
+# 	input : "data/{sp}/trimmed_reads/{sample}"
+# 	output : "data/{sp}/genomescope/{sample}"
+# 	shell : cluster_script + "B_variant_calling/genomescope.sh {input} {output}"
+
+rule index_genome :
+	threads : 1
+	resources: mem=20000000, tmp=20000
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz"
+	output : "data/{sp}/reference/{sp}_b3v08.fasta.gz.bwt"
+	shell : cluster_script + "A_mapping_and_preprocessing/index_fa_bwa.sh {input} data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz."
+
+rule map_reads :
 	threads : 16
-	resources : mem=64000000, tmp=100000
-	input : "data/{sp}/trimmed_reads/{sample}"
-	output : "data/{sp}/genomescope/{sample}"
-	shell : cluster_script + "B_variant_calling/genomescope.sh {input} {output}"
+	resources : mem=104857600, tmp=60000
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz.bwt", "data/{sp}/trimmed_reads/{sample}"
+	output : "data/{sp}/mapping/{sample}_to_b3v08.bam"
+	shell :
+		cluster_script + "G_mapping/map_reads.sh {wildcards.sample} {wildcards.sp} data/{wildcards.sp}/trimmed_reads/{wildcards.sample}/*_R[12].cleaned.fastq.gz data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz.bwt.* {output}"
+
+rule index_bam :
+	threads : 1
+	resources : mem=20000000, tmp=10000
+	input : "data/{sp}/mapping/{sample}_to_b3v08.bam"
+	output : "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+	shell : cluster_script + "scripts/index_bam.sh {input} {output}"

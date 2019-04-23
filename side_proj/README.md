@@ -7,7 +7,6 @@ The analysis of variants of reference genomes were moved back to repository `tim
 
 #### Inference of variants
 
-- heterozygosity calls
 - SNP calling
 - SV calling
 
@@ -20,5 +19,16 @@ The analysis of variants of reference genomes were moved back to repository `tim
 
 #### Dependencies
 
-- [N_variant_calling](N_variant_calling) - `atlas`
-- [M_structural_variations](M_structural_variations) - `Delly` (0.7.6), `manta` (1.0.3)
+- [B_variant_calling](B_variant_calling) -
+- [E_structural_variation_calling](E_structural_variation_calling) - `Delly` (0.7.6), `manta` (1.0.3)
+
+
+-> you need to have genome reference that were build in the repository `timema_assembly`:
+
+```
+for sp in $TIMEMAS; do
+    ln -s /scratch/beegfs/monthly/kjaron/timema_assembly/data/$sp/reference /scratch/beegfs/monthly/kjaron/variant_analysis/data/$sp/reference;
+done
+```
+
+-> trimmed reads from Montpellier (check [A_mapping_and_preprocessing/README.md] for sorting them out)
