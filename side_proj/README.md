@@ -20,7 +20,7 @@ The analysis of variants of reference genomes were moved back to repository `tim
 #### Dependencies
 
 - [B_variant_calling](B_variant_calling) -
-- [E_structural_variation_calling](E_structural_variation_calling) - `Delly` (0.7.6), `manta` (1.0.3)
+- [E_structural_variation_calling](E_structural_variation_calling) - `Delly` (0.7.6), `manta` (1.5.0)
 
 
 -> you need to have genome reference that were build in the repository `timema_assembly`:

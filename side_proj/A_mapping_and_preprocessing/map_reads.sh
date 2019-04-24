@@ -16,7 +16,7 @@
 #BSUB -R \"rusage[tmp=30000] span[ptile=16]\"
 
 module add UHTS/Aligner/bwa/0.7.17
-module add UHTS/Analysis/samtools/1.3
+module add UHTS/Analysis/samtools/1.8
 
 sample="$1"
 sp="$2"

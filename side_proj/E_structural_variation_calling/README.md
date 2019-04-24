@@ -40,7 +40,7 @@ manta.sh 1_Tdi b3v04 ref_is350
 
 ##### Delly
 
-installed it is running
+Check their [readme](https://github.com/dellytools/delly#germline-sv-calling), it's very clear and simple. installed it is running
 
 ```
 delly call -g Tge_abyss87_besst_GC_core_100k_filtered.fa \

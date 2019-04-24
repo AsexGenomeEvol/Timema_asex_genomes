@@ -4,4 +4,4 @@
 
 module add UHTS/Analysis/samtools/1.8
 
-samtools index $1
+samtools faidx $1

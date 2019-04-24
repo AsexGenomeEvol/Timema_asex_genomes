@@ -19,6 +19,7 @@ with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 		# 	genomescope_files.append("data/" + line[1] + "/genomescope/" + line[2])
 		trimmed_reads.append("data/" + line[1] + "/trimmed_reads/" + line[2])
 		mapping_indices.append("data/" + line[1] + "/mapping/" + line[2] + "_to_b3v08.bam.bai")
+		delly_calls.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_delly.bcf")
 
 ### if environmental variable USE_LOCAL contains anything, it will compute on /scratch/local
 cluster_script = os.environ.get("USE_LOCAL")
@@ -38,6 +39,10 @@ rule trim_all :
 rule map_all :
 	input :
 		expand(mapping_indices)
+
+rule delly_all :
+	input :
+		expand(delly_calls)
 
 rule trim_reads :
 	threads : 16
@@ -71,7 +76,28 @@ rule map_reads :
 
 rule index_bam :
 	threads : 1
-	resources : mem=20000000, tmp=10000
+	resources : mem=20000000, tmp=20000
 	input : "data/{sp}/mapping/{sample}_to_b3v08.bam"
 	output : "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
 	shell : cluster_script + "A_mapping_and_preprocessing/index_bam.sh {input} {output}"
+
+rule call_delly :
+	threads : 1
+	resources : mem=200000000, tmp=50000
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+	output : "data/{sp}/variant_calls/{sample}/{sample}_delly.bcf"
+	shell : cluster_script + "E_structural_variation_calling/delly.sh {input} {output}"
+
+rule index_fasta :
+	threads : 1
+	resources : mem=20000000, tmp=10000
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz"
+	output : "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai"
+	shell : cluster_script + "A_mapping_and_preprocessing/index_fa_sam.sh {input} {output}"
+
+rule call_manta :
+	threads : 32
+	resources : mem=200000000, tmp=50000
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+	output : "data/{sp}/variant_calls/{sample}/{sample}_manta"
+	shell : cluster_script + "E_structural_variation_calling/delly.sh {input} {output}"
