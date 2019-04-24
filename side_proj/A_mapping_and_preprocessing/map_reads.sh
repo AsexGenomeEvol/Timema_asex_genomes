@@ -27,8 +27,8 @@ path_to_reads=$(dirname $(printf -- '%s\n' "${@}" | grep "R1" | head -1))
 while read index lib; do
     echo Mapping $index $lib
     RG="@RG\tID:"$lib"\tDT:2019-04-23\tLB:lib-"$lib"\tPL:ILLUMINA\tSM:$sample"
-    bwa mem -M -t 15 -R \"$RG\" \
-        $reference $path_to_reads/"$lib"* | samtools view -bS - > temp.bam
+    bwa mem -M -t 15 -R "$RG" \
+        $reference $path_to_reads/*"$lib"_R[12]* | samtools view -bS - > temp.bam
     samtools view -h temp.bam | samblaster -M | samtools view -h -q 20 | samtools sort -@10 -O bam - > "$sample"_"$lib".bam
 done < <(printf -- '%s\n' "$libs" | cat -n)
 
@@ -37,4 +37,4 @@ rm temp.bam
 ls "$sample"*.bam > "$sample".run_list
 samtools merge -@ 16 -b "$sample".run_list ${@:$#}
 
-# rm $(cat "$sample".run_list)
+rm $(cat "$sample".run_list)

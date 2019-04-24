@@ -17,7 +17,7 @@ INPUT_DIR=$4
 # data/4_Tbi/trimmed/Tbi_01/
 OUTPUT_DIR=$5
 
-R1_READS=$(ls $INPUT_DIR | grep "_R1_")
+R1_READS=$(ls $INPUT_DIR/* | grep "_R1_")
 
 mkdir $OUTPUT_DIR
 
@@ -29,8 +29,14 @@ for r1 in $R1_READS; do
     np_r1="$NAMEBASE"_R1.se.cleaned.fastq.gz
     np_r2="$NAMEBASE"_R2.se.cleaned.fastq.gz
 
-    trimmomatic PE -threads 16 "$INPUT_DIR"/"$r1" "$INPUT_DIR"/"$r2" \
-        "$OUTPUT_DIR"/$t_r1 "$OUTPUT_DIR"/$np_r1 \
-        "$OUTPUT_DIR"/$t_r2 "$OUTPUT_DIR"/$np_r1 \
-        ILLUMINACLIP:"$ADAPTERS":3:25:6 LEADING:9 TRAILING:9 SLIDINGWINDOW:4:15 MINLEN:96
+    if [[ -f $r2 ]]; then
+        trimmomatic PE -threads 16 "$r1" "$r2" \
+             "$OUTPUT_DIR"/$t_r1 "$OUTPUT_DIR"/$np_r1 \
+             "$OUTPUT_DIR"/$t_r2 "$OUTPUT_DIR"/$np_r2 \
+             ILLUMINACLIP:"$ADAPTERS":3:25:6 LEADING:9 TRAILING:9 SLIDINGWINDOW:4:15 MINLEN:96
+    else
+        trimmomatic SE -threads 16 "$r1" "$OUTPUT_DIR"/$np_r1 \
+             ILLUMINACLIP:"$ADAPTERS":3:25:6 LEADING:9 TRAILING:9 SLIDINGWINDOW:4:15 MINLEN:96
+    fi
 done
+

@@ -3,11 +3,11 @@
 # 1 a directory with input reads
 # 2 output dir data/{sp}/genomescope/{sample}
 
-FASTQS=$(ls $1/*)
+INDIR=$1
 OUTDIR=$2
-mkdir -p $OUTDIR
 
-#zcat $1 $2 > $OUTDIR/trimmed_reads.fasta
+FASTQS=$(ls "$INDIR"/*_R[12].cleaned.fastq.gz)
+mkdir -p $OUTDIR
 
 jellyfish count -C -m 21 -s 1000000000 -t 16 -o $OUTDIR/kmer_counts <(zcat $FASTQS)
 
@@ -22,7 +22,7 @@ fi
 jellyfish histo -t 16 $OUTDIR/kmer_counts.jf > $OUTDIR/kmer.hist
 genomescope.R $OUTDIR/kmer.hist 21 100 $OUTDIR 1000 verbose
 
-if [[ -s $OUTDIR/summary.txt ]]
-then
-    rm $OUTDIR/kmer_counts.jf
-fi
+#if [[ -s $OUTDIR/summary.txt ]]
+#then
+#    rm $OUTDIR/kmer_counts.jf
+#fi
