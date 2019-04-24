@@ -20,7 +20,6 @@ then
 	exit 1
 fi
 
-bsub <<< """
 #BSUB -L /bin/bash
 #BSUB -J "$3"_manta
 #BSUB -q bgee
@@ -58,4 +57,3 @@ rm $GENOME* $BAM*
 rm -r temp
 
 rmdir \$LOCAL_DIR
-"""

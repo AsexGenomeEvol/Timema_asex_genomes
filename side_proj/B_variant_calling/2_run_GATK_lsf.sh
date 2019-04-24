@@ -4,7 +4,6 @@
 # IS
 # ref name
 
-bsub <<< """
 #BSUB -L /bin/bash
 #BSUB -J $1_GATK
 #BSUB -q dee
@@ -27,4 +26,3 @@ GenomeAnalysisTK \
   --genotyping_mode DISCOVERY \
   -stand_call_conf 30 \
   -o raw_variants.vcf
-"""

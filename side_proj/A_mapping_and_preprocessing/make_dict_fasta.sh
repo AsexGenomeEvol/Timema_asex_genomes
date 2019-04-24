@@ -2,7 +2,6 @@
 #
 # build dict from fasta specified by 1st argument
 
-bsub <<< """
 #BSUB -L /bin/bash
 #BSUB -J dict_fa
 #BSUB -q normal
@@ -15,4 +14,3 @@ module add UHTS/Analysis/picard-tools/2.2.1
 
 FILENAME=$1
 picard-tools CreateSequenceDictionary R=$1 O="\${FILENAME%.*}".dict
-"""
