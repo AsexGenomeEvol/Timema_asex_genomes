@@ -72,7 +72,7 @@ rule map_reads :
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz.bwt", "data/{sp}/trimmed_reads/{sample}"
 	output : "data/{sp}/mapping/{sample}_to_b3v08.bam"
 	shell :
-		cluster_script + "A_mapping_and_preprocessing/map_reads.sh {wildcards.sample} {wildcards.sp} data/{wildcards.sp}/trimmed_reads/{wildcards.sample}/*_R[12].cleaned.fastq.gz data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz.* {output}"
+		cluster_script + "A_mapping_and_preprocessing/map_reads.sh {wildcards.sample} {wildcards.sp} data/{wildcards.sp}/trimmed_reads/{wildcards.sample}/*_R[12]*q.gz data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz.* {output}"
 
 rule index_bam :
 	threads : 1

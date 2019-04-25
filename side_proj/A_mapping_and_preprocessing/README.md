@@ -26,3 +26,9 @@ for sp in $TIMEMAS; do
 done
 
 ```
+
+I am also adding samples `Tsp_00` that are libraries from the reference genome:
+
+```
+for sp in $TIMEMAS; do ln -s /scratch/beegfs/monthly/kjaron/timema_assembly/data/$sp/trimmed_reads/is_550 /scratch/beegfs/monthly/kjaron/variant_analysis/data/$sp/trimmed_reads/$(echo $sp | cut -f 2 -d _)_00; done
+```
