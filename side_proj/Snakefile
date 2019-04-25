@@ -7,16 +7,13 @@ timema = ['1_Tdi', '1_Tps',
           '5_Tge', '5_Tpa']
 
 trimmed_reads = []
-# genomescope_files = []
 mapping_indices = []
+delly_calls = []
 
 with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 	tab.readline()
 	for textline in tab :
 		line = textline.split()
-		#  following line just takes the first sample, because I am renalysing only this one
-		# if line[2][-2:] == "01" :
-		# 	genomescope_files.append("data/" + line[1] + "/genomescope/" + line[2])
 		trimmed_reads.append("data/" + line[1] + "/trimmed_reads/" + line[2])
 		mapping_indices.append("data/" + line[1] + "/mapping/" + line[2] + "_to_b3v08.bam.bai")
 		delly_calls.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_delly.bcf")
@@ -32,10 +29,6 @@ rule trim_all :
 	input :
 		expand(trimmed_reads)
 
-# rule genomescope_all :
-# 	input :
-# 		expand(genomescope_outputs)
-
 rule map_all :
 	input :
 		expand(mapping_indices)
@@ -50,14 +43,6 @@ rule trim_reads :
 	input : "A_mapping_and_preprocessing/Illumina-PE_adapters.fa", "data/{sp}/raw_reads/{sample}"
 	output : "data/{sp}/trimmed_reads/{sample}"
 	shell : cluster_script + "A_mapping_and_preprocessing/trim_reads.sh {wildcards.sp} {wildcards.sample} {input} {output}"
-
-# genome profiling is done on the refence genomes
-# rule genomescope :
-# 	threads : 16
-# 	resources : mem=64000000, tmp=100000
-# 	input : "data/{sp}/trimmed_reads/{sample}"
-# 	output : "data/{sp}/genomescope/{sample}"
-# 	shell : cluster_script + "B_variant_calling/genomescope.sh {input} {output}"
 
 rule index_genome :
 	threads : 1
