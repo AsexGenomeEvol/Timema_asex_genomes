@@ -4,10 +4,11 @@
 # is a reference genome (VERSION)
 # individual
 
-module add UHTS/Analysis/delly/0.7.8
-
 GENOME="$1"
-BAM="$2"
-DELLY="$4"
+BAM="$3"
+DELLY="$5"
 
-delly call -g $GENOME $BAM -o $DELLY
+# -r 200 is basically excluding translocations, that are impossible to detect due to heavy fragmentation of our references
+delly call -r 200 -g $GENOME $BAM -o $DELLY
+
+# we could possibly run the SV calls on Nosil's Tce reference, so we know how many translocations we are missing in other species or something...
