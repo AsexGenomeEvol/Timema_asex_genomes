@@ -82,7 +82,7 @@ rule filter_bam :
 rule call_delly :
 	threads : 1
 	resources : mem=200000000, tmp=50000
-	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
 	output : "data/{sp}/variant_calls/{sample}/{sample}_delly.bcf"
 	shell : cluster_script + "E_structural_variation_calling/delly.sh {input} {output}"
 
@@ -90,12 +90,12 @@ rule index_fasta :
 	threads : 1
 	resources : mem=20000000, tmp=10000
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz"
-	output : "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai"
+	output : "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi"
 	shell : cluster_script + "A_mapping_and_preprocessing/index_fa_sam.sh {input} {output}"
 
 rule call_manta :
 	threads : 32
 	resources : mem=200000000, tmp=50000
-	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
 	output : directory("data/{sp}/variant_calls/{sample}/{sample}_manta")
 	shell : cluster_script + "E_structural_variation_calling/manta.sh {input} {output}"

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 GENOME="$1"
-BAM="$3"
-OUTDIR="$5"
+BAM="$4"
+OUTDIR="$6"
 
 # generate manta script
 /Home/kjaron/src/manta-1.5.0.centos6_x86_64/bin/configManta.py \
