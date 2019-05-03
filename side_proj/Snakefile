@@ -68,14 +68,21 @@ rule map_reads :
 rule index_bam :
 	threads : 1
 	resources : mem=20000000, tmp=20000
-	input : "data/{sp}/mapping/{sample}_to_b3v08.bam"
-	output : "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+	input : "{bam}.bam"
+	output : "{bam}.bam.bai"
 	shell : cluster_script + "A_mapping_and_preprocessing/index_bam.sh {input} {output}"
+
+rule filter_bam :
+	threads : 1
+	resources : mem=20000000, tmp=30000
+	input : "data/{sp}/mapping/{sample}_to_b3v08.bam"
+	output : "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam"
+	shell : cluster_script + "A_mapping_and_preprocessing/filter_splitreads.py {input} {output}"
 
 rule call_delly :
 	threads : 1
 	resources : mem=200000000, tmp=50000
-	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
 	output : "data/{sp}/variant_calls/{sample}/{sample}_delly.bcf"
 	shell : cluster_script + "E_structural_variation_calling/delly.sh {input} {output}"
 

@@ -51,7 +51,22 @@ produced in 2 hours a `.bcf` file that was not parsed so far.
 
 ##### Lumpy
 
-requires `samtools` or `sambamba`.
+I installed lumpy and [smoove](https://brentp.github.io/post/smoove/) which is a probabilistic genotyper using SV calls by lumpy.
+
+```
+module add UHTS/Analysis/samtools/1.8
+```
+
+test run:
+
+```
+fasta=data/2_Tcm/reference/2_Tcm_b3v08.fasta.gz
+bam=data/2_Tcm/mapping/Tcm_05_to_b3v08.bam
+outdir=data/2_Tcm/variant_calls/Tcm_05/Tcm_05_smoove/
+smoove call -x --genotype --name Tcm_05 --outdir $outdir \
+           -f $fasta --processes 24 $bam
+```
+
 
 ##### Brakedancer
 
