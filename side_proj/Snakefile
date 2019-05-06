@@ -29,6 +29,9 @@ if cluster_script == None :
 else :
 	cluster_script = "scripts/use_local.sh "
 
+#### calling rules, in the end there should I one that does all,
+#### but in practice it's useful to be able to call the individual steps
+
 rule trim_all :
 	input :
 		expand(trimmed_reads)
@@ -48,6 +51,8 @@ rule manta_all :
 rule lumpy_all :
 	input :
 		expand(smoove_dirs)
+
+#### the rules of individual steps
 
 rule trim_reads :
 	threads : 16
@@ -87,8 +92,13 @@ rule filter_bam :
 
 rule call_delly :
 	threads : 1
+<<<<<<< HEAD
 	resources : mem=200000000, tmp=50000
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+=======
+	resources : mem=40000000, tmp=50000
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
+>>>>>>> [variant_analysis] smoove should work now, reducting memory requested for delly, to be tested
 	output : "data/{sp}/variant_calls/{sample}/{sample}_delly.bcf"
 	shell : cluster_script + "E_structural_variation_calling/delly.sh {input} {output}"
 
@@ -97,7 +107,7 @@ rule call_lumpy :
 	resources : mem=200000000, tmp=50000
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
 	output : directory("data/{sp}/variant_calls/{sample}/{sample}_smoove")
-	shell :  cluster_script + "E_structural_variation_calling/smoove.sh {input} {output}"
+	shell :  cluster_script + "E_structural_variation_calling/smoove.sh {wildcards.sample} {input} {output}"
 
 rule index_fasta :
 	threads : 1
