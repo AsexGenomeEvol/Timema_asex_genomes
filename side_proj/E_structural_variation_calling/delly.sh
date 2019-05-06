@@ -5,8 +5,8 @@
 # individual
 
 GENOME="$1"
-BAM="$3"
-DELLY="$5"
+BAM="$4"
+DELLY="$6"
 
 # -r 200 is basically excluding translocations, that are impossible to detect due to heavy fragmentation of our references
 delly call -r 200 -g $GENOME $BAM -o $DELLY

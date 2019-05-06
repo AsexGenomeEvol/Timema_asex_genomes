@@ -10,6 +10,7 @@ trimmed_reads = []
 mapping_indices = []
 delly_calls = []
 manta_dirs = []
+smoove_dirs = []
 
 with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 	tab.readline()
@@ -19,6 +20,7 @@ with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 		mapping_indices.append("data/" + line[1] + "/mapping/" + line[2] + "_to_b3v08.bam.bai")
 		delly_calls.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_delly.bcf")
 		manta_dirs.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_manta")
+		smoove_dirs.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_smoove")
 
 ### if environmental variable USE_LOCAL contains anything, it will compute on /scratch/local
 cluster_script = os.environ.get("USE_LOCAL")
@@ -42,6 +44,10 @@ rule delly_all :
 rule manta_all :
 	input :
 		expand(manta_dirs)
+
+rule lumpy_all :
+	input :
+		expand(smoove_dirs)
 
 rule trim_reads :
 	threads : 16
@@ -75,9 +81,9 @@ rule index_bam :
 rule filter_bam :
 	threads : 1
 	resources : mem=20000000, tmp=30000
-	input : "data/{sp}/mapping/{sample}_to_b3v08.bam"
+	input : "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
 	output : "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam"
-	shell : cluster_script + "A_mapping_and_preprocessing/filter_splitreads.py {input} {output}"
+	shell : cluster_script + "A_mapping_and_preprocessing/filter_reads.sh A_mapping_and_preprocessing/filter_splitreads.py {input} {output}"
 
 rule call_delly :
 	threads : 1
@@ -85,6 +91,13 @@ rule call_delly :
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
 	output : "data/{sp}/variant_calls/{sample}/{sample}_delly.bcf"
 	shell : cluster_script + "E_structural_variation_calling/delly.sh {input} {output}"
+
+rule call_lumpy :
+	threads : 32
+	resources : mem=200000000, tmp=50000
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
+	output : directory("data/{sp}/variant_calls/{sample}/{sample}_smoove")
+	shell :  cluster_script + "E_structural_variation_calling/smoove.sh {input} {output}"
 
 rule index_fasta :
 	threads : 1
@@ -96,6 +109,6 @@ rule index_fasta :
 rule call_manta :
 	threads : 32
 	resources : mem=200000000, tmp=50000
-	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
+	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
 	output : directory("data/{sp}/variant_calls/{sample}/{sample}_manta")
 	shell : cluster_script + "E_structural_variation_calling/manta.sh {input} {output}"
