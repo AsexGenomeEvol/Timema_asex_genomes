@@ -15,4 +15,4 @@ OUTDIR=$7
 source /scratch/beegfs/monthly/kjaron/src/svtyper/bin/activate
 module add UHTS/Analysis/samtools/1.8
 
-smoove call -x --genotype --name $SAMPLE -f $FASTA --processes 32 $BAM --outdir $OUTDIR
+smoove call -x --genotype --name $SAMPLE -f $FASTA --processes 8 $BAM --outdir $OUTDIR
