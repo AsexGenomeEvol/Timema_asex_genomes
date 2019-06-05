@@ -12,7 +12,7 @@ FASTA=$2
 BAM=$5
 OUTDIR=$7
 
-source /scratch/beegfs/monthly/kjaron/src/svtyper/bin/activate
+source /scratch/temporary/kjaron/src/svtyper/myvenv/bin/activate
 module add UHTS/Analysis/samtools/1.8
 
 smoove call -x --genotype --name $SAMPLE -f $FASTA --processes 8 $BAM --outdir $OUTDIR
