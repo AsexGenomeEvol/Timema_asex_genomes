@@ -11,3 +11,10 @@ OUTDIR="$6"
   --runDir="$OUTDIR"
 
 python -E "$OUTDIR"/runWorkflow.py -m local -j 32 -g 180
+
+# clean the temp data (tons and tons of files)
+rm -r "$OUTDIR"/workspace/pyflow.data/logs/tmp
+# tar the rest of the workspace
+tar -cf "$OUTDIR"/workspace.tar "$OUTDIR"/workspace --remove-files
+
+echo "Done"
