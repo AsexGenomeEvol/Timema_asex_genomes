@@ -29,3 +29,11 @@ lot of this is done in very unsorted way in `playground.R` script.
 ### per Type / Size analysis
 
 - For this I should probably separate homozygous and heterozygous SVs in asexuals (I will have 5 inds for homo, 6 for hetero).
+
+### Sanity checks
+
+I need to make sure that I understand how much these SV calls are wrong. I need to do a bunch of sanity checks, especially addressing coverage supporting individual SVs.
+
+- Check coverage distribution of heterozygous alleles (per type?)
+- Check coverage distribution of homozygous alleles (per type?)
+- Table of coverages of individual libraries? (calculate from bam file?)

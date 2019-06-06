@@ -47,7 +47,7 @@ table(lumpy_merged)
 barplot(table(lumpy_merged))
 
 ##### Tce
-menta_calls <- readLines("manta_merged.vcf")
+menta_calls <- readLines("data/3_Tce/variant_calls/manta_merged.vcf")
 menta_calls <- menta_calls[!grepl("^##", menta_calls)]
 header <- unlist(strsplit(menta_calls[1], '\t'))
 
@@ -94,3 +94,7 @@ png('~/Desktop/Tms_alle_freq_vs_heterozyg.png')
           xlim = c(-0.1, 6.1), ylim = c(1.8, 12.2))
     text(sapply(cell_coordinates, function(x){ if(x[1] == 0){ 0.05 } else { x[1]}} ), sapply(cell_coordinates, function(x){ x[2] } ), cells)
 dev.off()
+
+# like this I could substitute patterns in names
+# test = c("asd", 'vfd')
+# sapply(c("1", "2"), function(x) { paste(test, collapse = x) } )
