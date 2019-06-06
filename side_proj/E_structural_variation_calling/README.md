@@ -87,19 +87,19 @@ In either the case I will remove all calls homozygous in all (nearly all?) indiv
 
 #### Making union
 
-There two ways how to make a union. Delly or SURVIVOR. Delly uses both recoprocal overlap and breakpoint offset to consider an SV the same. SURVIVOR focuses on the offset only. Might be a good idea to try both, as it brings only very little effort.
+There two ways how to make a union. Delly or SURVIVOR. Delly uses both recoprocal overlap and breakpoint offset to consider an SV the same. SURVIVOR focuses on the offset only. Delly is however screwing up on merging other SV callers, so SURVIVOR it is
 
 ```
-E_structural_variation_calling/delly_all_merged_calls.sh <sp>
+E_structural_variation_calling/survivor_all_merged_calls.sh <sp>
 ```
 
 generates
 
 ```
-data/$SP/variant_calls/all_calls_merged.bcf
+data/$SP/variant_calls/"$SP"_survivor_all_calls_union.vcf
 ```
 
-file with the default merging parameters (covergage > 10; overlap > 80%; max offset < 1000). It is a wild script for now, but once I will have delly SV calls for all the species, I will embed it to `Snakemake`.
+file with the default merging parameters (min len > 30; breakpoint distance < 1000). It is a wild script for now, but once I will have delly SV calls for all the species, I will embed it to `Snakemake`.
 
 #### Genotyping by Delly
 
