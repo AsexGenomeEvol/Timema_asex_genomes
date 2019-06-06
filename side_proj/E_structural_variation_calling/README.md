@@ -100,3 +100,32 @@ data/$SP/variant_calls/all_calls_merged.bcf
 ```
 
 file with the default merging parameters (covergage > 10; overlap > 80%; max offset < 1000). It is a wild script for now, but once I will have delly SV calls for all the species, I will embed it to `Snakemake`.
+
+#### Genotyping by Delly
+
+Delly has a genotyper given set of candidates, so I use it while feeding it with the merged SVs.
+
+```
+E_structural_variation_calling/delly_genotyping.sh <sp>
+```
+
+generating
+
+```
+data/$SP/variant_calls/$SAMPLE/delly_genotyping.bcf # for each sample
+data/$SP/variant_calls/delly_genotyping_merged.bcf
+```
+
+#### Paragraph
+
+TODO
+
+#### What do we have in the end
+
+- individual delly / smove / manta SV calls (mostly if we want to go back and check something)
+- merged calls of the three (`"$SP"_all_calls_merged.bcf`, is there support inside? Need to check)
+- merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given the set of candidates
+
+#### TO CONSIDER
+
+I think smove and manta use different names for the same thing (duplication vs insertion) or at least they sums are the same and one distinguishes them and the other does not. So it might be a good idea to "unify" them before merging. SURVIVOR cared about SV typpes, not sure how exactly Delly merger works.
