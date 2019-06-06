@@ -6,8 +6,17 @@ SP=$1
 
 # data/$SP/variant_calls/*/*_delly.bcf \
 ls data/$SP/variant_calls/*/*_smoove/*-smoove.genotyped.vcf \
+   > data/$SP/variant_calls/lumpy_sv_files
+
+ls data/$SP/variant_calls/*/*_manta/results/variants/diploidSV.vcf \
+   > data/$SP/variant_calls/manta_sv_files
+
+ls data/$SP/variant_calls/*/*_smoove/*-smoove.genotyped.vcf \
    data/$SP/variant_calls/*/*_manta/results/variants/diploidSV.vcf \
    > data/$SP/variant_calls/all_sv_files
+
+SURVIVOR merge data/$SP/variant_calls/lumpy_sv_files 1000 1 1 1 0 30 data/$SP/variant_calls/"$SP"_survivor_lumpy_calls_union.vcf
+SURVIVOR merge data/$SP/variant_calls/manta_sv_files 1000 1 1 1 0 30 data/$SP/variant_calls/"$SP"_survivor_manta_calls_union.vcf
 
 SURVIVOR merge data/$SP/variant_calls/all_sv_files 1000 1 1 1 0 30 data/$SP/variant_calls/"$SP"_survivor_all_calls_union.vcf
 
