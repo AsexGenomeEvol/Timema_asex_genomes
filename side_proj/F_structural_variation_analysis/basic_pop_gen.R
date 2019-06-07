@@ -1,17 +1,13 @@
 library(AsexStats)
 source('F_structural_variation_analysis/plot_SFS.R')
+source('F_structural_variation_analysis/load_SV_calls.R')
 
 ###############
 # MANTA CALLS #
 ###############
 
-SV_call_files <- paste0("data/", timemas$codes, "/variant_calls/", timemas$codes, "_survivor_manta_calls_union.vcf")
-
-SV_calls <- lapply(SV_call_files, readLines)
-SV_calls <- lapply(SV_calls, function(x) { x[!grepl("^##", x)]} )
-SV_headers <- lapply(SV_calls, function(x) { unlist(strsplit(x[1], '\t'))} )
-SV_calls <- lapply(SV_calls, function(x) { strsplit(x[-1], '\t')} )
-# species list of SVs lists
+SV_call_manta_files <- paste0("data/", timemas$codes, "/variant_calls/", timemas$codes, "_survivor_manta_calls_union.vcf")
+SV_calls <- load_SV_calls(SV_call_manta_files)
 
 # SFSs
 pdf('figures/SFS_manta.pdf', width = 12, height = 8)
@@ -33,13 +29,8 @@ dev.off()
 # SMOOVE CALLS #
 ################
 
-
-SV_call_files <- paste0("data/", timemas$codes, "/variant_calls/", timemas$codes, "_survivor_lumpy_calls_union.vcf")
-
-SV_calls <- lapply(SV_call_files, readLines)
-SV_calls <- lapply(SV_calls, function(x) { x[!grepl("^##", x)]} )
-SV_headers <- lapply(SV_calls, function(x) { unlist(strsplit(x[1], '\t'))} )
-SV_calls <- lapply(SV_calls, function(x) { strsplit(x[-1], '\t')} )
+SV_call_lumpy_files <- paste0("data/", timemas$codes, "/variant_calls/", timemas$codes, "_survivor_lumpy_calls_union.vcf")
+SV_calls <- load_SV_calls(SV_call_lumpy_files)
 # species list of SVs lists
 
 # SFSs

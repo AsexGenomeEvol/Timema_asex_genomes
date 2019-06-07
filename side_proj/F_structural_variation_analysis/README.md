@@ -22,9 +22,9 @@ lot of this is done in very unsorted way in `playground.R` script.
 
 ### density of SVs
 
-- check modality in sexual / asexuals (sexual are expected to segregate regardless of position in the genome, i.e. all scaffolds should be even)
+- check modality in sexual / asexuals (sexual are expected to segregate regardless of position in the genome, i.e. all scaffolds should be even) --> too few data, probably got to map them to the reference
 - in asexuals we expect unimodal disr for homozygous SVs and bimodal for heterozygous SVs. Furthermore, we expect a negative relation of the two
-- A statistical approach? Given a random placement, what is the expected distribution of observed density given the scf size, quantile?
+- A statistical approach? Given a random placement, what is the expected distribution of observed density given the scf size, quantile? -> this could be useful
 
 ### per Type / Size analysis
 
