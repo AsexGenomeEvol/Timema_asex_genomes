@@ -34,7 +34,7 @@ require(digest)
 library(sm)
 source('F_structural_variation_analysis/plot_violins.R')
 
-pdf('figures/SV_sizes.pdf', height = 30, width = 8)
+pdf('figures/SV_sizes_manta.pdf', height = 30, width = 8)
 par(mfrow = c(5,1))
 for (i in seq(1, 10, by = 2)){
     label <- timema_pairs$labels[(i + 1) / 2]
@@ -65,7 +65,7 @@ pdf('figures/SV_sizes_inversions_manta.pdf')
 dev.off()
 
 pdf('figures/SV_sizes_insertions_manta.pdf')
-    plot_violins_of_one_sv('INV', 'Insertions')
+    plot_violins_of_one_sv('INS', 'Insertions')
 dev.off()
 
 pdf('figures/SV_sizes_duplications_manta.pdf')

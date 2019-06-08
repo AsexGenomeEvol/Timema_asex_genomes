@@ -46,14 +46,57 @@ for (i in 1:10) {
     scf_densities[[i]] <- get_density_tables(homozygous_SV_calls[[i]], heterozygous_SV_calls[[i]], scf_lengths[[i]])
 }
 
-#### This would be better in python
+# pause
+# for (i in 1:10) {
+#     write.table(scf_densities[[i]], paste0("stats/", timemas$codes[i], "_SV_densities_manta.tsv"), quote = F, sep = '\t')
+# }
 
+# unpause
+# scf_densities <- list()
+# for (i in 1:10) {
+#     scf_densities[[i]] <- read.table(paste0("stats/", timemas$codes[i], "_SV_densities_manta.tsv"))
+# }
 
+get_expectation_tables <- function(one_sp){
+    one_sp <- one_sp[one_sp$len > 100000,]
 
+    overall_homo_sv_den <- sum(one_sp$homo_SVs) / sum(one_sp$len)
+    overall_hetero_sv_den <- sum(one_sp$hetero_SVs) / sum(one_sp$len)
+    one_sp$homo_SV_probs <- apply(one_sp, 1, function(x){ pbinom(x[2], x[1], overall_homo_sv_den) } )
+    one_sp$hetero_SV_probs <- apply(one_sp, 1, function(x){ pbinom(x[4], x[1], overall_hetero_sv_den) } )
+    one_sp$expected_homo_SVs <- apply(one_sp, 1, function(x){ x[1] * overall_homo_sv_den } )
+    one_sp$expected_hetero_SVs <- apply(one_sp, 1, function(x){ x[1] * overall_hetero_sv_den } )
+    one_sp$hetero_SVs_dif <- one_sp$hetero_SVs - one_sp$expected_hetero_SVs
+    one_sp$homo_SVs_dif <- one_sp$homo_SVs - one_sp$expected_homo_SVs
+    one_sp
+}
+
+SV_expecations <- lapply(scf_densities, get_expectation_tables)
+
+## Does not lead anywhere. Not sure how comes that the last time I had the |_ plot. (shared by 2?)
+## Need to rething it
+## Possible courses of actions are
+### - mapping our scaffolds to the reference asm
+### - filtering of low quality SVs to reduce noise
+# lapply(SV_expecations, function(x) { cor.test(x$hetero_density, x$homo_density) } )
+# lapply(SV_expecations, function(x) { cor.test(x$hetero_SVs, x$homo_SVs) } )
+# # # pbinom(one_sp$homo_SVs[1], one_sp$len[1], overall_homo_sv_den)
+# #
+# # one_sp <- one_sp[one_sp$expected_homo_SVs > 0.5,]
+# boxplot(one_sp$expected_homo_SVs ~ one_sp$homo_SVs, xlab = "scaffolds given observed SVs", ylab = "distributions of expectations of scaffolds")
+# lines(c(0,12), c(0, 12))
 #
-# mean(hetero_density == 0)
-# mean(homo_density == 0)
+# hist(one_sp$hetero_SVs_dif, col = 'purple')
+# hist(one_sp$homo_SVs_dif, col = 'orange')
 #
-# non_zero_scfs <- hetero_density != 0 | homo_density != 0
+# plot(one_sp$hetero_SVs_dif ~ one_sp$homo_SVs_dif)
 #
-# plot(hetero_density[non_zero_scfs] ~ homo_density[non_zero_scfs], pch = 20)
+# library(MASS)
+# library(RColorBrewer)
+# rf <- colorRampPalette(rev(brewer.pal(11,'Spectral')))
+#
+# k <- kde2d(one_sp$hetero_SVs, one_sp$homo_SVs, n=100)
+# k$z <- log10(k$z)
+# image(k, col=rf(20)[1:15])
+#       xlab = 'number of heterozygous individuals',
+#       ylab = 'allele frequency')

@@ -20,15 +20,29 @@ Analysis of 6 individuals per species. I want to know heterozygosity patterns in
 
 lot of this is done in very unsorted way in `playground.R` script.
 
+```
+F_structural_variation_analysis/plot_SFS.R
+```
+
 ### density of SVs
 
 - check modality in sexual / asexuals (sexual are expected to segregate regardless of position in the genome, i.e. all scaffolds should be even) --> too few data, probably got to map them to the reference
 - in asexuals we expect unimodal disr for homozygous SVs and bimodal for heterozygous SVs. Furthermore, we expect a negative relation of the two
 - A statistical approach? Given a random placement, what is the expected distribution of observed density given the scf size, quantile? -> this could be useful
 
+```
+F_structural_variation_analysis/SV_density.R
+```
+
+Using all this, I can not detect any displacement of homozygous / heterozygous SV between asexuals. Supposedly this can be a problem of the combinations of too fragmented assemblies, no filtering applied to the called SVs and because SVs are rare and the signal was weak at the very beginning. I also calculated expecations of SV presence based on SV homo/heterozygosity, maybe I should figure out a sexual expececation jointly estimating expectations for both (that would more easily show differences between sex/asex)
+
 ### per Type / Size analysis
 
 - For this I should probably separate homozygous and heterozygous SVs in asexuals (I will have 5 inds for homo, 6 for hetero).
+
+```
+F_structural_variation_analysis/SV_types_and_lengths.R
+```
 
 ### Sanity checks
 
