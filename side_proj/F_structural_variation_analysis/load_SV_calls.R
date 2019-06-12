@@ -13,12 +13,14 @@ load_SV_calls <- function(files, headers = F){
 get_sv_table <- function(one_sp_sv_calls){
      info_vec <- sapply(one_sp_sv_calls, function(x){x[8]} )
      info_vec <- strsplit(info_vec, ';')
-     data.frame(
+     sv_frame <- data.frame(
           scf = sapply(info_vec, get_entry, "CHR2"),
           len = as.numeric(sapply(info_vec, get_entry, "AVGLEN")),
-          type = sapply(info_vec, get_entry, "SVTYPE"),
-          presence = sapply(info_vec, get_entry, "SUPP_VEC")
+          type = sapply(info_vec, get_entry, "SVTYPE")
      )
+     presence_vec = as.numeric(ssplit(sapply(info_vec, get_entry, "SUPP_VEC"), split = ''))
+     sv_frame[, c('00', '01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 6, byrow = T)
+     sv_frame
 }
 
 get_entry <- function(infoline, entry_name){
