@@ -24,6 +24,56 @@ for( i in 1:10){
 }
 dev.off()
 
+### Tms individual plots
+
+i <- 8
+Tce_site_freq <- sapply(SV_calls[[i]], alt_alleles)
+Tce_pop_heterozygosity <- sapply(SV_calls[[i]], gen_heterozygots)
+
+pdf('figures/SFS_Tce_manta.pdf', width = 9, height = 4)
+    barplot(table(Tce_site_freq), col = sex_red, cex.axis = 2, cex.names = 1.75)
+dev.off()
+
+cells <- table(paste(Tce_pop_heterozygosity, Tce_site_freq))
+cell_coordinates <- lapply(strsplit(names(cells), ' '), as.numeric)
+cr = colorRampPalette(c(sex_red, sex_red, sex_red, sex_red, 'white'))
+k <- kde2d(Tce_site_freq, Tce_pop_heterozygosity, n = 100)
+
+pdf('figures/SFS_vs_heterozygosity_Tce_manta.pdf', width = 6, height = 6)
+    image(k, col = rev(cr(1000)),
+          # ylab = 'number of heterozygous individuals',
+          # xlab = 'allele frequency',
+          ylim = c(-0.2, 6.2), xlim = c(0.6, 12.4),
+          cex.axis = 1.4, bty = 'n')
+    text(sapply(cell_coordinates, function(x){ if( x[2] == 1) { 1.2 } else { x[2] } } ),
+         sapply(cell_coordinates, function(x){ x[1] } ),
+         cells)
+dev.off()
+
+### Tce individual plots
+
+i <- 7
+Tms_site_freq <- sapply(SV_calls[[i]], alt_alleles)
+Tms_pop_heterozygosity <- sapply(SV_calls[[i]], gen_heterozygots)
+
+pdf('figures/SFS_Tms_manta.pdf', width = 9, height = 4)
+    barplot(table(Tms_site_freq), col = asex_blue, cex.axis = 2, cex.names = 1.75)
+dev.off()
+
+cells <- table(paste(Tms_pop_heterozygosity, Tms_site_freq))
+cell_coordinates <- lapply(strsplit(names(cells), ' '), as.numeric)
+cr = colorRampPalette(c(asex_blue, asex_blue, asex_blue, asex_blue, 'white'))
+k <- kde2d(Tms_site_freq, Tms_pop_heterozygosity, n = 100)
+
+pdf('figures/SFS_vs_heterozygosity_Tms_manta.pdf', width = 6, height = 6)
+    image(k, col = rev(cr(1000)),
+          ylim = c(-0.2, 6.2), xlim = c(0.6, 12.4),
+          cex.axis = 1.4, bty = 'n')
+    text(sapply(cell_coordinates, function(x){ if( x[2] == 1) { 1.2 } else { x[2] } } ),
+         sapply(cell_coordinates, function(x){ x[1] } ),
+         cells)
+dev.off()
+
 
 ################
 # SMOOVE CALLS #

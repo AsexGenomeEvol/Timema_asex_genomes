@@ -6,59 +6,6 @@ source('F_structural_variation_analysis/filter_SV_calls.R')
 SV_call_manta_files <- paste0("data/", timemas$codes, "/variant_calls/", timemas$codes, "_survivor_manta_calls_union.vcf")
 SV_calls <- load_SV_calls(SV_call_manta_files)
 
-get_SV_table_per_ind <- function(heter_sv_table){
-    inds = c('00', '01', '02', '03', '04', '05')
-    t(sapply(inds, function(ind){
-        ind_subset <- heter_sv_table[heter_sv_table[, ind] == 1,]
-        table(ind_subset$type)
-    }))
-}
-
-get_by_type_SV_tables <- function(SV_calls){
-    # subset heterozygous and homozygous calls
-    heterozygous_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, 'heterozygous')
-    homozygous_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, 'homozygous')
-    polymorphic_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, 'polymorphic')
-
-    heter_sv_tables <- lapply(heterozygous_SV_calls, get_sv_table)
-    homo_sv_tables <- lapply(homozygous_SV_calls, get_sv_table)
-    polymorphic_sv_tables <- lapply(polymorphic_SV_calls, get_sv_table)
-
-    # heter_types <- lapply(heter_sv_tables, function(x) { round(table(x$type) / nrow(x), 3) } )
-    # heter_types <- lapply(heter_sv_tables, function(x) { table(x$type) } )
-    # homo_types <- lapply(homo_sv_tables, function(x) { table(x$type) } )
-
-    heter_sv_summary_tables <- lapply(heter_sv_tables, get_SV_table_per_ind)
-    homo_sv_summary_tables <- lapply(homo_sv_tables, get_SV_table_per_ind)
-    polymorphic_sv_summary_tables <- lapply(polymorphic_sv_tables, get_SV_table_per_ind)
-
-    merged_sv_summary_tables <- list()
-    for( i in 1:10 ){
-        heter_tab <- heter_sv_summary_tables[[i]][,1:4]
-        homo_tab  <- homo_sv_summary_tables[[i]][,1:4]
-        poly_tab   <- polymorphic_sv_summary_tables[[i]][,1:4]
-
-        colnames(heter_tab) <- paste("heter", colnames(heter_tab), sep = "_")
-        colnames(homo_tab)  <- paste("homo", colnames(homo_tab), sep = "_")
-        colnames(poly_tab)   <- paste("all", colnames(poly_tab), sep = "_")
-
-        correct_order <- as.vector(matrix(1:12, ncol = 4, byrow = T))
-        merged_sv_summary_tables[[i]] <- cbind(heter_tab, homo_tab, poly_tab)[,correct_order]
-    }
-
-    by_type_tables <- list()
-    for ( type in c('DEL', 'DUP', 'INS', 'INV') ){
-        # very UGLY soring of all the lists in a single data frame
-        type_df <- as.data.frame(matrix(unlist(lapply(merged_sv_summary_tables, function(tab){ tab[, grepl(type, colnames(tab))] } )), nrow = 6))
-        if ( ncol(type_df) != 0){
-            colnames(type_df) <- paste(rep(timemas$codes, each = 3), rep(c('heter', 'homo', 'all'), 10), sep = "_")
-            by_type_tables[[type]] <- type_df
-        }
-    }
-
-    by_type_tables
-}
-
 source('F_structural_variation_analysis/plot_SV_barplots.R')
 by_type_tables <- get_by_type_SV_tables(SV_calls)
 
