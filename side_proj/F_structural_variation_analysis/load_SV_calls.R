@@ -10,7 +10,7 @@ load_SV_calls <- function(files, headers = F){
     }
 }
 
-get_sv_table <- function(one_sp_sv_calls){
+get_sv_table <- function(one_sp_sv_calls, genotypes = F){
      info_vec <- sapply(one_sp_sv_calls, function(x){x[8]} )
      info_vec <- strsplit(info_vec, ';')
      sv_frame <- data.frame(
@@ -18,12 +18,21 @@ get_sv_table <- function(one_sp_sv_calls){
           len = as.numeric(sapply(info_vec, get_entry, "AVGLEN")),
           type = sapply(info_vec, get_entry, "SVTYPE")
      )
-     presence_vec = as.numeric(ssplit(sapply(info_vec, get_entry, "SUPP_VEC"), split = ''))
-     sv_frame[, c('00', '01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 6, byrow = T)
+     if (genotypes) {
+         presence_vec = sapply(one_sp_sv_calls, get_genotypes)
+         sv_frame[, c('00', '01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 6, byrow = T)
+     } else {
+         presence_vec = as.numeric(ssplit(sapply(info_vec, get_entry, "SUPP_VEC"), split = ''))
+         sv_frame[, c('00', '01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 6, byrow = T)
+     }
      sv_frame
 }
 
 get_entry <- function(infoline, entry_name){
     entry <- ssplit(grep(entry_name, infoline, value = T))
     ifelse(length(entry) == 0, NA, entry[2])
+}
+
+get_genotypes <- function(infoline){
+    substr(infoline[10:15], 1, 3)
 }

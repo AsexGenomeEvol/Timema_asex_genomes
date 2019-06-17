@@ -1,3 +1,5 @@
+## here the heterozygosity is population heterozygosity
+
 library(AsexStats)
 source('F_structural_variation_analysis/load_SV_calls.R')
 source('F_structural_variation_analysis/filter_SV_calls.R')
