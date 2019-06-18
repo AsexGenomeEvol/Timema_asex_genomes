@@ -10,7 +10,7 @@ load_SV_calls <- function(files, headers = F){
     }
 }
 
-get_sv_table <- function(one_sp_sv_calls, genotypes = F){
+get_sv_table <- function(one_sp_sv_calls, genotypes = F, coordinates = F){
      info_vec <- sapply(one_sp_sv_calls, function(x){x[8]} )
      info_vec <- strsplit(info_vec, ';')
      sv_frame <- data.frame(
@@ -24,6 +24,10 @@ get_sv_table <- function(one_sp_sv_calls, genotypes = F){
      } else {
          presence_vec = as.numeric(ssplit(sapply(info_vec, get_entry, "SUPP_VEC"), split = ''))
          sv_frame[, c('00', '01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 6, byrow = T)
+     }
+     if (coordinates) {
+         sv_frame$pos <- as.numeric(sapply(one_sp_sv_calls, function(x) { x[2] } ))
+         sv_frame$end <- as.numeric(sapply(info_vec, get_entry, "END"))
      }
      sv_frame
 }
