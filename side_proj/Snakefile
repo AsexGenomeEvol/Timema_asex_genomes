@@ -21,6 +21,7 @@ with open('A_mapping_and_preprocessing/resequencing_samples') as tab :
 		delly_calls.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_delly.bcf")
 		manta_dirs.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_manta")
 		smoove_dirs.append("data/" + line[1] + "/variant_calls/" + line[2] + "/" + line[2] + "_smoove")
+		tandem_rep_files.append("data/" + line[1] + "/tandem_repeats/" + line[2] + "_kseek.rep")
 
 ### if environmental variable USE_LOCAL contains anything, it will compute on /scratch/local
 cluster_script = os.environ.get("USE_LOCAL")
@@ -51,6 +52,10 @@ rule manta_all :
 rule lumpy_all :
 	input :
 		expand(smoove_dirs)
+
+rule tandem_all :
+	input :
+		expand(tandem_rep_files)
 
 #### the rules of individual steps
 
@@ -126,3 +131,11 @@ rule call_manta :
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
 	output : directory("data/{sp}/variant_calls/{sample}/{sample}_manta")
 	shell : cluster_script + "E_structural_variation_calling/manta.sh {input} {output}"
+
+rule annotate_tandem :
+	threads : 1
+	resources : mem=50000000, tmp=100000
+	input : "data/{sp}/trimmed_reads/{sample}"
+	output : "data/{sp}/tandem_repeats/{sample}_kseek.rep"
+	shell :
+		cluster_script + "G_tandem_repeats/tandem_repeats.sh data/{wildcards.sp}/trimmed_reads/{wildcards.sample}/*_R[12]*q.gz {output}"
