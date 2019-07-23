@@ -14,4 +14,10 @@ This trial have worked:
 bsub -M 50000000 -q bgee -o kseek_trial.log 'perl /home/kjaron/bin/k_seek.pl Tdi_550.fastq 1_Tdi'
 ```
 
-Now, I want to generate an annotation for all.
+Now, I want to generate an annotation for all... This script
+
+```
+G_tandem_repeats/tandem_repeats.sh
+```
+
+and rules in snakefile do the job. Now I have `data/<sp>/tandem_repeats/<ind>_kseek.rep.total` files. The exploratory analysis will be done in `G_tandem_repeats/analysis_of_simple_repeats.R` script.
