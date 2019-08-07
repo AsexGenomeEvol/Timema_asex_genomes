@@ -118,7 +118,16 @@ data/$SP/variant_calls/delly_genotyping_merged.bcf
 
 #### Paragraph
 
-TODO
+Calculate read deapth of a bam file
+
+```
+module add UHTS/Analysis/samtools/1.8
+samtools depth -a mapping/Tms_00_to_b3v08.bam > coverage_depth # coule be directly piped
+cat coverage_depth |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
+## 11.55
+## av read len?? made it up to 100
+
+```
 
 #### What do we have in the end
 

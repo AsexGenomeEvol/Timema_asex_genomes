@@ -12,7 +12,7 @@ homozygous_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, 'homozygous')
 
 # load reference info
 scf_len_files <- paste0("data/", timemas$codes, "/reference/", timemas$codes, "_b3v08_scf.lengths")
-scf_lengths <- lapply(scf_len_files, read.table, header = F, col.names = c('len'), row.names = 1)
+scf_lengths <- lapply(scf_len_files, read.table, header = F, col.names = c('scf', 'len'), row.names = 1)
 
 # calculate density (occurences / nt, affected nt / nt, statistical ...)
 one_sp_calls <- heterozygous_SV_calls[[1]]

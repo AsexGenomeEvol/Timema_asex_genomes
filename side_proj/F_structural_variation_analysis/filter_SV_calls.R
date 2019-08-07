@@ -14,6 +14,14 @@ is_polymorphic <- function(x, pattern){
     }
 }
 
+is_rare <- function(x, pattern){
+    if ( sum(!grepl("./.", x[10:15], fixed = T)) > 1 ) {
+        x
+    } else {
+        NA
+    }
+}
+
 get_subset_of_SV_calls <- function(sp_sv_calls, sv_subset){
     # the conditional like this allows to set more than one keyword
     if ( 'heterozygous' %in% sv_subset){
@@ -24,6 +32,9 @@ get_subset_of_SV_calls <- function(sp_sv_calls, sv_subset){
     }
     if ( 'polymorphic' %in% sv_subset){
         sp_sv_calls <- lapply(sp_sv_calls, is_polymorphic)
+    }
+    if ( 'filter_rare' %in% sv_subset){
+        sp_sv_calls <- lapply(sp_sv_calls, is_rare)
     }
     # space for more sv_subset keywords
     sp_sv_calls[!is.na(sp_sv_calls)]
@@ -37,11 +48,20 @@ get_SV_table_per_ind <- function(heter_sv_table){
     }))
 }
 
-get_by_type_SV_tables <- function(SV_calls){
+get_by_type_SV_tables <- function(SV_calls, filter_rare = F){
     # subset heterozygous and homozygous calls
-    heterozygous_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, 'heterozygous')
-    homozygous_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, 'homozygous')
-    polymorphic_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, 'polymorphic')
+    if ( filter_rare ){
+        het_pattern <- 'heterozygous'
+        hom_pattern <- 'homozygous'
+        poly_pattern <- 'polymorphic'
+    } else {
+        het_pattern <- c('heterozygous', 'filter_rare')
+        hom_pattern <- c('homozygous', 'filter_rare')
+        poly_pattern <- c('polymorphic', 'filter_rare')
+    }
+    heterozygous_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, het_pattern)
+    homozygous_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, hom_pattern)
+    polymorphic_SV_calls <- lapply(SV_calls, get_subset_of_SV_calls, poly_pattern)
 
     heter_sv_tables <- lapply(heterozygous_SV_calls, get_sv_table)
     homo_sv_tables <- lapply(homozygous_SV_calls, get_sv_table)

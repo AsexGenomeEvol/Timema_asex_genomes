@@ -74,6 +74,39 @@ pdf('figures/SFS_vs_heterozygosity_Tms_manta.pdf', width = 6, height = 6)
          cells)
 dev.off()
 
+####
+# some more exploration
+
+sv_genotype_tables <- lapply(SV_calls, get_sv_table, genotypes = T)
+
+SVs <- sv_genotype_tables[[1]]
+
+sv_genotype_tables <- lapply(sv_genotype_tables, function(SVs){
+homoz <- rowSums(SVs[,c('00','01','02','03','04','05')] == "1/1")
+het <- rowSums(SVs[,c('00','01','02','03','04','05')] == "0/1")
+SVs$num_homoz <- homoz
+SVs$num_het <- het
+SVs$homo <- homoz > 0 & het == 0
+SVs$het <- het > 0 & homoz == 0
+SVs$both <- het > 0 & homoz > 0
+SVs })
+
+homo_non_rare <- sapply(sv_genotype_tables, function(x) { sum(x$homo & x$num_homoz > 1) / sum(x$homo) } )[seq(1,10,by=2)]
+het_non_rare  <- sapply(sv_genotype_tables, function(x) { sum(x$het & x$num_het > 1) / sum(x$het) } )[seq(1,10,by=2)]
+plot(homo_non_rare ~ het_non_rare, pch = 20, col = 1, bty = 'n', cex = 2, xlim = c(0.2, 0.7), ylim = c(0.2, 0.7),
+xlab = 'Heterozygous in more than one ind [%]', ylab = 'Homozygous in more than one ind [%]')
+lines(c(0, 1), c(0, 1))
+points(homo_non_rare ~ het_non_rare, pch = 20, col = asex_blue, cex = 1.7)
+text(het_non_rare, homo_non_rare, timemas$names[seq(1,10,by=2)], pos = 2)
+
+# among asexuals
+range(sapply(sv_genotype_tables, nrow)[seq(1,10, by = 2)])
+# among sexuals
+range(sapply(sv_genotype_tables, nrow)[seq(2,10, by = 2)])
+
+sapply(sv_genotype_tables, function(SVs) { sum(SVs$homo) })
+sapply(sv_genotype_tables, function(SVs) { sum(SVs$het) })
+sapply(sv_genotype_tables, function(SVs) { sum(SVs$both) })
 
 ################
 # SMOOVE CALLS #
