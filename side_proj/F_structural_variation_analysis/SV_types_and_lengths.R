@@ -71,3 +71,68 @@ dev.off()
 pdf('figures/SV_sizes_duplications_manta.pdf')
     plot_violins_of_one_sv('DUP', 'Duplications')
 dev.off()
+
+
+##### PLOT IT PER HOMO/HETERO
+
+# get non-rare
+homo_sv_tables <- lapply(homo_sv_tables,
+                         function(one_sp){ one_sp[apply(one_sp[,4:9], 1, sum ) > 1 & one_sp[,4] == 0, ]} )
+
+heter_sv_tables <- lapply(heter_sv_tables,
+                         function(one_sp){ one_sp[apply(one_sp[,4:9], 1, sum ) > 1, ]} )
+
+# one_sp <- homo_sv_tables[[1]]
+for (type_to_plot in c('INV', 'INS', 'DEL')){
+    pdf(paste0('figures/SV_hetero_homo_sizes_', type_to_plot , '_manta.pdf'), width = 8, height = 8)
+
+    homo_sizes <- lapply(homo_sv_tables, function(x){ x[x$type == type_to_plot, 'len'] } )
+    hetero_sizes <- lapply(heter_sv_tables, function(x){ x[x$type == type_to_plot, 'len'] } )
+
+    ylim <- c(min(log10(abs(unlist(c(homo_sizes, hetero_sizes))))),
+              max(log10(abs(unlist(c(homo_sizes, hetero_sizes))))))
+    par(mfrow = c(2, 1))
+    # ASEX
+    asexuals <- seq(1, 10, by = 2)
+    par(mar = c(3.2, 3.5, 2.5, 1))
+    plot(x=NULL, y=NULL,
+         xlim = c(0.5, 5.5), ylim = ylim,
+         type="n", ann=FALSE, axes=F)
+    axis(1, at=c(1:5), labels = F)
+    axis(2, at = c(1, 2, 3, 4, 5), labels = c('10', '100', '1000', '10000', '100000'), cex.axis = 1)
+    text(c(1:5), par("usr")[3] - 0.3, srt = 15, pos = 1, xpd = TRUE, labels = timemas$labels[asexuals], cex = 1.3)
+    mtext(expression(paste("Sizes [" , log[10], " nt]")), side = 2, line = +2, cex = 1.6)
+    title(type_to_plot)
+    legend('topright', c('left - all homozygous', 'right - all heterozygous'), bty = 'n')
+
+    for(i in 1:5){
+        sp_to_plot <- asexuals[i]
+        vioplot2(log10(abs(homo_sizes[[sp_to_plot]])),
+                 at = i, side = "left", col = asex_blue,
+                 add = T, h = 0.2)
+        vioplot2(log10(abs(hetero_sizes[[sp_to_plot]])),
+                 at = i, side = "right", col = asex_blue,
+                 add = T, h = 0.2)
+    }
+
+    par(mar = c(3.2, 3.5, 1, 1))
+    sexuals <- seq(2, 10, by = 2)
+    plot(x=NULL, y=NULL,
+         xlim = c(0.5, 5.5), ylim = ylim,
+         type="n", ann=FALSE, axes=F)
+    axis(1, at=c(1:5), labels = F)
+    axis(2, at = c(1, 2, 3, 4, 5), labels = c('10', '100', '1000', '10000', '100000'), cex.axis = 1)
+    text(c(1:5), par("usr")[3] - 0.3, srt = 15, pos = 1, xpd = TRUE, labels = timemas$labels[sexuals], cex = 1.3)
+    mtext(expression(paste("Sizes [" , log[10], " nt]")), side = 2, line = +2, cex = 1.6)
+
+    for(i in 1:5){
+        sp_to_plot <- sexuals[i]
+        vioplot2(log10(abs(homo_sizes[[sp_to_plot]])),
+                 at = i, side = "left", col = sex_red,
+                 add = T, h = 0.2)
+        vioplot2(log10(abs(hetero_sizes[[sp_to_plot]])),
+                 at = i, side = "right", col = sex_red,
+                 add = T, h = 0.2)
+    }
+    dev.off()
+}
