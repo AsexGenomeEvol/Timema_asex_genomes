@@ -44,6 +44,16 @@ Using all this, I can not detect any displacement of homozygous / heterozygous S
 F_structural_variation_analysis/SV_types_and_lengths.R
 ```
 
+### SVs vs scaffold size where they were called
+
+To figure:
+ - How long scaffolds are meaningful to anchor to genome reference
+ - What is the effect of assembly fragmentation on SV calling
+
+```
+F_structural_variation_analysis/SVs_vs_scaffold_length.R
+```
+
 ### Sanity checks
 
 I need to make sure that I understand how much these SV calls are wrong. I need to do a bunch of sanity checks, especially addressing coverage supporting individual SVs.
