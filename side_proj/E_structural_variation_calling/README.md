@@ -8,7 +8,7 @@ with greater resolution.
 
 Methods are based on coverage or mapping patterns. Different methods produce different variant calls. This observation let to development of methods that calls consensus based on different methods. The consensus caller is called (Survivor)[https://github.com/fritzsedlazeck/SURVIVOR].
 
-#### pair-end
+#### SV calls: pair-end
 
 ##### Manta
 
@@ -72,9 +72,9 @@ smoove call -x --genotype --name Tcm_05 --outdir $outdir \
 
 weird problem with libraries.
 
-#### mate-pairs
+#### SV calls: mate-pairs
 
-I have mate-pairs for only reference genomes
+I have mate-pairs for only reference genomes.
 
 #### Merging calls
 
@@ -85,7 +85,7 @@ Right now I have Delly, Lumpy and Manta SV calls, the union in T. monikensis is 
 
 In either the case I will remove all calls homozygous in all (nearly all?) individuals (asm errors).
 
-#### Making union
+##### Making union
 
 There two ways how to make a union. Delly or SURVIVOR. Delly uses both recoprocal overlap and breakpoint offset to consider an SV the same. SURVIVOR focuses on the offset only. Delly is however screwing up on merging other SV callers, so SURVIVOR it is
 
@@ -101,7 +101,14 @@ data/$SP/variant_calls/"$SP"_survivor_all_calls_union.vcf
 
 file with the default merging parameters (min len > 30; breakpoint distance < 1000). It is a wild script for now, but once I will have delly SV calls for all the species, I will embed it to `Snakemake`.
 
-#### Genotyping by Delly
+- individual delly / smove / manta SV calls (mostly if we want to go back and check something)
+- merged calls of the three (`"$SP"_all_calls_merged.bcf`, is there support inside? Need to check)
+
+#### Genotyping
+
+This step is now essential. Till now we were calling variants with a crtain reliability. We need to take their union and ask again, in what samples is this variant present? Absence of clear evidence (the reason why it was not called in the first place) and we need to confirm the absence rather.
+
+##### by Delly
 
 Delly has a genotyper given set of candidates, so I use it while feeding it with the merged SVs.
 
@@ -116,7 +123,13 @@ data/$SP/variant_calls/$SAMPLE/delly_genotyping.bcf # for each sample
 data/$SP/variant_calls/delly_genotyping_merged.bcf
 ```
 
-#### Paragraph
+Output are merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given the set of candidates
+
+##### Paragraph
+
+This is program of choice. The problem is that it requires formating for the `.vcf` file that contains `REF` and `ALT` (check minimalist example `data/testing_data/round-trip-genotyping/candidates.vcf`). Which means that I need to go one step back, to figure out how to merge calls WITH explicit `REF`/`ALT` sequences. The other option would be to genotype using calls of each other and then base the mergin on the genopyping itself (SURVIVOR on steroids). I should try to genotype reciprocally two samples and then see if the genotyping is consistent with SURVIVOR merged calls.
+
+NOt sure why I needed this, but I keep it for now because one nevers knows:
 
 Calculate read deapth of a bam file
 
@@ -126,15 +139,14 @@ samtools depth -a mapping/Tms_00_to_b3v08.bam > coverage_depth # coule be direct
 cat coverage_depth |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
 ## 11.55
 ## av read len?? made it up to 100
-
 ```
 
-#### What do we have in the end
+##### GraphTyper2
 
-- individual delly / smove / manta SV calls (mostly if we want to go back and check something)
-- merged calls of the three (`"$SP"_all_calls_merged.bcf`, is there support inside? Need to check)
-- merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given the set of candidates
+
 
 #### TO CONSIDER
 
 I think smove and manta use different names for the same thing (duplication vs insertion) or at least they sums are the same and one distinguishes them and the other does not. So it might be a good idea to "unify" them before merging. SURVIVOR cared about SV typpes, not sure how exactly Delly merger works.
+
+- [stix](https://github.com/ryanlayer/stix)
