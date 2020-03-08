@@ -10,6 +10,24 @@ Methods are based on coverage or mapping patterns. Different methods produce dif
 
 #### SV calls: pair-end
 
+
+Restarting efforts at Edinburgh required quite lot of logistic investment to move the data here. I have them in agregated directories by type rather than indevidual as before. Not sure which is better. If I will reorganize them again, I will have rewrite this, but for now I keep it as it is.
+
+**data**
+
+- 60 mapping files: `data/mapped_reseq_reads/*.bam`
+- 60 manta SV calls (called at Vital-it cluster using `E_structural_variation_calling/manta.sh`): `data/manta_SV_calls/<sp>_<ind>_manta/*.vcf.gz`
+- 60 lumpy SV calls (called at Vital-it cluster using `E_structural_variation_calling/smoove.sh`; smoove is a wrapper round lumpy): `data/smoove_SVs/...`
+- reference genomes: `data/final_references/*_b3v08.fasta.gz`
+
+```
+for bam in data/mapped_reseq_reads/*.bam; do
+  qsub -o logs/ -e logs/ -cwd -N bamindex -V -pe smp64 1 -b yes "samtools index $bam"
+done
+```
+
+### Done in Lausanne
+
 ##### Manta
 
 The tools is designed for tumor cells, but there is no reason to think that it wont work on whole bodies.
@@ -38,6 +56,8 @@ The name of the reference individual's insert size 350: `ref_is350`
 manta.sh 1_Tdi b3v04 ref_is350
 ```
 
+For a record, Manta does not by default call inversions, but breakpoints: `$MANTA_INSTALL_FOLDER/libexec/convertInversion.py` should convert BND to INV.
+
 ##### Delly
 
 Check their [readme](https://github.com/dellytools/delly#germline-sv-calling), it's very clear and simple. installed it is running
@@ -52,10 +72,6 @@ produced in 2 hours a `.bcf` file that was not parsed so far.
 ##### Lumpy
 
 I installed lumpy and [smoove](https://brentp.github.io/post/smoove/) which is a probabilistic genotyper using SV calls by lumpy.
-
-```
-module add UHTS/Analysis/samtools/1.8
-```
 
 test run:
 
@@ -125,20 +141,42 @@ data/$SP/variant_calls/delly_genotyping_merged.bcf
 
 Output are merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given the set of candidates
 
+### Done in Edinburgh
+
 ##### Paragraph
 
 This is program of choice. The problem is that it requires formating for the `.vcf` file that contains `REF` and `ALT` (check minimalist example `data/testing_data/round-trip-genotyping/candidates.vcf`). Which means that I need to go one step back, to figure out how to merge calls WITH explicit `REF`/`ALT` sequences. The other option would be to genotype using calls of each other and then base the mergin on the genopyping itself (SURVIVOR on steroids). I should try to genotype reciprocally two samples and then see if the genotyping is consistent with SURVIVOR merged calls.
 
-NOt sure why I needed this, but I keep it for now because one nevers knows:
+```
+VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
+SAMPLES=data/genotyping/Tms_samples.txt
+REF=data/final_references/3_Tms_b3v08.fasta.gz
+qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes "mkdir -p /scratch/kjaron/3_Tce_ind00_genotyping; multigrmpy.py -i $VARIANTS -m $SAMPLES -r $REF -o data/genotyping/3_Tce_ind00_genotyping --scratch-dir /scratch/kjaron/3_Tce_ind00_genotyping --threads 32"
+```
 
-Calculate read deapth of a bam file
+- Error 1: [SVs too close to the start of scafflds](https://github.com/Illumina/paragraph/issues/42). For now I will just kick them out
+- Error 2: [Unresloved <INS>](https://github.com/Illumina/manta/blob/master/docs/userGuide/README.md#insertions-with-incomplete-insert-sequence-assembly) by definition don't have resolved sequence. I will filter those out as well for now. I guess the better strategy would be to use Ns.
+- Error 3: `Illegal character in ALT allele: [3_Tms_b3v08_scaf000202:631916[N` I think this means it does not like the the inversions!
+
 
 ```
-module add UHTS/Analysis/samtools/1.8
-samtools depth -a mapping/Tms_00_to_b3v08.bam > coverage_depth # coule be directly piped
-cat coverage_depth |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
+zcat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz | grep "^##" > data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
+zcat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz | grep -v "^##" | awk '{if ( $2 > 150 ){ print $0 } }' | grep -v "<INS>" >> data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
+```
+
+Samples requires depth of each bam file, so
+
+```
+samtools depth -a data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam > coverage_depth # coule be directly piped
+cat coverage_depth |  awk '{sum+=$3} END { print "Average = ", sum/NR}'
 ## 11.55
 ## av read len?? made it up to 100
+```
+
+Get coverages of all bam files
+
+```
+qsub -o logs/ -e logs/ -cwd -N coverages -V -pe smp64 1 -b yes "bash calculate_coverages.sh"
 ```
 
 ##### GraphTyper2

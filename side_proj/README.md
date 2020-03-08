@@ -13,9 +13,7 @@ The analysis of variants of reference genomes were moved back to repository `tim
 
 #### Downstream analysis of variants
 
-- ?
-- ??
-- ???
+- 
 
 #### Dependencies
 
