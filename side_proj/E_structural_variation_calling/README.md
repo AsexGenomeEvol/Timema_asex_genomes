@@ -147,6 +147,8 @@ Output are merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given 
 
 This is program of choice. The problem is that it requires formating for the `.vcf` file that contains `REF` and `ALT` (check minimalist example `data/testing_data/round-trip-genotyping/candidates.vcf`). Which means that I need to go one step back, to figure out how to merge calls WITH explicit `REF`/`ALT` sequences. The other option would be to genotype using calls of each other and then base the mergin on the genopyping itself (SURVIVOR on steroids). I should try to genotype reciprocally two samples and then see if the genotyping is consistent with SURVIVOR merged calls.
 
+
+
 ```
 VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
 SAMPLES=data/genotyping/Tms_samples.txt
@@ -157,11 +159,24 @@ qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes "mkdir -p /scrat
 - Error 1: [SVs too close to the start of scafflds](https://github.com/Illumina/paragraph/issues/42). For now I will just kick them out
 - Error 2: [Unresloved <INS>](https://github.com/Illumina/manta/blob/master/docs/userGuide/README.md#insertions-with-incomplete-insert-sequence-assembly) by definition don't have resolved sequence. I will filter those out as well for now. I guess the better strategy would be to use Ns.
 - Error 3: `Illegal character in ALT allele: [3_Tms_b3v08_scaf000202:631916[N` I think this means it does not like the the inversions!
+- Error 4: `Exception: 514459:514542 missing REF or ALT sequence.`; and the problematic SV is `3_Tms_b3v08_scaf000253	514459	MantaINV:5899:0:0:0:0:0	N	<INV>	34	SampleFT	END=514542;SVTYPE=INV;SVLEN=83;IMPRECISE;CIPOS=-351,352;CIEND=-355,356;INV5	GT:FT:GQ:PL:PR	1/1:MinGQ:9:86,12,0:0,4`. Reported [here](https://github.com/Illumina/paragraph/issues/43). For now I just manually deleted it, as I don't see anything wrong with it for now.
+- Error 5: `Exception: Illegal character in ALT allele: ]3_Tms_b3v08_scaf007303:7862]T` This is a breakpoint that is not an inversion, so it was not convered.
 
+All the fixes:
 
 ```
-zcat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz | grep "^##" > data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
-zcat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz | grep -v "^##" | awk '{if ( $2 > 150 ){ print $0 } }' | grep -v "<INS>" >> data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
+conda activate py2
+python2 ~/src/manta/src/python/libexec/convertInversion.py ~/.conda/envs/default_genomics/bin/samtools data/final_references/3_Tms_b3v08.fasta.gz data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz > data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_inversions.vcf
+cat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_inversions.vcf | grep "^##" > data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
+cat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_inversions.vcf | grep -v "^##" | awk '{if ( $2 > 150 ){ print $0 } }' | grep -v "<INS>" | grep -v "MantaBND" | grep -v "514459" >> data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
+```
+
+```
+python2 ~/src/manta/src/python/libexec/convertInversion.py
+```
+
+```
+python ./scripts/convertManta2Paragraph_compatible_vcf.py ~/.conda/envs/default_genomics/bin/samtools data/final_references/3_Tms_b3v08.fasta.gz data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV.vcf.gz > data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV_inversions.vcf
 ```
 
 Samples requires depth of each bam file, so
@@ -188,3 +203,5 @@ qsub -o logs/ -e logs/ -cwd -N coverages -V -pe smp64 1 -b yes "bash calculate_c
 I think smove and manta use different names for the same thing (duplication vs insertion) or at least they sums are the same and one distinguishes them and the other does not. So it might be a good idea to "unify" them before merging. SURVIVOR cared about SV typpes, not sure how exactly Delly merger works.
 
 - [stix](https://github.com/ryanlayer/stix)
+
+CNV with a different specialised software, such as http://software.broadinstitute.org/software/genomestrip/
