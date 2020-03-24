@@ -32,6 +32,7 @@ from io import BufferedReader
 from subprocess import check_output
 from os import path
 from os.path import exists
+from collections import defaultdict
 
 class VcfRecord:
     def __init__(self, inline):
@@ -78,6 +79,13 @@ class VcfRecord:
             if self.mateChr == self.chr:
                 self.isINV3 = True
 
+    def adjustVcfRecords(self):
+        # this should be unnecessary, but I put it here for any case (if there is a corer case where this entry has less than 15 characters)
+        if len(self.vid) >= 15:
+            # rename MantaDUP:TANDEM to simply MantaDUP and <DUP> respectively
+            if self.vid[:15] == "MantaDUP:TANDEM":
+                self.vid = "MantaDUP" + self.vid[15:]
+                self.alt = "<DUP>"
 
     def makeLine(self):
         infoStr = ";".join(self.info)
@@ -95,7 +103,6 @@ class VcfRecord:
 
 
 def scanVcf(vcfFile):
-
     invMateDict = {}
 
     if vcfFile.endswith('gz'):
@@ -107,6 +114,8 @@ def scanVcf(vcfFile):
     for line in fpVcf:
         if line[0] == '#':
             continue
+        # else:
+        #     break
 
         vcfRec = VcfRecord(line)
         vcfRec.checkInversion()
@@ -117,7 +126,6 @@ def scanVcf(vcfFile):
             else:
                 mateId = vcfRec.infoDict["MATEID"]
                 invMateDict[mateId] = ""
-
     return invMateDict
 
 
@@ -139,18 +147,19 @@ def writeLines(lines):
         sys.stdout.write(line)
 
 
-def convertInversions(refFasta, vcfFile, invMateDict):
+def convertInversions(args, invMateDict):
     isHeaderInfoAdded = False
     isHeaderAltAdded = False
     lineBuffer = []
     bufferedChr = ""
     bufferedPos = -1
+    filteringStats = defaultdict(int)
 
-    if vcfFile.endswith('gz'):
-        gzfp = gzip.open(vcfFile, 'r')
+    if args.mantaVcf.endswith('gz'):
+        gzfp = gzip.open(args.mantaVcf, 'r')
         fpVcf = BufferedReader(gzfp)
     else:
-        fpVcf = open(vcfFile, 'r')
+        fpVcf = open(args.mantaVcf, 'r')
 
     for line in fpVcf:
         if line.startswith('#'):
@@ -178,7 +187,7 @@ def convertInversions(refFasta, vcfFile, invMateDict):
                 # adjust POS for INV5
                 vcfRec.pos -= 1
                 vcfRec.matePos -= 1
-                vcfRec.ref = getReference(refFasta,
+                vcfRec.ref = getReference(args.refFasta,
                                           vcfRec.chr, vcfRec.pos, vcfRec.pos)
 
             # update manta ID
@@ -224,7 +233,7 @@ def convertInversions(refFasta, vcfFile, invMateDict):
                         cipos = vcfRec.infoDict["CIPOS"].split(',')
                         homSeqStart = vcfRec.pos + int(cipos[0]) + 1
                         homSeqEnd = vcfRec.pos + int(cipos[1])
-                        refSeq = getReference(refFasta, vcfRec.chr,
+                        refSeq = getReference(args.refFasta, vcfRec.chr,
                                               homSeqStart, homSeqEnd)
                         infoHomSeqStr = "HOMSEQ=%s" % refSeq
                         newInfo.append(infoHomSeqStr)
@@ -256,6 +265,11 @@ def convertInversions(refFasta, vcfFile, invMateDict):
 
             vcfRec.info = newInfo
 
+        if vcfRec.pos < args.r:
+            filteringStats['too_close'] += 1
+            continue
+
+        vcfRec.adjustVcfRecords()
         vcfRec.makeLine()
 
         # make sure the vcf is sorted in genomic order
@@ -274,16 +288,23 @@ def convertInversions(refFasta, vcfFile, invMateDict):
     if lineBuffer:
         writeLines(lineBuffer)
 
+    return filteringStats
 
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Converts manta diploidSV output to paragraph compatible vcf file.')
     parser.add_argument('refFasta', help='the reference .fasta file (can be gzipped)')
     parser.add_argument('mantaVcf', help='the manta _diploidSV.vcf file (can be gzipped)')
+    parser.add_argument('-r', '-read_length', help='to filter the variants located less than read length bases away from the beginning of the scaffolds (default: 150)', default=150, type=int)
+
+    # TODO TEST FOR SAMTOOLS
 
     args = parser.parse_args()
-    refFasta = args.refFasta
-    vcfFile = args.mantaVcf
+    # for testing
+    # args.refFasta = 'test/Tms_sample_ref.fasta'
+    # args.mantaVcf = 'test/test_diploidSV.vcf'
+    # args.r = 150
 
-    invMateDict = scanVcf(vcfFile)
-    convertInversions(refFasta, vcfFile, invMateDict)
+    invMateDict = scanVcf(args.mantaVcf)
+    filteringStats = convertInversions(args, invMateDict)
+    sys.stderr.write("Filtering " + str(filteringStats['too_close']) + " with postion < " + str(args.r) + "\n")
