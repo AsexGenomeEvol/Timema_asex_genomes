@@ -27,14 +27,13 @@
 
 import sys
 import gzip
+import argparse
 from io import BufferedReader
 from subprocess import check_output
 from os import path
 from os.path import exists
 
-
 class VcfRecord:
-
     def __init__(self, inline):
         tokens = inline.strip().split('\t')
 
@@ -122,9 +121,9 @@ def scanVcf(vcfFile):
     return invMateDict
 
 
-def getReference(samtools, refFasta, chrom, start, end):
+def getReference(refFasta, chrom, start, end):
     region = "%s:%d-%d" % (chrom, start, end)
-    samtoolsOut = check_output([samtools, "faidx", refFasta, region])
+    samtoolsOut = check_output(["samtools", "faidx", refFasta, region])
     # sys.stderr.write("".join([samtools, "faidx" + refFasta + region]))
     # sys.stderr.write(str(samtoolsOut))
     refSeq = ""
@@ -140,7 +139,7 @@ def writeLines(lines):
         sys.stdout.write(line)
 
 
-def convertInversions(samtools, refFasta, vcfFile, invMateDict):
+def convertInversions(refFasta, vcfFile, invMateDict):
     isHeaderInfoAdded = False
     isHeaderAltAdded = False
     lineBuffer = []
@@ -179,7 +178,7 @@ def convertInversions(samtools, refFasta, vcfFile, invMateDict):
                 # adjust POS for INV5
                 vcfRec.pos -= 1
                 vcfRec.matePos -= 1
-                vcfRec.ref = getReference(samtools, refFasta,
+                vcfRec.ref = getReference(refFasta,
                                           vcfRec.chr, vcfRec.pos, vcfRec.pos)
 
             # update manta ID
@@ -225,7 +224,7 @@ def convertInversions(samtools, refFasta, vcfFile, invMateDict):
                         cipos = vcfRec.infoDict["CIPOS"].split(',')
                         homSeqStart = vcfRec.pos + int(cipos[0]) + 1
                         homSeqEnd = vcfRec.pos + int(cipos[1])
-                        refSeq = getReference(samtools, refFasta, vcfRec.chr,
+                        refSeq = getReference(refFasta, vcfRec.chr,
                                               homSeqStart, homSeqEnd)
                         infoHomSeqStr = "HOMSEQ=%s" % refSeq
                         newInfo.append(infoHomSeqStr)
@@ -278,22 +277,13 @@ def convertInversions(samtools, refFasta, vcfFile, invMateDict):
 
 
 if __name__=='__main__':
+    parser = argparse.ArgumentParser(description='Converts manta diploidSV output to paragraph compatible vcf file.')
+    parser.add_argument('refFasta', help='the reference .fasta file (can be gzipped)')
+    parser.add_argument('mantaVcf', help='the manta _diploidSV.vcf file (can be gzipped)')
 
-    usage = "convertInversion.py <samtools path> <reference fasta> <vcf file>\n"
-    if len(sys.argv) <= 3:
-        sys.stderr.write(usage)
-        sys.exit(1)
-
-    samtools = sys.argv[1]
-    refFasta = sys.argv[2]
-    vcfFile = sys.argv[3]
-
-    for inputFile in [samtools, refFasta, vcfFile]:
-        if not(exists(inputFile)):
-            errMsg = ('File %s does not exist.'
-                      % inputFile)
-            sys.stderr.write(errMsg + '\nProgram exits.')
-            sys.exit(1)
+    args = parser.parse_args()
+    refFasta = args.refFasta
+    vcfFile = args.mantaVcf
 
     invMateDict = scanVcf(vcfFile)
-    convertInversions(samtools, refFasta, vcfFile, invMateDict)
+    convertInversions(refFasta, vcfFile, invMateDict)

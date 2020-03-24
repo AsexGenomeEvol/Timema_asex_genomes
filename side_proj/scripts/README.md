@@ -1,6 +1,8 @@
-### make
 
-make scripts dedicated to particular tasks.
+```
+python3 scripts/convertManta2Paragraph_compatible_vcf.py
+data/3_Tms/variant_calls/variant_calls/Tms_00/Tms_00_manta/results/variants/diploidSV.vcf
+```
 
 ### Generic genomics
 
