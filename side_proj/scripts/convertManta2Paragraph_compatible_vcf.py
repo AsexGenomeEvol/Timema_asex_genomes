@@ -80,12 +80,10 @@ class VcfRecord:
                 self.isINV3 = True
 
     def adjustVcfRecords(self):
-        # this should be unnecessary, but I put it here for any case (if there is a corer case where this entry has less than 15 characters)
-        if len(self.vid) >= 15:
-            # rename MantaDUP:TANDEM to simply MantaDUP and <DUP> respectively
-            if self.vid[:15] == "MantaDUP:TANDEM":
-                self.vid = "MantaDUP" + self.vid[15:]
-                self.alt = "<DUP>"
+        # rename MantaDUP:TANDEM to simply MantaDUP and <DUP> respectively
+        if "MantaDUP:TANDEM" in self.vid:
+            self.vid = "MantaDUP" + self.vid[15:]
+            self.alt = "<DUP>"
 
     def makeLine(self):
         infoStr = ";".join(self.info)
@@ -265,12 +263,31 @@ def convertInversions(args, invMateDict):
 
             vcfRec.info = newInfo
 
+        vcfRec.makeLine()
+
+        # for adjustments I made a method (now chaniging DUP:TANDEM to DUP)
+        vcfRec.adjustVcfRecords()
+        # line  chr  pos  vid  ref  alt  qual  filter  others
+
         if vcfRec.pos < args.r:
             filteringStats['too_close'] += 1
             continue
 
-        vcfRec.adjustVcfRecords()
-        vcfRec.makeLine()
+        if vcfRec.alt == '<INS>':
+            filteringStats['unresolved_INS'] += 1
+            continue
+
+        if 'MantaBND' in vcfRec.vid :
+            filteringStats['BND'] += 1
+            continue
+
+        if vcfRec.alt == '<INV>' and 'SVINSSEQ' in vcfRec.line:
+            filteringStats['INV_SVINSSEQ'] += 1
+            continue
+
+        if args.quality_filtering and vcfRec.filter != "PASS":
+            filteringStats['QUAL'] += 1
+            continue
 
         # make sure the vcf is sorted in genomic order
         if (not vcfRec.chr == bufferedChr) or (vcfRec.pos > bufferedPos):
@@ -295,7 +312,8 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Converts manta diploidSV output to paragraph compatible vcf file.')
     parser.add_argument('refFasta', help='the reference .fasta file (can be gzipped)')
     parser.add_argument('mantaVcf', help='the manta _diploidSV.vcf file (can be gzipped)')
-    parser.add_argument('-r', '-read_length', help='to filter the variants located less than read length bases away from the beginning of the scaffolds (default: 150)', default=150, type=int)
+    parser.add_argument('-r', '-read_length', default=150, type=int, help='to filter the variants located less than read length bases away from the beginning of the scaffolds (default: 150)')
+    parser.add_argument('--quality_filtering', action="store_true", default=False, help='set to filter all the non-PASS variants (default: False)')
 
     # TODO TEST FOR SAMTOOLS
 
@@ -308,3 +326,8 @@ if __name__=='__main__':
     invMateDict = scanVcf(args.mantaVcf)
     filteringStats = convertInversions(args, invMateDict)
     sys.stderr.write("Filtering " + str(filteringStats['too_close']) + " with postion < " + str(args.r) + "\n")
+    sys.stderr.write("Filtering " + str(filteringStats['BND']) + " breakpoints (BND) that were not possible to convert to inversions\n")
+    sys.stderr.write("Filtering " + str(filteringStats['unresolved_INS']) + " unresolved interstions (those with alt tag <INS>)\n")
+    sys.stderr.write("Filtering " + str(filteringStats['INV_SVINSSEQ']) + " INV with SVINSSEQ tag in the info\n")
+    if args.quality_filtering:
+        sys.stderr.write("Filtering " + str(filteringStats['QUAL']) + " variants with non-PASS quality\n")
