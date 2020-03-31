@@ -1,6 +1,6 @@
 
 ```
-VARIANTS=test/test_diploidSV.vcf
+VARIANTS=test/test_diploidSV.vcf.gz
 REF=test/Tms_sample_ref.fasta
 TESTOUT=test/paragraph_compatible.vcf
 SCRIPT=scripts/convertManta2Paragraph_compatible_vcf.py

@@ -162,21 +162,15 @@ qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes "mkdir -p /scrat
 - Error 4: `Exception: 514459:514542 missing REF or ALT sequence.`; and the problematic SV is `3_Tms_b3v08_scaf000253	514459	MantaINV:5899:0:0:0:0:0	N	<INV>	34	SampleFT	END=514542;SVTYPE=INV;SVLEN=83;IMPRECISE;CIPOS=-351,352;CIEND=-355,356;INV5	GT:FT:GQ:PL:PR	1/1:MinGQ:9:86,12,0:0,4`. Reported [here](https://github.com/Illumina/paragraph/issues/43). For now I just manually deleted it, as I don't see anything wrong with it for now.
 - Error 5: `Exception: Illegal character in ALT allele: ]3_Tms_b3v08_scaf007303:7862]T` This is a breakpoint that is not an inversion, so it was not convered.
 
-All the fixes:
+All the are now in a single script `scripts/convertManta2Paragraph_compatible_vcf.py`:
 
 ```
-conda activate py2
-python2 ~/src/manta/src/python/libexec/convertInversion.py ~/.conda/envs/default_genomics/bin/samtools data/final_references/3_Tms_b3v08.fasta.gz data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz > data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_inversions.vcf
-cat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_inversions.vcf | grep "^##" > data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
-cat data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_inversions.vcf | grep -v "^##" | awk '{if ( $2 > 150 ){ print $0 } }' | grep -v "<INS>" | grep -v "MantaBND" | grep -v "514459" >> data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
-```
-
-```
-python2 ~/src/manta/src/python/libexec/convertInversion.py
-```
-
-```
-python ./scripts/convertManta2Paragraph_compatible_vcf.py ~/.conda/envs/default_genomics/bin/samtools data/final_references/3_Tms_b3v08.fasta.gz data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV.vcf.gz > data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV_inversions.vcf
+conda activate default_genomics
+SCRIPT=scripts/convertManta2Paragraph_compatible_vcf.py
+REF=data/final_references/3_Tms_b3v08.fasta.gz
+VARIANTS=data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV.vcf.gz
+OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
+python3 $SCRIPT $REF $VARIANTS > $OUT
 ```
 
 Samples requires depth of each bam file, so

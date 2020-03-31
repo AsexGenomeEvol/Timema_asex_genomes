@@ -28,7 +28,6 @@
 import sys
 import gzip
 import argparse
-from io import BufferedReader
 from subprocess import check_output
 from os import path
 from os.path import exists
@@ -104,13 +103,12 @@ def scanVcf(vcfFile):
     invMateDict = {}
 
     if vcfFile.endswith('gz'):
-        gzfp = gzip.open(vcfFile, 'r')
-        fpVcf = BufferedReader(gzfp)
+        fpVcf = gzip.open(vcfFile, 'rt')
     else:
         fpVcf = open(vcfFile, 'r')
 
     for line in fpVcf:
-        if line[0] == '#':
+        if line.startswith('#'):
             continue
         # else:
         #     break
@@ -154,8 +152,7 @@ def convertInversions(args, invMateDict):
     filteringStats = defaultdict(int)
 
     if args.mantaVcf.endswith('gz'):
-        gzfp = gzip.open(args.mantaVcf, 'r')
-        fpVcf = BufferedReader(gzfp)
+        fpVcf = gzip.open(args.mantaVcf, 'rt')
     else:
         fpVcf = open(args.mantaVcf, 'r')
 
