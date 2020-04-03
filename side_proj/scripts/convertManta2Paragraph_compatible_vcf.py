@@ -138,18 +138,20 @@ def getReference(refFasta, chrom, start, end):
     return refSeq.upper()
 
 
-def writeLines(lines):
-    for line in lines:
-        sys.stdout.write(line)
-
-
 def convertInversions(args, invMateDict):
     isHeaderInfoAdded = False
     isHeaderAltAdded = False
-    lineBuffer = []
-    bufferedChr = ""
-    bufferedPos = -1
+    # lineBuffer = []
+    # bufferedChr = ""
+    # bufferedPos = -1
     filteringStats = defaultdict(int)
+
+    if args.prefix_split_by_type:
+        out_files = dict()
+        out_files['INV'] = open(args.prefix_split_by_type + "_INV.vcf", 'w')
+        out_files['INS'] = open(args.prefix_split_by_type + "_INS.vcf", 'w')
+        out_files['DUP'] = open(args.prefix_split_by_type + "_DUP.vcf", 'w')
+        out_files['DEL'] = open(args.prefix_split_by_type + "_DEL.vcf", 'w')
 
     if args.mantaVcf.endswith('gz'):
         fpVcf = gzip.open(args.mantaVcf, 'rt')
@@ -159,15 +161,28 @@ def convertInversions(args, invMateDict):
     for line in fpVcf:
         if line.startswith('#'):
             if (not isHeaderInfoAdded) and line.startswith("##FORMAT="):
-                sys.stdout.write("##INFO=<ID=INV3,Number=0,Type=Flag,Description=\"Inversion breakends open 3' of reported location\">\n")
-                sys.stdout.write("##INFO=<ID=INV5,Number=0,Type=Flag,Description=\"Inversion breakends open 5' of reported location\">\n")
+                header_line = "##INFO=<ID=INV3,Number=0,Type=Flag,Description=\"Inversion breakends open 3' of reported location\">\n##INFO=<ID=INV5,Number=0,Type=Flag,Description=\"Inversion breakends open 5' of reported location\">\n"
+                if args.prefix_split_by_type:
+                    out_files["INV"].write(header_line)
+                else:
+                    sys.stdout.write(header_line)
                 isHeaderInfoAdded = True
 
             if (not isHeaderAltAdded) and line.startswith("##ALT="):
-                sys.stdout.write("##ALT=<ID=INV,Description=\"Inversion\">\n")
+                header_line = "##ALT=<ID=INV,Description=\"Inversion\">\n"
+                if args.prefix_split_by_type:
+                    out_files["INV"].write(header_line)
+                else:
+                    sys.stdout.write(header_line)
                 isHeaderAltAdded = True
 
-            sys.stdout.write(line)
+            if args.prefix_split_by_type:
+                out_files["INV"].write(line)
+                out_files["DEL"].write(line)
+                out_files["INS"].write(line)
+                out_files["DUP"].write(line)
+            else:
+                sys.stdout.write(line)
             continue
 
         vcfRec = VcfRecord(line)
@@ -286,21 +301,31 @@ def convertInversions(args, invMateDict):
             filteringStats['QUAL'] += 1
             continue
 
-        # make sure the vcf is sorted in genomic order
-        if (not vcfRec.chr == bufferedChr) or (vcfRec.pos > bufferedPos):
-            if lineBuffer:
-                writeLines(lineBuffer)
-
-            lineBuffer = [vcfRec.line]
-            bufferedChr = vcfRec.chr
-            bufferedPos = vcfRec.pos
-        elif vcfRec.pos < bufferedPos:
-            lineBuffer.insert(0, vcfRec.line)
+        if args.prefix_split_by_type:
+            out_files[vcfRec.vid[5:8]].write(vcfRec.line)
         else:
-            lineBuffer.append(vcfRec.line)
+            sys.stdout.write(vcfRec.line)
 
-    if lineBuffer:
-        writeLines(lineBuffer)
+        # make sure the vcf is sorted in genomic order
+        # if (not vcfRec.chr == bufferedChr) or (vcfRec.pos > bufferedPos):
+        #     if lineBuffer:
+        #         writeLines(lineBuffer)
+        #
+        #     lineBuffer = [vcfRec.line]
+        #     bufferedChr = vcfRec.chr
+        #     bufferedPos = vcfRec.pos
+        # elif vcfRec.pos < bufferedPos:
+        #     lineBuffer.insert(0, vcfRec.line)
+        # else:
+        #     lineBuffer.append()
+        # def writeLines(lines):
+        #     for line in lines:
+
+    if args.prefix_split_by_type:
+        out_files['INV'].close()
+        out_files['INS'].close()
+        out_files['DUP'].close()
+        out_files['DEL'].close()
 
     return filteringStats
 
@@ -311,6 +336,7 @@ if __name__=='__main__':
     parser.add_argument('mantaVcf', help='the manta _diploidSV.vcf file (can be gzipped)')
     parser.add_argument('-r', '-read_length', default=150, type=int, help='to filter the variants located less than read length bases away from the beginning of the scaffolds (default: 150)')
     parser.add_argument('--quality_filtering', action="store_true", default=False, help='set to filter all the non-PASS variants (default: False)')
+    parser.add_argument('-prefix_split_by_type', default='', help='if specified prefix, variants are (default: merged output streamed to std stream)')
 
     # TODO TEST FOR SAMTOOLS
 
