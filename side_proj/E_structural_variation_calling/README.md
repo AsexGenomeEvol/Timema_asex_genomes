@@ -147,13 +147,8 @@ Output are merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given 
 
 This is program of choice. The problem is that it requires formating for the `.vcf` file that contains `REF` and `ALT` (check minimalist example `data/testing_data/round-trip-genotyping/candidates.vcf`). Which means that I need to go one step back, to figure out how to merge calls WITH explicit `REF`/`ALT` sequences. The other option would be to genotype using calls of each other and then base the mergin on the genopyping itself (SURVIVOR on steroids). I should try to genotype reciprocally two samples and then see if the genotyping is consistent with SURVIVOR merged calls.
 
-
-
 ```
-VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
-SAMPLES=data/genotyping/Tms_samples.txt
-REF=data/final_references/3_Tms_b3v08.fasta.gz
-qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes "mkdir -p /scratch/kjaron/3_Tce_ind00_genotyping; multigrmpy.py -i $VARIANTS -m $SAMPLES -r $REF -o data/genotyping/3_Tce_ind00_genotyping --scratch-dir /scratch/kjaron/3_Tce_ind00_genotyping --threads 32"
+parallel -j 1 'qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes {}' :::: E_structural_variation_calling/paragraph_commands.txt
 ```
 
 - Error 1: [SVs too close to the start of scafflds](https://github.com/Illumina/paragraph/issues/42). For now I will just kick them out
@@ -162,16 +157,32 @@ qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes "mkdir -p /scrat
 - Error 4: `Exception: 514459:514542 missing REF or ALT sequence.`; and the problematic SV is `3_Tms_b3v08_scaf000253	514459	MantaINV:5899:0:0:0:0:0	N	<INV>	34	SampleFT	END=514542;SVTYPE=INV;SVLEN=83;IMPRECISE;CIPOS=-351,352;CIEND=-355,356;INV5	GT:FT:GQ:PL:PR	1/1:MinGQ:9:86,12,0:0,4`. Reported [here](https://github.com/Illumina/paragraph/issues/43). For now I just manually deleted it, as I don't see anything wrong with it for now.
 - Error 5: `Exception: Illegal character in ALT allele: ]3_Tms_b3v08_scaf007303:7862]T` This is a breakpoint that is not an inversion, so it was not convered.
 
-All the are now in a single script `scripts/convertManta2Paragraph_compatible_vcf.py`:
+All the are now in a single script `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py`:
 
 ```
 conda activate default_genomics
-SCRIPT=scripts/convertManta2Paragraph_compatible_vcf.py
+SCRIPT=scripts/convertManta/convertManta2Paragraph_compatible_vcf.py
 REF=data/final_references/3_Tms_b3v08.fasta.gz
-VARIANTS=data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV.vcf.gz
-OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected.vcf
-python3 $SCRIPT $REF $VARIANTS > $OUT
+VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz
+OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed
+python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type $OUT
 ```
+
+**local testing**
+
+too many erros. I will try to do it locally now:
+
+here I am testing only `PASS` duplications
+
+```
+OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed_quality_filtered
+python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type --quality_filtering $OUT
+multigrmpy.py -i data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed_DUP.vcf -m data/genotyping/Tms_samples.txt -r data/final_references/3_Tms_b3v08.fasta.gz -o data/genotyping/3_Tms_ind00_genotyping_DUP --scratch-dir temp/3_Tms_ind00_genotyping_DUP --threads 16
+```
+
+here I will test vcf file without header (it's really big and I think useless).
+
+**other**
 
 Samples requires depth of each bam file, so
 
