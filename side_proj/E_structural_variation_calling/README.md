@@ -147,16 +147,24 @@ Output are merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given 
 
 This is program of choice. The problem is that it requires formating for the `.vcf` file that contains `REF` and `ALT` (check minimalist example `data/testing_data/round-trip-genotyping/candidates.vcf`). Which means that I need to go one step back, to figure out how to merge calls WITH explicit `REF`/`ALT` sequences. The other option would be to genotype using calls of each other and then base the mergin on the genopyping itself (SURVIVOR on steroids). I should try to genotype reciprocally two samples and then see if the genotyping is consistent with SURVIVOR merged calls.
 
-I feed `paragraph` with processed manta SV calls using `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py` script.
+I feed `paragraph` with adjusted manta SV calls using `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py` script wrapped in the `E_structural_variation_calling/prepare_manta_to_paragraph_compatible.sh` script that runs it for all the species.
 
 ```
-parallel -j 1 'qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes {}' :::: E_structural_variation_calling/paragraph_commands.txt
+conda activate default_genomics
+qsub -o logs/ -e logs/ -cwd -N convert_vcf -V -pe smp64 32 -b yes 'bash E_structural_variation_calling/prepare_manta_to_paragraph_compatible.sh'
 ```
 
-This works now for `INS`, `DEL`. Does not for `DUP` and `INV`. The full log of problems I have encountered is bellow.
+TODO: the the SAMPLES TABLES
 
+Now, the genotyping commands for individual files are in `E_structural_variation_calling/paragraph_commands.txt` so to actually genotype the data we run:
 
-##### Manta vcf output to Paragraph compatible vcf
+```
+parallel -j 1 'qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 8 -b yes {}' :::: E_structural_variation_calling/paragraph_commands.txt
+```
+
+This generates `data/genotyping/*_ind*_genotyping` directories for each individual (the second `*`) of each species (the firt `*`).
+
+##### Details on converting manta vcf output to Paragraph compatible vcf
 
 The script `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py` does this conversion:
  - breakpoints (BND) converted to inversions (INV)
@@ -175,27 +183,6 @@ REF=data/final_references/3_Tms_b3v08.fasta.gz
 VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz
 OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed
 python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type > $OUT
-```
-
-I will write a wrapped that will do it for all the species and references
-
-```
-qsub -o logs/ -e logs/ -cwd -N convert_vcf -V -pe smp64 32 -b yes 'bash E_structural_variation_calling/convert_all_manta_vcf_to_paragraph_compatible.sh'
-```
-
-### Tms_01 test
-
-```
-conda activate default_genomics
-SCRIPT=scripts/convertManta/convertManta2Paragraph_compatible_vcf.py
-REF=data/final_references/3_Tms_b3v08.fasta.gz
-VARIANTS=data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV.vcf.gz
-OUT=data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV_manta_compatible.vcf
-python3 $SCRIPT $REF $VARIANTS > $OUT
-```
-
-```
-qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes 'mkdir -p /scratch/kjaron/3_Tms_ind01_genotyping; multigrmpy.py -i data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV_manta_compatible.vcf -m data/genotyping/Tms_samples.txt -r data/final_references/3_Tms_b3v08_unmasked.fasta -o data/genotyping/3_Tms_ind01_genotyping --scratch-dir /scratch/kjaron/3_Tms_ind01_genotyping --threads 32'
 ```
 
 #### TO CONSIDER
