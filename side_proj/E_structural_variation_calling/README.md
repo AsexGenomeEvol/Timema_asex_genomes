@@ -156,15 +156,17 @@ parallel -j 1 'qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes {
 This works now for `INS`, `DEL`. Does not for `DUP` and `INV`. The full log of problems I have encountered is bellow.
 
 
-##### Paragraph error log
+##### Manta vcf output to Paragraph compatible vcf
 
-- Error 1: [SVs too close to the start of scafflds](https://github.com/Illumina/paragraph/issues/42). For now I will just kick them out
-- Error 2: [Unresloved <INS>](https://github.com/Illumina/manta/blob/master/docs/userGuide/README.md#insertions-with-incomplete-insert-sequence-assembly) by definition don't have resolved sequence. I will filter those out as well for now. I guess the better strategy would be to use Ns.
-- Error 3: `Illegal character in ALT allele: [3_Tms_b3v08_scaf000202:631916[N` I think this means it does not like the the inversions!
-- Error 4: `Exception: 514459:514542 missing REF or ALT sequence.`; and the problematic SV is `3_Tms_b3v08_scaf000253	514459	MantaINV:5899:0:0:0:0:0	N	<INV>	34	SampleFT	END=514542;SVTYPE=INV;SVLEN=83;IMPRECISE;CIPOS=-351,352;CIEND=-355,356;INV5	GT:FT:GQ:PL:PR	1/1:MinGQ:9:86,12,0:0,4`. Reported [here](https://github.com/Illumina/paragraph/issues/43). For now I just manually deleted it, as I don't see anything wrong with it for now.
-- Error 5: `Exception: Illegal character in ALT allele: ]3_Tms_b3v08_scaf007303:7862]T` This is a breakpoint that is not an inversion, so it was not convered.
+The script `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py` does this conversion:
+ - breakpoints (BND) converted to inversions (INV)
+ - renaming TandemDUP to DUP
+ - filtering out variants with unknown reference sequence
+ - filtering out variants that occur on the start of scaffolds (paragraph can not genotype those; default 150 bases)
+ - filtering unresolved insertions (those with alt tag <INS>)                                                                                          
+ - filtering nested structural variants (the non INS with SVINSSEQ tag in the info)
 
-All the are now in a single script `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py`:
+Example execution
 
 ```
 conda activate default_genomics
@@ -172,154 +174,39 @@ SCRIPT=scripts/convertManta/convertManta2Paragraph_compatible_vcf.py
 REF=data/final_references/3_Tms_b3v08.fasta.gz
 VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz
 OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed
-python3 $SCRIPT $REF $VARIANTS --quality_filtering -prefix_split_by_type $OUT
+python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type > $OUT
 ```
 
-**INV**
-
-The current warnings:
+I will write a wrapped that will do it for all the species and references
 
 ```
-2020-04-06 15:54:52,957 WARNING  3_Tms_b3v08_scaf000046:667050 Padding base in genome is different from VCF. Use the one from genome.
-2020-04-06 15:54:53,125 WARNING  3_Tms_b3v08_scaf000820:160049 Padding base in genome is different from VCF. Use the one from genome.
-2020-04-06 15:54:53,128 WARNING  3_Tms_b3v08_scaf000273:75266 Padding base in genome is different from VCF. Use the one from genome.
-...
-2020-04-06 15:54:58,956 WARNING  3_Tms_b3v08_scaf009637:199 Padding base in genome is different from VCF. Use the one from genome.
+qsub -o logs/ -e logs/ -cwd -N convert_vcf -V -pe smp64 32 -b yes 'bash E_structural_variation_calling/convert_all_manta_vcf_to_paragraph_compatible.sh'
 ```
 
-I should figure out why the warnings and potentially fix the conversion script.
-
-31/72 variants get the warning.
+### Tms_01 test
 
 ```
-3_Tms_b3v08_scaf000820  160049  MantaINV:12347:0:0:1:0:0        B'>3_TMS_B3V08_SCAF000820:160049-160049\NN\N'   <INV>   28      PASS    END=160307;SVTYPE=INV;SVLEN=258;IMPRECISE;
-3_Tms_b3v08_scaf000273  75266   MantaINV:6190:0:0:2:0:0 B'>3_TMS_B3V08_SCAF000273:75266-75266\NC\N'     <INV>   87      PASS    END=76145;SVTYPE=INV;SVLEN=879;IMPRECISE;CIPOS=-312
-...
+conda activate default_genomics
+SCRIPT=scripts/convertManta/convertManta2Paragraph_compatible_vcf.py
+REF=data/final_references/3_Tms_b3v08.fasta.gz
+VARIANTS=data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV.vcf.gz
+OUT=data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV_manta_compatible.vcf
+python3 $SCRIPT $REF $VARIANTS > $OUT
 ```
 
-These are only those that are marked as `IMPRECISE`.
-
-Compared to those that are just alright:
-
 ```
-3_Tms_b3v08_scaf000266  245751  MantaINV:6090:0:0:0:0:0 T       <INV>   32      PASS    END=245911;SVTYPE=INV;SVLEN=160;IMPRECISE;CIPOS=-326,327;CIEND=-375,375;INV3
+qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 32 -b yes 'mkdir -p /scratch/kjaron/3_Tms_ind01_genotyping; multigrmpy.py -i data/manta_SV_calls/Tms_01_manta/results/variants/diploidSV_manta_compatible.vcf -m data/genotyping/Tms_samples.txt -r data/final_references/3_Tms_b3v08_unmasked.fasta -o data/genotyping/3_Tms_ind01_genotyping --scratch-dir /scratch/kjaron/3_Tms_ind01_genotyping --threads 32'
 ```
-
-Examples of two types of converted inversions:
-
-##### GOOD
-
-```
-3_Tms_b3v08_scaf000034  455072  MantaBND:1196:0:1:0:0:0:1       T       T]3_Tms_b3v08_scaf000034:455954]        29      PASS    SVTYPE=BND;MATEID=MantaBND:1196:0:1:0:0:0:0;IMPRECI
-3_Tms_b3v08_scaf000034  455954  MantaBND:1196:0:1:0:0:0:0       G       G]3_Tms_b3v08_scaf000034:455072]        29      PASS    SVTYPE=BND;MATEID=MantaBND:1196:0:1:0:0:0:1;IMPRECI
-```
-
-into
-
-```
-3_Tms_b3v08_scaf000034  455072  MantaINV:1196:0:1:0:0:0 T       <INV>   29      PASS    END=455954;SVTYPE=INV;SVLEN=882;IMPRECISE;CIPOS=-318,318;CIEND=-319,319;INV3    GT:FT:GQ:PL
-```
-
-4. 3_Tms_b3v08_scaf000076
-
-```
-X  206212  MantaBND:2416:0:1:0:0:0:0       A       A]X:209142]        122     PASS    SVTYPE=BND;MATEID=MantaBND:2416:0:1:0:0:0:1;CIPOS=0
-X  209131  MantaBND:2416:0:1:0:0:0:1       T       T]X:206223]        122     PASS    SVTYPE=BND;MATEID=MantaBND:2416:0:1:0:0:0:0;CIPOS=0
-```
-
-into
-
-```
-X  206212  MantaINV:2416:0:1:0:0:0 A       <INV>   122     PASS    END=209142;SVTYPE=INV;SVLEN=2930;CIPOS=0,11;CIEND=-11,0;HOMLEN=11;HOMSEQ=ATAGAGGTTAG;INV3
-```
-
-#### BAD
-
-```
-3_Tms_b3v08_scaf000001  1881491 MantaBND:49:0:0:1:0:0:0 C       [3_Tms_b3v08_scaf000001:1881608[C       43      PASS    SVTYPE=BND;MATEID=MantaBND:49:0:0:1:0:0:1;CIPOS=0,2;HOMLEN=
-3_Tms_b3v08_scaf000001  1881606 MantaBND:49:0:0:1:0:0:1 A       [3_Tms_b3v08_scaf000001:1881493[A       43      PASS    SVTYPE=BND;MATEID=MantaBND:49:0:0:1:0:0:0;CIPOS=0,2;HOMLEN=
-```
-
-into
-
-```
-3_Tms_b3v08_scaf000001  1881490 MantaINV:49:0:0:1:0:0   B'>3_TMS_B3V08_SCAF000001:1881490-1881490\NG\N' <INV>   43      PASS    END=1881607;SVTYPE=INV;SVLEN=117;CIPOS=0,2;CIEND=-2
-```
-
-**3_Tms_b3v08_scaf000046**
-
-```
-X  667051  MantaBND:1568:0:0:1:0:0:1       G       [X:667176[G        40      PASS    SVTYPE=BND;MATEID=MantaBND:1568:0:0:1:0:0:0;IMPRECI
-X  667176  MantaBND:1568:0:0:1:0:0:0       A       [X:667051[A        40      PASS    SVTYPE=BND;MATEID=MantaBND:1568:0:0:1:0:0:1;IMPRECI
-```
-
-into
-
-```
-X  667050  MantaINV:1568:0:0:1:0:0 B'>3_TMS_B3V08_SCAF000046:667050-667050\NT\N'   <INV>   40      PASS    END=667175;SVTYPE=INV;SVLEN=125;IMPRECISE;CIPOS=-38
-```
-
-This seems like the problem happens then there is reverse complementary reference sequence. Let's see why is that.
-
-Some other breakpoints entries
-
-```
-3_Tms_b3v08_scaf000018  369206  MantaBND:658:0:0:2:0:0:0        A       [3_Tms_b3v08_scaf000018:369560[AAAACAAACAAGTAAAAACAAGTA 698     PASS    SVTYPE=BND;MATEID=MantaBND:658:0:0:
-3_Tms_b3v08_scaf000018  369560  MantaBND:658:0:0:2:0:0:1        G       [3_Tms_b3v08_scaf000018:369206[ACTTGTTTTTACTTGTTTGTTTTG 698     PASS    SVTYPE=BND;MATEID=MantaBND:658:0:0:
-3_Tms_b3v08_scaf000019  938566  MantaBND:707:0:0:0:0:0:1        G       G]3_Tms_b3v08_scaf000019:938717]        15      MinQUAL SVTYPE=BND;MATEID=MantaBND:707:0:0:0:0:0:0;IMPRECIS
-3_Tms_b3v08_scaf000019  938717  MantaBND:707:0:0:0:0:0:0        G       G]3_Tms_b3v08_scaf000019:938566]        15      MinQUAL
-```
-
-Questions:
- 1. Why the `3_Tms_b3v08_scaf000018` inversion got filtered? Is it an inversion?
-
-Ha, that's because it's one of the inversions with `SVINSSEQ=AAAACAAACAAGTAAAAACAAGT`. That means that on one side of the inversion there is an insertion too. I am for now filtering those variants as paragraph does not have a capacity to genotype nested variants.
-
-
-**DUP**
-
-Paragraph README:
-
-```
-<DUP> for duplication
-    Must have END key in INFO field. paraGRAPH assumes the sequence between POS and END being duplicated for one more time in the alternative allele.
-```
-
-too many erros. I will try to do it locally now:
-
-here I am testing only `PASS` duplications
-
-```
-OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed_quality_filtered
-python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type --quality_filtering $OUT
-multigrmpy.py -i data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed_DUP.vcf -m data/genotyping/Tms_samples.txt -r data/final_references/3_Tms_b3v08.fasta.gz -o data/genotyping/3_Tms_ind00_genotyping_DUP --scratch-dir temp/3_Tms_ind00_genotyping_DUP --threads 16
-```
-
-**other**
-
-Samples requires depth of each bam file, so
-
-```
-samtools depth -a data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam > coverage_depth # coule be directly piped
-cat coverage_depth |  awk '{sum+=$3} END { print "Average = ", sum/NR}'
-## 11.55
-## av read len?? made it up to 100
-```
-
-Get coverages of all bam files
-
-```
-qsub -o logs/ -e logs/ -cwd -N coverages -V -pe smp64 1 -b yes "bash calculate_coverages.sh"
-```
-
-##### GraphTyper2
-
-
 
 #### TO CONSIDER
 
 I think smove and manta use different names for the same thing (duplication vs insertion) or at least they sums are the same and one distinguishes them and the other does not. So it might be a good idea to "unify" them before merging. SURVIVOR cared about SV typpes, not sure how exactly Delly merger works.
 
 - [stix](https://github.com/ryanlayer/stix)
+- [BAdabouM](https://github.com/cumtr/BAdabouM)
+
+Another SV genotyper:
+
+- GraphTyper2
 
 CNV with a different specialised software, such as http://software.broadinstitute.org/software/genomestrip/
