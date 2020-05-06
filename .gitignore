@@ -1,6 +1,6 @@
 data
 logs
-stats
+tables
 lists
 *.pdf
 .snakemake
