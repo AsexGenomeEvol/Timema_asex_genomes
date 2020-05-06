@@ -154,7 +154,12 @@ conda activate default_genomics
 qsub -o logs/ -e logs/ -cwd -N convert_vcf -V -pe smp64 32 -b yes 'bash E_structural_variation_calling/prepare_manta_to_paragraph_compatible.sh'
 ```
 
-TODO: the the SAMPLES TABLES
+Paragraphs also require coverage tables for each sample. They can be generated using following R script.
+
+```
+mkdir -p data/genotyping
+Rscript E_structural_variation_calling/prepare_coverage_tables.R
+```
 
 Now, the genotyping commands for individual files are in `E_structural_variation_calling/paragraph_commands.txt` so to actually genotype the data we run:
 
