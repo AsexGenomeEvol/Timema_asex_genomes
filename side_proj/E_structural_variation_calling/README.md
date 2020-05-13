@@ -179,6 +179,63 @@ The script `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py` does 
  - filtering unresolved insertions (those with alt tag <INS>)                                                                                          
  - filtering nested structural variants (the non INS with SVINSSEQ tag in the info)
 
+New problem with some samples:
+ - `!reference_sequence.empty()`
+
+The problematic samples:
+ - Tte_ind01, Tte_ind02, Tte_ind04, Tte_ind05
+ - Tsi_ind00, Tsi_ind03, Tsi_ind04, Tsi_ind05
+ - Tdi_ind00, Tdi_ind01, Tdi_ind04, Tdi_ind05
+ - Tge_ind01, Tge_ind03, Tge_ind04
+
+Funny enough, Tms (the tested one) is all alright and all species have at least one passed. I suppose I need to figure what exactly the error is about.
+
+I will check those on `bigfoot`:
+
+```
+drwxr-xr-x  2 kjaron       blaxterlab  64K May  7 09:52 4_Tte_ind01_genotyping_temp
+drwxr-xr-x  2 kjaron       blaxterlab 128K May  7 11:35 2_Tsi_ind03_genotyping_temp
+drwxr-xr-x  2 kjaron       blaxterlab 244K May  7 13:26 1_Tdi_ind04_genotyping_temp
+drwxr-xr-x  2 kjaron       blaxterlab  48K May  7 09:39 5_Tge_ind01_genotyping_temp
+drwxr-xr-x  2 kjaron       blaxterlab  44K May  7 09:37 5_Tge_ind04_genotyping_temp
+```
+
+- `4_Tte_ind01_genotyping_temp`:
+
+An SV landing here seems to have troubles with the reference sequence
+
+```
+>4_Tte_b3v08_scaf062865
+Cctttcaagtacaccaggtttattatatccatgtcccttttctacctccaccactacttc
+aagtttgtcctgacttgtttatttacagaacacttctggaattttagatacttctagcat
+atcaccttctacctctgggaatacaatttctttagccatttcaattgccccattaaaaaa
+aactataaagctcatctcctggctcaataattaggctaattcagaagcaatttcagcatt
+ttgaaattccatgttttggtaatctaaatttaattttactgggaaagttgtttctatatc
+tttatgaatcaataaagcaggtacttcaattccacattgcagattaagactttctaaacc
+cattccttctaatttatctttgggaatttcaacactcactgttagtcctgcattgtcatt
+agaaaaatgttgatggagatcttgatctacgtgacgtttgtcccatactttttctttcac
+caattgcaccatcctttgtccacgagatgacattttgtctgaataagacag   
+```
+
+I suspect if I unmask the sequence, the problem will be resolved.
+
+```
+multigrmpy.py -i data/manta_SV_calls/Tte_01_manta/results/variants/diploidSV_paragraph_compatible.vcf -m data/genotyping/4_Tte_samples.txt -r data/final_references/4_Tte_b3v08_unmasked.fasta -o data/genotyping/4_Tte_ind01_genotyping --scratch-dir /scratch/kjaron/4_Tte_ind01_genotyping_temp --threads 16 && rm -r /scratch/kjaron/4_Tte_ind01_genotyping_temp
+```
+
+Nope, still
+
+```
+[2020-05-08 13:25:26.576] [Genotyping] [16458] [critical] Assertion failed: !reference_sequence.empty()
+```
+
+and
+
+```
+4_Tte_b3v08_scaf031309
+
+```
+
 Example execution
 
 ```
@@ -189,6 +246,15 @@ VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz
 OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed
 python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type > $OUT
 ```
+
+##### merging the calls
+
+Getting the individual genotyping calls together
+
+```
+E_structural_variation_calling/merging_paragraph_calls.py 3_Tms
+```
+
 
 #### TO CONSIDER
 
