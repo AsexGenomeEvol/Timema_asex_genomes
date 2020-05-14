@@ -17,13 +17,6 @@ for( i in 1:10){
 }
 dev.off()
 
-pdf('figures/SFS_vs_heterozygosity_manta.pdf', width = 30, height = 12)
-layout(mat = matrix(1:10, nrow = 2, ncol = 5))
-for( i in 1:10){
-    plot_SFS_vs_heterozygosity(SV_calls[[i]], timemas$labels[i])
-}
-dev.off()
-
 ### Tms individual plots
 
 i <- 8
@@ -121,12 +114,5 @@ pdf('figures/SFS_smove.pdf', width = 12, height = 8)
 layout(mat = matrix(1:10, nrow = 2, ncol = 5))
 for( i in 1:10){
     plot_SFS(SV_calls[[i]], timemas$labels[i], timemas$cols[i])
-}
-dev.off()
-
-pdf('figures/SFS_vs_heterozygosity_smove.pdf', width = 30, height = 12)
-layout(mat = matrix(1:10, nrow = 2, ncol = 5))
-for( i in 1:10){
-    plot_SFS_vs_heterozygosity(SV_calls[[i]], timemas$labels[i])
 }
 dev.off()

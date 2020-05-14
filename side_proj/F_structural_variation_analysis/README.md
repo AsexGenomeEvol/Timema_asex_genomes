@@ -12,16 +12,20 @@ Analysis of 6 individuals per species. I want to know heterozygosity patterns in
 - merged calls of the three (`"$SP"_all_calls_merged.bcf`, is there support inside? Need to check)
 - merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given the set of candidates
 
+- merged paragraph genotyping (`data/genotyping/3_Tms_merged_calls_naive.vcf`), only for Tms for now. The merging procedure should be adjusted, therefore for now the file is called "naive".
+
 ### basic population genetics
 
 - SFS (site freq. spectra)
 - SFS vs heterozygosity (figure out how to plot it, maybe monochromatic scale and a simple tile per type??)
 - stats as fractions of "present in all", "heterozygous in all", "homozygous in all", "heterozygous"
 
-lot of this is done in very unsorted way in `playground.R` script.
+Lot of the original plotting is done in very unsorted way in `F_structural_variation_analysis/playground.R` script using functions from `F_structural_variation_analysis/plot_SFS.R`.
+
+The basic popgen of the final genotypes will now be done by
 
 ```
-F_structural_variation_analysis/plot_SFS.R
+Rscript F_structural_variation_analysis/plot_genotyped_SV_SFS.R
 ```
 
 ### density of SVs

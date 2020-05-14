@@ -252,8 +252,10 @@ python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type > $OUT
 Getting the individual genotyping calls together
 
 ```
-E_structural_variation_calling/merging_paragraph_calls.py 3_Tms
+python3 E_structural_variation_calling/merging_paragraph_calls.py 3_Tms 1> data/genotyping/3_Tms_merged_calls_naive.vcf 2> data/genotyping/3_Tms_merged_and_filtered_calls_naive.vcf
 ```
+
+Now I have `data/genotyping/3_Tms_merged_calls_naive.vcf` file I can play with. Obviously, I need to also get back to the script and adjust the merging criteria, right now it's very naive (overlapping variants merged, the first variant is always the reference one and filtering only by 'PASS' keyword).
 
 
 #### TO CONSIDER
