@@ -257,6 +257,17 @@ python3 E_structural_variation_calling/merging_paragraph_calls.py 3_Tms 1> data/
 
 Now I have `data/genotyping/3_Tms_merged_calls_naive.vcf` file I can play with. Obviously, I need to also get back to the script and adjust the merging criteria, right now it's very naive (overlapping variants merged, the first variant is always the reference one and filtering only by 'PASS' keyword).
 
+##### Long Read individuals
+
+We have one `Tdi` individual, it's long reads are `data/1_Tdi/pacbio_1Tdi/raw_reads/`. We will use a classical nglmr/sniffles SV pipeline.
+
+```
+zcat data/1_Tdi/pacbio_1Tdi/raw_reads/*.fastq.gz | ngmlr -t 16 -r data/final_references/1_Tdi_b3v08.fasta | samtools view -bh - > data/1_Tdi/pacbio_1Tdi/mapped_to_b3v08.bam
+samtools index data/1_Tdi/pacbio_1Tdi/mapped_to_b3v08.bam
+sniffles -m data/1_Tdi/pacbio_1Tdi/mapped_to_b3v08.bam -v data/1_Tdi/pacbio_1Tdi/Tdi06_sniffles.vcf
+```
+
+
 
 #### TO CONSIDER
 

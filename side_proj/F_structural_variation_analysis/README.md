@@ -28,6 +28,22 @@ The basic popgen of the final genotypes will now be done by
 Rscript F_structural_variation_analysis/plot_genotyped_SV_SFS.R
 ```
 
+There seems to be the last 12
+
+```
+# solid ones:
+# 3_Tms_b3v08_scaf002312: 21725 - 23286; 00
+# 3_Tms_b3v08_scaf000092: 80652 - 80811; 00 01 02 05
+```
+
+```
+samtools view data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam 3_Tms_b3v08_scaf002312 > data/mapped_reseq_reads/subselected_chromosomes/Tms_00_b3v08_scaf002312.bam
+samtools view data/mapped_reseq_reads/Tms_01_to_b3v08_mapped_within_scfs.bam 3_Tms_b3v08_scaf002312 > data/mapped_reseq_reads/subselected_chromosomes/Tms_01_b3v08_scaf002312.bam
+for i in 00 01 02 03 04 05; do
+    samtools view data/mapped_reseq_reads/Tms_"$i"_to_b3v08_mapped_within_scfs.bam 3_Tms_b3v08_scaf000092 > data/mapped_reseq_reads/subselected_chromosomes/Tms_"$i"_b3v08_scaf000092.bam
+done
+```
+
 ### density of SVs
 
 - check modality in sexual / asexuals (sexual are expected to segregate regardless of position in the genome, i.e. all scaffolds should be even) --> too few data, probably got to map them to the reference
