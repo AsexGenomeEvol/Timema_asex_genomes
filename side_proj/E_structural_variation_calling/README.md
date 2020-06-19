@@ -267,7 +267,39 @@ samtools index data/1_Tdi/pacbio_1Tdi/mapped_to_b3v08.bam
 sniffles -m data/1_Tdi/pacbio_1Tdi/mapped_to_b3v08.bam -v data/1_Tdi/pacbio_1Tdi/Tdi06_sniffles.vcf
 ```
 
+This took for ever! Either I must filter out the bamfile out of all "between scaffolds" mapping, but Tanja suggested that I could just make quick and dirty long read assembly and call SVs on that.
 
+Quick and dirty redbeans assembly
+
+```
+conda activate /ceph/users/chodson/.conda/envs/pbassembly
+
+qsub -o logs/ -e logs/ -cwd -N read_len_dist -V -pe smp64 1 -b yes '~/generic_genomics/fastq2read_lengths.sh data/1_Tdi/pacbio_1Tdi/raw_reads/*.fastq.gz > data/1_Tdi/pacbio_1Tdi_readlen_dist.tsv'
+
+qsub -o logs/ -e logs/ -cwd -N redbeans -V -pe smp64 32 -b yes 'wtdbg2 -L 1000 -x preset3 -t 32 -g 1300m -i data/1_Tdi/pacbio_1Tdi/raw_reads/7k1yOJfO_m54161_171122_021109.fastq.gz -i data/1_Tdi/pacbio_1Tdi/raw_reads/FHbycsRw_m54161_190117_061402.fastq.gz -i data/1_Tdi/pacbio_1Tdi/raw_reads/tW3dEm3W_m54161_190213_054535.fastq.gz -i data/1_Tdi/pacbio_1Tdi/raw_reads/u2gBb1JT_m54161_190215_191639.fastq.gz -i data/1_Tdi/pacbio_1Tdi/raw_reads/Y1EnuWX5_m54161_171127_212638.fastq.gz -o data/1_Tdi/pacbio_1Tdi/redbeans_asm/Tdi_pb_asm00 && wtdbg-cns -t 32 -i data/1_Tdi/pacbio_1Tdi/redbeans_asm/Tdi_pb_asm00.ctg.lay.gz -o data/1_Tdi/pacbio_1Tdi/redbeans_asm/Tdi_pb_asm00.ctg.fa'
+```
+
+and map the reads on the new reference.
+
+```
+qsub -o logs/ -e logs/ -cwd -N sniffles -V -pe smp64 32 -b yes "zcat data/1_Tdi/pacbio_1Tdi/raw_reads/*.fastq.gz | ngmlr -t 32 --no-progress -r data/1_Tdi/pacbio_1Tdi/redbeans_asm/Tdi_pb_asm00.ctg.fa | samtools view -bh - > data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00.bam"
+```
+
+run sniffles
+
+```
+qsub -o logs/ -e logs/ -cwd -N sniffles -V -pe smp64 32 -b yes "mkdir -p /scratch/kjaron/snif_temp && sniffles -t 32 -q 15 -m data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00.bam -v data/1_Tdi/pacbio_1Tdi/Tdi06_on_pb_asm_sniffles.vcf --tmp_file /scratch/kjaron/snif_temp && rm -r /scratch/kjaron/snif_temp"
+```
+
+and visualise them:
+
+<!-- ```
+samplot plot -n Tms_00 Tms_01 Tms_02 Tms_03 Tms_04 Tms_05 -b data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_01_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_02_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_03_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_04_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_05_to_b3v08_mapped_within_scfs.bam -o data/sandbox/3_Tms_b3v08_scaf000092_INV_80652_80811.png -s 80652 -e 80811 -c 3_Tms_b3v08_scaf000092 -a -t INV
+``` -->
+
+```
+qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'samplot vcf --vcf data/1_Tdi/pacbio_1Tdi/Tdi06_sniffles.vcf -d figures/SVs_PacBio -O png -b data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00.bam --sample_ids Tdi_pb > F_structural_variation_analysis/samplot_commands_pb.sh'
+```
 
 #### TO CONSIDER
 

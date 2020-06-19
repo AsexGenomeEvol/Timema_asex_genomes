@@ -14,6 +14,24 @@ Analysis of 6 individuals per species. I want to know heterozygosity patterns in
 
 - merged paragraph genotyping (`data/genotyping/3_Tms_merged_calls_naive.vcf`), only for Tms for now. The merging procedure should be adjusted, therefore for now the file is called "naive".
 
+### SV curation
+
+This is sort of a post-analysis step to make sure what we do makes sense.
+
+We will use [SV-plaudit](https://github.com/jbelyeu/SV-plaudit), a high throughput SV curation tool. It internally uses [samplot](https://github.com/ryanlayer/samplot) to plot individual SVs, I will try to use it first internally, then I will run the whole framework
+
+```
+samplot plot -n Tms_00 Tms_01 Tms_02 Tms_03 Tms_04 Tms_05 -b data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_01_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_02_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_03_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_04_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_05_to_b3v08_mapped_within_scfs.bam -o data/sandbox/3_Tms_b3v08_scaf000092_INV_80652_80811.png -s 80652 -e 80811 -c 3_Tms_b3v08_scaf000092 -a -t INV
+```
+
+this looks bad. Like really bad. Let's try to get them for all
+
+```
+qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'samplot vcf --vcf data/genotyping/3_Tms_merged_calls_naive_header.vcf -d figures/SVs -O png -b data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_01_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_02_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_03_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_04_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_05_to_b3v08_mapped_within_scfs.bam --sample_ids Tms_00 Tms_01 Tms_02 Tms_03 Tms_04 Tms_05 > F_structural_variation_analysis/samplot_commands.sh'
+```
+
+I should also add genes to [the plots](https://github.com/ryanlayer/samplot/tree/v1.0.1#gene-and-other-genomic-feature-annotations)
+
 ### basic population genetics
 
 - SFS (site freq. spectra)
