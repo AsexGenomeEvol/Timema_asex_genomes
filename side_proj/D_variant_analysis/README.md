@@ -4,14 +4,14 @@ Extract genotypes out of heavy vcf files. Once we get the base stats we can come
 
 ```bash
 for sp in $TIMEMAS; do
-    zcat data/SNP_calls/"$sp".SNP_filter.vcf.gz | grep -v "^#" | awk '{ if ($7 == "PASS"){ print $0 } }' |  cut -f 1,2,10,11,12,13,14 > data/SNP_calls/"$sp".SNP_filter_passed.tsv
+    zcat data/SNP_calls/"$sp".SNP_filter.vcf.gz | grep -v "^#" | awk '{ if ($7 == "PASS"){ print $0 } }' |  cut -f 1,2,6,10,11,12,13,14 > data/SNP_calls/"$sp".SNP_filter_passed.tsv
 done
 ```
 
 This bash-prefiltered files I process with python script `sorting_variants.py`
 
 ```
-python3 sorting_variants.py
+python3 D_variant_analysis/sorting_variants.py
 ```
 
 to get three files: `*_heterozygous_SNP_filter_passed.tsv`, `*_homozygous_SNP_filter_passed.tsv`, and `*_trinalge_SNP_filter_passed.tsv`. The first two are lists of locations of SNPs found in at least two individuals that were found only in homozygous or only in heterozygous states. The triangle file are values that should be placed on the triangle plot (SFS decomposed by heterozygotes).
