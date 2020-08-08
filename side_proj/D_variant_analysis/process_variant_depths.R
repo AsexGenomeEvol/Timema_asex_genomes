@@ -55,27 +55,33 @@ for (sp in timemas$codes[seq(1,10, by = 2)]){
 
 dev.off()
 
-png('figures/SNP_quality_assesment.png')
+
 depths <- c('d1', 'd2', 'd3', 'd4', 'd5')
 
-for (sp in timemas$codes[seq(1,10, by = 2)]){
+for (sp in timemas$codes[seq(1,10, by = 1)]){
     tab_filename <- paste0('data/SNP_calls/', sp ,'_reduced_variants.tsv')
     variant_tab <- read.table(tab_filename, stringsAsFactors = F)
     colnames(variant_tab) <- c('scf', 'pos', 'qual', paste0('g', 1:5), paste0('d', 1:5))
 
-    number_of_het_per_variant = rowSums(variant_tab[,c('g1', 'g2', 'g3', 'g4', 'g5')] == '0/1')
-    hist(variant_tab$qual[number_of_het_per_variant == 0], breaks = 300, main = sp)
-    hist(variant_tab$qual[number_of_het_per_variant == 1], breaks = 300, add = T, col = 'red')
-    hist(variant_tab$qual[number_of_het_per_variant > 1], breaks = 300, add = T, col = 'blue')
-    lines(c(300, 300), c(0, 1000), col = 'yellow')
+    png(paste0('figures/SNP_qual/', sp ,'_qual_assesment.png'))
+        number_of_het_per_variant = rowSums(variant_tab[,c('g1', 'g2', 'g3', 'g4', 'g5')] == '0/1')
+        hist(variant_tab$qual[number_of_het_per_variant == 0], breaks = 300, main = sp)
+        hist(variant_tab$qual[number_of_het_per_variant == 1], breaks = 300, add = T, col = 'red')
+        hist(variant_tab$qual[number_of_het_per_variant > 1], breaks = 300, add = T, col = 'blue')
+        lines(c(300, 300), c(0, 1000), col = 'yellow')
+    dev.off()
 
-    mean_variant_covrage <- rowMeans(apply(variant_tab[, depths], 2, as.numeric))
-    plot(mean_variant_covrage[number_of_het_per_variant == 0] ~ variant_tab$qual[number_of_het_per_variant == 0], cex = 0.3, pch = 20, xlab = 'varian quality', ylab = 'mean coveage', main = sp)
-    points(mean_variant_covrage[number_of_het_per_variant == 1] ~ variant_tab$qual[number_of_het_per_variant == 1], col = 'red', cex = 0.3, pch = 20)
-    points(mean_variant_covrage[number_of_het_per_variant > 1] ~ variant_tab$qual[number_of_het_per_variant > 1], col = 'blue', cex = 0.3, pch = 20)
-
+    png(paste0('figures/SNP_qual/', sp ,'_depth_qual_assesment.png'))
+        mean_variant_covrage <- rowMeans(apply(variant_tab[, depths], 2, as.numeric))
+        plot(mean_variant_covrage[number_of_het_per_variant == 0] ~ variant_tab$qual[number_of_het_per_variant == 0], cex = 0.3, pch = 20, xlab = 'varian quality', ylab = 'mean coveage', main = sp)
+        points(mean_variant_covrage[number_of_het_per_variant == 1] ~ variant_tab$qual[number_of_het_per_variant == 1], col = 'red', cex = 0.3, pch = 20)
+        points(mean_variant_covrage[number_of_het_per_variant > 1] ~ variant_tab$qual[number_of_het_per_variant > 1], col = 'blue', cex = 0.3, pch = 20)
+    dev.off()
 }
 
-dev.off()
-
 # hist(variant_tab$qual, breaks = 100)
+
+
+
+
+

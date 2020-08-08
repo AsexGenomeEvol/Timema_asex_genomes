@@ -14,7 +14,7 @@ This bash-prefiltered files I process with python script `sorting_variants.py`
 python3 D_variant_analysis/sorting_variants.py
 ```
 
-to get three files: `*_heterozygous_SNP_filter_passed.tsv`, `*_homozygous_SNP_filter_passed.tsv`, and `*_trinalge_SNP_filter_passed.tsv`. The first two are lists of locations of SNPs found in at least two individuals that were found only in homozygous or only in heterozygous states. The triangle file are values that should be placed on the triangle plot (SFS decomposed by heterozygotes).
+Produces `data/SNP_calls/<sp>_reduced_variants.tsv` which is just a reduced vcf files to release a bit of pain when loading them in R. The file contains variants, their corresponding scf and position, variant quality score, all 5 genotypes and corresponding depths supporting the genotypes.
 
 ### Analysing coverage of heterozygous SNPs
 
@@ -32,4 +32,26 @@ PL - Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF sp
 ```
 
 The script above `sorting_variants.py` produces also `_homo_depths.tsv` and `_hetero_depths.tsv` files with depths of variants that are found only in homozygous or only in heterozygous states.
+
+In the script `process_variant_depths.R`, we plot a distribution of covrages per individual and a distribution of qualities of variants. In both cases we can see mulimodality. The most meaningful will be to filter all variants with at least one individual with coverage > 15 and variant quality score > 300.
+
+### Filtering
+
+I added this filtering criteria (at least one individual with coverage > 15 and variant quality score > 300) to the preprocessing python script, and now
+
+```
+python3 D_variant_analysis/sorting_variants.py
+```
+
+also generates `data/SNP_calls/<sp>_reduced_filtered_variants.tsv` files.
+
+### Plotting variants on chromosomes
+
+I am resolving the plotting in the following script
+
+```
+Rscript D_variant_analysis/plot_SNPs_on_chromosomes.R
+```
+
+The files I need are called SNPs - `data/SNP_calls/<sp>_reduced_filtered_variants.tsv`, block alignment `data/b3v08_anchoring_to_LGs/<sp>_scf_block_alignment.tsv`, and genome index `data/<sp>/reference/<sp>_b3v08_scf.lengths`
 
