@@ -45,6 +45,8 @@ python3 D_variant_analysis/sorting_variants.py
 
 also generates `data/SNP_calls/<sp>_reduced_filtered_variants.tsv` files.
 
+We could get some filtering stats I guess by `wc -l` ing the `_reduced` and `_reduced_filtered` files or by adding a few lines to the `sorting_variants` script.
+
 ### Plotting variants on chromosomes
 
 I am resolving the plotting in the following script
