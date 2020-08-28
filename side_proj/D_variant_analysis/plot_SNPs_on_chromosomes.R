@@ -15,7 +15,7 @@ get_chr_size <- function(chr){
     sum(reference[reference$chromosome == chr,'len']) + ((sum(reference$chromosome == chr) - 1) * 10000)
 }
 
-plot_SVs_on_LGs <- function(exclude_zero = T, lines = F, pal = 'asex'){
+plot_SVs_on_LGs <- function(exclude_zero = T, lines = F, pal = 'asex', ylim = NA){
 
     # BrBG
     if ( pal == 'asex' ){
@@ -24,8 +24,11 @@ plot_SVs_on_LGs <- function(exclude_zero = T, lines = F, pal = 'asex'){
         pal <- brewer.pal(5, "YlOrRd")[c(3,5)]
     }
     # pal <- addalpha(pal, alpha)
+    if ( any(is.na(ylim)) ){
+        ylim = range(variant_density_table$variants, na.rm = T)
+    }
+    # print(ylim)
 
-    ylim = range(variant_density_table$variants, na.rm = T)
     plot(NULL, xlim = c(1, nrow(variant_density_table)), ylim = ylim, pch = 20,
          main = sp, xaxt = "n", bty = 'n', xlab = '', ylab = '', cex.axis = 1.4, cex.main = 1.6)
          # xlab = 'linage group [ Mbp ]', ylab = '# found SVs'
@@ -81,6 +84,12 @@ reference$chromosome <- sapply(strsplit(reference$scf, "_"), function(x) { x[1] 
 chromosomes <- data.frame(chr = paste0('lg', c(1:12, 'X')))
 chromosomes$len <- sapply( chromosomes$chr, get_chr_size )
 
+# I need to round up chromosome lengths to avoid one window being part of two chromosomes
+chromosomes$rounded_len <- ceiling(chromosomes$len / window) * window + (window * gap_beween_chromosomes)
+chromosomes$adjustments <- cumsum(c(0, chromosomes$rounded_len[1:(nrow(chromosomes) - 1)]))
+rownames(chromosomes) <- chromosomes$chr
+chromosomes <- chromosomes[chromosomes$chr != 'lgX', ]
+
 ##########
 
 # sp = '5_Tge'
@@ -91,54 +100,56 @@ pdf('figures/anchored_SNPs.pdf', width = 10, height = 6)
 
 for(sp in timemas$codes){
     tab_filename <- paste0('data/SNP_calls/', sp, '_reduced_filtered_variants.tsv')
-    variant_tab <- read.table(tab_filename, stringsAsFactors = F)
-    colnames(variant_tab) <- c('scf', 'pos', 'qual', paste0('g', 1:5), paste0('d', 1:5), 'ref_scf', 'ref_pos', 'lg', 'lg_pos')
+    output_file <- paste0("tables/SNPs/", sp, "_SNPs_on_chromosomes_w", window, ".tsv")
 
-    if ( sp == '1_Tps'){
-        variant_tab[,'g4'] <- NA
-        variant_tab[,'g5'] <- NA
-    }
-    if ( sp == '4_Tte'){
-        variant_tab[,'g1'] <- NA
-    }
-    if ( sp == '2_Tsi'){
-        variant_tab[,'g1'] <- NA
-        variant_tab[,'g2'] <- NA
-        variant_tab[,'g3'] <- NA
-    }
+    if ( file.exists(output_file) ){
+        variant_density_table <- read.table(output_file, header = T, sep = '\t', stringsAsFactors = F)
+    } else {
+        variant_tab <- read.table(tab_filename, stringsAsFactors = F)
+        colnames(variant_tab) <- c('scf', 'pos', 'qual', paste0('g', 1:5), paste0('d', 1:5), 'ref_scf', 'ref_pos', 'lg', 'lg_pos')
 
-    anchored_variant_tab <- variant_tab[!is.na(variant_tab$lg_pos), ]
-
-    # I need to round up chromosome lengths to avoid one window being part of two chromosomes
-    chromosomes$rounded_len <- ceiling(chromosomes$len / window) * window + (window * gap_beween_chromosomes)
-    chromosomes$adjustments <- cumsum(c(0, chromosomes$rounded_len[1:(nrow(chromosomes) - 1)]))
-    rownames(chromosomes) <- chromosomes$chr
-    chromosomes <- chromosomes[chromosomes$chr != 'lgX', ]
-
-    #### prepare variant template
-    variant_density_table <- do.call("rbind", lapply(1:12, get_lg_windows))
-    variant_density_table$variants <- 0
-    variant_density_table$common <- 0
-
-    for (i in 1:nrow(anchored_variant_tab)) {
-        lg = anchored_variant_tab[i, 'lg']
-        pos = anchored_variant_tab[i, 'lg_pos']
-        row <- variant_density_table$lg == lg & variant_density_table$lg_from < pos & variant_density_table$lg_to > pos
-        variant_density_table[row, 'variants'] <- variant_density_table[row, 'variants'] + 1
-        derived_variants <- sum(anchored_variant_tab[i, paste0('g', 1:5)] == '1/1', na.rm = T)
-        derived_variants_freq <- mean(anchored_variant_tab[i, paste0('g', 1:5)] == '1/1', na.rm = T)
-        if ( derived_variants == 0){
-            next
+        if ( sp == '1_Tps'){
+            variant_tab[,'g4'] <- NA
+            variant_tab[,'g5'] <- NA
         }
-        if ( derived_variants_freq != 1 & derived_variants != 1 ){
-            variant_density_table[row, 'common'] <- variant_density_table[row, 'common'] + 1
+        if ( sp == '4_Tte'){
+            variant_tab[,'g1'] <- NA
         }
+        if ( sp == '2_Tsi'){
+            variant_tab[,'g1'] <- NA
+            variant_tab[,'g2'] <- NA
+            variant_tab[,'g3'] <- NA
+        }
+
+        anchored_variant_tab <- variant_tab[!is.na(variant_tab$lg_pos), ]
+
+        #### prepare variant template
+        variant_density_table <- do.call("rbind", lapply(1:12, get_lg_windows))
+        variant_density_table$variants <- 0
+        variant_density_table$common <- 0
+
+        for (i in 1:nrow(anchored_variant_tab)) {
+            lg = anchored_variant_tab[i, 'lg']
+            pos = anchored_variant_tab[i, 'lg_pos']
+            row <- variant_density_table$lg == lg & variant_density_table$lg_from < pos & variant_density_table$lg_to > pos
+            variant_density_table[row, 'variants'] <- variant_density_table[row, 'variants'] + 1
+            derived_variants <- sum(anchored_variant_tab[i, paste0('g', 1:5)] == '1/1', na.rm = T)
+            derived_variants_freq <- mean(anchored_variant_tab[i, paste0('g', 1:5)] == '1/1', na.rm = T)
+            if ( derived_variants == 0){
+                next
+            }
+            if ( derived_variants_freq != 1 & derived_variants != 1 ){
+                variant_density_table[row, 'common'] <- variant_density_table[row, 'common'] + 1
+            }
+        }
+
+        write.table(variant_density_table, output_file, quote = F, sep = '\t')
     }
 
     if ( sp %in% timemas$codes[seq(1, 10, by=2)]){
-        plot_SVs_on_LGs(F, T, 'asex')
+        plot_SVs_on_LGs(F, T, 'asex', c(0, 22000))
     } else {
-        plot_SVs_on_LGs(F, T, 'sex')
+        plot_SVs_on_LGs(F, T, 'sex', c(0, 22000))
     }
 
 }
