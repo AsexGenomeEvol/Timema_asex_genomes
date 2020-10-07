@@ -293,13 +293,47 @@ qsub -o logs/ -e logs/ -cwd -N sniffles -V -pe smp64 32 -b yes "mkdir -p /scratc
 
 and visualise them:
 
-<!-- ```
-samplot plot -n Tms_00 Tms_01 Tms_02 Tms_03 Tms_04 Tms_05 -b data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_01_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_02_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_03_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_04_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_05_to_b3v08_mapped_within_scfs.bam -o data/sandbox/3_Tms_b3v08_scaf000092_INV_80652_80811.png -s 80652 -e 80811 -c 3_Tms_b3v08_scaf000092 -a -t INV
-``` -->
+```
+qsub -o logs/ -e logs/ -cwd -N sortbam -V -pe smp64 16 -b yes 'mkdir -p /scratch/kjaron && samtools sort -T /scratch/kjaron/sorting_bam -o data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00_sorted.bam -@16 data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00.bam && samtools index data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00_sorted.bam'
+```
 
 ```
-qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'samplot vcf --vcf data/1_Tdi/pacbio_1Tdi/Tdi06_sniffles.vcf -d figures/SVs_PacBio -O png -b data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00.bam --sample_ids Tdi_pb > F_structural_variation_analysis/samplot_commands_pb.sh'
+qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'START=3019763; END=3019890; SCF=ctg152; TYPE=DEL; samplot plot -n Tdi_PB -b data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00_sorted.bam -o data/sandbox/"$SCF"_"$START"_"$END"_"$TYPE".png -s $START -e $END -c $SCF -a -t $TYPE'
 ```
+
+
+
+```
+while read SCF START END TYPE
+do
+    echo samplot plot -n Tdi_PB -b data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00_sorted.bam -o data/sandbox/"$SCF"_"$START"_"$END"_"$TYPE".png -s $START -e $END -c $SCF -a -t $TYPE >> plotting_commands.sh
+done < tables/Tdi_PB_SVs.tsv
+```
+
+```
+parallel -j 1 'qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes {}' :::: plotting_commands.sh
+```
+
+```
+qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'samplot vcf --vcf data/1_Tdi/pacbio_1Tdi/Tdi06_on_pb_asm_sniffles.vcf -d figures/SVs -O png -b data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00.bam --sample_ids Tdi_PB > F_structural_variation_analysis/samplot_commands_PB.sh'
+```
+
+#### SV qc and filtering before merging
+
+Described in `E_structural_variation_calling/structural_variant_QC.md` (I wil move it here probably).
+
+Now we have few levels of filtering:
+  - no filtering (`diploidSV_reduced.vcf`)
+  - relaxed: remove only those with split read OR read pair support greater than relaxed threshold (`diploidSV_filt_relaxed.vcf`)
+  - stringent: split read OR read pair support in the stringent interval (`diploidSV_filt_stringent.vcf`)
+  - very stringent: split read support in the stringent interval (`diploidSV_filt_very_stringent.vcf`)
+
+We will see which makes most sense.
+
+#### TODO
+
+- get maximal number of SVs that there could be so we don't see any
+- can we classify number of SVs that are microsats?
 
 #### TO CONSIDER
 
@@ -313,3 +347,5 @@ Another SV genotyper:
 - GraphTyper2
 
 CNV with a different specialised software, such as http://software.broadinstitute.org/software/genomestrip/
+
+All those would just just improve the homozygous SV calls and perhaps sexual SVs too.
