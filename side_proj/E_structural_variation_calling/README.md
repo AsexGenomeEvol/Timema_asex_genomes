@@ -1,24 +1,10 @@
 ## Structural variations
 
-Detection of structural variants from population data will be based on pair-end illumina data.
-One individual per species will have mate-pairs as well to access structural variations
-with greater resolution.
-
-### Inference from Illumina reads
-
-Methods are based on coverage or mapping patterns. Different methods produce different variant calls. This observation let to development of methods that calls consensus based on different methods. The consensus caller is called (Survivor)[https://github.com/fritzsedlazeck/SURVIVOR].
+Detection of structural variants from population data will be based on pair-end illumina data. We are interested in difference between sexual and asexual species, we therefore use a SV caller well balancing specificity and sensitivity [Manta](https://github.com/Illumina/manta), due to the problem of collapsed duplicates we also introduce coverage, based filtering and use a [SURVIVOR](https://github.com/fritzsedlazeck/SURVIVOR) to merge calls (variants in different individuals of the same type with breakpoints less than 100 bases from each other).
 
 #### SV calls: pair-end
 
-
-Restarting efforts at Edinburgh required quite lot of logistic investment to move the data here. I have them in agregated directories by type rather than indevidual as before. Not sure which is better. If I will reorganize them again, I will have rewrite this, but for now I keep it as it is.
-
-**data**
-
-- 60 mapping files: `data/mapped_reseq_reads/*.bam`
-- 60 manta SV calls (called at Vital-it cluster using `E_structural_variation_calling/manta.sh`): `data/manta_SV_calls/<sp>_<ind>_manta/*.vcf.gz`
-- 60 lumpy SV calls (called at Vital-it cluster using `E_structural_variation_calling/smoove.sh`; smoove is a wrapper round lumpy): `data/smoove_SVs/...`
-- reference genomes: `data/final_references/*_b3v08.fasta.gz`
+Indexing mapped reads to the reference gneomes (`data/final_references/*_b3v08.fasta.gz`)
 
 ```
 for bam in data/mapped_reseq_reads/*.bam; do
@@ -26,238 +12,116 @@ for bam in data/mapped_reseq_reads/*.bam; do
 done
 ```
 
-### Done in Lausanne
+I downloaded precompiled binaries of (Manta)[https://github.com/Illumina/manta] v1.0.3. Using commands in the script `E_structural_variation_calling/manta.sh` I get 50 manta SV calls: `data/manta_SV_calls/data/"$SP"/"$IND"_manta/results/variants/diploidSV.vcf`
 
-##### Manta
+#### SV qc and filtering before merging
 
-The tools is designed for tumor cells, but there is no reason to think that it wont work on whole bodies.
-
-I downloaded precompiled binaries of (Manta)[https://github.com/Illumina/manta] v1.0.3.
-
-Unpacking and running `runMantaWorkflowDemo.py` reported succesful run and some details of commends that were tested. I will extract those commands and apply them to Tge, since I already have indexed reference and mapped pair end reads..
+Removing header from vcf files (non-necessary for filtering)
 
 ```
-/Home/kjaron/src/manta-1.0.3.centos5_x86_64/bin/configManta.py --normalBam="map_pe_to_5_Tge.bam"  --referenceFasta="Tge_abyss87_besst_GC_core_100k_filtered.fa" --runDir=$(pwd)
+for file in $(find ./data/manta_SV_calls -name "diploidSV.vcf.gz"); do
+    out=${file%.vcf.gz}_reduced.vcf
+    echo $file $out
+    zcat $file | grep -v "^#" > $out
+done
 ```
 
-the workflow script was created, so I run it. It can nicely limit the memory.
+in the following R snippet I will plot all the coverage distributions of split reads and pair end coveages of homozygous and heterozygous variants per individual.
 
-```
-python -E runWorkflow.py -m local -j 32 -g 120 1> tge_350_manta.log 2> tge_350_manta.err
-```
+```{R}
+library(AsexStats)
+source('E_structural_variation_calling/vcf_processing_fctions.R')
 
-53k SVs, 7k of good quality. Very small Indels included.
+sp <- timemas$codes[1]
 
-Turned into scripts:
+for(sp in timemas$codes){
+    sp_short <- substr(sp, 3, 5)
 
-The name of the reference individual's insert size 350: `ref_is350`
+    SV_files <- paste0('data/manta_SV_calls/data/', sp, '/', sp_short, '_0', c(1:5) ,'_manta/results/variants/diploidSV_reduced.vcf')
 
-```bash
-manta.sh 1_Tdi b3v04 ref_is350
-```
-
-For a record, Manta does not by default call inversions, but breakpoints: `$MANTA_INSTALL_FOLDER/libexec/convertInversion.py` should convert BND to INV.
-
-##### Delly
-
-Check their [readme](https://github.com/dellytools/delly#germline-sv-calling), it's very clear and simple. installed it is running
-
-```
-delly call -g Tge_abyss87_besst_GC_core_100k_filtered.fa \
-  map_pe_to_5_Tge.bam -o tge_350_delly.bcf
+    pdf(paste0('figures/manta_SV_coverages_', sp ,'.pdf'))
+        for (ind in 1:5){
+            SV_tab <- read.table(SV_files[ind], header = F)
+            print(plot_one(SV_tab, 'SR', paste0(sp_short, '0', ind, ' SR')))
+            print(plot_one(SV_tab, 'PR', paste0(sp_short, '0', ind, ' PR')))
+        }
+    dev.off()
+}
 ```
 
-produced in 2 hours a `.bcf` file that was not parsed so far.
+Now, I (need?) want to create a table of filtering thesholds for individual genomes using the figures I just generated, so I make `tables/SVs/coveage_thresholds.tsv` with more relaxed and more stringent thresholds. The following snippet will generate a few filtering files based on different stringency levels.
 
-##### Lumpy
+```R
+library(AsexStats)
+source('E_structural_variation_calling/vcf_processing_fctions.R')
 
-I installed lumpy and [smoove](https://brentp.github.io/post/smoove/) which is a probabilistic genotyper using SV calls by lumpy.
+filtering_thresholds <- read.table('tables/SVs/coveage_thresholds.tsv', header = T, row.names = 1)
 
-test run:
+for(sp in timemas$codes){
+    sp_short <- substr(sp, 3, 5)
 
-```
-fasta=data/2_Tcm/reference/2_Tcm_b3v08.fasta.gz
-bam=data/2_Tcm/mapping/Tcm_05_to_b3v08.bam
-outdir=data/2_Tcm/variant_calls/Tcm_05/Tcm_05_smoove/
-smoove call -x --genotype --name Tcm_05 --outdir $outdir \
-           -f $fasta --processes 24 $bam
-```
+    SV_files <- paste0('data/manta_SV_calls/data/', sp, '/', sp_short, '_0', c(1:5) ,'_manta/results/variants/diploidSV_reduced.vcf')
+    out_relaxed <- paste0('data/manta_SV_calls/data/', sp, '/', sp_short, '_0', c(1:5) ,'_manta/results/variants/diploidSV_filt_relaxed.vcf')
+    out_str <- paste0('data/manta_SV_calls/data/', sp, '/', sp_short, '_0', c(1:5) ,'_manta/results/variants/diploidSV_filt_stringent.vcf')
+    out_very_str <- paste0('data/manta_SV_calls/data/', sp, '/', sp_short, '_0', c(1:5) ,'_manta/results/variants/diploidSV_filt_very_stringent.vcf')
 
+    for (ind in 1:5){
+        SV_tab <- read.table(SV_files[ind], header = F)
+        SR_cov_1 <- sapply(strsplit(SV_tab[,10], ':'), str2depth, 6, 1)
+        SR_cov_2 <- sapply(strsplit(SV_tab[,10], ':'), str2depth, 6, 2)
+        SR_cov <- SR_cov_1 + SR_cov_2
+        PR_cov_1 <- sapply(strsplit(SV_tab[,10], ':'), str2depth, 5, 1)
+        PR_cov_2 <- sapply(strsplit(SV_tab[,10], ':'), str2depth, 5, 2)
+        PR_cov <- PR_cov_1 + PR_cov_2
 
-##### Brakedancer
+        # relaxed: remove only those with split read OR read pair support greater than relaxed threshold
+        relaxed_u <- filtering_thresholds[paste0(sp_short,'0',ind), 'relaxed_u']
+        keep <- is.na(SR_cov) | SR_cov < relaxed_u
+        write.table(SV_tab[keep,], out_relaxed[ind], quote = F, sep = '\t', row.names = F, col.names = F)
 
-weird problem with libraries.
+        stringent_l <- filtering_thresholds[paste0(sp_short,'0',ind), 'stringent_l']
+        stringent_u <- filtering_thresholds[paste0(sp_short,'0',ind), 'stringent_u']
 
-#### SV calls: mate-pairs
+        # stringent: split read OR read pair support in the stringent interval
+        SR_in_range <- SR_cov > stringent_l & SR_cov < stringent_u
+        SR_in_range[is.na(SR_in_range)] <- F # missing value means 0
+        PR_in_range <- (PR_cov > stringent_l & PR_cov < stringent_u)
+        PR_in_range[is.na(PR_in_range)] <- F # missing value means 0
+        write.table(SV_tab[SR_in_range | PR_in_range,], out_str[ind], quote = F, sep = '\t', row.names = F, col.names = F)
 
-I have mate-pairs for only reference genomes.
-
-#### Merging calls
-
-Right now I have Delly, Lumpy and Manta SV calls, the union in T. monikensis is ~10k, overlap of at least two >4k and all three >1k. There are two strategies I will consider:
-
-1. Accept all calls made by at least two callers
-2. Create a union of all calls, and use a genotyper to test this set of candidate SV in all the individuals.
-
-In either the case I will remove all calls homozygous in all (nearly all?) individuals (asm errors).
-
-##### Making union
-
-There two ways how to make a union. Delly or SURVIVOR. Delly uses both recoprocal overlap and breakpoint offset to consider an SV the same. SURVIVOR focuses on the offset only. Delly is however screwing up on merging other SV callers, so SURVIVOR it is
-
-```
-E_structural_variation_calling/survivor_all_merged_calls.sh <sp>
-```
-
-generates
-
-```
-data/$SP/variant_calls/"$SP"_survivor_all_calls_union.vcf
+        # very stringent: split read support in the stringent interval
+        write.table(SV_tab[SR_in_range,], out_very_str[ind], quote = F, sep = '\t', row.names = F, col.names = F)
+    }
+}
 ```
 
-file with the default merging parameters (min len > 30; breakpoint distance < 1000). It is a wild script for now, but once I will have delly SV calls for all the species, I will embed it to `Snakemake`.
+Now we have variants:
 
-- individual delly / smove / manta SV calls (mostly if we want to go back and check something)
-- merged calls of the three (`"$SP"_all_calls_merged.bcf`, is there support inside? Need to check)
+- no filtering (`diploidSV_reduced.vcf`)
+- relaxed: remove only those with split read OR read pair support greater than relaxed threshold (`diploidSV_filt_relaxed.vcf`)
+- stringent: split read OR read pair support in the stringent interval (`diploidSV_filt_stringent.vcf`)
+- very stringent: split read support in the stringent interval (`diploidSV_filt_very_stringent.vcf`)
 
-#### Genotyping
 
-This step is now essential. Till now we were calling variants with a crtain reliability. We need to take their union and ask again, in what samples is this variant present? Absence of clear evidence (the reason why it was not called in the first place) and we need to confirm the absence rather.
+##### SV curation
 
-##### by Delly
+This is sort of a post-analysis step to make sure what we do makes sense.
 
-Delly has a genotyper given set of candidates, so I use it while feeding it with the merged SVs.
-
-```
-E_structural_variation_calling/delly_genotyping.sh <sp>
-```
-
-generating
+We will use [SV-plaudit](https://github.com/jbelyeu/SV-plaudit), a high throughput SV curation tool. It internally uses [samplot](https://github.com/ryanlayer/samplot) to plot individual SVs, I will try to use it first internally, then I will run the whole framework
 
 ```
-data/$SP/variant_calls/$SAMPLE/delly_genotyping.bcf # for each sample
-data/$SP/variant_calls/delly_genotyping_merged.bcf
+samplot plot -n Tms_00 Tms_01 Tms_02 Tms_03 Tms_04 Tms_05 -b data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_01_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_02_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_03_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_04_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_05_to_b3v08_mapped_within_scfs.bam -o data/sandbox/3_Tms_b3v08_scaf000092_INV_80652_80811.png -s 80652 -e 80811 -c 3_Tms_b3v08_scaf000092 -a -t INV
 ```
 
-Output are merged genotyping calls (`"$SP"_delly_genotyping_merged.bcf`), given the set of candidates
-
-### Done in Edinburgh
-
-##### Paragraph
-
-This is program of choice. The problem is that it requires formating for the `.vcf` file that contains `REF` and `ALT` (check minimalist example `data/testing_data/round-trip-genotyping/candidates.vcf`). Which means that I need to go one step back, to figure out how to merge calls WITH explicit `REF`/`ALT` sequences. The other option would be to genotype using calls of each other and then base the mergin on the genopyping itself (SURVIVOR on steroids). I should try to genotype reciprocally two samples and then see if the genotyping is consistent with SURVIVOR merged calls.
-
-I feed `paragraph` with adjusted manta SV calls using `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py` script wrapped in the `E_structural_variation_calling/prepare_manta_to_paragraph_compatible.sh` script that runs it for all the species.
+this looks bad. Like really bad. Let's try to get them for all
 
 ```
-conda activate default_genomics
-qsub -o logs/ -e logs/ -cwd -N convert_vcf -V -pe smp64 32 -b yes 'bash E_structural_variation_calling/prepare_manta_to_paragraph_compatible.sh'
+qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'samplot vcf --vcf data/genotyping/3_Tms_merged_calls_naive_header.vcf -d figures/SVs -O png -b data/mapped_reseq_reads/Tms_00_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_01_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_02_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_03_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_04_to_b3v08_mapped_within_scfs.bam data/mapped_reseq_reads/Tms_05_to_b3v08_mapped_within_scfs.bam --sample_ids Tms_00 Tms_01 Tms_02 Tms_03 Tms_04 Tms_05 > F_structural_variation_analysis/samplot_commands.sh'
 ```
 
-Paragraphs also require coverage tables for each sample. They can be generated using following R script.
+It seems that all heterozygous SVs in asexuals are shaky.
 
-```
-mkdir -p data/genotyping
-Rscript E_structural_variation_calling/prepare_coverage_tables.R
-```
-
-Now, the genotyping commands for individual files are in `E_structural_variation_calling/paragraph_commands.txt` so to actually genotype the data we run:
-
-```
-parallel -j 1 'qsub -o logs/ -e logs/ -cwd -N paragraph -V -pe smp64 8 -b yes {}' :::: E_structural_variation_calling/paragraph_commands.txt
-```
-
-This generates `data/genotyping/*_ind*_genotyping` directories for each individual (the second `*`) of each species (the firt `*`).
-
-##### Details on converting manta vcf output to Paragraph compatible vcf
-
-The script `scripts/convertManta/convertManta2Paragraph_compatible_vcf.py` does this conversion:
- - breakpoints (BND) converted to inversions (INV)
- - renaming TandemDUP to DUP
- - filtering out variants with unknown reference sequence
- - filtering out variants that occur on the start of scaffolds (paragraph can not genotype those; default 150 bases)
- - filtering unresolved insertions (those with alt tag <INS>)                                                                                          
- - filtering nested structural variants (the non INS with SVINSSEQ tag in the info)
-
-New problem with some samples:
- - `!reference_sequence.empty()`
-
-The problematic samples:
- - Tte_ind01, Tte_ind02, Tte_ind04, Tte_ind05
- - Tsi_ind00, Tsi_ind03, Tsi_ind04, Tsi_ind05
- - Tdi_ind00, Tdi_ind01, Tdi_ind04, Tdi_ind05
- - Tge_ind01, Tge_ind03, Tge_ind04
-
-Funny enough, Tms (the tested one) is all alright and all species have at least one passed. I suppose I need to figure what exactly the error is about.
-
-I will check those on `bigfoot`:
-
-```
-drwxr-xr-x  2 kjaron       blaxterlab  64K May  7 09:52 4_Tte_ind01_genotyping_temp
-drwxr-xr-x  2 kjaron       blaxterlab 128K May  7 11:35 2_Tsi_ind03_genotyping_temp
-drwxr-xr-x  2 kjaron       blaxterlab 244K May  7 13:26 1_Tdi_ind04_genotyping_temp
-drwxr-xr-x  2 kjaron       blaxterlab  48K May  7 09:39 5_Tge_ind01_genotyping_temp
-drwxr-xr-x  2 kjaron       blaxterlab  44K May  7 09:37 5_Tge_ind04_genotyping_temp
-```
-
-- `4_Tte_ind01_genotyping_temp`:
-
-An SV landing here seems to have troubles with the reference sequence
-
-```
->4_Tte_b3v08_scaf062865
-Cctttcaagtacaccaggtttattatatccatgtcccttttctacctccaccactacttc
-aagtttgtcctgacttgtttatttacagaacacttctggaattttagatacttctagcat
-atcaccttctacctctgggaatacaatttctttagccatttcaattgccccattaaaaaa
-aactataaagctcatctcctggctcaataattaggctaattcagaagcaatttcagcatt
-ttgaaattccatgttttggtaatctaaatttaattttactgggaaagttgtttctatatc
-tttatgaatcaataaagcaggtacttcaattccacattgcagattaagactttctaaacc
-cattccttctaatttatctttgggaatttcaacactcactgttagtcctgcattgtcatt
-agaaaaatgttgatggagatcttgatctacgtgacgtttgtcccatactttttctttcac
-caattgcaccatcctttgtccacgagatgacattttgtctgaataagacag   
-```
-
-I suspect if I unmask the sequence, the problem will be resolved.
-
-```
-multigrmpy.py -i data/manta_SV_calls/Tte_01_manta/results/variants/diploidSV_paragraph_compatible.vcf -m data/genotyping/4_Tte_samples.txt -r data/final_references/4_Tte_b3v08_unmasked.fasta -o data/genotyping/4_Tte_ind01_genotyping --scratch-dir /scratch/kjaron/4_Tte_ind01_genotyping_temp --threads 16 && rm -r /scratch/kjaron/4_Tte_ind01_genotyping_temp
-```
-
-Nope, still
-
-```
-[2020-05-08 13:25:26.576] [Genotyping] [16458] [critical] Assertion failed: !reference_sequence.empty()
-```
-
-and
-
-```
-4_Tte_b3v08_scaf031309
-
-```
-
-Example execution
-
-```
-conda activate default_genomics
-SCRIPT=scripts/convertManta/convertManta2Paragraph_compatible_vcf.py
-REF=data/final_references/3_Tms_b3v08.fasta.gz
-VARIANTS=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV.vcf.gz
-OUT=data/manta_SV_calls/Tms_00_manta/results/variants/diploidSV_corrected_decomposed
-python3 $SCRIPT $REF $VARIANTS -prefix_split_by_type > $OUT
-```
-
-##### merging the calls
-
-Getting the individual genotyping calls together
-
-```
-python3 E_structural_variation_calling/merging_paragraph_calls.py 3_Tms 1> data/genotyping/3_Tms_merged_calls_naive.vcf 2> data/genotyping/3_Tms_merged_and_filtered_calls_naive.vcf
-```
-
-Now I have `data/genotyping/3_Tms_merged_calls_naive.vcf` file I can play with. Obviously, I need to also get back to the script and adjust the merging criteria, right now it's very naive (overlapping variants merged, the first variant is always the reference one and filtering only by 'PASS' keyword).
-
-##### Long Read individuals
+##### SVs in a Long Read asexual individual
 
 We have one `Tdi` individual, it's long reads are `data/1_Tdi/pacbio_1Tdi/raw_reads/`. We will use a classical nglmr/sniffles SV pipeline.
 
@@ -317,35 +181,3 @@ parallel -j 1 'qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes {}' 
 ```
 qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'samplot vcf --vcf data/1_Tdi/pacbio_1Tdi/Tdi06_on_pb_asm_sniffles.vcf -d figures/SVs -O png -b data/1_Tdi/pacbio_1Tdi/mapped_to_pb_asm00.bam --sample_ids Tdi_PB > F_structural_variation_analysis/samplot_commands_PB.sh'
 ```
-
-#### SV qc and filtering before merging
-
-Described in `E_structural_variation_calling/structural_variant_QC.md` (I wil move it here probably).
-
-Now we have few levels of filtering:
-  - no filtering (`diploidSV_reduced.vcf`)
-  - relaxed: remove only those with split read OR read pair support greater than relaxed threshold (`diploidSV_filt_relaxed.vcf`)
-  - stringent: split read OR read pair support in the stringent interval (`diploidSV_filt_stringent.vcf`)
-  - very stringent: split read support in the stringent interval (`diploidSV_filt_very_stringent.vcf`)
-
-We will see which makes most sense.
-
-#### TODO
-
-- get maximal number of SVs that there could be so we don't see any
-- can we classify number of SVs that are microsats?
-
-#### TO CONSIDER
-
-I think smove and manta use different names for the same thing (duplication vs insertion) or at least they sums are the same and one distinguishes them and the other does not. So it might be a good idea to "unify" them before merging. SURVIVOR cared about SV typpes, not sure how exactly Delly merger works.
-
-- [stix](https://github.com/ryanlayer/stix)
-- [BAdabouM](https://github.com/cumtr/BAdabouM)
-
-Another SV genotyper:
-
-- GraphTyper2
-
-CNV with a different specialised software, such as http://software.broadinstitute.org/software/genomestrip/
-
-All those would just just improve the homozygous SV calls and perhaps sexual SVs too.

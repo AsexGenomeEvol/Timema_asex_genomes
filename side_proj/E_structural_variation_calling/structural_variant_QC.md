@@ -67,7 +67,7 @@ for(sp in timemas$codes){
         # relaxed: remove only those with split read OR read pair support greater than relaxed threshold
         relaxed_u <- filtering_thresholds[paste0(sp_short,'0',ind), 'relaxed_u']
         keep <- is.na(SR_cov) | SR_cov < relaxed_u
-        write.table(SV_tab[keep,], out_relaxed[ind], quote = F, sep = '\t', row.names = F)
+        write.table(SV_tab[keep,], out_relaxed[ind], quote = F, sep = '\t', row.names = F, col.names = F)
 
         stringent_l <- filtering_thresholds[paste0(sp_short,'0',ind), 'stringent_l']
         stringent_u <- filtering_thresholds[paste0(sp_short,'0',ind), 'stringent_u']
@@ -77,10 +77,10 @@ for(sp in timemas$codes){
         SR_in_range[is.na(SR_in_range)] <- F # missing value means 0
         PR_in_range <- (PR_cov > stringent_l & PR_cov < stringent_u)
         PR_in_range[is.na(PR_in_range)] <- F # missing value means 0
-        write.table(SV_tab[SR_in_range | PR_in_range,], out_str[ind], quote = F, sep = '\t', row.names = F)
+        write.table(SV_tab[SR_in_range | PR_in_range,], out_str[ind], quote = F, sep = '\t', row.names = F, col.names = F)
 
         # very stringent: split read support in the stringent interval
-        write.table(SV_tab[SR_in_range,], out_very_str[ind], quote = F, sep = '\t', row.names = F)
+        write.table(SV_tab[SR_in_range,], out_very_str[ind], quote = F, sep = '\t', row.names = F, col.names = F)
     }
 }
 ```
