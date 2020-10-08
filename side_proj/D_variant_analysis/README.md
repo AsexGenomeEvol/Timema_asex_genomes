@@ -1,3 +1,19 @@
+#### Input data
+
+**SNPs**
+
+`data/SNP_calls/"$sp".SNP_filter.vcf.gz`
+
+**SVs**
+
+In `data/manta_SV_calls/data/$SP/` directories we have merged files with three different filtering levels:
+
+- no filtering (`SVs_no_filt_union.vcf`)
+- relaxed: remove only those with split read OR read pair support greater than relaxed threshold (`SVs_filt_relaxed_union.vcf`)
+- stringent: split read OR read pair support in the stringent interval (`SVs_filt_stringent_union.vcf`)
+- very stringent: split read support in the stringent interval (`SVs_filt_very_stringent_union.vcf`)
+
+
 ## SNV analysis
 
 Extract genotypes out of heavy vcf files. Once we get the base stats we can come back to the original files to check other detailed info, but for now the genotypes only will do the job.

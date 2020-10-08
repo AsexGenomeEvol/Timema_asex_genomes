@@ -15,15 +15,15 @@ get_sv_table <- function(one_sp_sv_calls, genotypes = F, coordinates = F){
      info_vec <- strsplit(info_vec, ';')
      sv_frame <- data.frame(
           scf = sapply(info_vec, get_entry, "CHR2"),
-          len = as.numeric(sapply(info_vec, get_entry, "AVGLEN")),
+          len = as.numeric(sapply(info_vec, get_entry, "SVLEN")),
           type = sapply(info_vec, get_entry, "SVTYPE")
      )
      if (genotypes) {
          presence_vec = sapply(one_sp_sv_calls, get_genotypes)
-         sv_frame[, c('00', '01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 6, byrow = T)
+         sv_frame[, c('01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 5, byrow = T)
      } else {
          presence_vec = as.numeric(ssplit(sapply(info_vec, get_entry, "SUPP_VEC"), split = ''))
-         sv_frame[, c('00', '01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 6, byrow = T)
+         sv_frame[, c('01', '02', '03', '04', '05')] <- matrix(presence_vec, ncol = 5, byrow = T)
      }
      if (coordinates) {
          sv_frame$pos <- as.numeric(sapply(one_sp_sv_calls, function(x) { x[2] } ))
@@ -38,5 +38,5 @@ get_entry <- function(infoline, entry_name){
 }
 
 get_genotypes <- function(infoline){
-    substr(infoline[10:15], 1, 3)
+    substr(infoline[10:14], 1, 3)
 }

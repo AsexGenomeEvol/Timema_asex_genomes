@@ -95,10 +95,11 @@ chromosomes <- chromosomes[chromosomes$chr != 'lgX', ]
 # sp = '5_Tge'
 
 ### LOADING SNPs
-pdf('figures/anchored_SNPs.pdf', width = 10, height = 6)
+pdf('figures/anchored_SNPs_one.pdf', width = 10, height = 5)
+# par(mfrow = c(5, 2))
 # pdf(paste0('figures/anchored_SNPs_', sp, '.pdf'), width = 10, height = 6)
 
-for(sp in timemas$codes){
+for(sp in timemas$codes[5]){
     tab_filename <- paste0('data/SNP_calls/', sp, '_reduced_filtered_variants.tsv')
     output_file <- paste0("tables/SNPs/", sp, "_SNPs_on_chromosomes_w", window, ".tsv")
 
