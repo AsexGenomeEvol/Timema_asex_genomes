@@ -28,12 +28,6 @@ for(sp in timemas$codes){
 
     ### generate blank variant_density_table
 
-    get_chr_size <- function(chr){
-        # when scaffolds are mapped to reference, I always leave 10000 bases between them on a linkage group (consistent with the NCBI reference that used this arbitrary number of bases)
-        sum(reference[reference$chromosome == chr,'len']) + ((sum(reference$chromosome == chr) - 1) * 10000)
-    }
-
-
     get_lg_windows <- function(i) {
         all_windows <- seq(0, chromosomes[i,'rounded_len'], by = window)
         adj <- chromosomes[i, 'adjustments']
@@ -50,14 +44,7 @@ for(sp in timemas$codes){
     colnames(reference) <- c('scf_o', 'scf', 'score', 'cov', 'len', 'asignment')
     reference$chromosome <- sapply(strsplit(reference$scf, "_"), function(x) { x[1] } )
 
-    chromosomes <- data.frame(chr = paste0('lg', c(1:12, 'X')))
-    chromosomes$len <- sapply( chromosomes$chr, get_chr_size )
-
-    # I need to round up chromosome lengths to avoid one window being part of two chromosomes
-    chromosomes$rounded_len <- ceiling(chromosomes$len / window) * window + (window * gap_beween_chromosomes)
-    chromosomes$adjustments <- cumsum(c(0, chromosomes$rounded_len[1:(nrow(chromosomes) - 1)]))
-    rownames(chromosomes) <- chromosomes$chr
-    chromosomes <- chromosomes[chromosomes$chr != 'lgX', ]
+    source('D_variant_analysis/load_chromosomes.R')
 
     variant_density_table <- do.call("rbind", lapply(1:12, get_lg_windows))
 
@@ -81,15 +68,13 @@ for(sp in timemas$codes){
         }
 
     }
-    variant_density_table$uniq_mapped[is.na(variant_density_table$uniq_mapped)] <- 0
 
+    variant_density_table$uniq_mapped[is.na(variant_density_table$uniq_mapped)] <- 0
     variant_density_table$uniq_mapped <- round(variant_density_table$uniq_mapped, 3)
 
     ####################
     ### add SNP info ###
     ####################
-
-    variant_density_table$SNPs <- 0
 
     tab_filename <- paste0('data/SNP_calls/', sp, '_reduced_filtered_variants.tsv')
 
@@ -112,10 +97,7 @@ for(sp in timemas$codes){
     print(paste('Filtering ', round(100 * mean(is.na(variant_tab$lg_pos)), 1), ' % of variants (unmapped)'))
     anchored_variant_tab <- variant_tab[!is.na(variant_tab$lg_pos), ]
 
-    #### prepare variant template
-    variant_density_table <- do.call("rbind", lapply(1:12, get_lg_windows))
     variant_density_table$SNPs <- 0
-    # variant_density_table$common <- 0
 
     for (i in 1:nrow(anchored_variant_tab)) {
         lg = anchored_variant_tab[i, 'lg']

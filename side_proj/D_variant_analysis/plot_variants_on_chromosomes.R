@@ -10,71 +10,70 @@ gap_beween_chromosomes = 3
 
 ###############################
 
-plot_SVs_on_LGs <- function(exclude_zero = T, lines = F, pal = 'asex', ylim = NA){
+plot_SVs_on_LGs <- function(exclude_zero = T, lines = F, sex = 'asex', SNP_ylim, SV_ylim){
 
-    # BrBG
-    if ( pal == 'asex' ){
+    if ( sex == 'asex' ){
         pal <- brewer.pal(5, "YlGnBu")[c(3,5)]
     } else {
         pal <- brewer.pal(5, "YlOrRd")[c(3,5)]
     }
-    # pal <- addalpha(pal, alpha)
-    if ( any(is.na(ylim)) ){
-        ylim = range(variant_density_table$variants, na.rm = T)
-    }
-    # print(ylim)
 
-    plot(NULL, xlim = c(1, nrow(variant_density_table)), ylim = ylim, pch = 20,
-         main = sp, xaxt = "n", bty = 'n', xlab = '', ylab = '', cex.axis = 1.4, cex.main = 1.6)
+    plot(NULL, xlim = c(1, nrow(variant_density_table)), ylim = c(0, 1), pch = 20,
+         main = sp, xaxt = "n", yaxt = "n", bty = 'n', xlab = '', ylab = '', cex.axis = 1.4, cex.main = 1.6)
          # xlab = 'linage group [ Mbp ]', ylab = '# found SVs'
     xtick <- chromosomes$adjustments / window
     axis(side = 1, at = xtick, labels = FALSE)
     text(x = (chromosomes$adjustments[1:12] + chromosomes$adjustments[2:13]) / (2 * window),  par("usr")[3],
          labels = chromosomes$chr[1:12], pos = 1, xpd = TRUE, cex = 1.3)
     for (i in seq(1, 12, by = 2)) {
-        rect(chromosomes$adjustments[i] / window, -2, chromosomes$adjustments[i + 1] / window, ylim[2], col = 'lightgrey', border = F)
+        rect(chromosomes$adjustments[i] / window, -2, chromosomes$adjustments[i + 1] / window, 1, col = 'lightgrey', border = F)
+    }
+    if ( sex == 'asex'){
+        axis(side = 2, at = seq(0,1, by = 0.2), labels = seq(0, SNP_ylim, length = 6))
+        mtext('SNPs', 2, line = 2.5)
+    } else {
+        axis(side = 4, at = seq(0,1, by = 0.2), labels = seq(0, SV_ylim, length = 6))
+        mtext('SVs', 4, line = 2.5)
     }
 
     if ( exclude_zero ){
-        variant_density_table[variant_density_table$variants == 0, 'variants'] <- NA
-        variant_density_table[variant_density_table$SVs == 0, 'common'] <- NA
+        variant_density_table[variant_density_table$SNPs == 0, 'SNPs'] <- NA
+        variant_density_table[variant_density_table$SVs == 0, 'SVs'] <- NA
     }
 
     if ( lines ){
-        lines(variant_density_table$SVs / max(variant_density_table$SVs), col = pal[2], lwd = 1.6)
-        lines(variant_density_table$variants / max(variant_density_table$variants), col = pal[1], lwd = 1.6)
+        lines(variant_density_table$SVs / SV_ylim, col = pal[2], lwd = 1.6)
+        lines(variant_density_table$SNPs / SNP_ylim, col = pal[1], lwd = 1.6)
     } else {
-        points(variant_density_table$variants, pch = 20, col = pal[1])
-        points(variant_density_table$SVs, pch = 20, col = pal[2])
+        points(variant_density_table$SVs / SV_ylim, pch = 20, col = pal[2])
+        points(variant_density_table$SNPs / SNP_ylim, pch = 20, col = pal[1])
     }
     legend('topright', bty = 'n', c('SNPs', 'SVs'), pch = 20, col = pal[c(1,2)])
 }
 
 ##########
 
-# sp = '5_Tge'
+source('D_variant_analysis/load_chromosomes.R')
+
 pdf('figures/anchored_SNPs_and_SVs_overlayed.pdf', width = 10, height = 6)
-# pdf(paste0('figures/anchored_SNPs_', sp, '.pdf'), width = 10, height = 6)
-
+par(mfrow = c(5, 2))
 for(sp in timemas$codes){
-    # tab_filename <- paste0('data/SNP_calls/', sp, '_reduced_filtered_variants.tsv')
-    # SV_filename <- paste0('data/SNP_calls/', sp, '_reduced_filtered_variants.tsv')
-    # SVs_filt_stringent_union_file <- paste0('data/manta_SV_calls/data/', sp, '/SVs_filt_stringent_union.vcf')
-    # mapping_file <- paste0('data/b3v08_anchoring_to_LGs/', sp, '_scf_block_alignment.tsv')
-    # mapping_summary_file <- paste0('tables/anchoring/', sp, '_summary.tsv')
 
-    make_variant_density_table_file <- paste0("tables/SNPs/", sp, "_SNPs_on_chromosomes_w", window, ".tsv")
+    variant_density_table_file <- paste0("tables/", sp, "_variants_on_chromosomes_w", window, ".tsv")
 
-    if ( file.exists(output_file) ){
-        variant_density_table <- read.table(make_variant_density_table_file, header = T, sep = '\t', stringsAsFactors = F)
+    if ( file.exists(variant_density_table_file) ){
+        variant_density_table <- read.table(variant_density_table_file, header = T, sep = '\t', stringsAsFactors = F)
     } else {
         print('please, run D_variant_analysis/make_variant_density_table.R first')
     }
 
     if ( sp %in% timemas$codes[seq(1, 10, by=2)]){
-        plot_SVs_on_LGs(F, T, 'asex', c(0, 1))
+        par(mar=c(2,4,2,0))
+        # 'c(bottom, left, top, right)'
+        plot_SVs_on_LGs(F, T, 'asex', 28000, 100)
     } else {
-        plot_SVs_on_LGs(F, T, 'sex', c(0, 22000))
+        par(mar=c(2,0,2,4))
+        plot_SVs_on_LGs(F, T, 'sex', 28000, 100)
     }
 
 }
