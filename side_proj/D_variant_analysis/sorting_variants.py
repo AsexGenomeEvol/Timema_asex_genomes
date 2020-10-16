@@ -57,9 +57,14 @@ for sp in ['1_Tdi', '1_Tps', '2_Tcm', '2_Tsi', '3_Tce', '3_Tms', '4_Tbi', '4_Tte
         header = mf.readline()
         for line in mf:
             mapped_block_tab = line.rstrip('\n').split('\t')
-            mapped_interval = interval([int(mapped_block_tab[3]), int(mapped_block_tab[4])])
-            scf2intervals[mapped_block_tab[0]].append(mapped_interval)
-            scf2mapping[mapped_block_tab[0]].append(reference_block(mapped_block_tab))
+            # equvalent of R's mapping_table[abs(mapping_table$block_r_end - mapping_table$block_r_start) / mapping_table$block_size > 0.5, ]
+            block_size = int(mapped_block_tab[2])
+            block_r_start = int(mapped_block_tab[6])
+            block_r_end = int(mapped_block_tab[7])
+            if (abs(block_r_end - block_r_start) / block_size) > 0.5:
+                mapped_interval = interval([int(mapped_block_tab[3]), int(mapped_block_tab[4])])
+                scf2intervals[mapped_block_tab[0]].append(mapped_interval)
+                scf2mapping[mapped_block_tab[0]].append(reference_block(mapped_block_tab))
 
     stderr.write("\tmapping loaded\n")
 

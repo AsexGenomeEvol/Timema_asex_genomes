@@ -65,11 +65,17 @@ We could get some filtering stats I guess by `wc -l` ing the `_reduced` and `_re
 
 ### Plotting variants on chromosomes
 
+First using the mapping, SNP and SV files to generate veriant density table
+
+```
+Rscript D_variant_analysis/make_variant_density_table.R
+```
+
 I am resolving the plotting in the following script
 
 ```
-Rscript D_variant_analysis/plot_SNPs_on_chromosomes.R
+
+D_variant_analysis/plot_variants_on_chromosomes.R
 ```
 
-The files I need are called SNPs - `data/SNP_calls/<sp>_reduced_filtered_variants.tsv`, block alignment `data/b3v08_anchoring_to_LGs/<sp>_scf_block_alignment.tsv`, and genome index `data/<sp>/reference/<sp>_b3v08_scf.lengths`
 
