@@ -63,6 +63,13 @@ also generates `data/SNP_calls/<sp>_reduced_filtered_variants.tsv` files.
 
 We could get some filtering stats I guess by `wc -l` ing the `_reduced` and `_reduced_filtered` files or by adding a few lines to the `sorting_variants` script.
 
+### Plotting heteoryzogisty
+
+```
+D_variant_analysis/make_heterozygosity_table.R
+D_variant_analysis/plot_heterozygosity.R
+```
+
 ### Plotting variants on chromosomes
 
 First using the mapping, SNP and SV files to generate veriant density table
