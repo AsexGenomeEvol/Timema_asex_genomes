@@ -35,22 +35,14 @@ if ( !file.exists(heterozygosity_table_filename)){
         heterozygosity_table[sp ,genotype_variants] <- called_variants
         # I could add asm stats to be able to divide by asm span
     }
-    # data from https://github.com/AsexGenomeEvol/Timema_SNP_calling/tree/master/F_snp_calling_round1#number-of-snp-and-monomorphic-positions-
-    # 1_Tdi   966024897
-    # 1_Tps 	874807942
-    # 2_Tcm 	899565414
-    # 2_Tsi 	896299726
-    # 3_Tce 	902715794
-    # 3_Tms 	991389399
-    # 4_Tbi 	920445028
-    # 4_Tte 	980178552
-    # 5_Tge 	960991903
-    # 5_Tpa 	705548015
-    #  [1] "4_Tte" "4_Tbi" "2_Tsi" "2_Tcm" "1_Tdi" "1_Tps" "3_Tms" "3_Tce" "5_Tge"
-    # [10] "5_Tpa"
+
     all_genotypes <- paste0("0", 1:5, "_SNPs_het")
-    colnames(heterozygosity_table) <- c("sp", all_genotypes, paste0("0", 1:5, "_SNPs"), "total_sp_SNPs", "callable_sites")
-    heterozygosity_table$callable_sites <- c(980178552, 920445028, 896299726, 899565414, 966024897, 874807942, 991389399, 902715794, 960991903, 705548015)
+    colnames(heterozygosity_table) <- c("sp", all_genotypes, paste0("0", 1:5, "_SNPs"), "total_sp_SNPs")
+
+    # data from https://github.com/AsexGenomeEvol/Timema_SNP_calling/tree/master/F_snp_calling_round1#number-of-snp-and-monomorphic-positions-
+    species <- c('1_Tdi', '1_Tps', '2_Tcm', '2_Tsi', '3_Tce', '3_Tms', '4_Tbi', '4_Tte', '5_Tge', '5_Tpa')
+    callable_sites <- c(966024897, 874807942, 899565414, 896299726, 902715794, 991389399, 920445028, 980178552, 960991903, 705548015)
+    heterozygosity_table[species, 'callable_sites'] <- callable_sites
 
     source('D_variant_analysis/load_SV_calls.R')
 
