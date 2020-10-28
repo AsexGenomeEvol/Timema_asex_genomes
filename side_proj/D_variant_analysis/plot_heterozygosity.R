@@ -15,7 +15,17 @@ mins <- apply(heterozygosities, 2, min, na.rm = T)
 maxes <- apply(heterozygosities, 2, max, na.rm = T)
 bar_sizes <- colMeans(heterozygosities, na.rm = T)
 
-ymax <- max(maxes)
+library(reshape2)
+individuals_het_tab <- melt(heterozygosities)
+colnames(individuals_het_tab) <- c('ind', 'sp', 'het')
+
+individuals_het_tab <- individuals_het_tab[!is.na(individuals_het_tab$het), ]
+individuals_het_tab$repr <- 'asex'
+
+individuals_het_tab[individuals_het_tab$sp %in% timemas$codes[seq(2,10, by = 2)], 'repr'] <- 'sex'
+repr_mode_test <- glm(het ~ pair + repr, data = individuals_het_tab)
+
+summary(repr_mode_test)
 
 ### GenomeScope data
 
@@ -43,7 +53,7 @@ locations <- barplot(genomescope_est, col = c(asex_blue, sex_red),
 text(locations,
      par("usr")[3] - (0.03 * ymax), pos = 1, srt = 25,
      xpd = TRUE, labels = timemas$labels, cex = 0.8)
-mtext('SNP heterozygosity [%]', 2, padj = -3.2, cex = 1.3)
+mtext('Nucleotide heterozygosity [%]', 2, padj = -3.2, cex = 1.3)
 
 w <- 0.1
 for ( i in 1:length(mins) ){
@@ -55,7 +65,7 @@ for ( i in 1:length(mins) ){
     lines(c(x - w, x + w), c(y_max, y_max), xpd=T, lwd = 1.5)
 }
 points(bar_sizes ~ locations, pch = 20, cex = 0.5)
-legend('topleft', pch = c(15, 20), col = c(sex_red, 1), c('GenomeScope', 'SNPs'), bty = 'n')
+legend('topleft', pch = c(15, 20), col = c(asex_blue, sex_red), c('parthenogenic', 'sexual'), bty = 'n')
 
 #### SVs
 

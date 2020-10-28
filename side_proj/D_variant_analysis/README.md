@@ -85,4 +85,6 @@ I am resolving the plotting in the following script
 D_variant_analysis/plot_variants_on_chromosomes.R
 ```
 
+### SNP variation along the chromosomes
+
 
