@@ -1,5 +1,6 @@
 library('RColorBrewer')
 library('AsexStats')
+# library('lme4')
 
 heterozygosity_table_filename <- 'tables/heterozygosity_table.tsv'
 
@@ -20,12 +21,16 @@ individuals_het_tab <- melt(heterozygosities)
 colnames(individuals_het_tab) <- c('ind', 'sp', 'het')
 
 individuals_het_tab <- individuals_het_tab[!is.na(individuals_het_tab$het), ]
+individuals_het_tab$pair <- substr(individuals_het_tab$sp, 1, 1)
 individuals_het_tab$repr <- 'asex'
 
 individuals_het_tab[individuals_het_tab$sp %in% timemas$codes[seq(2,10, by = 2)], 'repr'] <- 'sex'
-repr_mode_test <- glm(het ~ pair + repr, data = individuals_het_tab)
+# repr_mode_test <- glm(het ~ pair + sp + repr, data = individuals_het_tab)
+# repr_mode_test <- lmer(het ~ pair + repr + (1| sp), data = individuals_het_tab, family = 'Guassian')
+# repr_mode_test <- lme(het ~ pair + repr, random = ~1|sp, data=individuals_het_tab)
 
-summary(repr_mode_test)
+# anova(repr_mode_test)
+
 
 ### GenomeScope data
 
