@@ -65,7 +65,7 @@ Transcriptome unfiltered: `*Tv01.fasta`.
 
 3) Filter the transcriptome.
 
-a) Map all samples against transcriptome and compute the TMP value per sample using [Kallisto](https://pachterlab.github.io/kallisto/about). 
+a) Map all samples against transcriptome and compute the TPM value per sample using [Kallisto](https://pachterlab.github.io/kallisto/about). 
 
 ```
 module add UHTS/Analysis/kallisto/0.43.0
@@ -237,7 +237,7 @@ cp *.all.maker.proteins.fasta *.max.proteins.fasta
 cp *.all.maker.transcripts.fasta *.max.transcripts.fasta
 ``` 
 
-3) Assign short names to each protein coding genes. 
+3) Assign short id to each protein coding genes. 
 
 ``` 
 maker_map_ids --prefix TCM_ --justify 5 *.max.gff > *.max.map	#example for T. californicum.
@@ -255,7 +255,7 @@ Default parameters against both the `NCBI non-redundant arthropods protein` data
 
 The genome and the annotation have been converted to EMBL format in order to be deposited in the European Nucleotide Archive (ENA) using [AGAT](https://github.com/NBISweden/AGAT) and [EMBLmyGFF3](https://github.com/NBISweden/EMBLmyGFF3).
 
-1) Fixing duplicates mRNA and flag genes with short intron.
+1) Fixing mRNA duplicates and flag genes with short intron.
 
 ```
 agat_sp_fix_features_locations_duplicated.pl --gff * --out *
