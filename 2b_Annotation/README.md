@@ -44,7 +44,7 @@ module add UHTS/Aligner/STAR/2.5.3a;
 mkdir index
 STAR --runMode genomeGenerate --genomeDir index --genomeFastaFiles genome.fasta --runThreadN 15
 
-# Mapping step (for SE)
+# Mapping step
 
 mkdir 2pass_basic
 
@@ -54,7 +54,7 @@ STAR --genomeDir ../index/ --readFilesIn <*.fastq.gz ...> --runThreadN 10 --outS
 2) Assembly with Trinity (genome guided mode).
 
 ```
-module add UHTS/Assembler/trinityrnaseq/2.4.0; #timema
+module add UHTS/Assembler/trinityrnaseq/2.4.0;
 
 # out.Aligned.sortedByCoord.out.bam output by STAR.
 
@@ -110,7 +110,7 @@ export AUGUSTUS_CONFIG_PATH=/scratch/beegfs/monthly/ptranvan/Software/busco/3.0.
 #### <a name="21_round1"></a>2.1) Iteration 1
 
 
-1) Create and modify control files. See [config_files]((./config_files/)) for more details.
+1) Create and modify control files. See [config_files](./config_files/) for more details.
 
 ```
 mkdir maker
