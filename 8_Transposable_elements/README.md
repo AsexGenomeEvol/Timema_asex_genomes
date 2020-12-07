@@ -1,16 +1,18 @@
-# Repeat identification, TE detection and annotation
+# Repeat identification and TE detection
 
-This is how repeats were detected and TEs annotated
+This is how repeats were detected and annotated
 
 ## mining repeats from raw reads
 
-Using dnaPipeTE v2.5 on serv04 of the Vital-it HPC facilities. dnaPipeTE had to be tweaked by Patrick Tran Van to be able to run.
+Using dnaPipeTE v2.5 on serv04. dnaPipeTE had to be tweaked by Patrick to be able to run.
 
 
 Raw read data put in scratch/local
 
-- genome size must be specified (assembly size used as proxy for each species)
-- parameters: -genome_coverage 0.5 -sample_number 4
+- genome size must be specified
+- parameters ok for most organizms: -genome_coverage 0.5 -sample_number 4
+
+run on dee_serv04, because might consume up to 400Gb memory and highjack all CPUs
 
 
 ```
@@ -32,7 +34,7 @@ for f in *.fasta; do cat $f | awk '/^>/ $1 ~ "LTR" { printf("%s#%s/%s\n",$0,"LTR
 
 Two folders were made:
 - raw_libraries (containing the repeat sequences)
-- genomes (containing b3_v08 Timema genomes)
+- genomes (containing b3_v06 (or b3_v04) Timema genomes)
 
 This script was run for RepeatMasker locally on dee_serv04 (check the parameters inside):
 
@@ -292,4 +294,15 @@ python te.py -s repeatmasker2r -i1 1_Tps_b3v07.fa_mod.html -o 1_Tps_b3v07_R_data
 ```
 
 2) See the R script in R/dnaPipeTE dir.
+
+## polymorphism
+
+similar to previous, just for all reseq
+```
+map_reads_pol.sh
+htseq_poly.sh
+count_pol.sh
+```
+
+
 

@@ -1,0 +1,71 @@
+Reserve 10 cpus on slack
+
+source /scratch/beegfs/monthly/ptranvan/Software/PASTEClassifier/1.0/config/setEnv.sh
+module add SequenceAnalysis/Repeat/trf/4.07b;
+module add SequenceAnalysis/HMM-Profile/hmmer/3.1b2;
+
+In working directory:
+
+ln -s /scratch/beegfs/monthly/ptranvan/Software/REPET/repbase/RepBase20.05_REPET.embl/repbase20.05_ntSeq_cleaned_TE.fa repbase20.05_ntSeq_cleaned_TE.fa
+ln -s /scratch/beegfs/monthly/ptranvan/Software/REPET/repbase/RepBase20.05_REPET.embl/repbase20.05_aaSeq_cleaned_TE.fa repbase20.05_aaSeq_cleaned_TE.fa
+
+2 way to run:
+
+1) Default:
+
+config file: /scratch/beegfs/monthly/ptranvan/Software/PASTEClassifier/1.0/config/PASTEClassifier_parallelized.cfg
+
+2) Using TE banks:
+
+config file: /scratch/beegfs/monthly/ptranvan/Software/PASTEClassifier/1.0/config/te_bank/PASTEClassifier_parallelized.cfg
+
+
+#might include the annotated Timema host genes as database:
+/scratch/beegfs/monthly/ptranvan/sinergia/timema/without_contamination/*/filtered/annotation/maker/result/functional/*transcripts.func.fasta.gz
+
+#remove any TE-related annotations from these:
+for f in *.fasta; do cat $f | grep -E "retro|transpos|transcriptase|unknown function|reverse|mobile element" | cut -d " " -f 1 | sed 's/>//g' > $f''.TEids; done
+for f in *.fasta; do /scratch/beegfs/monthly/jbast/software/scripts/extract_contigs.py -i $f -o $f''.noTEs.fa -l $f''.TEids -r; done
+
+
+#add a rDNA database (here SILVA used):
+wget http://ftp.arb-silva.de/current/Exports/SILVA_132_SSURef_Nr99_tax_silva.fasta.gz     
+wget http://ftp.arb-silva.de/current/Exports/SILVA_132_LSURef_tax_silva.fasta.gz          
+cat SILVA_132_LSURef_tax_silva.fasta SILVA_132_SSURef_Nr99_tax_silva.fasta > rDNA_silva.fa  
+
+
+#TE lib only run seq bigger 500 bp, otherwise too much
+
+#first reformat headers and fasta interleaved max 60 bp (Patrick script for Timema):
+python asv3.py -s rename_TE -i1 input.fasta -o output.fasta
+for f in *.centroid95min500; do python /scratch/beegfs/monthly/jbast/software/asv3.py -s rename_TE -i1 $f -o $f.cvt; done
+
+
+#run script to make Timema folder structure, copy TE libs in each and make the fitting cfg file
+./pastec_run.sh
+
+
+
+Commands:
+
+PASTEClassifier_parallelized.py -i consensus.fa -C PASTEClassifier_parallelized.cfg -S 1 >& PASTEC_step1.log
+PASTEClassifier_parallelized.py -i consensus.fa -C PASTEClassifier_parallelized.cfg -S 2 >& PASTEC_step2.log
+
+
+
+For parallelized version:
+To launch all steps of PASTEClassifier_parallelized.py
+#launch from /scratch/beegfs/monthly/ not local!
+
+nohup PASTEClassifier_parallelized.py -i inpuFile.fa -C PASTEClassifier_parallelized.cfg -w -r  >& PASTEC.log &
+
+#parameters -r and -w should be added
+
+
+#if something went wrong, clean mysql database:
+mysql --host=devbioinfo.unil.ch --user=synergia --password=synergia1234
+use synergia;
+select * from jobs;
+
+delete from jobs ;
+
