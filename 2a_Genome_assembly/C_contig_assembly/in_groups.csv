@@ -1,0 +1,8 @@
+group_name,	library_name,	file_name
+se,	Il_se,	/scratch/local/monthly/kjaron/1_Tps/DATA/Tps_se.fq
+pe_1,	Il_pe1,	/scratch/local/monthly/kjaron/1_Tps/DATA/Tps_R?tf_is_225.fq
+pe_2,	Il_pe2,	/scratch/local/monthly/kjaron/1_Tps/DATA/Tps_R?t_is_350.fq
+pe_3,	Il_pe3,	/scratch/local/monthly/kjaron/1_Tps/DATA/Tps_R?t_is_550.fq
+pe_4,	Il_pe4,	/scratch/local/monthly/kjaron/1_Tps/DATA/Tps_R?t_is_700.fq
+mp_1,	Il_mp1,	/scratch/local/monthly/kjaron/1_Tps/DATA/RF_mp/Tps_R?t_is_3000.fq
+mp_2,	Il_mp2,	/scratch/local/monthly/kjaron/1_Tps/DATA/RF_mp/Tps_R?t_is_5000.fq

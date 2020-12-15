@@ -53,7 +53,7 @@ TROOT (timema root) at the root folder of timema assembly project. Scripts are s
 designed for cluster running `lsf` scheduler.
 
 ```bash
-echo "export TROOT=/scratch/beegfs/monthly/kjaron/timema_assembly" >> ~/.bashrc
+echo "export TROOT=/scratch/beegfs/monthly/kjaron/Timema_asex_genomes/2a_Genome_assembly" >> ~/.bashrc
 ```
 
 General dependencies (used versions):
@@ -72,22 +72,13 @@ Dependencies by sections:
 
 ## Pipeline
 
-### Notes about the organization of this pipeline
+**Notes about the organization of this pipeline**
 
-- all paths in all `README.md` files are relative to root of the repository - `$TROOT`. Do not try to run `make` commands inside of subfolders (make will complain anyway, but I do not want you to be surprised), hierarchical documentation should simplify reading and clarity of the whole project.
-- Every `README.md` contains three main sections:
-    - explanation of the analyses / computations done by scripts in the directory
-    - make commands to be executed (in the root) to run the analyses
-    - details of testing and all the stuff - this section might contain non-exising links and wrongly named scripts, because it is just a bit cleaned lab book for testing
-- usually (not in all cases) I tried to mark script that were not used in the end with prefix `n`, sometimes I did not wanted to fix working make recepie, so I kept the name I used at the beginning.
-- R scripts that are not called from any Makefile are stating with line `# wild script`
 - computed summary tables in stats directory are present in repository as well
-- the make pipeline is semiautomatic. It means that you can't redo the whole study in one `make`, you need to build piece by piece using individual make instructions and you have to make sure that the next instruction is submitted once the previous one has successfully finished. This comes from two problems, first I have not chosen the optimal build language, GNU make is not aware of cluster computing, therefore it is non-trivial to write proper recipes. The second aspect is the size of the project, to redo everything top to bottom including all the tests you would need several computational years and sufficient resources. For this reason the default build target for make is its help, where all pipeline recipes are listed.
-- Makefiles are hard to read, if you are not sure what any step is doing, you can run `make <step> --dry-run`, which will just list command make would execute (shorter version of the same is `make <step> -n`), which is way easier than trying to fish from the makefile what it is supposed to do. Then you can look at the scripts written in friend languages like `R`, `python` or `bash`.
+- the make pipeline is semiautomatic. It means that you can't redo the whole study in one `make`, you need to build piece by piece using individual make instructions and you have to make sure that the next instruction is submitted once the previous one has successfully finished. This comes from two problems, first I have not chosen the optimal build language, GNU make is not aware of cluster computing, therefore it is non-trivial to write proper recipes (the choice was made at the time Snakemake was not so fun to work with). The second aspect is the size of the project, to redo everything top to bottom including all the tests you would need several computational years and sufficient resources. For this reason the default build target for make is its help, where all pipeline recipes are listed.
+- Makefiles themselves are hard to read, if you are not sure what any step is doing, you can run `make <step> --dry-run`, which will just list command make would execute (shorter version of the same is `make <step> -n`), which is way easier than trying to fish from the makefile what it is supposed to do. Then you can look at the scripts written in friend languages like `R`, `python` or `bash`.
 
-### Trimming
-
-#### description
+### Read parsing
 
 The raw reads present `data/<sp>/raw_reads/<is>/<files>` need to be cleaned before the assembly. We aim to cut all low quality bases and and sequences of adapters using `trimmomatic`. Mate-pair libraries also require identification of linker sequence and reversing orientation to be Forward-Reverse direction, detailed information can be found at [webpage of Illumina](https://www.illumina.com/documents/products/datasheets/datasheet_genomic_sequence.pdf). We used `NxTrim` for delinking.
 
@@ -145,3 +136,26 @@ make kmergenie
 ```
 
 The assembly of trimmed reads using optimal predicted kmer is described in directory [C_contig_assembly](../C_contig_assembly)
+
+### Contig assembly
+
+I wanted to separate steps of contig building and scaffolding to be able to optimize these two steps separately. However, I found that config assembly and scaffolding is more interlinked that I expected. For example `SOAPdenovo2` produces very fragmented contig assembly with size way over the size of genome, however SOAP scaffolder is apparently able to deal with it and in the end the scaffolds produced by `SOAPdenovo2` had continuity comparable to other pipelines.
+
+I tested with more or less effort `Platanus`, `SOAPdenovo2`, `ABySS`, `Megahit`. I also tried `MaSuRCA` and `ALLPATHS-LG`, but I encountered technical difficulties. Beside a choice of assembler I explored effects of input data, namely the effect of correction of reads, effect of additional sequencing, adding single end reads, and using pair-end contamination of mate pairs. Based on trials I found three approaches that were tested on all ten species (see XXXX). In the pipeline section only the final approach using `ABySS` is presented. The optimal kmer for `ABySS` was determined by `kmergenie` (and experimentally verified that it represent locally optimal assembly continuity).
+
+## Pipeline
+
+To assemble batch3 with `ABySS` you can run
+
+```
+make assemble.batch3
+```
+
+make stats of all the assemblies
+
+```
+make asm.stats
+make asm.tables
+```
+
+Scaffolding of ABySS contigs and more tested scaffolding strategies are described in directory [D_scaffolding](../D_scaffolding).

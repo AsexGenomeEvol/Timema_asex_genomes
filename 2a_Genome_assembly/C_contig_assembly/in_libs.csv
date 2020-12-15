@@ -1,0 +1,8 @@
+library_name,	project_name,	organism_name,	type,	paired,	frag_size,	frag_stddev,	insert_size,	insert_stddev, read_orientation, genomic_start,	genomic_end
+Il_se,	Tps_asm,	Tpoppensis,	fragment,	0,	,	,	,	,	,	,	
+Il_pe1,	Tps_asm,	Tpoppensis,	fragment,	1,	200,	10,	,	,	inward,	,	
+Il_pe2,	Tps_asm,	Tpoppensis,	fragment,	1,	350,	10,	,	,	inward,	,	
+Il_pe3,	Tps_asm,	Tpoppensis,	fragment,	1,	550,	10,	,	,	inward,	,	
+Il_pe4,	Tps_asm,	Tpoppensis,	fragment,	1,	700,	10,	,	,	inward,	,	
+Il_mp1,	Tps_asm,	Tpoppensis,	jumping,	1,	,	,	3000,	400,	outward,	,	
+Il_mp2,	Tps_asm,	Tpoppensis,	jumping,	1,	,	,	5000,	500,	outward,	,	
