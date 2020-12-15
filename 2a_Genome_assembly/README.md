@@ -220,3 +220,4 @@ make counts.Ns
 Once all the tasks above are done, pull the results into a table
 
 TODO : pull them into table (I bet I got this already somewhere)
+TODO : add decontamination step
