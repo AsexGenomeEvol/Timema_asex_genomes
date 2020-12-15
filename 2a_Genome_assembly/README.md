@@ -141,11 +141,11 @@ The assembly of trimmed reads using optimal predicted kmer is described in direc
 
 I wanted to separate steps of contig building and scaffolding to be able to optimize these two steps separately. However, I found that config assembly and scaffolding is more interlinked that I expected. For example `SOAPdenovo2` produces very fragmented contig assembly with size way over the size of genome, however SOAP scaffolder is apparently able to deal with it and in the end the scaffolds produced by `SOAPdenovo2` had continuity comparable to other pipelines.
 
-I tested with more or less effort `Platanus`, `SOAPdenovo2`, `ABySS`, `Megahit`. I also tried `MaSuRCA` and `ALLPATHS-LG`, but I encountered technical difficulties. Beside a choice of assembler I explored effects of input data, namely the effect of correction of reads, effect of additional sequencing, adding single end reads, and using pair-end contamination of mate pairs. Based on trials I found three approaches that were tested on all ten species (see XXXX). In the pipeline section only the final approach using `ABySS` is presented. The optimal kmer for `ABySS` was determined by `kmergenie` (and experimentally verified that it represent locally optimal assembly continuity).
+I tested with more or less effort `Platanus`, `SOAPdenovo2`, `ABySS`, `Megahit`. I also tried `MaSuRCA` and `ALLPATHS-LG`, but I encountered technical difficulties. Beside a choice of assembler I explored effects of input data, namely the effect of correction of reads, effect of additional sequencing, adding single end reads, and using pair-end contamination of mate pairs. Based on trials I found three approaches that were tested on all ten species (see [C_contig_assembly](C_contig_assembly)). In the pipeline section only the final approach using `ABySS` is presented. The optimal kmer for `ABySS` was determined by `kmergenie` (and experimentally verified that it represent locally optimal assembly continuity).
 
-## Pipeline
+#### execution
 
-To assemble batch3 with `ABySS` you can run
+To assemble the genomes with `ABySS` run
 
 ```
 make assemble.batch3
@@ -158,4 +158,37 @@ make asm.stats
 make asm.tables
 ```
 
-Scaffolding of ABySS contigs and more tested scaffolding strategies are described in directory [D_scaffolding](../D_scaffolding).
+Scaffolding of ABySS contigs and more tested scaffolding strategies are described in directory [D_scaffolding](D_scaffolding).
+
+### Scaffolding and Gap closing
+
+partially this section is covered in the previous section, I considered [BESST](https://github.com/ksahlin/BESST) and inbuilt scaffolders of all the individual assembly pipelines I tested (check README in the [D_scaffolding](D_scaffolding) directory for other tests). `BESST` has shown to over-perform all other approaches. The main advantage is that `BESST` considers that a certain proportion of mate pair libraries is just a pair-end contamination.
+
+We also filled gaps of the scaffolds using `GapCloser` a part of SOAPdenovo package.
+
+#### execution
+
+`BESST` pipeline does not handle well too many contigs on input, therefore prior scaffolding we filter out everything smaller than 250 bases (couple of minutes). Then we build a bwa index (couple of hours) and finally map all pair end and mate pairs to contigs. Note that this is 5 (libraries) * 10 (species) = 50 jobs, where each job takes couple of hours. In the end we need to build an index for every single one of the bam files.
+
+```
+make filter.batch3
+make indexed.batch3
+make mapping.batch3
+make index.all.bam
+```
+
+scaffold `ABySS` contigs with `BESST` using mapped reads
+
+```
+make scaffold.batch3
+```
+
+At this level I see that batch2 (the one with more data) is actually bit worse than batch1, therefore I will not even try to gapfill it, gapifilling will be done only for batches 1 and 3.
+
+```
+make gapfilling
+```
+
+Detailed evaluation of scaffolded assemblies is in directory [E_assembly_evaluation](E_assembly_evaluation).
+
+### Assembly evaluation
