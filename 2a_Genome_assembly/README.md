@@ -68,7 +68,7 @@ Dependencies by sections:
 - [B_read_parsing](B_read_parsing) : `trimmomatic` (0.33), `NxTrim` (v0.4.1)
 - [C_contig_assembly](C_contig_assembly) - `SOAPdenovo2` (2.04), `ABySS` (2.0.0)
 - [D_scaffolding](D_scaffolding) - `SOAPdenovo2`, `ABySS`, `BESST` (2.2.6)
-- [E_assembly_evaluation](E_assembly_evaluation) - `quast` (v4.1), `BUSCO`, `reapr` (1.0.18), `cutadapt` (v1.13), `Blobtools`
+- [E_assembly_evaluation](E_assembly_evaluation) - `quast` (v4.1), `BUSCO`, `cutadapt` (v1.13), `Blobtools`
 
 ## Pipeline
 
@@ -168,7 +168,7 @@ We also filled gaps of the scaffolds using `GapCloser` a part of SOAPdenovo pack
 
 #### execution
 
-`BESST` pipeline does not handle well too many contigs on input, therefore prior scaffolding we filter out everything smaller than 250 bases (couple of minutes). Then we build a bwa index (couple of hours) and finally map all pair end and mate pairs to contigs. Note that this is 5 (libraries) * 10 (species) = 50 jobs, where each job takes couple of hours. In the end we need to build an index for every single one of the bam files.
+`BESST` pipeline does not handle well too many contigs on input, therefore prior scaffolding we filter out everything smaller than 250 bases (couple of minutes). Then we build a bwa index (couple of hours) and finally map all pair end and mate pairs to contigs. Note that this is 5 (libraries) * 10 (species) = 50 jobs, where each job takes couple of hours. In the end we need to build an index for every single one of the bam files. Note that all this depends on existing files, so even the make files will not like that the files and directories do not exist.
 
 ```
 make filter.batch3
@@ -192,3 +192,31 @@ make gapfilling
 Detailed evaluation of scaffolded assemblies is in directory [E_assembly_evaluation](E_assembly_evaluation).
 
 ### Assembly evaluation
+
+The choice of parameters for the final assembly was combination of several factors : *Continuity* (N50), *Completeness* (% of Ns, BUSCO) and *comparability* of sexual and asexual sister species.
+
+The pipeline will calculate all the stats and pull them into table.
+
+#### execution
+
+Following four commands can be run in parallel. Calculate basic statistics:
+
+```
+make asm.stats
+```
+
+Search for single copy orthologs using BUSCO
+
+```
+make busco
+```
+
+Calculate number of unknown nucleotides
+
+```
+make counts.Ns
+```
+
+Once all the tasks above are done, pull the results into a table
+
+TODO : pull them into table (I bet I got this already somewhere)
