@@ -27,13 +27,6 @@ done
 
 ```
 
-I am also adding samples `Tsp_00` that are libraries from the reference genome:
-
-```
-for sp in $TIMEMAS; do ln -s /scratch/beegfs/monthly/kjaron/timema_assembly/data/$sp/trimmed_reads/is_550 /scratch/beegfs/monthly/kjaron/variant_analysis/data/$sp/trimmed_reads/$(echo $sp | cut -f 2 -d _)_00; done
-```
-
-Alright, all the SV calls take for ever. I need to get rid of all reads mapping to edges of different scaffolds.
+Alright, all the SV calls take for ever detecting breakpoint between scaffolds as SVs (scaffolds are considered chromosomes in the SV world). To prevent this unintended behaviour I need to get rid of all reads mapping to edges of different scaffolds.
 I was considering `BAMQL`, but it was too complicated to install on the cluster.
 So, I will map `A_mapping_and_preprocessing/filter_splitreads.py`
-
