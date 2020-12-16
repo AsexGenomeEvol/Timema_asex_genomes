@@ -1,4 +1,4 @@
-sample_table <- read.table('A_mapping_and_preprocessing/resequencing_samples', header = T)
+sample_table <- read.table('tables/resequencing_samples.tsv', header = T)
 
 get_coverage <- function(x){
     sp <- x['sp_ID']
