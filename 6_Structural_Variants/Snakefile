@@ -47,14 +47,14 @@ rule trim_reads :
 	resources : mem=80000000, tmp=150000
 	input : "data/Illumina-PE_adapters.fa", "data/{sp}/raw_reads/{sample}"
 	output : "data/{sp}/trimmed_reads/{sample}"
-	shell : cluster_script + "B_SV_calling/trim_reads.sh {wildcards.sp} {wildcards.sample} {input} {output}"
+	shell : cluster_script + "scripts/trim_reads.sh {wildcards.sp} {wildcards.sample} {input} {output}"
 
 rule index_genome :
 	threads : 1
 	resources: mem=20000000, tmp=20000
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz"
 	output : "data/{sp}/reference/{sp}_b3v08.fasta.gz.bwt"
-	shell : cluster_script + "B_SV_calling/index_fa_bwa.sh {input} data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz."
+	shell : cluster_script + "scripts/index_fa_bwa.sh {input} data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz."
 
 rule map_reads :
 	threads : 16
@@ -62,32 +62,32 @@ rule map_reads :
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz.bwt", "data/{sp}/trimmed_reads/{sample}"
 	output : "data/{sp}/mapping/{sample}_to_b3v08.bam"
 	shell :
-		cluster_script + "B_SV_calling/map_reads.sh {wildcards.sample} {wildcards.sp} data/{wildcards.sp}/trimmed_reads/{wildcards.sample}/*_R[12]*q.gz data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz.* {output}"
+		cluster_script + "scripts/map_reads.sh {wildcards.sample} {wildcards.sp} data/{wildcards.sp}/trimmed_reads/{wildcards.sample}/*_R[12]*q.gz data/{wildcards.sp}/reference/{wildcards.sp}_b3v08.fasta.gz.* {output}"
 
 rule index_bam :
 	threads : 1
 	resources : mem=20000000, tmp=20000
 	input : "{bam}.bam"
 	output : "{bam}.bam.bai"
-	shell : cluster_script + "B_SV_calling/index_bam.sh {input} {output}"
+	shell : cluster_script + "scripts/index_bam.sh {input} {output}"
 
 rule filter_bam :
 	threads : 1
 	resources : mem=20000000, tmp=30000
 	input : "data/{sp}/mapping/{sample}_to_b3v08.bam", "data/{sp}/mapping/{sample}_to_b3v08.bam.bai"
 	output : "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam"
-	shell : cluster_script + "B_SV_calling/filter_reads.sh B_SV_calling/filter_splitreads.py {input} {output}"
+	shell : cluster_script + "scripts/filter_reads.sh scripts/filter_splitreads.py {input} {output}"
 
 rule index_fasta :
 	threads : 1
 	resources : mem=20000000, tmp=10000
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz"
 	output : "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi"
-	shell : cluster_script + "B_SV_calling/index_fa_sam.sh {input} {output}"
+	shell : cluster_script + "scripts/index_fa_sam.sh {input} {output}"
 
 rule call_manta :
 	threads : 32
 	resources : mem=200000000, tmp=50000
 	input : "data/{sp}/reference/{sp}_b3v08.fasta.gz", "data/{sp}/reference/{sp}_b3v08.fasta.gz.fai", "data/{sp}/reference/{sp}_b3v08.fasta.gz.gzi", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam", "data/{sp}/mapping/{sample}_to_b3v08_mapped_within_scfs.bam.bai"
 	output : directory("data/{sp}/variant_calls/{sample}/{sample}_manta")
-	shell : cluster_script + "B_SV_calling/manta.sh {input} {output}"
+	shell : cluster_script + "scripts/manta.sh {input} {output}"
