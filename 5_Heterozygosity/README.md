@@ -2,6 +2,8 @@
 
 Genome-wide nucleotide heterozygosity was estimated using genome profiling analysis of raw reads from the reference genomes using GenomeScope (v2). A second, SNP-based heterozygosity estimate was generated using re-sequenced individuals. We re-sequenced five individuals per species (and generated SNP and SV calls for all of them). However, 3 individuals of T. shepardi, 2 individuals of T. poppensis and one T. tahoe individual did not pass quality control and were discarded from the downstream analyses.
 
+
+
 ## Pipeline
 
 TODO: table of content
@@ -23,3 +25,9 @@ The pipeline is completelly described in [A_SNP_calling](A_SNP_calling). Some ad
 ### Visualization
 
 TODO
+
+#### Input data
+
+**SNPs**
+
+`data/SNP_calls/"$sp".SNP_filter.vcf.gz`
