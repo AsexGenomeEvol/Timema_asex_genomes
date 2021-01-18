@@ -21,7 +21,7 @@ Transcriptome sequences were taken from Bast et al. (2018).
 
 Timema orthologous groups (OGs) were inferred with the OrthoDB standalone pipeline (v. 2.4.4) (Kriventseva et al, 2015) using default parameters.
 
-The high level of fragmentation typical for Illumina-based genomes constrains the ability to identify 1:1 orthologs across all ten Timema species. To maximize the number of single copy OGs covering all ten Timema species, transcriptomes were included during orthology inference. Thus, transcripts were used to complete OGs in absence of a gene from the corresponding species. This can be visulised with **2020.09.03_timema_orthologs.ipynb** 
+The high level of fragmentation typical for Illumina-based genomes constrains the ability to identify 1:1 orthologs across all ten *Timema* species. To maximize the number of single copy OGs covering all ten *Timema* species, transcriptomes were included during orthology inference. Thus, transcripts were used to complete OGs in absence of a gene from the corresponding species. This can be visulised with **2020.09.03_timema_orthologs.ipynb** 
 
 Using this approach, 7157 single copy OGs covering at least three sexual-parthenogenetic sister species pairs were obtained (**output/SM Table 4**). For raw output of all ortholog relationships see (**output/og2gene_orthodb_All_final.txt**)
 
