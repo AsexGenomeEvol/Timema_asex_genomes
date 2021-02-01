@@ -11,5 +11,16 @@ Alignments available [here](https://selectome.org/timema/download).
 
 The branch-site model with rate variation at the DNA level was run using the Godon software (https://bitbucket.org/Davydov/godon/, version 2020-02-17, option BSG --ncat 4). Each branch was tested iteratively, in one run per gene tree. For each branch, we obtain a ΔlnL which measures the evidence for positive selection, a corresponding p-value and associated q-value (estimated from the distribution of p-values over all branches of all genes), and an estimate of the proportion of sites under positive selection if any.
 
+Output from Godon: **pos_sel_data/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv**
 
+We then looked to see if the amount of positive selection was different between sex and asex species
 
+* **positive_sel_plot.R** | binomal GLMM and plots
+* **positive_sel_plot_perm_lrt.R** | permuation glm on lrt statistic
+* **positive_sel_plot_overlap.R** | Examine if positively selected genes overlap between species
+
+Finally we looked at the GO terms enriched in positively selected genes:
+
+* **Top_GO.R**
+
+For this we used the GO terms combined from the genome annotation data (available from NCBI: PRJEB31411) and transcriptomes (avaiable from https://zenodo.org/record/3451445#.YBhAMHf0m50), provided in **pos_sel_data/GO_terms** for convenience. 
