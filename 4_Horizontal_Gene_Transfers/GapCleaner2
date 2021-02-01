@@ -1,0 +1,78 @@
+#!/usr/local/bin/python3.4
+
+import sys
+
+#Lecture du fichier
+print("*****************************")
+print("*Bienvenue dans Gapcleaner !*")
+print("*****************************")
+
+if len(sys.argv)!=3:
+	sys.exit("Usage: GapCleaner.py <fasta> <seuil>")
+
+
+
+#Lire l'input (fasta uni or multi-lignes):
+nomsEspeces = []
+sequences = []
+
+with open(sys.argv[1]) as align:
+    for line in align:
+        if line[0]=='>':
+            nomsEspeces.append(line.rstrip())
+            sequences.append("")
+        else :
+            sequences[-1] += line.rstrip()
+
+#If it was only fasta1ligne:
+# nomsEspeces = [x.rstrip() for x in open(sys.argv[1]) if x[0]=='>']
+# sequences = [x.rstrip() for x in open(sys.argv[1]) if x[0]!='>']
+
+seuil=round((1-float(sys.argv[2]))*100, 2)/100
+nbEspeces=len(nomsEspeces)
+
+if seuil < 0 or seuil > 1 :
+    sys.exit("Usage: GapCleaner.py <fasta> <seuil>\nSeuil doit etre compris entre 0 et 1!")
+
+print(sys.argv[1], "rassemble",nbEspeces,"especes.")
+print("seuil : "+sys.argv[2]+" (ie. max " + str(seuil*100) + "% donnees manquantes)\n")
+
+nbSitesInitial = len(sequences[0])
+print("***Il y a", nbSitesInitial, "sites dans l'alignement de depart.")
+
+
+#Count gaps in each site:
+gaps = [0]
+gaps *= nbSitesInitial
+missing = {'-', 'N', '?', '!', 'X'}
+for seq in sequences:
+    for site in range(0,nbSitesInitial):
+        if seq[site] in missing :
+            gaps[site] += 1
+
+
+#Write output :
+output_name = sys.argv[1] + "_clean" + sys.argv[2]
+output = open(output_name, "w")
+
+for i in range(0,nbEspeces):
+    output.write(nomsEspeces[i] + "\n")
+    nbSitesFinal = 0
+    for site in range(0,nbSitesInitial):
+        if gaps[site]/nbEspeces <= seuil :
+            nbSitesFinal += 1  #should be calculated for one species
+            output.write(sequences[i][site])
+    output.write("\n")
+output.close()    
+
+
+#Output infos:
+removed = nbSitesInitial - nbSitesFinal
+removed_pc = (1-(nbSitesFinal / nbSitesInitial)) *100
+print("***Il y a", nbSitesFinal, "sites dans l'alignement nettoye \n     --->", removed , " sites ont ete elimines (" + format(removed_pc, '.2f') + "%)\n")
+print("Output in : " + output_name)
+
+
+print("******************************\n")
+
+
