@@ -1,0 +1,1312 @@
+dat1      <- read.table("../timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
+getwd()
+dat1      <- read.table("../output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
+getwd()
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)#
+#
+dat1$branch_name <- as.character(dat1$branch_name)#
+dat1$branch_name <- #
+ifelse(dat1$branch_name == "Northern_Clade", "Northern", #
+ifelse(dat1$branch_name == "Santa_Barbara_Clade", "Santa Barbara", #
+ifelse(dat1$branch_name == "Southern_Clade", "Southern", #
+dat1$branch_name)))#
+#
+dat1$sp_pair <-#
+ifelse(dat1$branch_name == "Tbi", "Tbi-Tte",#
+ifelse(dat1$branch_name == "Tce", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tcm", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tpa", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tps", "Tps-Tdi",#
+ifelse(dat1$branch_name == "Tte", "Tbi-Tte", #
+ifelse(dat1$branch_name == "Tms", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tsi", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tge", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tdi", "Tps-Tdi", #
+NA))))))))))#
+#
+dat1$rep_mode <-#
+ifelse(dat1$branch_name == "Tbi", "sex",#
+ifelse(dat1$branch_name == "Tce", "sex",#
+ifelse(dat1$branch_name == "Tcm", "sex",#
+ifelse(dat1$branch_name == "Tpa", "sex",#
+ifelse(dat1$branch_name == "Tps", "sex",#
+ifelse(dat1$branch_name == "Tte", "asex", #
+ifelse(dat1$branch_name == "Tms", "asex", #
+ifelse(dat1$branch_name == "Tsi", "asex",#
+ifelse(dat1$branch_name == "Tge", "asex",#
+ifelse(dat1$branch_name == "Tdi", "asex", #
+ifelse(dat1$branch_name == "Tps/Tdi", "sex_asex", #
+ifelse(dat1$branch_name == "Tpa/Tge", "sex_asex", #
+ifelse(dat1$branch_name == "Tcm/Tsi", "sex_asex", #
+ifelse(dat1$branch_name == "Tbi/Tte", "sex_asex", #
+ifelse(dat1$branch_name == "Santa Barbara", "sex_asex", #
+ifelse(dat1$branch_name == "Northern", "clade",#
+ifelse(dat1$branch_name == "Southern", "clade",#
+NA)))))))))))))))))
+print (sessionInfo())
+q_val_threshold <- 0.01 ## set to desired threshold
+dat1_selected = subset(dat1, dat1$qvalue < q_val_threshold)
+length(dat1_selected[,1])#
+head(dat1_selected )#
+min(dat1_selected$lrt)
+N_sel_branches_without_NandS    <- subset(N_sel_branches, N_sel_branches$rep_mode != "clade")
+N_sel_branches <- as.data.frame(table(dat1_selected$branch_name))#
+colnames(N_sel_branches) <- c("branch", "N")
+N_sel_branches$rep_mode <-#
+ifelse(N_sel_branches$branch == "Tbi", "sex",#
+ifelse(N_sel_branches$branch == "Tce", "sex",#
+ifelse(N_sel_branches$branch == "Tcm", "sex",#
+ifelse(N_sel_branches$branch == "Tpa", "sex",#
+ifelse(N_sel_branches$branch == "Tps", "sex",#
+ifelse(N_sel_branches$branch == "Tte", "asex", #
+ifelse(N_sel_branches$branch == "Tms", "asex", #
+ifelse(N_sel_branches$branch == "Tsi", "asex",#
+ifelse(N_sel_branches$branch == "Tge", "asex",#
+ifelse(N_sel_branches$branch == "Tdi", "asex", #
+ifelse(N_sel_branches$branch == "Tps/Tdi", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tpa/Tge", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tcm/Tsi", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tbi/Tte", "sex_asex", #
+ifelse(N_sel_branches$branch == "Santa Barbara", "sex_asex", #
+ifelse(N_sel_branches$branch == "Northern", "clade",#
+ifelse(N_sel_branches$branch == "Southern", "clade",#
+NA)))))))))))))))))
+N_sel_branches_without_NandS    <- subset(N_sel_branches, N_sel_branches$rep_mode != "clade")
+N_sel_branches_without_termonly <- subset(N_sel_branches_without_NandS, N_sel_branches_without_NandS$rep_mode != "sex_asex")
+N_sel_branches_without_termonly$group <- c("Tbi-Tte", "Tce-Tms", "Tcm-Tsi", "Tps-Tdi", "Tpa-Tge", "Tce-Tms", "Tpa-Tge", "Tps-Tdi", "Tcm-Tsi", "Tbi-Tte")
+N_sel_branches_without_termonly$rep_mode_ord  = ordered(N_sel_branches_without_termonly$rep_mode, levels = c("asex", "sex"))
+N_sel_branches_without_termonly$group_ord = ordered(N_sel_branches_without_termonly$group, levels = c("Tbi-Tte", "Tcm-Tsi", "Tce-Tms", "Tps-Tdi", "Tpa-Tge"))
+P1b <- ggplot(N_sel_branches_without_termonly, aes(x = factor(group_ord), y = N, fill = rep_mode_ord)) + #
+	geom_col(width = 0.5, colour="black", position=position_dodge(width=0.6)) + theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),#
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, BSG", "qval thresh = ",q_val_threshold ))  + ylim(0,max_y )
+### +ve sel#
+#
+library(ggplot2)#
+library(cowplot)#
+library(hash)#
+library(stringr)
+print (sessionInfo())
+ggplot(N_sel_branches_without_termonly, aes(x = factor(group_ord), y = N, fill = rep_mode_ord)) + #
+	geom_col(width = 0.5, colour="black", position=position_dodge(width=0.6)) + theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),#
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, BSG", "qval thresh = ",q_val_threshold ))  + ylim(0,max_y )
+max_y = max(N_sel_branches$N * 1.05)
+ggplot(N_sel_branches_without_termonly, aes(x = factor(group_ord), y = N, fill = rep_mode_ord)) + #
+	geom_col(width = 0.5, colour="black", position=position_dodge(width=0.6)) + theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),#
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, BSG", "qval thresh = ",q_val_threshold ))  + ylim(0,max_y )
+pdf(paste("543sp_N_pos_genes_int_branches_P1b_qval_", q_val_threshold ,".pdf", sep = ""), width = 6, height = 8)#
+P1b  #
+dev.off()#
+getwd() ## where has my plot gone....
+P1b <- ggplot(N_sel_branches_without_termonly, aes(x = factor(group_ord), y = N, fill = rep_mode_ord)) + #
+	geom_col(width = 0.5, colour="black", position=position_dodge(width=0.6)) + theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),#
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, BSG", "qval thresh = ",q_val_threshold ))  + ylim(0,max_y )#
+#
+pdf(paste("543sp_N_pos_genes_int_branches_P1b_qval_", q_val_threshold ,".pdf", sep = ""), width = 6, height = 8)#
+P1b  #
+dev.off()#
+getwd() ## where has my plot gone....
+dat1_a    <- subset(dat1, dat1$rep_mode != "clade")#
+dat1_term <- subset(dat1_a, dat1_a$rep_mode != "sex_asex")
+dat1_term$pos_sel_bi <- ifelse(dat1_term$qvalue < q_val_threshold, 1, 0)
+head(dat1_term)
+dat1_term$rep_mode <- as.factor(dat1_term$rep_mode)
+dat1_term$gene <- as.factor(dat1_term$gene)
+str(dat1_term)
+library(lme4)
+library(car)
+attach(dat1_term)
+mix_2 = glmer(pos_sel_bi ~ rep_mode  + (1|sp_pair), family = "binomial")
+mix_3 = glmer(pos_sel_bi ~ rep_mode  + (1|gene), family = "binomial")
+mix2_lrt <- drop1(mix_2,test="Chisq")
+mix_5 = glmer(pos_sel_bi ~ sp_pair * rep_mode + (1|gene), family = "binomial", control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e7))) #### Runs
+Anova(mix_5, type = 3 )  ### WALD
+m5 = glm(pos_sel_bi ~ sp_pair * rep_mode, family = "binomial")
+summary(m5)
+Anova(m5, type = 3 )
+m5a = glm(pos_sel_bi ~ sp_pair + rep_mode, family = "binomial")
+summary(m5a)
+Anova(m5a, type = 3 )
+### rep mode inter sp_pair#
+mix_5 = glmer(pos_sel_bi ~ sp_pair * rep_mode + (1|gene), family = "binomial", control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e7))) #### Runs#
+Anova(mix_5, type = 3 )  ### WALD#
+mix_5a = glmer(pos_sel_bi ~ sp_pair + rep_mode + (1|gene), family = "binomial", control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e7))) #### Runs#
+Anova(mix_5a, type = 3 )  ### WALD
+########################################################################
+### how many branches show +ve sel by sp#
+#
+q_val_threshold <- 0.05 ## set to desired threshold#
+dat1_selected = subset(dat1, dat1$qvalue < q_val_threshold)#
+#
+N_sel_branches <- as.data.frame(table(dat1_selected$branch_name))#
+colnames(N_sel_branches) <- c("branch", "N")#
+#
+N_sel_branches$rep_mode <-#
+ifelse(N_sel_branches$branch == "Tbi", "sex",#
+ifelse(N_sel_branches$branch == "Tce", "sex",#
+ifelse(N_sel_branches$branch == "Tcm", "sex",#
+ifelse(N_sel_branches$branch == "Tpa", "sex",#
+ifelse(N_sel_branches$branch == "Tps", "sex",#
+ifelse(N_sel_branches$branch == "Tte", "asex", #
+ifelse(N_sel_branches$branch == "Tms", "asex", #
+ifelse(N_sel_branches$branch == "Tsi", "asex",#
+ifelse(N_sel_branches$branch == "Tge", "asex",#
+ifelse(N_sel_branches$branch == "Tdi", "asex", #
+ifelse(N_sel_branches$branch == "Tps/Tdi", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tpa/Tge", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tcm/Tsi", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tbi/Tte", "sex_asex", #
+ifelse(N_sel_branches$branch == "Santa Barbara", "sex_asex", #
+ifelse(N_sel_branches$branch == "Northern", "clade",#
+ifelse(N_sel_branches$branch == "Southern", "clade",#
+NA)))))))))))))))))#
+#
+N_sel_branches_without_NandS    <- subset(N_sel_branches, N_sel_branches$rep_mode != "clade")#
+N_sel_branches_without_termonly <- subset(N_sel_branches_without_NandS, N_sel_branches_without_NandS$rep_mode != "sex_asex")#
+N_sel_branches_without_termonly$group <- c("Tbi-Tte", "Tce-Tms", "Tcm-Tsi", "Tps-Tdi", "Tpa-Tge", "Tce-Tms", "Tpa-Tge", "Tps-Tdi", "Tcm-Tsi", "Tbi-Tte")#
+N_sel_branches_without_termonly$rep_mode_ord  = ordered(N_sel_branches_without_termonly$rep_mode, levels = c("asex", "sex"))#
+N_sel_branches_without_termonly$group_ord = ordered(N_sel_branches_without_termonly$group, levels = c("Tbi-Tte", "Tcm-Tsi", "Tce-Tms", "Tps-Tdi", "Tpa-Tge"))#
+#
+max_y = max(N_sel_branches$N * 1.05)#
+#
+P1b <- ggplot(N_sel_branches_without_termonly, aes(x = factor(group_ord), y = N, fill = rep_mode_ord)) + #
+	geom_col(width = 0.5, colour="black", position=position_dodge(width=0.6)) + theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),#
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, BSG", "qval thresh = ",q_val_threshold ))  + ylim(0,max_y )#
+#
+pdf(paste("543sp_N_pos_genes_int_branches_P1b_qval_", q_val_threshold ,".pdf", sep = ""), width = 6, height = 8)#
+P1b  #
+dev.off()#
+getwd() ## where has my plot gone....#
+####################################################################################################
+### sig diff#
+dat1_a    <- subset(dat1, dat1$rep_mode != "clade")#
+dat1_term <- subset(dat1_a, dat1_a$rep_mode != "sex_asex")#
+#
+dat1_term$pos_sel_bi <- ifelse(dat1_term$qvalue < q_val_threshold, 1, 0)#
+head(dat1_term)#
+dat1_term$rep_mode <- as.factor(dat1_term$rep_mode)#
+dat1_term$gene <- as.factor(dat1_term$gene)#
+str(dat1_term)#
+#
+library(lme4)#
+library(car)#
+attach(dat1_term)#
+### rep mode inter sp_pair#
+mix_5 = glmer(pos_sel_bi ~ sp_pair * rep_mode + (1|gene), family = "binomial", control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e7))) #### Runs#
+Anova(mix_5, type = 3 )  ### WALD#
+mix_5a = glmer(pos_sel_bi ~ sp_pair + rep_mode + (1|gene), family = "binomial", control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e7))) #### Runs#
+Anova(mix_5a, type = 3 )  ### WALD#
+## glm #
+m5 = glm(pos_sel_bi ~ sp_pair * rep_mode, family = "binomial")#
+summary(m5)#
+Anova(m5, type = 3 )#
+#
+## glm #
+m5a = glm(pos_sel_bi ~ sp_pair + rep_mode, family = "binomial")#
+summary(m5a)#
+Anova(m5a, type = 3 )
+Anova(mix_5a, type = 3 )  ### WALD
+library(ggplot2)#
+library(cowplot)#
+library(hash)#
+library(stringr)#
+library(lme4)#
+library(car)#
+#
+print (sessionInfo())
+## data#
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)#
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)#
+#
+dat1$branch_name <- as.character(dat1$branch_name)#
+dat1$branch_name <- #
+ifelse(dat1$branch_name == "Northern_Clade", "Northern", #
+ifelse(dat1$branch_name == "Santa_Barbara_Clade", "Santa Barbara", #
+ifelse(dat1$branch_name == "Southern_Clade", "Southern", #
+dat1$branch_name)))#
+#
+dat1$sp_pair <-#
+ifelse(dat1$branch_name == "Tbi", "Tbi-Tte",#
+ifelse(dat1$branch_name == "Tce", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tcm", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tpa", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tps", "Tps-Tdi",#
+ifelse(dat1$branch_name == "Tte", "Tbi-Tte", #
+ifelse(dat1$branch_name == "Tms", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tsi", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tge", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tdi", "Tps-Tdi", #
+NA))))))))))#
+#
+dat1$rep_mode <-#
+ifelse(dat1$branch_name == "Tbi", "sex",#
+ifelse(dat1$branch_name == "Tce", "sex",#
+ifelse(dat1$branch_name == "Tcm", "sex",#
+ifelse(dat1$branch_name == "Tpa", "sex",#
+ifelse(dat1$branch_name == "Tps", "sex",#
+ifelse(dat1$branch_name == "Tte", "asex", #
+ifelse(dat1$branch_name == "Tms", "asex", #
+ifelse(dat1$branch_name == "Tsi", "asex",#
+ifelse(dat1$branch_name == "Tge", "asex",#
+ifelse(dat1$branch_name == "Tdi", "asex", #
+ifelse(dat1$branch_name == "Tps/Tdi", "sex_asex", #
+ifelse(dat1$branch_name == "Tpa/Tge", "sex_asex", #
+ifelse(dat1$branch_name == "Tcm/Tsi", "sex_asex", #
+ifelse(dat1$branch_name == "Tbi/Tte", "sex_asex", #
+ifelse(dat1$branch_name == "Santa Barbara", "sex_asex", #
+ifelse(dat1$branch_name == "Northern", "clade",#
+ifelse(dat1$branch_name == "Southern", "clade",#
+NA)))))))))))))))))#
+#
+head(dat1)#
+#
+########################################################################
+### how many branches show +ve sel by sp#
+#
+q_val_threshold <- 0.05 ## set to desired threshold#
+dat1_selected = subset(dat1, dat1$qvalue < q_val_threshold)#
+#
+N_sel_branches <- as.data.frame(table(dat1_selected$branch_name))#
+colnames(N_sel_branches) <- c("branch", "N")#
+#
+N_sel_branches$rep_mode <-#
+ifelse(N_sel_branches$branch == "Tbi", "sex",#
+ifelse(N_sel_branches$branch == "Tce", "sex",#
+ifelse(N_sel_branches$branch == "Tcm", "sex",#
+ifelse(N_sel_branches$branch == "Tpa", "sex",#
+ifelse(N_sel_branches$branch == "Tps", "sex",#
+ifelse(N_sel_branches$branch == "Tte", "asex", #
+ifelse(N_sel_branches$branch == "Tms", "asex", #
+ifelse(N_sel_branches$branch == "Tsi", "asex",#
+ifelse(N_sel_branches$branch == "Tge", "asex",#
+ifelse(N_sel_branches$branch == "Tdi", "asex", #
+ifelse(N_sel_branches$branch == "Tps/Tdi", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tpa/Tge", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tcm/Tsi", "sex_asex", #
+ifelse(N_sel_branches$branch == "Tbi/Tte", "sex_asex", #
+ifelse(N_sel_branches$branch == "Santa Barbara", "sex_asex", #
+ifelse(N_sel_branches$branch == "Northern", "clade",#
+ifelse(N_sel_branches$branch == "Southern", "clade",#
+NA)))))))))))))))))#
+#
+N_sel_branches_without_NandS    <- subset(N_sel_branches, N_sel_branches$rep_mode != "clade")#
+N_sel_branches_without_termonly <- subset(N_sel_branches_without_NandS, N_sel_branches_without_NandS$rep_mode != "sex_asex")#
+N_sel_branches_without_termonly$group <- c("Tbi-Tte", "Tce-Tms", "Tcm-Tsi", "Tps-Tdi", "Tpa-Tge", "Tce-Tms", "Tpa-Tge", "Tps-Tdi", "Tcm-Tsi", "Tbi-Tte")#
+N_sel_branches_without_termonly$rep_mode_ord  = ordered(N_sel_branches_without_termonly$rep_mode, levels = c("asex", "sex"))#
+N_sel_branches_without_termonly$group_ord = ordered(N_sel_branches_without_termonly$group, levels = c("Tbi-Tte", "Tcm-Tsi", "Tce-Tms", "Tps-Tdi", "Tpa-Tge"))#
+#
+max_y = max(N_sel_branches$N * 1.05)#
+#
+P1b <- ggplot(N_sel_branches_without_termonly, aes(x = factor(group_ord), y = N, fill = rep_mode_ord)) + #
+	geom_col(width = 0.5, colour="black", position=position_dodge(width=0.6)) + theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),#
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, BSG", "qval thresh = ",q_val_threshold ))  + ylim(0,max_y )#
+#
+pdf(paste("543sp_N_pos_genes_int_branches_P1b_qval_", q_val_threshold ,".pdf", sep = ""), width = 6, height = 8)#
+P1b  #
+dev.off()#
+getwd() ## where has my plot gone....#
+####################################################################################################
+### sig diff#
+dat1_a    <- subset(dat1, dat1$rep_mode != "clade")#
+dat1_term <- subset(dat1_a, dat1_a$rep_mode != "sex_asex")#
+#
+dat1_term$pos_sel_bi <- ifelse(dat1_term$qvalue < q_val_threshold, 1, 0)#
+head(dat1_term)#
+dat1_term$rep_mode <- as.factor(dat1_term$rep_mode)#
+dat1_term$gene <- as.factor(dat1_term$gene)#
+str(dat1_term)#
+attach(dat1_term)#
+### rep mode inter sp_pair#
+mix_5 = glmer(pos_sel_bi ~ sp_pair * rep_mode + (1|gene), family = "binomial", control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e7))) #### Runs#
+Anova(mix_5, type = 3 )  ### WALD#
+mix_5a = glmer(pos_sel_bi ~ sp_pair + rep_mode + (1|gene), family = "binomial", control=glmerControl(optimizer="bobyqa",optCtrl=list(maxfun=2e7))) #### Runs#
+Anova(mix_5a, type = 3 )  ### WALD
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
+library(ggplot2)#
+library(cowplot)#
+library(hash)#
+library(stringr)#
+library(car)#
+library(MASS)#
+library(fitdistrplus)#
+## data#
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)#
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)
+dat1$branch_name <- as.character(dat1$branch_name)#
+dat1$branch_name <- #
+ifelse(dat1$branch_name == "Northern_Clade", "Northern", #
+ifelse(dat1$branch_name == "Santa_Barbara_Clade", "Santa Barbara", #
+ifelse(dat1$branch_name == "Southern_Clade", "Southern", #
+dat1$branch_name)))#
+#
+dat1$sp_pair <-#
+ifelse(dat1$branch_name == "Tbi", "Tbi-Tte",#
+ifelse(dat1$branch_name == "Tce", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tcm", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tpa", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tps", "Tps-Tdi",#
+ifelse(dat1$branch_name == "Tte", "Tbi-Tte", #
+ifelse(dat1$branch_name == "Tms", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tsi", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tge", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tdi", "Tps-Tdi", #
+NA))))))))))#
+#
+dat1$rep_mode <-#
+ifelse(dat1$branch_name == "Tbi", "sex",#
+ifelse(dat1$branch_name == "Tce", "sex",#
+ifelse(dat1$branch_name == "Tcm", "sex",#
+ifelse(dat1$branch_name == "Tpa", "sex",#
+ifelse(dat1$branch_name == "Tps", "sex",#
+ifelse(dat1$branch_name == "Tte", "asex", #
+ifelse(dat1$branch_name == "Tms", "asex", #
+ifelse(dat1$branch_name == "Tsi", "asex",#
+ifelse(dat1$branch_name == "Tge", "asex",#
+ifelse(dat1$branch_name == "Tdi", "asex", #
+ifelse(dat1$branch_name == "Tps/Tdi", "sex_asex", #
+ifelse(dat1$branch_name == "Tpa/Tge", "sex_asex", #
+ifelse(dat1$branch_name == "Tcm/Tsi", "sex_asex", #
+ifelse(dat1$branch_name == "Tbi/Tte", "sex_asex", #
+ifelse(dat1$branch_name == "Santa Barbara", "sex_asex", #
+ifelse(dat1$branch_name == "Northern", "clade",#
+ifelse(dat1$branch_name == "Southern", "clade",#
+NA)))))))))))))))))
+head(dat1)#
+#
+####################################################################################################
+### sig diff#
+#
+dat1_a    <- subset(dat1, dat1$rep_mode != "clade")#
+dat1_term <- subset(dat1_a, dat1_a$rep_mode != "sex_asex")#
+dat1_term$rep_mode <- as.factor(dat1_term$rep_mode)#
+dat1_term$gene <- as.factor(dat1_term$gene)
+######################################
+### get test stats#
+m7c_real = glm(dat1_term$lrt ~ dat1_term$sp_pair + dat1_term$rep_mode)#
+m7d_real = glm(dat1_term$lrt ~ dat1_term$sp_pair + dat1_term$rep_mode, family = quasipoisson(link = "log"))#
+#
+m7c_real_sp_pair_LR <- Anova(m7c_real, type = 3)$LR[1]#
+m7d_real_sp_pair_LR <- Anova(m7d_real, type = 3)$LR[1]#
+#
+m7c_real_rep_mode_LR <- Anova(m7c_real, type = 3)$LR[2]#
+m7d_real_rep_mode_LR <- Anova(m7d_real, type = 3)$LR[2]
+## randomise everything#
+#
+rand_lrt <- function(df){#
+	df$lrt_rand <- sample(df$lrt, replace = F)#
+#
+	m7c = glm(df$lrt_rand ~ df$sp_pair + df$rep_mode)#
+	m7c_out = Anova(m7c, type = 3)#
+	m7d = glm(df$lrt_rand ~ df$sp_pair + df$rep_mode, family = quasipoisson(link = "log"))#
+	m7d_out = Anova(m7d, type = 3)#
+	## LR sp pair, LR rep, P sp pair, P rep mode#
+	m7c_out_v <- c(m7c_out$LR[1], m7c_out$LR[2], m7c_out$P[1], m7c_out$P[2])#
+	m7d_out_v <- c(m7d_out$LR[1], m7d_out$LR[2], m7d_out$P[1], m7d_out$P[2])#
+	output <- list("m7c_out_v" = m7c_out_v, "m7d_out_v" = m7d_out_v )#
+	return(output)	#
+}
+run_N = 3 # 1000#
+set.seed(42)#
+#
+rand_df_m7c <- c()#
+rand_df_m7d <- c()#
+for (i in seq(1:run_N)){#
+	print(i)#
+	test_i <- rand_lrt(dat1_term)#
+	rand_df_m7c <- rbind(rand_df_m7c, test_i$m7c_out_v)#
+	rand_df_m7d <- rbind(rand_df_m7d, test_i$m7d_out_v)#
+}
+colnames(rand_df_m7c) <- c("LR_sp","LR_rep_mode", "P_sp","P_rep_mode")#
+rand_df_m7c <- as.data.frame(rand_df_m7c)#
+#
+head(rand_df_m7c)#
+#
+colnames(rand_df_m7d) <- c("LR_sp","LR_rep_mode", "P_sp","P_rep_mode")#
+rand_df_m7d <- as.data.frame(rand_df_m7d)
+rand_df_m7d
+get_pval = function(rand_df,calc_TS_sp, calc_TS_rep){#
+	N_rand_larger_sp       <- length(subset(rand_df, rand_df$LR_sp       > calc_TS_sp)[,1])#
+	N_rand_larger_rep_mode <- length(subset(rand_df, rand_df$LR_rep_mode > calc_TS_rep)[,1])#
+#
+	adj_pval_sp = 10000#
+	if(N_rand_larger_sp == 0){#
+		adj_pval_sp = 0#
+	}#
+	else{#
+		adj_pval_sp = N_rand_larger_sp / length(rand_df$LR_sp)#
+	}#
+#
+	adj_pval_rep_mode = 10000#
+	if(N_rand_larger_rep_mode == 0){#
+		adj_pval_rep_mode = 0#
+	}#
+	else{#
+		adj_pval_rep_mode = N_rand_larger_rep_mode / length(rand_df$LR_rep_mode)#
+	}#
+#
+	print("Sp pair")#
+	print(N_rand_larger_sp)#
+	print(adj_pval_sp)#
+	print("Rep pair")#
+	print(N_rand_larger_rep_mode)	#
+	print(adj_pval_rep_mode)	#
+}#
+#
+get_pval(rand_df_m7c,  m7c_real_sp_pair_LR, m7c_real_rep_mode_LR) # sp pair = 0.18,  rep-mode <0.001#
+get_pval(rand_df_m7d,  m7d_real_sp_pair_LR, m7d_real_rep_mode_LR) # sp pair = 0.183, rep-mode <0.001
+#### This only works as the dataframe is structured by species pair#
+#
+## check rep mode is alternating #
+#
+dat1_term$test <- rep(c(3, 7) , length(dat1_term[,1]) / 2)#
+head(dat1_term)#
+mean(subset(dat1_term, dat1_term$rep_mode == "sex")$test)#
+mean(subset(dat1_term, dat1_term$rep_mode == "asex")$test)
+rand_rep_mode <- function(df){#
+	pos <- c("sex", "asex")#
+	rand_rep <- c()#
+	for (i in seq(1,length(df[,1]) / 2)){#
+		rand_rep_i <- sample(pos, replace = F)#
+		rand_rep <- c(rand_rep, rand_rep_i) 	#
+	}#
+	df$rand_rep <- rand_rep#
+	m7c = glm(df$lrt ~ df$sp_pair + df$rand_rep)#
+	m7c_out = Anova(m7c, type = 3)#
+	m7d = glm(df$lrt ~ df$sp_pair + df$rand_rep, family = quasipoisson(link = "log"))#
+	m7d_out = Anova(m7d, type = 3)#
+	## LR sp pair, LR rep, P sp pair, P rep mode#
+	m7c_out_v <- c(m7c_out$LR[1], m7c_out$LR[2], m7c_out$P[1], m7c_out$P[2])#
+	m7d_out_v <- c(m7d_out$LR[1], m7d_out$LR[2], m7d_out$P[1], m7d_out$P[2])#
+	output <- list("m7c_out_v" = m7c_out_v, "m7d_out_v" = m7d_out_v )#
+	return(output)	#
+}
+run_N =  3 #1000
+rand_rep_df_m7c <- c()#
+rand_rep_df_m7d <- c()#
+for (i in seq(1:run_N)){#
+	print(i)#
+	test_i <- rand_rep_mode(dat1_term)#
+	rand_rep_df_m7c <- rbind(rand_rep_df_m7c, test_i$m7c_out_v)#
+	rand_rep_df_m7d <- rbind(rand_rep_df_m7d, test_i$m7d_out_v)#
+}
+colnames(rand_rep_df_m7c) <- c("LR_sp","LR_rep_mode", "P_sp","P_rep_mode")#
+rand_rep_df_m7c <- as.data.frame(rand_rep_df_m7c)#
+#
+colnames(rand_rep_df_m7d) <- c("LR_sp","LR_rep_mode", "P_sp","P_rep_mode")#
+rand_rep_df_m7d <- as.data.frame(rand_rep_df_m7d)#
+#
+str(rand_rep_df_m7c)#
+head(dat1_term)
+m7c_real_sp_pair_LR
+Anova(m7c_real, type = 3)
+Anova(m7d_real, type = 3)
+get_pval = function(rand_df,calc_TS){#
+	N_rand_larger <- length(subset(rand_df, rand_df$LR_rep_mode > calc_TS)[,1])#
+	print(N_rand_larger)#
+	adj_pval = 10000#
+	if(N_rand_larger == 0){#
+		adj_pval = 0#
+	}#
+	else{#
+		adj_pval = N_rand_larger / length(rand_df$LR_rep_mode)#
+	}#
+	print(adj_pval)#
+}#
+get_pval(rand_rep_df_m7c,  m7c_real_sp_pair_LR ) # 0.011#
+get_pval(rand_rep_df_m7d,  m7d_real_sp_pair_LR ) # 0.011
+library(ggplot2)#
+library(cowplot)#
+library(hash)#
+library(stringr)#
+library(car)#
+library(MASS)#
+library(fitdistrplus)#
+## data#
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)#
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)#
+#
+dat1$branch_name <- as.character(dat1$branch_name)#
+dat1$branch_name <- #
+ifelse(dat1$branch_name == "Northern_Clade", "Northern", #
+ifelse(dat1$branch_name == "Santa_Barbara_Clade", "Santa Barbara", #
+ifelse(dat1$branch_name == "Southern_Clade", "Southern", #
+dat1$branch_name)))#
+#
+dat1$sp_pair <-#
+ifelse(dat1$branch_name == "Tbi", "Tbi-Tte",#
+ifelse(dat1$branch_name == "Tce", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tcm", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tpa", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tps", "Tps-Tdi",#
+ifelse(dat1$branch_name == "Tte", "Tbi-Tte", #
+ifelse(dat1$branch_name == "Tms", "Tce-Tms",#
+ifelse(dat1$branch_name == "Tsi", "Tcm-Tsi",#
+ifelse(dat1$branch_name == "Tge", "Tpa-Tge",#
+ifelse(dat1$branch_name == "Tdi", "Tps-Tdi", #
+NA))))))))))#
+#
+dat1$rep_mode <-#
+ifelse(dat1$branch_name == "Tbi", "sex",#
+ifelse(dat1$branch_name == "Tce", "sex",#
+ifelse(dat1$branch_name == "Tcm", "sex",#
+ifelse(dat1$branch_name == "Tpa", "sex",#
+ifelse(dat1$branch_name == "Tps", "sex",#
+ifelse(dat1$branch_name == "Tte", "asex", #
+ifelse(dat1$branch_name == "Tms", "asex", #
+ifelse(dat1$branch_name == "Tsi", "asex",#
+ifelse(dat1$branch_name == "Tge", "asex",#
+ifelse(dat1$branch_name == "Tdi", "asex", #
+ifelse(dat1$branch_name == "Tps/Tdi", "sex_asex", #
+ifelse(dat1$branch_name == "Tpa/Tge", "sex_asex", #
+ifelse(dat1$branch_name == "Tcm/Tsi", "sex_asex", #
+ifelse(dat1$branch_name == "Tbi/Tte", "sex_asex", #
+ifelse(dat1$branch_name == "Santa Barbara", "sex_asex", #
+ifelse(dat1$branch_name == "Northern", "clade",#
+ifelse(dat1$branch_name == "Southern", "clade",#
+NA)))))))))))))))))#
+head(dat1)#
+#
+####################################################################################################
+### sig diff#
+#
+dat1_a    <- subset(dat1, dat1$rep_mode != "clade")#
+dat1_term <- subset(dat1_a, dat1_a$rep_mode != "sex_asex")#
+dat1_term$rep_mode <- as.factor(dat1_term$rep_mode)#
+dat1_term$gene <- as.factor(dat1_term$gene)#
+######################################
+### get test stats from real data#
+#
+### using 2 dists to check it is robust#
+m7c_real = glm(dat1_term$lrt ~ dat1_term$sp_pair + dat1_term$rep_mode)#
+m7d_real = glm(dat1_term$lrt ~ dat1_term$sp_pair + dat1_term$rep_mode, family = quasipoisson(link = "log"))#
+#
+m7c_real_sp_pair_LR <- Anova(m7c_real, type = 3)$LR[1]#
+m7d_real_sp_pair_LR <- Anova(m7d_real, type = 3)$LR[1]#
+#
+m7c_real_rep_mode_LR <- Anova(m7c_real, type = 3)$LR[2]#
+m7d_real_rep_mode_LR <- Anova(m7d_real, type = 3)$LR[2]#
+########## randomise rep mode#
+#
+rand_rep_mode <- function(df){#
+	pos <- c("sex", "asex")#
+	rand_rep <- c()#
+	for (i in seq(1,length(df[,1]) / 2)){#
+		rand_rep_i <- sample(pos, replace = F)#
+		rand_rep <- c(rand_rep, rand_rep_i) 	#
+	}#
+	df$rand_rep <- rand_rep#
+	m7c = glm(df$lrt ~ df$sp_pair + df$rand_rep)#
+	m7c_out = Anova(m7c, type = 3)#
+	m7d = glm(df$lrt ~ df$sp_pair + df$rand_rep, family = quasipoisson(link = "log"))#
+	m7d_out = Anova(m7d, type = 3)#
+	## LR sp pair, LR rep, P sp pair, P rep mode#
+	m7c_out_v <- c(m7c_out$LR[1], m7c_out$LR[2], m7c_out$P[1], m7c_out$P[2])#
+	m7d_out_v <- c(m7d_out$LR[1], m7d_out$LR[2], m7d_out$P[1], m7d_out$P[2])#
+	output <- list("m7c_out_v" = m7c_out_v, "m7d_out_v" = m7d_out_v )#
+	return(output)	#
+}#
+#
+#### run for x times#
+#
+run_N =  3 #1000#
+set.seed(42)#
+#
+rand_rep_df_m7c <- c()#
+rand_rep_df_m7d <- c()#
+for (i in seq(1:run_N)){#
+	print(i)#
+	test_i <- rand_rep_mode(dat1_term)#
+	rand_rep_df_m7c <- rbind(rand_rep_df_m7c, test_i$m7c_out_v)#
+	rand_rep_df_m7d <- rbind(rand_rep_df_m7d, test_i$m7d_out_v)#
+}
+colnames(rand_rep_df_m7c) <- c("LR_sp","LR_rep_mode", "P_sp","P_rep_mode")#
+rand_rep_df_m7c <- as.data.frame(rand_rep_df_m7c)#
+#
+colnames(rand_rep_df_m7d) <- c("LR_sp","LR_rep_mode", "P_sp","P_rep_mode")#
+rand_rep_df_m7d <- as.data.frame(rand_rep_df_m7d)#
+#
+get_pval = function(rand_df,calc_TS){#
+	N_rand_larger <- length(subset(rand_df, rand_df$LR_rep_mode > calc_TS)[,1])#
+	print(N_rand_larger)#
+	adj_pval = 10000#
+	if(N_rand_larger == 0){#
+		adj_pval = 0#
+	}#
+	else{#
+		adj_pval = N_rand_larger / length(rand_df$LR_rep_mode)#
+	}#
+	print(adj_pval)#
+}#
+get_pval(rand_rep_df_m7c,  m7c_real_sp_pair_LR ) # 0.011#
+get_pval(rand_rep_df_m7d,  m7d_real_sp_pair_LR ) # 0.011
+rand_rep_df_m7c
+rand_rep_df_m7d
+print (sessionInfo())
+### +ve sel#
+#
+library(ggplot2)#
+library(cowplot)#
+library(hash)#
+library(stringr)#
+##############################################################################################
+####################### shared genes#
+qval_thresh = 0.05#
+#
+dat2 <- read.table(paste("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0_qval=", qval_thresh, "_Nsp.csv", sep = ""), sep = ",", header = T)
+# class sex, asex, mixed#
+dat2$sex_class <- paste(ifelse(dat2$N_sex > 0, "sex", ""), ifelse(dat2$N_asex > 0, "asex", ""), sep = "")#
+P1_all_sp <- ggplot(dat2, aes(x=N_sp)) +#
+    theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+    geom_histogram(color="black", fill="grey", binwidth=1) +#
+	xlab ("Number of species") + #
+	ggtitle(paste("543sp pair 1-to-1 orths, qval = ", qval_thresh , "\nNumber of species with positive sel in branches of the same gene", sep = ""))  #
+dat2_2sp <- subset(dat2, dat2$N_sp == 2)#
+dat2_2sp_N <- as.data.frame(table(dat2_2sp$sex_class))#
+colnames(dat2_2sp_N) <- c("class", "N") #
+dat2_2sp_N$class_ord = ordered(dat2_2sp_N$class, levels = c("asex", "sexasex", "sex"))#
+#
+P1_2sp <- ggplot(dat2_2sp_N , aes(x = factor(class_ord), y = N, fill = class_ord)) + #
+	geom_bar(stat="identity") + ### geom_bar(position="dodge",stat="identity") to make non-stacked#
+	theme_bw() +#
+	scale_fill_manual(values = c("royalblue", "purple", "red")) + #
+	xlab ("Class") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, qval = ", qval_thresh , "\npositive sel in 2 branches of the same gene", sep = ""))
+dat2_3sp <- subset(dat2, dat2$N_sp == 3)#
+dat2_3sp_N <- as.data.frame(table(dat2_3sp$sex_class))#
+colnames(dat2_3sp_N) <- c("class", "N") #
+dat2_3sp_N$class_ord = ordered(dat2_3sp_N$class, levels = c("asex", "sexasex", "sex"))#
+#
+P1_3sp <- ggplot(dat2_3sp_N , aes(x = factor(class_ord), y = N, fill = class_ord)) + #
+	geom_bar(stat="identity") + ### geom_bar(position="dodge",stat="identity") to make non-stacked#
+	theme_bw() +#
+	scale_fill_manual(values = c("royalblue", "purple", "red")) + #
+	xlab ("Class") + #
+	ylab ("Number of positive selected genes")  + #
+	ggtitle(paste("543sp pair 1-to-1 orths, qval = ", qval_thresh , "\npositive sel in 3 branches of the same gene", sep = ""))
+plot_grid(P1_all_sp,P1_2sp ,P1_3sp , ncol = 1 )
+Intersect <- function (x) {  #
+  # Multiple set version of intersect#
+  # x is a list#
+  if (length(x) == 1) {#
+    unlist(x)#
+  } else if (length(x) == 2) {#
+    intersect(x[[1]], x[[2]])#
+  } else if (length(x) > 2){#
+    intersect(x[[1]], Intersect(x[-1]))#
+  }#
+}#
+######################
+### overlaps - sep as different N genes in each comp#
+dat1      <- read.table("timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)#
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)#
+library("SuperExactTest")
+dat1      <- read.table("timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)#
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)#
+calc_overlap = function(df, sp_A, sp_B, qval){#
+	df_spA = subset(dat1, df$branch_name == sp_A)#
+	df_spB = subset(dat1, df$branch_name == sp_B)#
+#
+	df_spA_sig = subset(df_spA, df_spA$qval < qval)#
+	df_spB_sig = subset(df_spB, df_spB$qval < qval)#
+	all_gene_A = df_spA$gene#
+	all_gene_B = df_spB$gene#
+#
+	sig_gene_A = df_spA_sig$gene#
+	sig_gene_B = df_spB_sig$gene	#
+	print(Intersect(list(sig_gene_A, sig_gene_B)))#
+	all_gene_list = list(sp_A = all_gene_A, sp_B = all_gene_B)#
+	all_gene_fit_overlap  = length(MSET(all_gene_list, n=length(df[,1]), lower.tail=FALSE)$intersects)#
+	sig_gene_list  = list(sp_A = sig_gene_A, sp_B = sig_gene_B)#
+	all_gene_fit   = MSET(sig_gene_list, n=all_gene_fit_overlap, lower.tail=FALSE)	#
+	# print(all_gene_fit_overlap)#
+	# print(sig_gene_A)#
+	# print(all_gene_fit)#
+	# expected #
+	length.gene.sets_sig =sapply(sig_gene_list,length)#
+	#print(length.gene.sets_sig)#
+	num.expcted.overlap=all_gene_fit_overlap*do.call(prod,as.list(length.gene.sets_sig/all_gene_fit_overlap))#
+	out_v <- c(length(all_gene_fit$intersects), num.expcted.overlap, all_gene_fit_overlap, all_gene_fit$FE, all_gene_fit$p)#
+	out_df <- as.data.frame(rbind(out_v))#
+	colnames(out_df) <- c("N_overlap", "N_exp", "Total_genes", "FE", "p")#
+	rownames(out_df) <- paste(sp_A, sp_B, sep = "_")#
+	return(out_df)#
+}#
+calc_overlap(dat1, "Tdi", "Tsi", 0.05)
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)#
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)#
+calc_overlap = function(df, sp_A, sp_B, qval){#
+	df_spA = subset(dat1, df$branch_name == sp_A)#
+	df_spB = subset(dat1, df$branch_name == sp_B)#
+#
+	df_spA_sig = subset(df_spA, df_spA$qval < qval)#
+	df_spB_sig = subset(df_spB, df_spB$qval < qval)#
+	all_gene_A = df_spA$gene#
+	all_gene_B = df_spB$gene#
+#
+	sig_gene_A = df_spA_sig$gene#
+	sig_gene_B = df_spB_sig$gene	#
+	print(Intersect(list(sig_gene_A, sig_gene_B)))#
+	all_gene_list = list(sp_A = all_gene_A, sp_B = all_gene_B)#
+	all_gene_fit_overlap  = length(MSET(all_gene_list, n=length(df[,1]), lower.tail=FALSE)$intersects)#
+	sig_gene_list  = list(sp_A = sig_gene_A, sp_B = sig_gene_B)#
+	all_gene_fit   = MSET(sig_gene_list, n=all_gene_fit_overlap, lower.tail=FALSE)	#
+	# print(all_gene_fit_overlap)#
+	# print(sig_gene_A)#
+	# print(all_gene_fit)#
+	# expected #
+	length.gene.sets_sig =sapply(sig_gene_list,length)#
+	#print(length.gene.sets_sig)#
+	num.expcted.overlap=all_gene_fit_overlap*do.call(prod,as.list(length.gene.sets_sig/all_gene_fit_overlap))#
+	out_v <- c(length(all_gene_fit$intersects), num.expcted.overlap, all_gene_fit_overlap, all_gene_fit$FE, all_gene_fit$p)#
+	out_df <- as.data.frame(rbind(out_v))#
+	colnames(out_df) <- c("N_overlap", "N_exp", "Total_genes", "FE", "p")#
+	rownames(out_df) <- paste(sp_A, sp_B, sep = "_")#
+	return(out_df)#
+}#
+calc_overlap(dat1, "Tdi", "Tsi", 0.05)#
+#
+expand.grid(a = c("Tbi", "Tte", "Tce"), b = c("Tbi", "Tte", "Tce"), unique = TRUE)#
+rbind(#
+calc_overlap(dat1, "Tbi", "Tpa", 0.05),#
+calc_overlap(dat1, "Tbi", "Tte", 0.05))#
+all_combo <- expand.grid(a = c("Tbi", "Tte", "Tce", "Tms","Tcm", "Tsi", "Tpa", "Tge", "Tps", "Tdi"), b = c("Tbi", "Tte", "Tce", "Tms","Tcm", "Tsi", "Tpa", "Tge", "Tps", "Tdi"), unique = TRUE)#
+all_combo$a <- as.character(all_combo$a)#
+all_combo$b <- as.character(all_combo$b)
+###### get uniq combos#
+#
+all_combo_list_s <- list()#
+for(i in seq(1: length(all_combo[,1]))){#
+	sp_sort = sort(c(all_combo$a[i], all_combo$b[i]))#
+	sp_str = paste(sp_sort[1], "_", sp_sort[2], sep = "")#
+	print(sp_sort)	#
+	all_combo_list_s <- c(all_combo_list_s, sp_str)#
+}#
+#
+all_combo_list_s_uniq <- unique(all_combo_list_s)#
+#
+#### run for all uniq combos#
+all_combo_overlap <- c()#
+for(i in seq(1: length(all_combo_list_s_uniq))){#
+	rec = as.character(all_combo_list_s_uniq[i])#
+	rec_s <- strsplit(rec, "_")#
+	print(rec)#
+	print(rec_s[[1]][1])#
+	print(rec_s[[1]][2])	#
+	over_i <- calc_overlap(dat1, rec_s[[1]][1], rec_s[[1]][2], 0.05)#
+	all_combo_overlap = rbind(all_combo_overlap, over_i)#
+}#
+##################
+## remove species compared to itself (e.g Tbi Tbi)#
+#
+all_combo_overlap$sp_a <- str_split_fixed(as.character(rownames(all_combo_overlap)), "_", 2)[,1]#
+all_combo_overlap$sp_b <- str_split_fixed(as.character(rownames(all_combo_overlap)), "_", 2)[,2]#
+all_combo_overlap$sp_same <- ifelse(all_combo_overlap$sp_a == all_combo_overlap$sp_b, 0, 1)#
+#
+all_combo_overlap_want <- subset(all_combo_overlap, all_combo_overlap$sp_same == 1)#
+#
+length(all_combo_overlap_want[,1]) ## 45#
+#
+### FDR p-vals#
+#
+all_combo_overlap_want$FDR <- p.adjust(all_combo_overlap_want$p, method = "fdr")#
+min(all_combo_overlap_want$FDR) ## 0.4940856
+all_combo_overlap_want
+## +ve sel#
+#
+library(ggplot2)#
+library(cowplot)#
+library(hash)#
+library(stringr)#
+library("SuperExactTest")#
+#
+######################
+### overlaps between positively selected genes - sep as different N genes in each comp#
+dat1      <- read.table("output/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)#
+dat1$gene <- as.character(dat1$gene )#
+head(dat1)
+calc_overlap = function(df, sp_A, sp_B, qval){#
+	df_spA = subset(dat1, df$branch_name == sp_A)#
+	df_spB = subset(dat1, df$branch_name == sp_B)#
+#
+	df_spA_sig = subset(df_spA, df_spA$qval < qval)#
+	df_spB_sig = subset(df_spB, df_spB$qval < qval)#
+	all_gene_A = df_spA$gene#
+	all_gene_B = df_spB$gene#
+#
+	sig_gene_A = df_spA_sig$gene#
+	sig_gene_B = df_spB_sig$gene	#
+	print(Intersect(list(sig_gene_A, sig_gene_B)))#
+	all_gene_list = list(sp_A = all_gene_A, sp_B = all_gene_B)#
+	all_gene_fit_overlap  = length(MSET(all_gene_list, n=length(df[,1]), lower.tail=FALSE)$intersects)#
+	sig_gene_list  = list(sp_A = sig_gene_A, sp_B = sig_gene_B)#
+	all_gene_fit   = MSET(sig_gene_list, n=all_gene_fit_overlap, lower.tail=FALSE)	#
+	# print(all_gene_fit_overlap)#
+	# print(sig_gene_A)#
+	# print(all_gene_fit)#
+	# expected #
+	length.gene.sets_sig =sapply(sig_gene_list,length)#
+	#print(length.gene.sets_sig)#
+	num.expcted.overlap=all_gene_fit_overlap*do.call(prod,as.list(length.gene.sets_sig/all_gene_fit_overlap))#
+	out_v <- c(length(all_gene_fit$intersects), num.expcted.overlap, all_gene_fit_overlap, all_gene_fit$FE, all_gene_fit$p)#
+	out_df <- as.data.frame(rbind(out_v))#
+	colnames(out_df) <- c("N_overlap", "N_exp", "Total_genes", "FE", "p")#
+	rownames(out_df) <- paste(sp_A, sp_B, sep = "_")#
+	return(out_df)#
+}#
+all_combo <- expand.grid(a = c("Tbi", "Tte", "Tce", "Tms","Tcm", "Tsi", "Tpa", "Tge", "Tps", "Tdi"), b = c("Tbi", "Tte", "Tce", "Tms","Tcm", "Tsi", "Tpa", "Tge", "Tps", "Tdi"), unique = TRUE)#
+all_combo$a <- as.character(all_combo$a)#
+all_combo$b <- as.character(all_combo$b)
+###### get uniq combos#
+#
+all_combo_list_s <- list()#
+for(i in seq(1: length(all_combo[,1]))){#
+	sp_sort = sort(c(all_combo$a[i], all_combo$b[i]))#
+	sp_str = paste(sp_sort[1], "_", sp_sort[2], sep = "")#
+	print(sp_sort)	#
+	all_combo_list_s <- c(all_combo_list_s, sp_str)#
+}#
+#
+all_combo_list_s_uniq <- unique(all_combo_list_s)#
+#
+#### run for all uniq combos#
+all_combo_overlap <- c()#
+for(i in seq(1: length(all_combo_list_s_uniq))){#
+	rec = as.character(all_combo_list_s_uniq[i])#
+	rec_s <- strsplit(rec, "_")#
+	print(rec)#
+	print(rec_s[[1]][1])#
+	print(rec_s[[1]][2])	#
+	over_i <- calc_overlap(dat1, rec_s[[1]][1], rec_s[[1]][2], 0.05)#
+	all_combo_overlap = rbind(all_combo_overlap, over_i)#
+}#
+##################
+## remove species compared to itself (e.g Tbi Tbi)#
+#
+all_combo_overlap$sp_a <- str_split_fixed(as.character(rownames(all_combo_overlap)), "_", 2)[,1]#
+all_combo_overlap$sp_b <- str_split_fixed(as.character(rownames(all_combo_overlap)), "_", 2)[,2]#
+all_combo_overlap$sp_same <- ifelse(all_combo_overlap$sp_a == all_combo_overlap$sp_b, 0, 1)#
+#
+all_combo_overlap_want <- subset(all_combo_overlap, all_combo_overlap$sp_same == 1)#
+#
+length(all_combo_overlap_want[,1]) ## 45#
+#
+### FDR p-vals#
+#
+all_combo_overlap_want$FDR <- p.adjust(all_combo_overlap_want$p, method = "fdr")#
+min(all_combo_overlap_want$FDR) ## 0.4940856
+all_combo <- expand.grid(a = c("Tbi", "Tte", "Tce", "Tms","Tcm", "Tsi", "Tpa", "Tge", "Tps", "Tdi"), b = c("Tbi", "Tte", "Tce", "Tms","Tcm", "Tsi", "Tpa", "Tge", "Tps", "Tdi"), unique = TRUE)#
+all_combo$a <- as.character(all_combo$a)#
+all_combo$b <- as.character(all_combo$b)
+###### get uniq combos#
+#
+all_combo_list_s <- list()#
+for(i in seq(1: length(all_combo[,1]))){#
+	sp_sort = sort(c(all_combo$a[i], all_combo$b[i]))#
+	sp_str = paste(sp_sort[1], "_", sp_sort[2], sep = "")#
+	print(sp_sort)	#
+	all_combo_list_s <- c(all_combo_list_s, sp_str)#
+}#
+#
+all_combo_list_s_uniq <- unique(all_combo_list_s)
+#### run for all uniq combos#
+all_combo_overlap <- c()#
+for(i in seq(1: length(all_combo_list_s_uniq))){#
+	rec = as.character(all_combo_list_s_uniq[i])#
+	rec_s <- strsplit(rec, "_")#
+	print(rec)#
+	print(rec_s[[1]][1])#
+	print(rec_s[[1]][2])	#
+	over_i <- calc_overlap(dat1, rec_s[[1]][1], rec_s[[1]][2], 0.05)#
+	all_combo_overlap = rbind(all_combo_overlap, over_i)#
+}
+Intersect <- function (x) {  #
+  # Multiple set version of intersect#
+  # x is a list#
+  if (length(x) == 1) {#
+    unlist(x)#
+  } else if (length(x) == 2) {#
+    intersect(x[[1]], x[[2]])#
+  } else if (length(x) > 2){#
+    intersect(x[[1]], Intersect(x[-1]))#
+  }#
+}
+#### run for all uniq combos#
+all_combo_overlap <- c()#
+for(i in seq(1: length(all_combo_list_s_uniq))){#
+	rec = as.character(all_combo_list_s_uniq[i])#
+	rec_s <- strsplit(rec, "_")#
+	print(rec)#
+	print(rec_s[[1]][1])#
+	print(rec_s[[1]][2])	#
+	over_i <- calc_overlap(dat1, rec_s[[1]][1], rec_s[[1]][2], 0.05)#
+	all_combo_overlap = rbind(all_combo_overlap, over_i)#
+}
+##################
+## remove species compared to itself (e.g Tbi Tbi)#
+#
+all_combo_overlap$sp_a <- str_split_fixed(as.character(rownames(all_combo_overlap)), "_", 2)[,1]#
+all_combo_overlap$sp_b <- str_split_fixed(as.character(rownames(all_combo_overlap)), "_", 2)[,2]#
+all_combo_overlap$sp_same <- ifelse(all_combo_overlap$sp_a == all_combo_overlap$sp_b, 0, 1)#
+#
+all_combo_overlap_want <- subset(all_combo_overlap, all_combo_overlap$sp_same == 1)#
+#
+length(all_combo_overlap_want[,1]) ## 45#
+#
+### FDR p-vals#
+#
+all_combo_overlap_want$FDR <- p.adjust(all_combo_overlap_want$p, method = "fdr")#
+min(all_combo_overlap_want$FDR) ## 0.4940856
+print (sessionInfo())
+## topGO#
+# install#
+# source("http://bioconductor.org/biocLite.R") #
+# biocLite() #
+# source("http://bioconductor.org/biocLite.R")   #
+# biocLite("topGO")#
+# biocLite("ALL")#
+# biocLite("affyLib")#
+#
+library(topGO)#
+library(ALL)#
+library("VennDiagram")#
+library(gridExtra)#
+library(grid)#
+library(ggplot2)#
+library("SuperExactTest")#
+library(cowplot)#
+require(dplyr)#
+print (sessionInfo())
+Intersect <- function (x) {  #
+  # Multiple set version of intersect#
+  # x is a list#
+  if (length(x) == 1) {#
+    unlist(x)#
+  } else if (length(x) == 2) {#
+    intersect(x[[1]], x[[2]])#
+  } else if (length(x) > 2){#
+    intersect(x[[1]], Intersect(x[-1]))#
+  }#
+}#
+#
+Union <- function (x) {  #
+  # Multiple set version of union#
+  # x is a list#
+  if (length(x) == 1) {#
+    unlist(x)#
+  } else if (length(x) == 2) {#
+    union(x[[1]], x[[2]])#
+  } else if (length(x) > 2) {#
+    union(x[[1]], Union(x[-1]))#
+  }#
+}#
+#
+Setdiff <- function (x, y) {#
+  # Remove the union of the y's from the common x's. #
+  # x and y are lists of characters.#
+  xx <- Intersect(x)#
+  yy <- Union(y)#
+  setdiff(xx, yy)#
+}#
+#
+#### load annotation#
+#
+setwd("data/GO_terms")#
+#
+# ## Arth annotated ## not used#
+# geneID2GO_Tbi_Arth <- readMappings(file = "543sp_Arth_Tbi_forTopGO.txt")#
+# geneID2GO_Tte_Arth <- readMappings(file = "543sp_Arth_Tte_forTopGO.txt")#
+# geneID2GO_Tce_Arth <- readMappings(file = "543sp_Arth_Tce_forTopGO.txt")#
+# geneID2GO_Tms_Arth <- readMappings(file = "543sp_Arth_Tms_forTopGO.txt")#
+# geneID2GO_Tcm_Arth <- readMappings(file = "543sp_Arth_Tcm_forTopGO.txt")#
+# geneID2GO_Tsi_Arth <- readMappings(file = "543sp_Arth_Tsi_forTopGO.txt")#
+# geneID2GO_Tpa_Arth <- readMappings(file = "543sp_Arth_Tpa_forTopGO.txt")#
+# geneID2GO_Tge_Arth <- readMappings(file = "543sp_Arth_Tge_forTopGO.txt")#
+# geneID2GO_Tps_Arth <- readMappings(file = "543sp_Arth_Tps_forTopGO.txt")#
+# geneID2GO_Tdi_Arth <- readMappings(file = "543sp_Arth_Tdi_forTopGO.txt")#
+## Droso annotated#
+geneID2GO_Tbi_Droso <- readMappings(file = "543sp_Droso_Tbi_forTopGO.txt")#
+geneID2GO_Tte_Droso <- readMappings(file = "543sp_Droso_Tte_forTopGO.txt")#
+geneID2GO_Tce_Droso <- readMappings(file = "543sp_Droso_Tce_forTopGO.txt")#
+geneID2GO_Tms_Droso <- readMappings(file = "543sp_Droso_Tms_forTopGO.txt")#
+geneID2GO_Tcm_Droso <- readMappings(file = "543sp_Droso_Tcm_forTopGO.txt")#
+geneID2GO_Tsi_Droso <- readMappings(file = "543sp_Droso_Tsi_forTopGO.txt")#
+geneID2GO_Tpa_Droso <- readMappings(file = "543sp_Droso_Tpa_forTopGO.txt")#
+geneID2GO_Tge_Droso <- readMappings(file = "543sp_Droso_Tge_forTopGO.txt")#
+geneID2GO_Tps_Droso <- readMappings(file = "543sp_Droso_Tps_forTopGO.txt")#
+geneID2GO_Tdi_Droso <- readMappings(file = "543sp_Droso_Tdi_forTopGO.txt")#
+################################################################################################################################################
+#### read in tables with genename and qval#
+make_named_numeric_vector <- function(list_file_name){#
+	full_list <- as.list(read.table(list_file_name))#
+	full_list_GL <- full_list$V2#
+	names(full_list_GL) <- full_list$V1#
+	return(full_list_GL)#
+}#
+#
+Tbi_qval_GL <- make_named_numeric_vector("543sp_Arth_Tbi_qval.txt")#
+Tte_qval_GL <- make_named_numeric_vector("543sp_Arth_Tte_qval.txt")#
+Tce_qval_GL <- make_named_numeric_vector("543sp_Arth_Tce_qval.txt")#
+Tms_qval_GL <- make_named_numeric_vector("543sp_Arth_Tms_qval.txt")#
+Tcm_qval_GL <- make_named_numeric_vector("543sp_Arth_Tcm_qval.txt")#
+Tsi_qval_GL <- make_named_numeric_vector("543sp_Arth_Tsi_qval.txt")#
+Tpa_qval_GL <- make_named_numeric_vector("543sp_Arth_Tpa_qval.txt")#
+Tge_qval_GL <- make_named_numeric_vector("543sp_Arth_Tge_qval.txt")#
+Tps_qval_GL <- make_named_numeric_vector("543sp_Arth_Tps_qval.txt")#
+Tdi_qval_GL <- make_named_numeric_vector("543sp_Arth_Tdi_qval.txt")#
+run_enrichment <- function(genelist, ref, sig_for_GO){#
+	### make rule for classing sig / non-sig #
+	topDiffGenes <- function(allScore) {return(allScore < sig_for_GO)}#
+	#### make GOdata object#
+	#### setting node size as 10 so at least 10 genes must be annot per GO terms #
+	#### do enrichment test#
+	GODATA_BP = new("topGOdata", ontology = "BP", allGenes = genelist, geneSel = topDiffGenes,  annot = annFUN.gene2GO, gene2GO = ref, nodeSize = 10)#
+#
+	### get N GOs used#
+#
+	GO_term_use_BP_list = GODATA_BP@graph@nodes#
+	N_GO_term_use_BP = length(GODATA_BP@graph@nodes)#
+    resultFisher <- runTest(GODATA_BP, algorithm = "weight01", statistic = "fisher")#
+#
+	### combined tables#
+	allRes1_BP <- GenTable(GODATA_BP, Fisher_w01 = resultFisher, ranksOf = "Fisher_w01", topNodes = length(GODATA_BP@graph@nodes), numChar = 200)#
+#
+	sig_fisher_BP_GO     = subset(allRes1_BP, allRes1_BP$Fisher_w01 < sig_for_GO)$GO.ID#
+	## return everything!#
+	out_list = list("N_GO_term_use_BP" = N_GO_term_use_BP, #
+	                "GO_term_use_BP_list" = GO_term_use_BP_list, #
+	                "allRes1_BP" = allRes1_BP, #
+	                "sig_fisher_BP_GO" = sig_fisher_BP_GO,#
+	                "GODATA_BP" = GODATA_BP) #
+	return(out_list)#
+#
+}#
+#### run the enrichment stuff (0.05)#
+#
+# # Tbi_Arth_enrich  <- run_enrichment(Tbi_qval_GL, geneID2GO_Tbi_Arth, 0.05)#
+# Tte_Arth_enrich  <- run_enrichment(Tte_qval_GL, geneID2GO_Tte_Arth, 0.05)#
+# Tce_Arth_enrich  <- run_enrichment(Tce_qval_GL, geneID2GO_Tce_Arth, 0.05)#
+# Tms_Arth_enrich  <- run_enrichment(Tms_qval_GL, geneID2GO_Tms_Arth, 0.05)#
+# Tcm_Arth_enrich  <- run_enrichment(Tcm_qval_GL, geneID2GO_Tcm_Arth, 0.05)#
+# Tsi_Arth_enrich  <- run_enrichment(Tsi_qval_GL, geneID2GO_Tsi_Arth, 0.05)#
+# Tpa_Arth_enrich  <- run_enrichment(Tpa_qval_GL, geneID2GO_Tpa_Arth, 0.05)#
+# Tge_Arth_enrich  <- run_enrichment(Tge_qval_GL, geneID2GO_Tge_Arth, 0.05)#
+# Tps_Arth_enrich  <- run_enrichment(Tps_qval_GL, geneID2GO_Tps_Arth, 0.05)#
+# Tdi_Arth_enrich  <- run_enrichment(Tdi_qval_GL, geneID2GO_Tdi_Arth, 0.05)#
+#
+#### run the enrichment stuff (0.05)#
+#
+Tbi_Droso_enrich  <- run_enrichment(Tbi_qval_GL, geneID2GO_Tbi_Droso, 0.05)#
+Tte_Droso_enrich  <- run_enrichment(Tte_qval_GL, geneID2GO_Tte_Droso, 0.05)#
+Tce_Droso_enrich  <- run_enrichment(Tce_qval_GL, geneID2GO_Tce_Droso, 0.05)#
+Tms_Droso_enrich  <- run_enrichment(Tms_qval_GL, geneID2GO_Tms_Droso, 0.05)#
+Tcm_Droso_enrich  <- run_enrichment(Tcm_qval_GL, geneID2GO_Tcm_Droso, 0.05)#
+Tsi_Droso_enrich  <- run_enrichment(Tsi_qval_GL, geneID2GO_Tsi_Droso, 0.05)#
+Tpa_Droso_enrich  <- run_enrichment(Tpa_qval_GL, geneID2GO_Tpa_Droso, 0.05)#
+Tge_Droso_enrich  <- run_enrichment(Tge_qval_GL, geneID2GO_Tge_Droso, 0.05)#
+Tps_Droso_enrich  <- run_enrichment(Tps_qval_GL, geneID2GO_Tps_Droso, 0.05)#
+Tdi_Droso_enrich  <- run_enrichment(Tdi_qval_GL, geneID2GO_Tdi_Droso, 0.05)
+Tbi_Droso_enrich_table <- Tbi_Droso_enrich$allRes1_BP#
+Tte_Droso_enrich_table <- Tte_Droso_enrich$allRes1_BP#
+Tce_Droso_enrich_table <- Tce_Droso_enrich$allRes1_BP#
+Tms_Droso_enrich_table <- Tms_Droso_enrich$allRes1_BP#
+Tcm_Droso_enrich_table <- Tcm_Droso_enrich$allRes1_BP#
+Tsi_Droso_enrich_table <- Tsi_Droso_enrich$allRes1_BP#
+Tpa_Droso_enrich_table <- Tpa_Droso_enrich$allRes1_BP#
+Tge_Droso_enrich_table <- Tge_Droso_enrich$allRes1_BP#
+Tps_Droso_enrich_table <- Tps_Droso_enrich$allRes1_BP#
+Tdi_Droso_enrich_table <- Tdi_Droso_enrich$allRes1_BP#
+#
+### add sp#
+#
+Tbi_Droso_enrich_table$sp <- rep("Tbi", length(Tbi_Droso_enrich_table[,1]))#
+Tte_Droso_enrich_table$sp <- rep("Tte", length(Tte_Droso_enrich_table[,1]))#
+Tce_Droso_enrich_table$sp <- rep("Tce", length(Tce_Droso_enrich_table[,1]))#
+Tms_Droso_enrich_table$sp <- rep("Tms", length(Tms_Droso_enrich_table[,1]))#
+Tcm_Droso_enrich_table$sp <- rep("Tcm", length(Tcm_Droso_enrich_table[,1]))#
+Tsi_Droso_enrich_table$sp <- rep("Tsi", length(Tsi_Droso_enrich_table[,1]))#
+Tpa_Droso_enrich_table$sp <- rep("Tpa", length(Tpa_Droso_enrich_table[,1]))#
+Tge_Droso_enrich_table$sp <- rep("Tge", length(Tge_Droso_enrich_table[,1]))#
+Tps_Droso_enrich_table$sp <- rep("Tps", length(Tps_Droso_enrich_table[,1]))#
+Tdi_Droso_enrich_table$sp <- rep("Tdi", length(Tdi_Droso_enrich_table[,1]))#
+#
+### join#
+#
+All_Droso_enrich_table <- rbind(#
+Tbi_Droso_enrich_table,#
+Tte_Droso_enrich_table,#
+Tce_Droso_enrich_table,#
+Tms_Droso_enrich_table,#
+Tcm_Droso_enrich_table,#
+Tsi_Droso_enrich_table,#
+Tpa_Droso_enrich_table,#
+Tge_Droso_enrich_table,#
+Tps_Droso_enrich_table,#
+Tdi_Droso_enrich_table#
+)#
+#
+### #
+#
+head(All_Droso_enrich_table)#
+#
+All_Droso_enrich_table_sig <- subset(All_Droso_enrich_table, All_Droso_enrich_table$Fisher_w01 < 0.05)#
+All_Droso_enrich_table_sig %>% count(sp)
+#######################################################################
+### N GO terms annot in sex and asex genes with sig +ve sel#
+get_sig_gene_vect <- function(list_file_name){#
+	df     <- read.table(list_file_name)#
+	df_sig <- subset(df, df$V2 < 0.05)#
+	return(as.character(df_sig$V1))#
+}#
+#
+Tbi_sig_genes <- get_sig_gene_vect("543sp_Droso_Tbi_qval.txt")#
+Tte_sig_genes <- get_sig_gene_vect("543sp_Droso_Tte_qval.txt")#
+Tce_sig_genes <- get_sig_gene_vect("543sp_Droso_Tce_qval.txt")#
+Tms_sig_genes <- get_sig_gene_vect("543sp_Droso_Tms_qval.txt")#
+Tcm_sig_genes <- get_sig_gene_vect("543sp_Droso_Tcm_qval.txt")#
+Tsi_sig_genes <- get_sig_gene_vect("543sp_Droso_Tsi_qval.txt")#
+Tpa_sig_genes <- get_sig_gene_vect("543sp_Droso_Tpa_qval.txt")#
+Tge_sig_genes <- get_sig_gene_vect("543sp_Droso_Tge_qval.txt")#
+Tps_sig_genes <- get_sig_gene_vect("543sp_Droso_Tps_qval.txt")#
+Tdi_sig_genes <- get_sig_gene_vect("543sp_Droso_Tdi_qval.txt")#
+## get all BPs (i.e. not fitered by node size)#
+run_enrichment_for_all_BP <- function(genelist, ref, sig_for_GO){#
+	### make rule for classing sig / non-sig - note this rule is not used for the GSEA#
+	topDiffGenes <- function(allScore) {return(allScore < sig_for_GO)}#
+	# topDiffGenes <- function(allScore) {return(allScore < 1)} ## as a check - setting to one gives the same pvalues for the GSEA#
+	#### make GOdata object#
+	#### setting node size as 1 to get all BP gos #
+	GODATA_BP = new("topGOdata", ontology = "BP", allGenes = genelist, geneSel = topDiffGenes,  annot = annFUN.gene2GO, gene2GO = ref, nodeSize = 1)#
+	### get N GOs used#
+#
+	GO_term_use_BP_list = GODATA_BP@graph@nodes#
+	## return everything!#
+	out_list = list("GO_term_use_BP_list" = GO_term_use_BP_list, "GODATA_BP" = GODATA_BP) #
+	return(out_list)#
+#
+}#
+Tbi_Droso_all_BP  <- run_enrichment_for_all_BP(Tbi_qval_GL, geneID2GO_Tbi_Droso, 0.05)#
+Tte_Droso_all_BP  <- run_enrichment_for_all_BP(Tte_qval_GL, geneID2GO_Tte_Droso, 0.05)#
+Tce_Droso_all_BP  <- run_enrichment_for_all_BP(Tce_qval_GL, geneID2GO_Tce_Droso, 0.05)#
+Tms_Droso_all_BP  <- run_enrichment_for_all_BP(Tms_qval_GL, geneID2GO_Tms_Droso, 0.05)#
+Tcm_Droso_all_BP  <- run_enrichment_for_all_BP(Tcm_qval_GL, geneID2GO_Tcm_Droso, 0.05)#
+Tsi_Droso_all_BP  <- run_enrichment_for_all_BP(Tsi_qval_GL, geneID2GO_Tsi_Droso, 0.05)#
+Tpa_Droso_all_BP  <- run_enrichment_for_all_BP(Tpa_qval_GL, geneID2GO_Tpa_Droso, 0.05)#
+Tge_Droso_all_BP  <- run_enrichment_for_all_BP(Tge_qval_GL, geneID2GO_Tge_Droso, 0.05)#
+Tps_Droso_all_BP  <- run_enrichment_for_all_BP(Tps_qval_GL, geneID2GO_Tps_Droso, 0.05)#
+Tdi_Droso_all_BP  <- run_enrichment_for_all_BP(Tdi_qval_GL, geneID2GO_Tdi_Droso, 0.05)#
+get_N_GOs_wBPfilt <- function(want_vec_name, geneID2GO_file, BP_GOs_name, ALL_BP_GOs_name, sp, rep_m){#
+	out_df = c()#
+	for(i in seq(1:length(want_vec_name))){#
+		#print(want_vec_name[i])#
+		a1 <- eval(parse(text=paste(geneID2GO_file,'$',want_vec_name[i],sep='')))#
+		a1_filt <- a1[a1 %in% BP_GOs_name]#
+		a2_filt <- a1[a1 %in% ALL_BP_GOs_name]		#
+		#print(a1)#
+		#print(a1_filt)		#
+		#print("\n")#
+		out_df <- rbind(out_df, c(want_vec_name[i], length(a1), length(a2_filt), length(a1_filt)))#
+		colnames(out_df) <- c("gene_name", "N_All_GOs", "N_AllBP_GOs", "N_usedBP_GOs")#
+		} #
+	out_df <- as.data.frame(out_df)#
+	out_df$N_All_GOs    <- as.numeric(as.character(out_df$N_All_GOs))#
+	out_df$N_AllBP_GOs  <- as.numeric(as.character(out_df$N_AllBP_GOs))#
+	out_df$N_usedBP_GOs <- as.numeric(as.character(out_df$N_usedBP_GOs))#
+	out_df$sp           <- rep(sp, length(out_df[,1]))	#
+	out_df$rep_mode     <- rep(rep_m, length(out_df[,1]))			#
+	return(out_df)#
+}#
+### get N GOs#
+#
+Tbi_Droso_NGOs <- get_N_GOs_wBPfilt(Tbi_sig_genes, "geneID2GO_Tbi_Droso", Tbi_Droso_enrich$GO_term_use_BP_list, Tbi_Droso_all_BP$GO_term_use_BP_list, "Tbi", "sex")#
+Tte_Droso_NGOs <- get_N_GOs_wBPfilt(Tte_sig_genes, "geneID2GO_Tte_Droso", Tte_Droso_enrich$GO_term_use_BP_list, Tte_Droso_all_BP$GO_term_use_BP_list, "Tte", "asex")#
+Tce_Droso_NGOs <- get_N_GOs_wBPfilt(Tce_sig_genes, "geneID2GO_Tce_Droso", Tce_Droso_enrich$GO_term_use_BP_list, Tce_Droso_all_BP$GO_term_use_BP_list, "Tce", "sex")#
+Tms_Droso_NGOs <- get_N_GOs_wBPfilt(Tms_sig_genes, "geneID2GO_Tms_Droso", Tms_Droso_enrich$GO_term_use_BP_list, Tms_Droso_all_BP$GO_term_use_BP_list, "Tms", "asex")#
+Tcm_Droso_NGOs <- get_N_GOs_wBPfilt(Tcm_sig_genes, "geneID2GO_Tcm_Droso", Tcm_Droso_enrich$GO_term_use_BP_list, Tcm_Droso_all_BP$GO_term_use_BP_list, "Tcm", "sex")#
+Tsi_Droso_NGOs <- get_N_GOs_wBPfilt(Tsi_sig_genes, "geneID2GO_Tsi_Droso", Tsi_Droso_enrich$GO_term_use_BP_list, Tsi_Droso_all_BP$GO_term_use_BP_list, "Tsi", "asex")#
+Tpa_Droso_NGOs <- get_N_GOs_wBPfilt(Tpa_sig_genes, "geneID2GO_Tpa_Droso", Tpa_Droso_enrich$GO_term_use_BP_list, Tpa_Droso_all_BP$GO_term_use_BP_list, "Tpa", "sex")#
+Tge_Droso_NGOs <- get_N_GOs_wBPfilt(Tge_sig_genes, "geneID2GO_Tge_Droso", Tge_Droso_enrich$GO_term_use_BP_list, Tge_Droso_all_BP$GO_term_use_BP_list, "Tge", "asex")#
+Tps_Droso_NGOs <- get_N_GOs_wBPfilt(Tps_sig_genes, "geneID2GO_Tps_Droso", Tps_Droso_enrich$GO_term_use_BP_list, Tps_Droso_all_BP$GO_term_use_BP_list, "Tps", "sex")#
+Tdi_Droso_NGOs <- get_N_GOs_wBPfilt(Tdi_sig_genes, "geneID2GO_Tdi_Droso", Tdi_Droso_enrich$GO_term_use_BP_list, Tdi_Droso_all_BP$GO_term_use_BP_list, "Tdi", "asex")#
+Allsp_Droso_NGOs <- as.data.frame(rbind(#
+Tbi_Droso_NGOs,#
+Tte_Droso_NGOs,#
+Tce_Droso_NGOs,#
+Tms_Droso_NGOs,#
+Tcm_Droso_NGOs,#
+Tsi_Droso_NGOs,#
+Tpa_Droso_NGOs,#
+Tge_Droso_NGOs,#
+Tps_Droso_NGOs,#
+Tdi_Droso_NGOs#
+))#
+Allsp_Droso_NGOs$N_All_GOs_bi <- ifelse(Allsp_Droso_NGOs$N_All_GOs > 0, 1,0)#
+Allsp_Droso_NGOs$N_AllBP_GOs_bi <- ifelse(Allsp_Droso_NGOs$N_AllBP_GOs > 0, 1,0)#
+Allsp_Droso_NGOs$N_usedBP_GOs_bi <- ifelse(Allsp_Droso_NGOs$N_usedBP_GOs > 0, 1,0)#
+Allsp_Droso_NGOs$sp_pair <-#
+ifelse(Allsp_Droso_NGOs$sp == "Tbi", "Tbi-Tte",#
+ifelse(Allsp_Droso_NGOs$sp == "Tce", "Tce-Tms",#
+ifelse(Allsp_Droso_NGOs$sp == "Tcm", "Tcm-Tsi",#
+ifelse(Allsp_Droso_NGOs$sp == "Tpa", "Tpa-Tge",#
+ifelse(Allsp_Droso_NGOs$sp == "Tps", "Tps-Tdi",#
+ifelse(Allsp_Droso_NGOs$sp == "Tte", "Tbi-Tte", #
+ifelse(Allsp_Droso_NGOs$sp == "Tms", "Tce-Tms",#
+ifelse(Allsp_Droso_NGOs$sp == "Tsi", "Tcm-Tsi",#
+ifelse(Allsp_Droso_NGOs$sp == "Tge", "Tpa-Tge",#
+ifelse(Allsp_Droso_NGOs$sp == "Tdi", "Tps-Tdi", #
+NA))))))))))#
+#
+Allsp_Droso_NGOs$sp_pair_ord = ordered(Allsp_Droso_NGOs$sp_pair, levels = c("Tbi-Tte", "Tcm-Tsi", "Tce-Tms", "Tps-Tdi", "Tpa-Tge"))#
+head(Allsp_Droso_NGOs)#
+#
+### at least one GO term annot #
+Allsp_Droso_NGOs_more_than_0_used <- subset(Allsp_Droso_NGOs, Allsp_Droso_NGOs$N_usedBP_GOs > 0)#
+### plot#
+#
+P1_N_usedBP_GOs_prop_GOs <- ggplot(Allsp_Droso_NGOs)  + #
+	geom_bar(aes(sp_pair_ord, N_usedBP_GOs_bi, fill = as.factor(rep_mode)), position = "dodge", stat = "summary", fun = "mean") +#
+	theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Prop genes with GO terms annotated")  #
+#
+P1_N_usedBP_GOs_mean_GOs_more_than_0_BPused_GO <-  ggplot(Allsp_Droso_NGOs_more_than_0_used )  + #
+	geom_bar(aes(sp_pair_ord, N_usedBP_GOs, fill = as.factor(rep_mode)), position = "dodge", stat = "summary", fun = "mean") +#
+	theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + #
+	scale_fill_manual(values = c("#92C5DECD", "#D6604DED")) + #
+	xlab ("Species pair") + #
+	ylab ("Mean GO terms annotated per gene")  #
+plot_grid(P1_N_usedBP_GOs_prop_GOs, P1_N_usedBP_GOs_mean_GOs_more_than_0_BPused_GO)
+plot_grid(P1_N_usedBP_GOs_prop_GOs, P1_N_usedBP_GOs_mean_GOs_more_than_0_BPused_GO)

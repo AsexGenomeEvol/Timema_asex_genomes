@@ -75,7 +75,7 @@ Setdiff <- function (x, y) {
 
 #### load annotation
 
-setwd("data/GO_terms")
+setwd("pos_sel_data/GO_terms")
 
 # ## Arth annotated ## not used
 # geneID2GO_Tbi_Arth <- readMappings(file = "543sp_Arth_Tbi_forTopGO.txt")

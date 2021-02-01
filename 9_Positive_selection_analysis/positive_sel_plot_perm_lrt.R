@@ -35,7 +35,7 @@ print (sessionInfo())
 
 
 ## data
-dat1      <- read.table("data/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
+dat1      <- read.table("pos_sel_data/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
 dat1$gene <- as.character(dat1$gene )
 head(dat1)
 

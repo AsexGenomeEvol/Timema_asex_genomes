@@ -33,7 +33,7 @@ print (sessionInfo())
 # [37] splines_3.5.1     MASS_7.3-51.4     abind_1.4-5       colorspace_1.4-1  stringi_1.4.3     munsell_0.5.0     crayon_1.3.4  
 
 ## data
-dat1      <- read.table("data/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
+dat1      <- read.table("pos_sel_data/timema_543_branches_with-ncat-codon-rate_sites_with_h0.tsv", sep = "\t", header = T)
 dat1$gene <- as.character(dat1$gene )
 head(dat1)
 
