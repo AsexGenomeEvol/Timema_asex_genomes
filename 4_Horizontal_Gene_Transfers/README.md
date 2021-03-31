@@ -4,7 +4,7 @@ Content:
   * **contamination_sequences** | Suspected contamination sequences identifed via blobtools (removed from the reference assemeblies prior to submission to NCBI).
 
 
-To detect HGT from non-metazoan species, we first used the pipeline of foreign sequence detection developed by [Francois et al. 2020](https://www.g3journal.org/content/10/2/721). This pipeline produced a custom database (from publically available data), available ADD LINK. 
+To detect HGT from non-metazoan species, we first used the pipeline of foreign sequence detection developed by [Francois et al. 2020](https://www.g3journal.org/content/10/2/721). This pipeline produced a custom database (from publically available data), available [here](http://doi.org/10.5281/zenodo.4650186). 
 
 We used the set of CDS identified in publicly available transcriptomes and the genome assemblies prior to the decontamination procedure with Blobtools (see [2a_Genome_assembly](../2a_Genome_assembly) section). The rationale is that some genuine HGT could have been wrongly considered as contaminant sequences during this decontamination step and thus been removed from the assembly. Scaffolds filtered during decontamination are available in directory [contamination_sequences](contamination_sequences).
 
