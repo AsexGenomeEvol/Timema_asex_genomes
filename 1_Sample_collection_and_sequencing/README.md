@@ -2,11 +2,11 @@
 
 For each of the ten species, the DNA for Illumina shotgun sequencing was derived from virgin adult females collected in 2015 from natural populations in California (SM Table 1). Extractions were done using the Qiagen Mag Attract de HMW DNA kit, following manufacturer indications. Five PCR-free libraries were generated for each reference genome (three 2x125bp paired end libraries with average insert sizes of respectively 350, 550 and 700bp, and two mate-pair libraries with 3000 and 5000bp insert sizes), one library (550bp insert size) was generated for each re-sequenced individual. Libraries were prepared using the illumina TruSeq DNA PCR-Free or Nextera Mate Pair Library Prep Kits, following manufacturer instructions, and sequenced on the Illumina HiSeq 2500 system, using v4 chemistry and 2x 125 bp reads at FASTERIS SA, Plan-les-Ouates, Switzerland.
 
-In addition, note the libraries with 350bp insert sizes were sequenced twice. In February 2016 and December 2016. We had the intention to improve the reference genomes with additional data, but the libraries must have had experienced some degradation because adding this data was deleterious to the assembly process in all ten cases. Thus, these libraries were used only for genome profiling analysis (see [5_Heterozygosity](5_Heterozygosity)).
-
-TODO link reads in SRA
+In addition, note the libraries with 350bp insert sizes were sequenced twice. In February 2016 and December 2016. We had the intention to improve the reference genomes with additional data, but the libraries must have had experienced some degradation because adding this data was deleterious to the assembly process in all ten cases. Thus, these libraries were used only for genome profiling analysis (see Table 1 and [5_Heterozygosity](5_Heterozygosity)).
 
 
+
+**Table 1 | Accession numbers for raw reads of reference individuals** | Species are abbreviated as follows: Tbi = T. bartmani, Tce = T. cristinae, Tps = T. poppensis, Tcm = T. californicum, Tpa = T. podura, Tte = T. tahoe, Tms = T. monikensis, Tdi = T. douglasi, Tsi = T. shepardi, and Tge = T. genevievae 
 | Library Name | Sp ID | Sample ID | Insert size | SRA sample accession | SRA run accession | Assembly | Genome profiling | Variants |
 |--------------|-------|-----------|-------------|----------------------|-------------------|:--------:|:----------------:|:--------:|
 | HYI-7_125    | 4_Tte | Tte_00    | 350         | SRS1972401           | SRR5248900        |     *    |         *        |          |
