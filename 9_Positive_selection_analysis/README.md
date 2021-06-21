@@ -18,6 +18,7 @@ We then looked to see if the amount of positive selection was different between 
 * **positive_sel_plot.R** | binomal GLMM and plots
 * **positive_sel_plot_perm_lrt.R** | permuation glm on lrt statistic
 * **positive_sel_plot_overlap.R** | Examine if positively selected genes overlap between species
+* **positive_sel_plot_poly.R** | Examine if the number of positively selected genes is infulenced by polymorphism
 
 Finally we looked at the GO terms enriched in positively selected genes:
 
