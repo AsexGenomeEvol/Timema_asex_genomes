@@ -13,7 +13,7 @@ import ast
 
 #### HOW TO USE
 
-## python $SC/te.py -s repeatmasker2r -i1 1_Tps_b3v07.fa_mod.html -o 1_Tps_b3v07_R_data.txt
+## python $SC/te_landscape.py -s repeatmasker2r -i1 1_Tdi_b3v08.fa_mod.html -o 1_Tdi_b3v08_R_data.txt
 	
 def repeatmasker2r(repeatmasker_file, output_file):
 
@@ -86,7 +86,7 @@ def repeatmasker2r(repeatmasker_file, output_file):
 	
 	type_TE = type_TE[::-1]
 	
-	print type_TE, len(type_TE)
+	#print type_TE, len(type_TE)
 	
 	## Same for kimura list
 	
@@ -100,6 +100,7 @@ def repeatmasker2r(repeatmasker_file, output_file):
 	
 	for kimura in kimura_list_reverse:
 	
+		#print kimura_list_reverse
 		dic_kimura = {}
 		data = 1
 	
@@ -109,117 +110,193 @@ def repeatmasker2r(repeatmasker_file, output_file):
 			
 			data += 1
 	
-		print dic_kimura
+		#print kimura
+		# ['50', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+		
+		# -> 1 st column is substitution level
+		
 		script = open(output_file,"a")
 		
 		if "SINE" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("SINE", kimura[0], dic_kimura["SINE"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("SINE", kimura[0], "0"))
+
+		if "LINE/Crack" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("LINE/Crack", kimura[0], dic_kimura["LINE/Crack"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("LINE/Crack", kimura[0], "0"))
+
+		if "LINE/Tx1" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("LINE/Tx1", kimura[0], dic_kimura["LINE/Tx1"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("LINE/Tx1", kimura[0], "0"))
+
+		if "LINE/Poseidon" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("LINE/Poseidon", kimura[0], dic_kimura["LINE/Poseidon"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("LINE/Poseidon", kimura[0], "0"))
+
 		if "LINE/R2" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/R2", kimura[0], dic_kimura["LINE/R2"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/R2", kimura[0], "0"))
+
 		if "LINE/Jockey-I" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/Jockey-I", kimura[0], dic_kimura["LINE/Jockey-I"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/Jockey-I", kimura[0], "0"))
+
 		if "LINE/R1" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/R1", kimura[0], dic_kimura["LINE/R1"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/R1", kimura[0], "0"))
+
 		if "LINE/LOA" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/LOA", kimura[0], dic_kimura["LINE/LOA"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/LOA", kimura[0], "0"))
+
 		if "LINE/L2" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/L2", kimura[0], dic_kimura["LINE/L2"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/L2", kimura[0], "0"))
+
 		if "LINE/CR1" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/CR1", kimura[0], dic_kimura["LINE/CR1"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/CR1", kimura[0], "0"))
+
 		if "LINE/RTE" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/RTE", kimura[0], dic_kimura["LINE/RTE"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/RTE", kimura[0], "0"))
+
 		if "LINE" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE", kimura[0], dic_kimura["LINE"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE", kimura[0], "0"))
+
 		if "LINE/L1" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LINE/L1", kimura[0], dic_kimura["LINE/L1"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LINE/L1", kimura[0], "0"))
+
+		if "LTR/Penelope" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("LTR/Penelope", kimura[0], dic_kimura["LTR/Penelope"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("LTR/Penelope", kimura[0], "0"))
+
 		if "LTR" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LTR", kimura[0], dic_kimura["LTR"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LTR", kimura[0], "0"))
+
 		if "LTR/Gypsy" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LTR/Gypsy", kimura[0], dic_kimura["LTR/Gypsy"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LTR/Gypsy", kimura[0], "0"))
+
 		if "LTR/Copia" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("LTR/Copia", kimura[0], dic_kimura["LTR/Copia"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("LTR/Copia", kimura[0], "0"))
+
+		if "LTR/BEL" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("LTR/BEL", kimura[0], dic_kimura["LTR/BEL"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("LTR/BEL", kimura[0], "0"))
+
 		if "RC/Helitron" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("RC/Helitron", kimura[0], dic_kimura["RC/Helitron"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("RC/Helitron", kimura[0], "0"))
+
+		if "DNA/ISL2EU" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("DNA/ISL2EU", kimura[0], dic_kimura["DNA/ISL2EU"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("DNA/ISL2EU", kimura[0], "0"))
+
+		if "DNA/MITE" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("DNA/MITE", kimura[0], dic_kimura["DNA/MITE"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("DNA/MITE", kimura[0], "0"))
+
+		if "DNA/MuDr" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("DNA/MuDr", kimura[0], dic_kimura["DNA/MuDr"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("DNA/MuDr", kimura[0], "0"))
+
 		if "DNA/Transib" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/Transib", kimura[0], dic_kimura["DNA/Transib"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/Transib", kimura[0], "0"))
+
 		if "DNA/TcMar" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/TcMar", kimura[0], dic_kimura["DNA/TcMar"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/TcMar", kimura[0], "0"))
+
 		if "DNA/Sola" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/Sola", kimura[0], dic_kimura["DNA/Sola"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/Sola", kimura[0], "0"))
+
 		if "DNA/PiggyBac" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/PiggyBac", kimura[0], dic_kimura["DNA/PiggyBac"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/PiggyBac", kimura[0], "0"))
+
 		if "DNA/P" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/P", kimura[0], dic_kimura["DNA/P"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/P", kimura[0], "0"))
+
 		if "DNA" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA", kimura[0], dic_kimura["DNA"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA", kimura[0], "0"))
+
 		if "DNA/Maverick" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/Maverick", kimura[0], dic_kimura["DNA/Maverick"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/Maverick", kimura[0], "0"))
+
 		if "DNA/Kolobok" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/Kolobok", kimura[0], dic_kimura["DNA/Kolobok"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/Kolobok", kimura[0], "0"))
+
 		if "DNA/hAT" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/hAT", kimura[0], dic_kimura["DNA/hAT"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/hAT", kimura[0], "0"))
+
 		if "DNA/Harbinger" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/Harbinger", kimura[0], dic_kimura["DNA/Harbinger"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/Harbinger", kimura[0], "0"))
+
 		if "DNA/Ginger" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/Ginger", kimura[0], dic_kimura["DNA/Ginger"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/Ginger", kimura[0], "0"))
+
+		if "DNA/Chapaev" in dic_kimura:
+			script.write("{}\t{}\t{}\n".format("DNA/Chapaev", kimura[0], dic_kimura["DNA/Chapaev"]))
+		else:
+			script.write("{}\t{}\t{}\n".format("DNA/Chapaev", kimura[0], "0"))
+
 		if "DNA/Academ" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("DNA/Academ", kimura[0], dic_kimura["DNA/Academ"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("DNA/Academ", kimura[0], "0"))
+
 		if "Other" in dic_kimura:
 			script.write("{}\t{}\t{}\n".format("Other", kimura[0], dic_kimura["Other"]))
 		else:
 			script.write("{}\t{}\t{}\n".format("Other", kimura[0], "0"))
+	
 				
 		script.close()
 			
@@ -249,7 +326,7 @@ def main(argv):
 	parser.add_argument('-o', action='store', dest='output_value',
 	                    help='Output')
 	                    	                    	
-	parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+	parser.add_argument('--version', action='version', version='%(prog)s 1.1')
 
 	results = parser.parse_args()
 		
