@@ -279,7 +279,7 @@ Timema_TEs.R
 ```
 python te.py -s repeatmasker2r -i1 <repeat_masker_file> -o <output>
 
-python te.py -s repeatmasker2r -i1 1_Tps_b3v07.fa_mod.html -o 1_Tps_b3v07_R_data.txt
+python tse.py -s repeatmasker2r -i1 1_Tps_b3v07.fa_mod.html -o 1_Tps_b3v07_R_data.txt
 
 ```
 
