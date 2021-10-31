@@ -196,8 +196,17 @@ p3 <- ggarrange(Tce_plot, Tms_plot, ncol=2)
 p4 <- ggarrange(Tbi_plot, Tte_plot, ncol=2) 
 p5 <- ggarrange(Tpa_plot, Tge_plot, ncol=2, common.legend = TRUE, legend = "bottom") 
 
+require(gridExtra)
 
-p <- ggarrange(p1, p2, p3, p4, p5, nrow=5, common.legend = TRUE, legend="bottom", heights = c(50,50)) 
-p
-ggexport(p, filename = "multi.page.ggplot2.pdf")
+pdf("pair12.pdf")
+grid.arrange(p1, p2, nrow=2)
+dev.off()
+
+pdf("pair34.pdf")
+grid.arrange(p3, p4, nrow=2)
+dev.off()
+
+pdf("pair5.pdf")
+grid.arrange(p5, nrow=1)
+dev.off()
 
