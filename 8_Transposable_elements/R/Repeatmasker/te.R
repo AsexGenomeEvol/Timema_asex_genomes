@@ -85,7 +85,7 @@ Tps_plot <- ggplot(Tps_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.poppensis") +
+  labs(title = "T. poppensis") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "red", size = 15, face = "italic"))
 Tps_plot
 dev.off()
@@ -96,7 +96,7 @@ Tdi_plot <- ggplot(Tdi_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.douglasi") +
+  labs(title = "T. douglasi") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "blue", size = 15, face = "italic"))
 Tdi_plot
 dev.off()
@@ -107,7 +107,7 @@ Tcm_plot <- ggplot(Tcm_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.californicum") +
+  labs(title = "T. californicum") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "red", size = 15, face = "italic"))
 Tcm_plot
 dev.off()
@@ -118,7 +118,7 @@ Tsi_plot <- ggplot(Tsi_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.shepardi") +
+  labs(title = "T. shepardi") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "blue", size = 15, face = "italic"))
 Tsi_plot
 dev.off()
@@ -129,7 +129,7 @@ Tce_plot <- ggplot(Tce_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.cristinae") +
+  labs(title = "T. cristinae") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "red", size = 15, face = "italic"))
 Tce_plot
 dev.off()
@@ -140,7 +140,7 @@ Tms_plot <- ggplot(Tms_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.monikensis") +
+  labs(title = "T. monikensis") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "blue", size = 15, face = "italic"))
 Tms_plot
 dev.off()
@@ -151,7 +151,7 @@ Tbi_plot <- ggplot(Tbi_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.bartmani") +
+  labs(title = "T. bartmani") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "red", size = 15, face = "italic"))
 Tbi_plot
 dev.off()
@@ -162,7 +162,7 @@ Tte_plot <- ggplot(Tte_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.tahoe") +
+  labs(title = "T. tahoe") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "blue", size = 15, face = "italic"))
 Tte_plot
 dev.off()
@@ -173,7 +173,7 @@ Tpa_plot <- ggplot(Tpa_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.podura") +
+  labs(title = "T. podura") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "red", size = 15, face = "italic"))
 Tpa_plot
 dev.off()
@@ -184,7 +184,7 @@ Tge_plot <- ggplot(Tge_data, aes(fill=Type, y=Genome_percent, x=Kimura)) +
   labs(x="Kimura substitution level (CpG adjusted)", y="Percent of genome") +
   coord_cartesian(ylim = c(0, 2)) +
   scale_y_continuous(breaks = seq(0, 2, 0.2)) +
-  labs(title = "T.genevievae") +
+  labs(title = "T. genevievae") +
   theme_bw() + theme(legend.position = "none", plot.title = element_text(color = "blue", size = 15, face = "italic"))
 Tge_plot
 dev.off()
@@ -196,17 +196,20 @@ p3 <- ggarrange(Tce_plot, Tms_plot, ncol=2)
 p4 <- ggarrange(Tbi_plot, Tte_plot, ncol=2) 
 p5 <- ggarrange(Tpa_plot, Tge_plot, ncol=2, common.legend = TRUE, legend = "bottom") 
 
-require(gridExtra)
 
-pdf("pair12.pdf")
-grid.arrange(p1, p2, nrow=2)
+pdf("TE_landscapes_all.pdf", width = 9, height = 15)
+plot_grid(p1, p2, p3, p4, p5, nrow = 5,  rel_heights = c(1,1,1,1,1.8))
 dev.off()
 
-pdf("pair34.pdf")
-grid.arrange(p3, p4, nrow=2)
+png(filename = "TE_landscapes_all.png", width = 9, height = 15, units = "in", bg = "white", res = 600)
+plot_grid(p1, p2, p3, p4, p5, nrow = 5,  rel_heights = c(1,1,1,1,1.8))
 dev.off()
 
-pdf("pair5.pdf")
-grid.arrange(p5, nrow=1)
+
+pdf("TE_landscapes_all_2.pdf", width = 9, height = 15)
+plot_grid(p1, p2, p3, p4, p5, nrow = 5,  rel_heights = c(1,1,1,1,1.8))
 dev.off()
 
+png(filename = "TE_landscapes_all_2.png", width = 8, height = 12, units = "in", bg = "white", res = 600)
+plot_grid(p1, p2, p3, p4, p5, nrow = 5,  rel_heights = c(1,1,1,1,2.05))
+dev.off()
