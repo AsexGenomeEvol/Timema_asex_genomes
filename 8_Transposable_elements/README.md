@@ -272,6 +272,11 @@ count.sh
 Timema_TEs.R
 ```
 
+#code for coverage analyses of TE landscapes
+```
+TE_landscape_coverage.sh
+```
+
 ## RepeatMasker output to R plot (R dir)
 
 1) Convert RepeatMasker output to table for R
