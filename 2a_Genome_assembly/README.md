@@ -4,7 +4,20 @@ This is documentation of a procedure of genome assembly of the ten stick insect 
 
 ## Table of content:
 
-TODO
+- [Assembly of Timema species](#assembly-of-timema-species)
+  * [Table of content:](#table-of-content-)
+  * [Organisation](#organisation)
+    + [Versioning of assemblies](#versioning-of-assemblies)
+    + [Environmental variable used in the workflow](#environmental-variable-used-in-the-workflow)
+  * [Pipeline](#pipeline)
+    + [Read parsing](#read-parsing)
+      - [execution](#execution)
+    + [Contig assembly](#contig-assembly)
+      - [execution](#execution-1)
+    + [Scaffolding and Gap closing](#scaffolding-and-gap-closing)
+      - [execution](#execution-2)
+    + [Assembly evaluation](#assembly-evaluation)
+      - [execution](#execution-3)
 
 ## Organisation
 
@@ -105,7 +118,7 @@ The optimal kmer for assembly of contigs was estimated using `kmergenie`.
 #### execution
 
 trim everything by (submits a lot of jobs to a cluster using `lsf`). Make is internally using scripts [trim_pair_end_reads_lsf.sh](B_read_parsing/trim_pair_end_reads_lsf.sh)
-and [process_mate_pair_reads.sh](B_read_parsing/process_mate_pair_reads.sh)
+and [process_mate_pair_reads.sh](B_read_parsing/process_mate_pair_reads.sh). To see just the commands that WOULD get executed, add parameter `-n` to make, and it will just show you the commands without executing them.
 
 ```
 make trimmed_reads
@@ -217,7 +230,8 @@ Calculate number of unknown nucleotides
 make counts.Ns
 ```
 
-Once all the tasks above are done, pull the results into a table
+Once all the tasks above are done, pull the results into a table.
 
-TODO : pull them into table (I bet I got this already somewhere)
-TODO : add decontamination step
+### Assembly decontamination
+
+Using [Blobtools](https://github.com/blaxterlab/blobology) before it was discontinued. We removed all scaffolds non-animal hits.

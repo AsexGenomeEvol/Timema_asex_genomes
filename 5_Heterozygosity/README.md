@@ -1,8 +1,12 @@
 # Heterozygosity
 
-Genome-wide nucleotide heterozygosity was estimated using genome profiling analysis of raw reads from the reference genomes using GenomeScope (v2). A second, SNP-based heterozygosity estimate was generated using re-sequenced individuals. We re-sequenced five individuals per species (and generated SNP and SV calls for all of them). However, 3 individuals of T. shepardi, 2 individuals of T. poppensis and one T. tahoe individual did not pass quality control and were discarded from the downstream analyses.
+Genome-wide nucleotide heterozygosity was estimated using genome profiling analysis of raw reads from the reference genomes using GenomeScope (v2). A second, SNP-based heterozygosity estimate was generated using re-sequenced individuals. We re-sequenced five individuals per species (and generated SNP and SV calls for all of them). However, 3 individuals of T. shepardi, 2 individuals of T. poppensis and one _T. tahoe_ individual did not pass quality control and were discarded from the downstream analyses.
 
-TODO: table of content
+- [Heterozygosity](#heterozygosity)
+  * [Pipeline](#pipeline)
+    + [Genome profiling](#genome-profiling)
+    + [SNP calling](#snp-calling)
+      - [execution](#execution)
 
 ## Pipeline
 
@@ -11,8 +15,6 @@ In this document we show how heterozygosity was estimated using genome profiling
 ### Genome profiling
 
 **Genome_profiling** was used to generate genome wide estiamtes of heterozygosity. These analyses fail to distingust completelly homozygous genomes and genomes with very low heterozygosity levels. We used SNP calling to complement genome profiling analysis.
-
-#### execution
 
 ### SNP calling
 

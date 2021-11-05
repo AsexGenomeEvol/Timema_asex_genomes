@@ -203,18 +203,25 @@ qsub -o logs/ -e logs/ -cwd -N samplot -V -pe smp64 1 -b yes 'samplot vcf --vcf 
 
 In `data/manta_SV_calls/data/$SP/` directories we have merged files: split read OR read pair support in the stringent interval (`SVs_filt_stringent_union.vcf`)
 
+Some quick and dirty QC of structural variants can be found in [a separated document](structural_variant_QC.md).
 
 ### Plotting heteoryzogisty
 
-```
-D_variant_analysis/make_heterozygosity_table.R
-D_variant_analysis/plot_heterozygosity.R
-```
-
-
-TODO
+The table of all the heterozygosity measures for each individual can be generated from appropriate inputs (that are not part of this repository)
 
 ```
-5_Heterozygosity/scripts/coverages_table.R
-5_Heterozygosity/scripts/prepare_coverage_tables.R
+Rscript scripts/make_heterozygosity_table.R # this table is provided
+```
+
+This is the way to plot the heteoryzogisty Figure in the manuscript
+
+```
+Rscript scripts/plot_heterozygosity.R
+```
+
+This will generate a table of per-reseq sample coverages and adjusting them for plotting
+
+```
+Rscript scripts/coverages_table.R
+Rscript scripts/prepare_coverage_tables.R
 ```

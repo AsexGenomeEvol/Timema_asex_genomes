@@ -12,7 +12,7 @@ in the following R snippet I will plot all the coverage distributions of split r
 
 ```{R}
 library(AsexStats)
-source('E_structural_variation_calling/vcf_processing_fctions.R')
+source('scripts/vcf_processing_fctions.R')
 
 sp <- timemas$codes[1]
 
