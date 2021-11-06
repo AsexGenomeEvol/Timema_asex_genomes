@@ -4,6 +4,8 @@ This is the repository for the collected scripts used in the study:
 
 >Jaron, K. S*., Parker, D. J*., Anselmetti, Y., Tran Van, P. T., Bast, J., Dumas,  Z., Figuet, E., François, C. M., Hayward, K., Rossier, V., Simion, P., Robinson-Rechavi,  M., Galtier, N., Schwander, T. 2020. Convergent consequences of parthenogenesis on stick insect genomes. bioRxiv. doi: https:// doi.org/10.1101/2020.11.20.391540
 
+and is archived at Zenodo: [![DOI](https://zenodo.org/badge/313881475.svg)](https://zenodo.org/badge/latestdoi/313881475)
+
 Raw sequence reads have been deposited in NCBI’s sequence read archive under the following bioprojects: PRJNA371785 (reference genomes, PRJNA670663 (resequenced individuals), PRJNA679785 (RNAseq reads used for annotation), and PRJNA673001 (PacBio reads for _T. douglasi_). Genome assemblies and annotations are deposited under bioproject PRJEB31411, and are also archived at Zenodo https://doi.org/10.5281/zenodo.5636226.
 
 ## Contents 
