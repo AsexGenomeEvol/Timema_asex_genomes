@@ -40,11 +40,11 @@ for(sp in timemas$codes){
                    genome_to = lg_from + adj)
     }
 
-    reference <- read.table('data/external_ref/sex_lg_assigment_scores_1.4a.tsv')
+    reference <- read.table('tables/sex_lg_assigment_scores_1.4a.tsv')
     colnames(reference) <- c('scf_o', 'scf', 'score', 'cov', 'len', 'asignment')
     reference$chromosome <- sapply(strsplit(reference$scf, "_"), function(x) { x[1] } )
 
-    source('D_variant_analysis/load_chromosomes.R')
+    source('scripts/load_chromosomes.R')
 
     variant_density_table <- do.call("rbind", lapply(1:12, get_lg_windows))
 
@@ -110,7 +110,7 @@ for(sp in timemas$codes){
     ### add SV info ###
     ###################
 
-    source('D_variant_analysis/load_SV_calls.R')
+    source('../6_Structural_Variants/scripts/load_SV_calls.R')
 
     SVs_filt_stringent_union_file <- paste0('data/manta_SV_calls/data/', sp, '/SVs_filt_stringent_union.vcf')
 

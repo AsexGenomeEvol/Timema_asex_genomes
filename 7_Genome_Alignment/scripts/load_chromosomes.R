@@ -3,7 +3,7 @@ get_chr_size <- function(chr){
     sum(reference[reference$chromosome == chr,'len']) + ((sum(reference$chromosome == chr) - 1) * 10000)
 }
 
-reference <- read.table('data/external_ref/sex_lg_assigment_scores_1.4a.tsv')
+reference <- read.table('tables/sex_lg_assigment_scores_1.4a.tsv')
 colnames(reference) <- c('scf_o', 'scf', 'score', 'cov', 'len', 'asignment')
 reference$chromosome <- sapply(strsplit(reference$scf, "_"), function(x) { x[1] } )
 
