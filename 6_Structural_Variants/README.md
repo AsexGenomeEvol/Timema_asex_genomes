@@ -4,16 +4,12 @@ Complementing nucleotide-based measures we searched for **Structural variants**,
 
 We found a high frequency of heterozygous SVs with approximately twice the expected coverage (SM Figure 7), which likely represent false positives. To reduce the number of false positives, we filtered very short SVs (30 bases or less) and  kept only variant calls that had either split read or paired-end read support within the expected coverage range, where the coverage range was defined individually for each sample by manual inspection of coverage distributions. The filtered SV calls were subsequently merged into population SV calls using SURVIVOR (v1.0.2). The merging criteria were: SV calls of the same type on the same strand with breakpoints distances shorter than 100 bp.  
 
-
-
  -  [scripts](scripts)
-
- -  [C_variant_analysis](C_variant_analysis)
 
 
 Alright, all the SV calls take for ever detecting breakpoint between scaffolds as SVs (scaffolds are considered chromosomes in the SV world). To prevent this unintended behaviour I need to get rid of all reads mapping to edges of different scaffolds.
 I was considering `BAMQL`, but it was too complicated to install on the cluster.
-So, I will map `A_mapping_and_preprocessing/filter_splitreads.py`
+So, I the reads were filtered using `A_mapping_and_preprocessing/filter_splitreads.py`.
 
 ## Structural variations
 
@@ -29,7 +25,7 @@ for bam in data/mapped_reseq_reads/*.bam; do
 done
 ```
 
-I downloaded precompiled binaries of (Manta)[https://github.com/Illumina/manta] v1.0.3. Using commands in the script `E_structural_variation_calling/manta.sh` I get 50 manta SV calls: `data/manta_SV_calls/data/"$SP"/"$IND"_manta/results/variants/diploidSV.vcf`
+I downloaded precompiled binaries of [Manta](https://github.com/Illumina/manta) v1.0.3. Using commands in the script `E_structural_variation_calling/manta.sh` I get 50 manta SV calls: `data/manta_SV_calls/data/"$SP"/"$IND"_manta/results/variants/diploidSV.vcf`
 
 #### SV qc and filtering before merging
 
@@ -43,7 +39,7 @@ for file in $(find ./data/manta_SV_calls -name "diploidSV.vcf.gz"); do
 done
 ```
 
-in the following R snippet I will plot all the coverage distributions of split reads and pair end coveages of homozygous and heterozygous variants per individual.
+in the following R snippet I will plot all the coverage distributions of split reads and pair end coveages of homozygous and heterozygous variants per individual. This was used as a QC of called SNPs.
 
 ```{R}
 library(AsexStats)
