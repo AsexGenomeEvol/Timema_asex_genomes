@@ -14,6 +14,7 @@
 
 4. [EMBL format](#4_embl)
 
+5. [Links](#5_links)
 
 ## <a name="1_required"></a>1) Required files 
 
@@ -269,5 +270,11 @@ agat_sp_flag_short_introns.pl --gff * --out *
 EMBLmyGFF3 *.gff *.fasta --topology linear --molecule_type 'genomic DNA' --transl_table 1  --species '*' --locus_tag * --project_id * --de * -o *
 ```
 
+## <a name="5_links"></a>5) Links
 
+The genome and annotations can be found here:
+
+https://www.ebi.ac.uk/ena/browser/view/PRJEB31411
+
+https://www.ncbi.nlm.nih.gov/bioproject/PRJEB31411
 
