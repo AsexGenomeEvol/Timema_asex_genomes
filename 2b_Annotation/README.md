@@ -272,7 +272,7 @@ EMBLmyGFF3 *.gff *.fasta --topology linear --molecule_type 'genomic DNA' --trans
 
 ## <a name="5_links"></a>5) Links
 
-The genome and annotations can be found here:
+The genomes and annotations can be found here:
 
 https://www.ebi.ac.uk/ena/browser/view/PRJEB31411
 
