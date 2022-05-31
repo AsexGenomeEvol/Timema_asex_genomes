@@ -9,7 +9,7 @@
 
 
 ############################################################################################
-### Final Alignment is here 3_Orthologs/trees/data/align_five_pair_HOGs_genomeonly_gb.fa 
+### Final Alignment is here 3_Orthologs/trees/tree_data/align_five_pair_HOGs_genomeonly_gb.fa 
 ### get aligmnents of orthologs from selectome (1-to-1, five pair, genome copies only, codons)
 ## join alignments
 ## filter alignment with gblocks
@@ -23,7 +23,7 @@
 module add Bioinformatics/Software/vital-it
 module load Phylogeny/raxml/8.2.12
 
-cat > codon_specify_genome_only.txt ## 3_Orthologs/trees/data/codon_specify_genome_only.txt
+cat > codon_specify_genome_only.txt ## 3_Orthologs/trees/tree_data/codon_specify_genome_only.txt
 DNA, codon1 = 1-1523166\3
 DNA, codon2 = 2-1523166\3
 DNA, codon3 = 3-1523166\3
